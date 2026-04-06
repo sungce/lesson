@@ -8,202 +8,253 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F5F4F0;--surface:#FFF;--border:#E2DFD6;--text:#1C1C1C;--muted:#696760;--light:#A8A59E;
---unit:#1B9E72;--unit-dk:#0E7A58;--unit-lt:#E1F5EE;--unit-md:#A8D8C8;
---green:#2A720E;--green-bg:#E8F3DC;--amber:#7A4E0A;--amber-bg:#FAF0DC;--red:#8C1E0E;--red-bg:#FAEBE6;--blue:#0A4E8C;--blue-bg:#E4F0FA;
---rLG:14px;--rMD:10px;--rSM:8px;--SBW:224px;--TBH:52px;}
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;display:flex;min-height:100vh}
-.sb{width:var(--SBW);background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
-.sb-top{padding:18px 16px 14px;border-bottom:1px solid var(--border)}.uchip{display:inline-flex;align-items:center;background:var(--unit-lt);color:var(--unit);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px}
-.sb-top h2{font-size:13px;font-weight:700;line-height:1.4}.smeta{font-size:11px;color:var(--light);margin-top:3px}.sb-nav{padding:6px 0;flex:1}.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);padding:8px 16px 4px}
-.na{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:12px;color:var(--muted);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}.na:hover{background:var(--bg);color:var(--text)}.na.on{color:var(--unit);font-weight:600;background:var(--unit-lt);border-left-color:var(--unit)}.na.done .nn{background:var(--green-bg);color:var(--green)}
-.nn{width:20px;height:20px;border-radius:50%;background:var(--border);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--muted)}.na.on .nn{background:var(--unit);color:#fff}
-.nbadge{margin-left:auto;font-size:10px;color:var(--light);background:var(--bg);border:1px solid var(--border);padding:1px 6px;border-radius:10px}
-.sb-foot{padding:12px 16px;border-top:1px solid var(--border)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:var(--rSM);border:1px solid var(--border);background:var(--surface);transition:all .12s}.ba:hover{background:var(--bg);color:var(--text)}
-.main{margin-left:var(--SBW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}.topbar{background:var(--surface);border-bottom:1px solid var(--border);height:var(--TBH);padding:0 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
-.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);flex:1}.bc a{color:var(--muted);text-decoration:none}.bc a:hover{color:var(--text)}.bc .sep{color:var(--border)}.bc .cur{color:var(--text);font-weight:500}.tbr{display:flex;align-items:center;gap:8px}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 11px;font-size:11px}.bp{background:var(--unit);color:#fff;border-color:var(--unit)}.bp:hover{background:var(--unit-dk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
-.page{padding:22px 24px;flex:1}.g2{display:grid;grid-template-columns:1fr 256px;gap:18px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TBH) + 14px)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);margin-bottom:12px;overflow:hidden}.card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.ch{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;user-select:none;-webkit-user-select:none}.ch:hover{background:var(--bg)}.sn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:14px;font-weight:600;flex:1}
-.st{font-size:11px;color:var(--light);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:20px}.carr{font-size:11px;color:var(--light);transition:transform .2s;flex-shrink:0}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:20px}.card.collapsed .cb{display:none}
-.ach{background:var(--unit-lt);border:1px solid var(--unit-md);border-radius:var(--rSM);padding:12px 14px;margin-bottom:16px}.ach-c{font-family:'Courier New',monospace;font-size:11px;font-weight:700;color:var(--unit);margin-bottom:4px}.ach-t{font-size:13px;line-height:1.6}
-.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--border);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:18px;height:18px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.ctags{display:flex;flex-wrap:wrap;gap:6px}.ctag{font-size:11px;padding:4px 11px;background:var(--bg);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--muted);transition:all .12s}.ctag:hover{background:var(--unit-lt);border-color:var(--unit-md);color:var(--unit)}
-.ibox{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:12px}.ibox.prev{background:var(--bg);border:1px solid var(--border);color:var(--muted)}.ibox.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.ibox.info{background:var(--blue-bg);border:1px solid #BACED8;color:var(--blue)}.ibox.ok{background:var(--green-bg);border:1px solid #BFDFAA;color:var(--green)}
-.div{height:1px;background:var(--border);margin:16px 0}.crow{display:grid;grid-template-columns:1fr 158px;gap:16px;align-items:start;margin-bottom:18px}
-.ct h4{font-size:13px;font-weight:700;margin-bottom:8px}.ct p{font-size:13px;color:var(--muted);line-height:1.75}.ct ul{padding-left:1rem;margin-top:7px}.ct ul li{font-size:13px;color:var(--muted);margin-bottom:4px;line-height:1.6}
-.cvis{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px;flex-shrink:0}
-.qwrap{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:16px}.qq{font-size:14px;font-weight:500;margin-bottom:13px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--unit);background:var(--unit-lt)}.opt.correct{border-color:#4A9020;background:var(--green-bg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--red-bg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
-.onum{width:22px;height:22px;border-radius:50%;background:var(--border);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
-.qfb{display:none;margin-top:11px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--green-bg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--red-bg);border:1px solid #F0B8A0;color:var(--red)}
-.rub{width:100%;border-collapse:collapse;font-size:12px}.rub th{background:var(--bg);padding:8px 10px;font-weight:600;border-bottom:1.5px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.rub td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;color:#1C1C1C;font-size:14px;line-height:1.65;display:flex;min-height:100vh}
+:root{--u:#1B9E72;--udk:#0E7A58;--ult:#E1F5EE;--umd:#A8D8C8;--bg:#F5F4F0;--sf:#FFF;--br:#E2DFD6;--tx:#1C1C1C;--mt:#696760;--lt:#A8A59E;--green:#2A720E;--gbg:#E8F3DC;--amber:#7A4E0A;--abg:#FAF0DC;--red:#8C1E0E;--rbg:#FAEBE6;--blue:#0A4E8C;--bbg:#E4F0FA;--rLG:14px;--rMD:10px;--rSM:8px;--SW:224px;--TH:52px}
+/* sidebar */
+.sb{width:var(--SW);background:var(--sf);border-right:1px solid var(--br);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
+.sb-top{padding:18px 16px 14px;border-bottom:1px solid var(--br)}.uchip{display:inline-flex;align-items:center;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px}
+.sb-top h2{font-size:13px;font-weight:700;line-height:1.4}.smeta{font-size:11px;color:var(--lt);margin-top:3px}.sb-nav{padding:6px 0;flex:1}.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lt);padding:8px 16px 4px}
+.na{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:12px;color:var(--mt);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}.na:hover{background:var(--bg);color:var(--tx)}.na.on{color:var(--u);font-weight:600;background:var(--ult);border-left-color:var(--u)}.na.done .nn{background:var(--gbg);color:var(--green)}
+.nn{width:20px;height:20px;border-radius:50%;background:var(--br);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--mt)}.na.on .nn{background:var(--u);color:#fff}
+.nbadge{margin-left:auto;font-size:10px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:1px 6px;border-radius:10px}
+.sb-foot{padding:12px 16px;border-top:1px solid var(--br)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mt);text-decoration:none;padding:6px 10px;border-radius:var(--rSM);border:1px solid var(--br);background:var(--sf);transition:all .12s}.ba:hover{background:var(--bg);color:var(--tx)}
+/* main */
+.main{margin-left:var(--SW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}
+.topbar{background:var(--sf);border-bottom:1px solid var(--br);height:var(--TH);padding:0 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
+.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mt);flex:1}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}.bcsep{color:var(--br)}.bccur{color:var(--tx);font-weight:500}.tbr{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--br);background:var(--sf);color:var(--tx);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 11px;font-size:11px}.bp{background:var(--u);color:#fff;border-color:var(--u)}.bp:hover{background:var(--udk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
+.page{padding:22px 24px;flex:1}.g2{display:grid;grid-template-columns:1fr 256px;gap:18px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TH) + 14px)}
+/* cards */
+.card{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);margin-bottom:12px;overflow:hidden}.card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.ch{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--br);transition:background .12s;user-select:none}.ch:hover{background:var(--bg)}
+.sn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:14px;font-weight:600;flex:1}
+.st{font-size:11px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:2px 8px;border-radius:20px}.carr{font-size:11px;color:var(--lt);transition:transform .2s;flex-shrink:0}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:20px}.card.collapsed .cb{display:none}
+/* content helpers */
+.ach{background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:12px 14px;margin-bottom:16px}.ach-c{font-family:'Courier New',monospace;font-size:11px;font-weight:700;color:var(--u);margin-bottom:4px}.ach-t{font-size:13px;line-height:1.6}
+.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--br);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:18px;height:18px;border-radius:50%;background:var(--gbg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ctags{display:flex;flex-wrap:wrap;gap:6px}.ctag{font-size:11px;padding:4px 11px;background:var(--bg);border:1px solid var(--br);border-radius:20px;cursor:pointer;color:var(--mt);transition:all .12s}.ctag:hover{background:var(--ult);border-color:var(--umd);color:var(--u)}
+.ibox{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:12px}.prev{background:var(--bg);border:1px solid var(--br);color:var(--mt)}.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.info{background:var(--bbg);border:1px solid #BACED8;color:var(--blue)}.ok{background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}
+.divl{height:1px;background:var(--br);margin:16px 0}
+.crow{display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:start;margin-bottom:16px}
+.ct h4{font-size:13px;font-weight:700;margin-bottom:8px}.ct p{font-size:13px;color:var(--mt);line-height:1.75}.ct ul{padding-left:1rem;margin-top:7px}.ct ul li{font-size:13px;color:var(--mt);margin-bottom:4px;line-height:1.6}
+.cvis{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px}
+/* quiz */
+.qwrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:16px;margin-top:16px}.qq{font-size:14px;font-weight:500;margin-bottom:13px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--u);background:var(--ult)}.opt.correct{border-color:#4A9020;background:var(--gbg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--rbg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
+.onum{width:22px;height:22px;border-radius:50%;background:var(--br);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
+.qfb{display:none;margin-top:11px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--rbg);border:1px solid #F0B8A0;color:var(--red)}
+/* assess */
+.rub{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px}.rub th{background:var(--bg);padding:8px 10px;font-weight:600;border-bottom:1.5px solid var(--br);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mt)}.rub td{padding:9px 10px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
 .lv4{color:#1A6000!important;font-weight:500}.lv3{color:#2A6830!important}.lv2{color:#7A4E00!important}.lv1{color:#8A2000!important}
-.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.scard{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:13px 14px;font-size:12px;line-height:1.65;color:var(--muted)}.scard strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--light);margin-bottom:5px}
-.sclist{display:flex;flex-direction:column;gap:5px}.scitem{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--border)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:4px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-family:inherit;color:var(--text);cursor:pointer;flex-shrink:0}
-.task{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px;border-left:3px solid var(--blue)}.task h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}.task p{font-size:13px;color:var(--muted);line-height:1.75}.srow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--border);margin-top:8px;font-size:12px;color:var(--muted)}.stepn{width:20px;height:20px;border-radius:50%;background:var(--unit-lt);color:var(--unit);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.ap{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);padding:15px;margin-bottom:12px}.ap h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--light);margin-bottom:10px}
-.slist{display:flex;flex-direction:column;gap:4px}.si{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--rSM);font-size:12px;color:var(--muted);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}.si.sa{background:var(--unit-lt);color:var(--unit);font-weight:500}.si.sd{color:var(--text)}
-.dot{width:22px;height:22px;border-radius:50%;background:var(--border);color:var(--light);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.dot.sa{background:var(--unit);color:#fff}.dot.sd{background:var(--green-bg);color:var(--green)}
-.td-num{font-size:32px;font-weight:300;letter-spacing:.05em;line-height:1;font-variant-numeric:tabular-nums;text-align:center;display:block}.td-lbl{font-size:10px;color:var(--light);text-align:center;margin-top:4px;margin-bottom:12px}
+.task{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px;border-left:3px solid var(--blue)}.task h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}.task p{font-size:13px;color:var(--mt);line-height:1.75}.srow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--br);margin-top:8px;font-size:12px;color:var(--mt)}.stepn{width:20px;height:20px;border-radius:50%;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.sclist{display:flex;flex-direction:column;gap:5px}.scitem{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--br)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:4px 7px;border:1px solid var(--br);border-radius:6px;background:var(--sf);font-family:inherit;color:var(--tx);cursor:pointer;flex-shrink:0}
+/* review */
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.scard{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:13px 14px;font-size:12px;line-height:1.65;color:var(--mt)}.scard strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--lt);margin-bottom:5px}
+/* sidebar panel */
+.ap{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);padding:15px;margin-bottom:12px}.ap h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--lt);margin-bottom:10px}
+.slist{display:flex;flex-direction:column;gap:4px}.si{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--rSM);font-size:12px;color:var(--mt);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}.si.sa{background:var(--ult);color:var(--u);font-weight:500}.si.sd{color:var(--tx)}
+.dot{width:22px;height:22px;border-radius:50%;background:var(--br);color:var(--lt);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.dot.sa{background:var(--u);color:#fff}.dot.sd{background:var(--gbg);color:var(--green)}
+.td-num{font-size:32px;font-weight:300;letter-spacing:.05em;text-align:center;display:block;font-variant-numeric:tabular-nums}.td-lbl{font-size:10px;color:var(--lt);text-align:center;margin-top:4px;margin-bottom:12px}
 .trow{display:flex;gap:6px}.trow .btn{flex:1;justify-content:center;font-size:11px}
-.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:6px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--unit);white-space:nowrap}.tdef{color:var(--muted)}
-.pbtrack{flex:1;height:6px;background:var(--unit-md);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--unit);border-radius:3px}
+.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:6px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--br)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--u);white-space:nowrap}.tdef{color:var(--mt)}
+.pbtrack{height:6px;background:var(--umd);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--u);border-radius:3px}
+/* toast */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
+@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
 
-@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.cvis{width:100%}.sgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){:root{--SBW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
+
+.conv-box{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:16px;margin-bottom:14px}
+.conv-box h4{font-size:12px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.conv-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.conv-lbl{font-size:11px;font-weight:700;color:var(--mt);min-width:80px}
+.cin{padding:8px 12px;border:1.5px solid var(--br);border-radius:var(--rSM);font-size:17px;font-family:'Courier New',monospace;font-weight:700;width:100px;background:var(--sf);color:var(--tx);outline:none}
+.cin:focus{border-color:var(--u)}
+.cout{padding:8px 14px;background:var(--ult);border:1.5px solid var(--umd);border-radius:var(--rSM);font-size:17px;font-family:'Courier New',monospace;font-weight:700;color:var(--u);min-width:130px;letter-spacing:.05em}
+.bit-labels{display:flex;gap:4px;margin-bottom:4px}
+.bit-lbl{width:36px;text-align:center;font-size:9px;color:var(--lt);font-family:'Courier New',monospace}
+.bits-wrap{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.bbit{width:36px;height:36px;border-radius:7px;border:1.5px solid var(--br);background:var(--sf);font-size:14px;font-family:'Courier New',monospace;font-weight:700;cursor:pointer;transition:all .12s;color:var(--mt)}
+.bbit:hover{border-color:var(--u);background:var(--ult);color:var(--u)}.bbit.on{background:var(--u);color:#fff;border-color:var(--u);box-shadow:0 2px 8px rgba(27,158,114,.3)}
+
 </style>
 </head>
 <body>
 <aside class="sb">
-  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 2/6 · 13차시</div></div>
+  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 2/7 · 15차시</div></div>
   <nav class="sb-nav"><div class="nlbl">소단원 목록</div><a class="na done" href="../lesson-01/index.html"><div class="nn">✓</div>데이터와 정보</a>
 <a class="na on" href="../lesson-02/index.html"><div class="nn">2</div>이진수와 디지털 표현<span class="nbadge">2차시</span></a>
 <a class="na " href="../lesson-03/index.html"><div class="nn">3</div>문자와 이미지 표현</a>
-<a class="na " href="../lesson-04/index.html"><div class="nn">4</div>데이터 수집과 분류</a>
-<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>데이터 분석과 시각화</a>
-<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 활용과 빅데이터</a>
+<a class="na " href="../lesson-04/index.html"><div class="nn">4</div>소리와 영상 표현</a>
+<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>데이터 수집과 분류</a>
+<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 분석과 시각화</a>
+<a class="na " href="../lesson-07/index.html"><div class="nn">7</div>데이터 활용과 빅데이터</a>
 </nav>
   <div class="sb-foot"><a class="ba" href="../../index.html">← 단원 목차</a></div>
 </aside>
 <main class="main">
   <header class="topbar">
-    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="sep">›</span><span class="cur">2. 이진수와 디지털 표현</span></div>
-    <div class="tbr"><button class="btn bsm" onclick="markDone('02')">✓ 완료 표시</button><a class="btn bsm bp" href="../lesson-03/index.html">다음 소단원 →</a></div>
+    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span class="bccur">2. 이진수와 디지털 표현</span></div>
+    <div class="tbr">
+      <button class="btn bsm" onclick="markDone('02')">✓ 완료 표시</button>
+      <a class="btn bsm bp" href="../lesson-03/index.html">다음 소단원 →</a>
+    </div>
   </header>
   <div class="page"><div class="g2"><div class="cm">
 
   <div class="card" id="sec-goal">
-    <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--unit-lt);color:var(--unit)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-    <div class="cb"><div class="ach"><div class="ach-c">[9정02-02]</div><div class="ach-t">수를 이진수로 표현하는 원리를 이해하고 10진수와 2진수를 상호 변환할 수 있다.</div></div>
-    <ul class="glist"><li><div class="gck">✓</div>비트(bit)와 바이트(byte)의 개념을 설명할 수 있다.</li><li><div class="gck">✓</div>10진수를 2진수로 변환하는 방법을 설명할 수 있다.</li><li><div class="gck">✓</div>2진수를 10진수로 변환하는 방법을 설명할 수 있다.</li></ul><div class="div"></div>
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--light);margin-bottom:8px">핵심 개념 미리보기</div>
-    <div class="ctags"><span class="ctag" onclick="goTo('sec-concept')">비트</span><span class="ctag" onclick="goTo('sec-concept')">바이트</span><span class="ctag" onclick="goTo('sec-concept')">이진수</span><span class="ctag" onclick="goTo('sec-concept')">10진수 변환</span><span class="ctag" onclick="goTo('sec-concept')">자릿값</span><span class="ctag" onclick="goTo('sec-concept')">2의 거듭제곱</span></div>
-    <div class="ibox prev">📌 <div><b>이전 차시 연결:</b> 지난 시간에 아날로그와 디지털의 차이를 배웠습니다. 이번에는 디지털 데이터의 기본 단위인 <em>이진수(0과 1)</em>로 숫자를 표현하는 방법을 탐구합니다.</div></div></div>
+    <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--ult);color:var(--u)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+    <div class="cb">
+      <div class="ach"><div class="ach-c">[9정02-02]</div><div class="ach-t">수를 이진수로 표현하는 원리를 이해하고 10진수와 2진수를 상호 변환할 수 있다.</div></div>
+      <ul class="glist">
+        <li><div class="gck">✓</div>비트(bit)와 바이트(byte)의 개념을 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>10진수를 2진수로 변환하는 나눗셈법을 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>2진수를 10진수로 자릿값법으로 변환할 수 있다.</li>
+      </ul>
+      <div class="divl"></div>
+      <div class="ctags">
+        <span class="ctag" onclick="goTo('sec-concept')">비트</span><span class="ctag" onclick="goTo('sec-concept')">바이트</span>
+        <span class="ctag" onclick="goTo('sec-concept')">이진수</span><span class="ctag" onclick="goTo('sec-concept')">자릿값</span>
+        <span class="ctag" onclick="goTo('sec-concept')">2의 거듭제곱</span>
+      </div>
+      <div class="ibox prev">📌 <div><b>이전 차시:</b> 아날로그를 디지털로 변환할 때 샘플링을 배웠습니다. 이번에는 디지털 데이터의 기본 단위인 <em>이진수(0과 1)</em>를 탐구합니다.</div></div>
+    </div>
   </div>
 
   <div class="card" id="sec-concept">
-    <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:#E8F3DC;color:#2A720E">02</div><h3>개념설명</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
+    <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:var(--gbg);color:var(--green)">02</div><h3>개념설명</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
     <div class="cb">
-<div class="crow">
-  <div class="ct">
-    <h4>비트(bit)와 바이트(byte)</h4>
-    <p>컴퓨터가 처리하는 가장 작은 단위는 <strong>비트(bit)</strong>로, 0 또는 1 중 하나의 값을 가집니다. 8비트가 모이면 <strong>1바이트(byte)</strong>가 됩니다.</p>
-    <ul>
-      <li>1 bit = 0 또는 1</li>
-      <li>1 byte = 8 bit</li>
-      <li>1 KB = 1,024 byte</li>
-      <li>1 MB = 1,024 KB</li>
-    </ul>
-  </div>
-  <div class="cvis">
-    <svg viewBox="0 0 130 110" width="130" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="8" width="122" height="20" rx="4" fill="#E1F5EE" stroke="#1B9E72" stroke-width="1.2"/>
-      <text x="65" y="22" font-size="9" fill="#0E7A58" text-anchor="middle" font-family="sans-serif" font-weight="bold">1 byte = 8 bit</text>
-      <g transform="translate(4,34)">
-        <rect x="0" y="0" width="14" height="20" rx="3" fill="#1B9E72" opacity=".9"/>
-        <rect x="16" y="0" width="14" height="20" rx="3" fill="#1B9E72" opacity=".75"/>
-        <rect x="32" y="0" width="14" height="20" rx="3" fill="#1B9E72" opacity=".9"/>
-        <rect x="48" y="0" width="14" height="20" rx="3" fill="#1B9E72" opacity=".6"/>
-        <rect x="64" y="0" width="14" height="20" rx="3" fill="#1B9E72" opacity=".9"/>
-        <rect x="80" y="0" width="14" height="20" rx="3" fill="#1B9E72" opacity=".6"/>
-        <rect x="96" y="0" width="14" height="20" rx="3" fill="#1B9E72" opacity=".75"/>
-        <rect x="112" y="0" width="14" height="20" rx="3" fill="#1B9E72" opacity=".9"/>
-        <text x="7"   y="13" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
-        <text x="23"  y="13" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">0</text>
-        <text x="39"  y="13" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
-        <text x="55"  y="13" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">0</text>
-        <text x="71"  y="13" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
-        <text x="87"  y="13" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">0</text>
-        <text x="103" y="13" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
-        <text x="119" y="13" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
-      </g>
-      <text x="65" y="72" font-size="7.5" fill="#696760" text-anchor="middle" font-family="sans-serif">= 10진수 171</text>
-      <text x="65" y="84" font-size="7" fill="#A8A59E" text-anchor="middle" font-family="sans-serif">128+32+8+2+1</text>
-    </svg>
-  </div>
-</div>
-<div class="div"></div>
-<h4 style="font-size:13px;font-weight:700;margin-bottom:10px">10진수 → 2진수 변환 (나눗셈법)</h4>
-<div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px;font-size:13px">
-  <b>예시: 13을 2진수로</b><br>
-  <div style="font-family:'Courier New',monospace;font-size:12px;color:var(--muted);line-height:2;margin-top:8px">
-    13 ÷ 2 = <b>6</b> 나머지 <b style="color:#1B9E72">1</b> ← 최하위 비트<br>
-    &nbsp;6 ÷ 2 = <b>3</b> 나머지 <b style="color:#1B9E72">0</b><br>
-    &nbsp;3 ÷ 2 = <b>1</b> 나머지 <b style="color:#1B9E72">1</b><br>
-    &nbsp;1 ÷ 2 = <b>0</b> 나머지 <b style="color:#1B9E72">1</b> ← 최상위 비트<br>
-    <br>나머지를 아래→위로 읽으면: <b style="color:#1B9E72;font-size:14px">1101₂</b>
-  </div>
-</div>
-<h4 style="font-size:13px;font-weight:700;margin-bottom:10px">2진수 → 10진수 변환 (자릿값법)</h4>
-<div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px 16px;font-size:13px">
-  <b>예시: 1101₂를 10진수로</b><br>
-  <div style="font-family:'Courier New',monospace;font-size:12px;color:var(--muted);line-height:2;margin-top:8px">
-    1×2³ + 1×2² + 0×2¹ + 1×2⁰<br>
-    = 8 + 4 + 0 + 1 = <b style="color:#1B9E72;font-size:14px">13</b>
-  </div>
-</div>
-<div class="ibox info">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.80–89 참고</div>
-</div>
+      <div class="crow">
+        <div class="ct">
+          <h4>비트(bit)와 바이트(byte)</h4>
+          <p>컴퓨터가 처리하는 가장 작은 단위는 <strong>비트(bit)</strong>로, 0 또는 1 중 하나의 값만 가집니다.</p>
+          <ul><li>1 bit = 0 또는 1 중 하나</li><li>1 byte = 8 bit</li><li>1 KB = 1,024 byte</li><li>1 MB = 1,024 KB</li></ul>
+        </div>
+        <div class="cvis">
+          <svg viewBox="0 0 128 90" width="128">
+            <rect x="2" y="4" width="124" height="18" rx="4" fill="var(--ult)" stroke="var(--u)" stroke-width="1.2"/>
+            <text x="64" y="16.5" font-size="9" fill="var(--udk)" text-anchor="middle" font-family="sans-serif" font-weight="bold">1 byte = 8 bit</text>
+            <g transform="translate(2,26)">
+              <rect x="0" y="0" width="14" height="18" rx="3" fill="var(--u)"/><text x="7" y="12" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
+              <rect x="16" y="0" width="14" height="18" rx="3" fill="var(--u)" opacity=".7"/><text x="23" y="12" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">0</text>
+              <rect x="32" y="0" width="14" height="18" rx="3" fill="var(--u)"/><text x="39" y="12" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
+              <rect x="48" y="0" width="14" height="18" rx="3" fill="var(--u)" opacity=".7"/><text x="55" y="12" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">0</text>
+              <rect x="64" y="0" width="14" height="18" rx="3" fill="var(--u)"/><text x="71" y="12" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
+              <rect x="80" y="0" width="14" height="18" rx="3" fill="var(--u)" opacity=".7"/><text x="87" y="12" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">0</text>
+              <rect x="96" y="0" width="14" height="18" rx="3" fill="var(--u)"/><text x="103" y="12" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
+              <rect x="112" y="0" width="14" height="18" rx="3" fill="var(--u)"/><text x="119" y="12" font-size="8" fill="#fff" text-anchor="middle" font-family="monospace">1</text>
+            </g>
+            <text x="64" y="60" font-size="7.5" fill="var(--mt)" text-anchor="middle" font-family="sans-serif">= 10진수 171</text>
+            <text x="64" y="72" font-size="7" fill="var(--lt)" text-anchor="middle" font-family="sans-serif">128+32+8+2+1</text>
+          </svg>
+        </div>
+      </div>
+      <div class="divl"></div>
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:10px">10진수 → 2진수 변환 (나눗셈법)</h4>
+      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;font-size:13px;margin-bottom:14px">
+        <b>예시: 13을 2진수로 변환</b>
+        <div style="font-family:'Courier New',monospace;font-size:12px;color:var(--mt);line-height:2.1;margin-top:8px">
+          13 ÷ 2 = 6 … 나머지 <b style="color:var(--u)">1</b> ← 최하위 비트<br>
+          &nbsp;6 ÷ 2 = 3 … 나머지 <b style="color:var(--u)">0</b><br>
+          &nbsp;3 ÷ 2 = 1 … 나머지 <b style="color:var(--u)">1</b><br>
+          &nbsp;1 ÷ 2 = 0 … 나머지 <b style="color:var(--u)">1</b> ← 최상위 비트<br><br>
+          아래→위로 읽으면: <b style="color:var(--u);font-size:15px">1101₂</b>
+        </div>
+      </div>
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:10px">2진수 → 10진수 (자릿값법)</h4>
+      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;font-size:13px">
+        <b>예시: 1101₂ → 10진수</b>
+        <div style="font-family:'Courier New',monospace;font-size:12px;color:var(--mt);line-height:2.1;margin-top:8px">
+          1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8 + 4 + 0 + 1 = <b style="color:var(--u);font-size:15px">13</b>
+        </div>
+      </div>
+      <div class="ibox info" style="margin-top:12px">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.80–89</div>
+    </div>
   </div>
 
   <div class="card" id="sec-interact">
-    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:#FAEBE6;color:#8C1E0E">03</div><h3>인터랙션 — 이진수 변환기</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
+    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:var(--rbg);color:var(--red)">03</div><h3>인터랙션 — 이진수 변환기 + 비트 계산기</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="ibox ok" style="margin-top:0;margin-bottom:16px">💡 숫자를 입력하면 즉시 2진수로 변환됩니다. 8개의 비트 버튼을 클릭해도 숫자를 만들 수 있어요!</div>
-      
-<div class="conv-wrap">
-  <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.07em">▸ 10진수 → 2진수 변환기</div>
-  <div class="conv-row">
-    <span class="conv-lbl">10진수 입력</span>
-    <input class="conv-in" id="dec-in" type="number" min="0" max="255" value="65" oninput="decToBin()" placeholder="0~255">
-    <span style="font-size:14px;color:var(--light)">→</span>
-    <span class="conv-out" id="bin-out">01000001</span>
-  </div>
-</div>
-<div class="conv-wrap">
-  <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.07em">▸ 비트 클릭 → 10진수 계산기</div>
-  <div class="bit-labels" id="bit-labels"></div>
-  <div class="bits-row" id="bits-row"></div>
-  <div style="display:flex;align-items:center;gap:10px">
-    <span class="conv-lbl">10진수 값</span>
-    <span class="conv-out" id="bits-out">0</span>
-    <button class="btn bsm" onclick="resetBits()">↺ 초기화</button>
-  </div>
-</div>
+      <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 숫자를 입력하면 즉시 2진수로 변환됩니다. 아래 비트 버튼을 직접 클릭해서 값을 조합해보세요!</div>
 
-      <div class="div"></div>
-      <div class="qwrap"><div class="qq">이진수 <b>1010₂</b>를 10진수로 변환한 값은?</div>
-      <div class="qopts">
-<div class="opt" onclick="checkQ(this,false,'힌트: 1×2³ + 0×2² + 1×2¹ + 0×2⁰ 로 계산해보세요.')"><span class="onum">①</span>8</div>
-<div class="opt" onclick="checkQ(this,true,'1×8 + 0×4 + 1×2 + 0×1 = 8+2 = 10 ✓')"><span class="onum">②</span>10</div>
-<div class="opt" onclick="checkQ(this,false,'힌트: 각 자리의 2의 거듭제곱 값을 곱해서 더하세요.')"><span class="onum">③</span>12</div>
-<div class="opt" onclick="checkQ(this,false,'힌트: 왼쪽부터 2³, 2², 2¹, 2⁰ 입니다.')"><span class="onum">④</span>5</div>
-</div>
-      <div class="qfb" id="qfb"></div></div>
+      <div class="conv-box">
+        <h4>▸ 10진수 → 2진수 실시간 변환기</h4>
+        <div class="conv-row">
+          <span class="conv-lbl">10진수 입력</span>
+          <input class="cin" id="dec-in" type="number" min="0" max="255" value="65" oninput="syncDecToBin()">
+          <span style="font-size:18px;color:var(--lt)">→</span>
+          <span class="cout" id="bin-out">01000001</span>
+        </div>
+        <div class="conv-row">
+          <span class="conv-lbl">16진수</span>
+          <span id="hex-out" style="font-family:'Courier New',monospace;font-size:14px;color:var(--amber)">0x41</span>
+        </div>
+        <div style="font-size:11px;color:var(--mt);margin-top:4px">💬 결과: <span id="explain-out" style="color:var(--u);font-weight:600"></span></div>
+      </div>
+
+      <div class="conv-box">
+        <h4>▸ 비트 클릭 → 10진수 계산기 (8비트)</h4>
+        <div class="bit-labels" id="bit-labels"></div>
+        <div class="bits-wrap" id="bits-wrap"></div>
+        <div class="conv-row">
+          <span class="conv-lbl">10진수 값</span>
+          <span class="cout" id="bits-val">0</span>
+          <button class="btn bsm" onclick="resetBits()">↺ 초기화</button>
+        </div>
+      </div>
+
+      <div class="qwrap">
+        <div class="qq">이진수 <b>1010₂</b>를 10진수로 변환한 값은?</div>
+        <div class="qopts">
+          <div class="opt" onclick="checkQ(this,false,'1×2³=8, 0×2²=0, 1×2¹=2, 0×2⁰=0 → 합계를 다시 계산해보세요.')"><span class="onum">①</span>8</div>
+          <div class="opt" onclick="checkQ(this,true,'1×8 + 0×4 + 1×2 + 0×1 = 8+2 = 10 ✓ 정확합니다!')"><span class="onum">②</span>10</div>
+          <div class="opt" onclick="checkQ(this,false,'왼쪽부터 2³=8, 2²=4, 2¹=2, 2⁰=1 임을 다시 확인하세요.')"><span class="onum">③</span>12</div>
+          <div class="opt" onclick="checkQ(this,false,'5는 이진수 101₂입니다. 자릿수를 다시 확인하세요.')"><span class="onum">④</span>5</div>
+        </div>
+        <div class="qfb"></div>
+      </div>
     </div>
   </div>
 
   <div class="card" id="sec-assess">
-    <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:#E4F0FA;color:#0A4E8C">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+    <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="task"><h4>📋 이진수 표현 분석하기</h4><p>제시된 5개의 10진수를 2진수로 변환하고, 각 변환 과정을 나눗셈법으로 단계별 기록하시오.</p><div class="srow"><div class="stepn">①</div><span>10진수 5개 선택 (10~100 범위)</span></div><div class="srow"><div class="stepn">②</div><span>나눗셈법으로 2진수 변환 과정 기록</span></div><div class="srow"><div class="stepn">③</div><span>변환 결과를 자릿값법으로 역검증</span></div></div>
-      <table class="rub" style="margin-bottom:16px"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody><tr><td><b>변환 정확성</b></td><td class="lv4">5개 모두 정확</td><td class="lv3">4개 정확</td><td class="lv2">3개 정확</td><td class="lv1">2개 이하</td></tr><tr><td><b>과정 기록</b></td><td class="lv4">단계별 명확히 기록</td><td class="lv3">대체로 기록</td><td class="lv2">결과만 기록</td><td class="lv1">기록 없음</td></tr></tbody></table>
-      <div class="sclist"><div class="scitem"><label>비트와 바이트의 관계를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div><div class="scitem"><label>10진수를 나눗셈법으로 2진수 변환할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div><div class="scitem"><label>2진수를 자릿값법으로 10진수 변환할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div></div>
+      <div class="task"><h4>📋 이진수 변환 분석하기</h4>
+        <p>제시된 5개의 10진수를 2진수로 변환하고, 각 변환 과정을 나눗셈법으로 단계별 기록하시오.</p>
+        <div class="srow"><div class="stepn">①</div><span>10진수 5개 선택 (10~100 범위)</span></div>
+        <div class="srow"><div class="stepn">②</div><span>나눗셈법으로 2진수 변환 과정 기록</span></div>
+        <div class="srow"><div class="stepn">③</div><span>자릿값법으로 역검증</span></div>
+      </div>
+      <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody>
+        <tr><td><b>변환 정확성</b></td><td class="lv4">5개 모두 정확</td><td class="lv3">4개 정확</td><td class="lv2">3개 정확</td><td class="lv1">2개 이하</td></tr>
+        <tr><td><b>과정 기록</b></td><td class="lv4">단계별 명확</td><td class="lv3">대체로 기록</td><td class="lv2">결과만 기록</td><td class="lv1">기록 없음</td></tr>
+      </tbody></table>
+      <div class="sclist">
+        <div class="scitem"><label>비트와 바이트의 관계를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>10진수→2진수 나눗셈법 변환을 할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>2진수→10진수 자릿값법 변환을 할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+      </div>
       <button class="btn bsm bok" style="margin-top:11px" onclick="saveSC('l202sc')">💾 저장</button>
     </div>
   </div>
 
   <div class="card" id="sec-review">
-    <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:#E8F3DC;color:#2A720E">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-    <div class="cb"><div class="sgrid"><div class="scard"><strong>비트·바이트</strong>1bit=0or1. 8bit=1byte. 1KB=1024byte. 컴퓨터 데이터 기본 단위.</div><div class="scard"><strong>10→2 변환</strong>2로 계속 나누며 나머지를 아래→위로 읽음. 13→1101₂</div><div class="scard"><strong>2→10 변환</strong>각 자리×2의 거듭제곱 합산. 1101₂=8+4+0+1=13</div></div>
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px;font-size:13px;margin-bottom:14px">
-      <strong>✏️ 단답형:</strong> "8비트로 표현할 수 있는 최댓값은 <span style='display:inline-block;width:60px;border-bottom:1.5px solid var(--text)'>&nbsp;</span>이다."
-      <textarea style="display:block;width:100%;margin-top:10px;padding:10px;border:1px solid var(--border);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:52px;background:var(--surface);outline:none" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='var(--unit)'" onblur="this.style.borderColor=''"></textarea></div>
-    <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 문자(아스키코드)와 이미지(픽셀)가 어떻게 디지털로 표현되는지 탐구합니다!</div></div></div>
+    <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:var(--gbg);color:var(--green)">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+    <div class="cb">
+      <div class="sgrid">
+        <div class="scard"><strong>비트·바이트</strong>1bit=0or1. 8bit=1byte. 1KB=1024byte.</div>
+        <div class="scard"><strong>10→2 변환</strong>2로 나눠 나머지를 아래→위. 13→1101₂</div>
+        <div class="scard"><strong>2→10 변환</strong>자릿값×2의 거듭제곱 합산. 1101₂=13</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
+        <b>✏️ 단답형:</b> 8비트로 표현할 수 있는 10진수 최댓값은 <span style="display:inline-block;width:60px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>이다.
+        <textarea style="display:block;width:100%;margin-top:10px;padding:9px;border:1px solid var(--br);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:50px;background:var(--sf)" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='var(--u)'" onblur="this.style.borderColor=''"></textarea>
+      </div>
+      <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 문자(아스키코드)와 이미지(픽셀)가 디지털로 표현되는 원리를 탐구합니다!</div></div>
+    </div>
   </div>
 
   </div>
@@ -217,17 +268,16 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);co
     </div></div>
     <div class="ap"><h5>수업 타이머</h5><span class="td-num" id="tnum">45:00</span><div class="td-lbl">수업 남은 시간</div>
     <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div></div>
-    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">bit</span><span class="tdef">0 또는 1 최소 단위</span></div><div class="tterm"><span class="tw">byte</span><span class="tdef">8bit 묶음</span></div><div class="tterm"><span class="tw">이진수</span><span class="tdef">0과 1로만 표현</span></div><div class="tterm"><span class="tw">자릿값</span><span class="tdef">2의 거듭제곱</span></div><div class="tterm"><span class="tw">오버플로</span><span class="tdef">최댓값 초과</span></div></div></div>
-    <div class="ap" style="background:var(--unit-lt);border-color:var(--unit-md)"><h5 style="color:var(--unit)">단원 진도</h5>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div class="pbtrack"><div class="pbfill" style="width:33%"></div></div><span style="font-size:11px;font-weight:600;color:var(--unit)">2/6</span></div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">bit</span><span class="tdef">0 또는 1 최소 단위</span></div><div class="tterm"><span class="tw">byte</span><span class="tdef">8bit 묶음</span></div><div class="tterm"><span class="tw">이진수</span><span class="tdef">0과1 표현</span></div><div class="tterm"><span class="tw">자릿값</span><span class="tdef">2의 거듭제곱</span></div><div class="tterm"><span class="tw">오버플로</span><span class="tdef">최댓값 초과</span></div></div></div>
+    <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:28%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">2/7</span></div>
     </div>
   </div>
   </div></div>
 </main>
-<div id="toast" style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap"></div>
+<div id="toast"></div>
 <script>
 
-'use strict';
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
 function toggleSec(id){var e=document.getElementById(id);if(e)e.classList.toggle('collapsed');}
 function goTo(id){var e=document.getElementById(id);if(!e)return;window.scrollTo({top:e.getBoundingClientRect().top+window.pageYOffset-68,behavior:'smooth'});}
@@ -236,12 +286,63 @@ function pad(n){return n<10?'0'+n:''+n;}
 function renderT(){var e=document.getElementById('tnum');if(!e)return;e.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);e.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
 function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
 function resetTimer(){clearInterval(tIv);tRun=false;tR=2700;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
-function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');o.style.pointerEvents='none';});el.classList.add(ok?'correct':'wrong');var fb=document.getElementById('qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ ':'✗ 힌트: ')+msg;}}
+function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');o.style.pointerEvents='none';});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
 function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){toast('저장 실패');}}
 function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
 function markDone(n){try{var d=JSON.parse(localStorage.getItem('u02done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u02done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
 
-document.addEventListener("DOMContentLoaded",function(){renderT();loadSC("l202sc");});
+
+// ── 10진수↔2진수 변환기 ──
+function syncDecToBin() {
+  var v = parseInt(document.getElementById('dec-in').value) || 0;
+  v = Math.max(0, Math.min(255, v));
+  var bin = v.toString(2).padStart(8, '0');
+  var hex = '0x' + v.toString(16).toUpperCase().padStart(2,'0');
+  document.getElementById('bin-out').textContent = bin;
+  document.getElementById('hex-out').textContent = hex;
+  var parts = [];
+  [7,6,5,4,3,2,1,0].forEach(function(i){
+    if((v >> i) & 1) parts.push(Math.pow(2,i));
+  });
+  document.getElementById('explain-out').textContent = parts.length ? parts.join(' + ') + ' = ' + v : '0';
+}
+// ── 비트 클릭 계산기 ──
+var bits = [0,0,0,0,0,0,0,0];
+var weights = [128,64,32,16,8,4,2,1];
+function initBits() {
+  var wr = document.getElementById('bits-wrap');
+  var ll = document.getElementById('bit-labels');
+  if(!wr || !ll) return;
+  wr.innerHTML = ''; ll.innerHTML = '';
+  weights.forEach(function(w, i) {
+    var lbl = document.createElement('div');
+    lbl.className = 'bit-lbl';
+    lbl.textContent = '2^'+(7-i);
+    ll.appendChild(lbl);
+    var b = document.createElement('button');
+    b.className = 'bbit';
+    b.textContent = '0';
+    b.setAttribute('aria-label', '비트 '+(7-i)+' 토글');
+    b.onclick = function() {
+      bits[i] = bits[i] ? 0 : 1;
+      b.textContent = bits[i];
+      b.classList.toggle('on', bits[i] === 1);
+      updateBitsVal();
+    };
+    wr.appendChild(b);
+  });
+}
+function updateBitsVal() {
+  var val = bits.reduce(function(s,v,i){ return s + v * weights[i]; }, 0);
+  document.getElementById('bits-val').textContent = val;
+}
+function resetBits() {
+  bits = [0,0,0,0,0,0,0,0];
+  document.querySelectorAll('.bbit').forEach(function(b){ b.textContent='0'; b.classList.remove('on'); });
+  updateBitsVal();
+}
+document.addEventListener('DOMContentLoaded', function(){ initBits(); syncDecToBin(); });
+
+document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l202sc');});
 </script>
-</body>
-</html>
+</body></html>
