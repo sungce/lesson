@@ -64,6 +64,8 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 /* toast */
 #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
 @media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){#pdf-grid{grid-template-columns:1fr 1fr!important}}
+@media(max-width:420px){#pdf-grid{grid-template-columns:1fr!important}}
 @media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
 
 
@@ -186,15 +188,113 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
       </div>
     </div>
   </div>
+
+  <!-- ★ 추가 수업자료 섹션 ★ -->
+  <div class="card" id="sec-material">
+    <div class="ch" onclick="toggleSec('sec-material')">
+      <div class="sn" style="background:linear-gradient(135deg,#1D4ED8,#7C3AED);color:#fff">📋</div>
+      <h3>수업 자료 — 데이터 수집 방법 4가지 + 설문지 실습</h3>
+      <span class="st" style="background:#EFF6FF;border-color:#BFDBFE;color:#1D4ED8">실습 자료</span>
+      <span class="carr">▾</span>
+    </div>
+    <div class="cb">
+
+      <!-- ① 인터랙티브 수업자료 -->
+      <div style="border:2px solid var(--umd);border-radius:var(--rLG);overflow:hidden;margin-bottom:20px">
+        <div style="background:var(--ult);border-bottom:1px solid var(--umd);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span style="font-size:15px">🗂️</span>
+          <span style="font-size:12px;font-weight:700;color:var(--udk)">데이터 수집 방법 4가지 인터랙티브 자료</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:var(--u);color:#fff;font-weight:700">설문·관찰·센서·공공데이터</span>
+          <a href="material.html" target="_blank" class="btn bsm bp" style="margin-left:auto">새 탭으로 열기 ↗</a>
+        </div>
+        <iframe src="material.html" style="width:100%;height:620px;border:none;display:block" title="데이터 수집 방법 4가지" loading="lazy"></iframe>
+      </div>
+
+      <!-- ② 설문조사 참여 -->
+      <div style="background:linear-gradient(135deg,#1D4ED8,#2563EB);border-radius:var(--rMD,10px);padding:20px 22px;margin-bottom:18px;color:#fff">
+        <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap">
+          <div style="flex:1;min-width:200px">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin-bottom:6px">실습 활동</div>
+            <div style="font-size:16px;font-weight:700;margin-bottom:6px">📝 지금 바로 설문에 참여해보세요!</div>
+            <div style="font-size:13px;opacity:.88;line-height:1.65;margin-bottom:12px">아래 버튼을 클릭하면 구글 설문폼으로 이동합니다.<br>직접 설문에 응답하면서 <strong>데이터가 수집되는 과정</strong>을 체험해보세요!</div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <a href="https://forms.gle/UbcuMx9UW2cpzJwVA" target="_blank"
+                 style="display:inline-flex;align-items:center;gap:7px;padding:10px 20px;background:#fff;color:#1D4ED8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;transition:opacity .15s"
+                 onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+                📋 설문조사 참여하기 →
+              </a>
+              <span style="font-size:11px;opacity:.75">Google Forms · 익명 응답</span>
+            </div>
+          </div>
+          <div style="flex-shrink:0;text-align:center;opacity:.6;font-size:52px;line-height:1">📊</div>
+        </div>
+      </div>
+
+      <!-- ③ PDF 설문지 다운로드 -->
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">📄 예시 설문지 6종 다운로드 (PDF)</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px" id="pdf-grid">
+
+          <a href="survey-01.pdf" download="설문01_스마트폰사용실태조사.pdf"
+             style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);text-decoration:none;color:var(--tx);transition:all .15s"
+             onmouseover="this.style.borderColor='var(--u)';this.style.background='var(--ult)'" onmouseout="this.style.borderColor='var(--br)';this.style.background='var(--sf)'">
+            <div style="width:32px;height:32px;background:#FEF2F2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">📱</div>
+            <div><div style="font-size:11px;font-weight:700;margin-bottom:2px">설문 01</div><div style="font-size:10px;color:var(--mt);line-height:1.4">스마트폰 사용 실태 조사</div></div>
+          </a>
+
+          <a href="survey-02.pdf" download="설문02_학교급식만족도조사.pdf"
+             style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);text-decoration:none;color:var(--tx);transition:all .15s"
+             onmouseover="this.style.borderColor='var(--u)';this.style.background='var(--ult)'" onmouseout="this.style.borderColor='var(--br)';this.style.background='var(--sf)'">
+            <div style="width:32px;height:32px;background:#F0FDF4;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🍱</div>
+            <div><div style="font-size:11px;font-weight:700;margin-bottom:2px">설문 02</div><div style="font-size:10px;color:var(--mt);line-height:1.4">학교 급식 만족도 조사</div></div>
+          </a>
+
+          <a href="survey-03.pdf" download="설문03_독서습관및선호조사.pdf"
+             style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);text-decoration:none;color:var(--tx);transition:all .15s"
+             onmouseover="this.style.borderColor='var(--u)';this.style.background='var(--ult)'" onmouseout="this.style.borderColor='var(--br)';this.style.background='var(--sf)'">
+            <div style="width:32px;height:32px;background:#EFF6FF;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">📚</div>
+            <div><div style="font-size:11px;font-weight:700;margin-bottom:2px">설문 03</div><div style="font-size:10px;color:var(--mt);line-height:1.4">독서 습관 및 선호 조사</div></div>
+          </a>
+
+          <a href="survey-04.pdf" download="설문04_수면및생활패턴조사.pdf"
+             style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);text-decoration:none;color:var(--tx);transition:all .15s"
+             onmouseover="this.style.borderColor='var(--u)';this.style.background='var(--ult)'" onmouseout="this.style.borderColor='var(--br)';this.style.background='var(--sf)'">
+            <div style="width:32px;height:32px;background:#FDF4FF;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">😴</div>
+            <div><div style="font-size:11px;font-weight:700;margin-bottom:2px">설문 04</div><div style="font-size:10px;color:var(--mt);line-height:1.4">수면 및 생활 패턴 조사</div></div>
+          </a>
+
+          <a href="survey-05.pdf" download="설문05_환경보호의식조사.pdf"
+             style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);text-decoration:none;color:var(--tx);transition:all .15s"
+             onmouseover="this.style.borderColor='var(--u)';this.style.background='var(--ult)'" onmouseout="this.style.borderColor='var(--br)';this.style.background='var(--sf)'">
+            <div style="width:32px;height:32px;background:#F0FDF4;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🌿</div>
+            <div><div style="font-size:11px;font-weight:700;margin-bottom:2px">설문 05</div><div style="font-size:10px;color:var(--mt);line-height:1.4">환경 보호 의식 조사</div></div>
+          </a>
+
+          <a href="survey-06.pdf" download="설문06_여가및취미활동조사.pdf"
+             style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);text-decoration:none;color:var(--tx);transition:all .15s"
+             onmouseover="this.style.borderColor='var(--u)';this.style.background='var(--ult)'" onmouseout="this.style.borderColor='var(--br)';this.style.background='var(--sf)'">
+            <div style="width:32px;height:32px;background:#FFFBEB;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🎮</div>
+            <div><div style="font-size:11px;font-weight:700;margin-bottom:2px">설문 06</div><div style="font-size:10px;color:var(--mt);line-height:1.4">여가 및 취미 활동 조사</div></div>
+          </a>
+
+        </div>
+        <div style="margin-top:10px;padding:10px 14px;background:var(--bbg);border:1px solid #BACED8;border-radius:var(--rSM);font-size:12px;color:var(--blue);display:flex;align-items:flex-start;gap:8px">
+          💡 <span>클릭하면 PDF 파일이 다운로드됩니다. 설문지를 인쇄하거나 화면으로 확인하며 <b>Q1~Q6의 각 문항 유형</b>(선택형·리커트·서술형 등)을 분석해보세요.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <div class="card" id="sec-assess">
     <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="task"><h4>📋 데이터 수집 계획서</h4>
-        <p>학교 주변 문제를 데이터로 해결하는 프로젝트를 설계하시오.</p>
-        <div class="srow"><div class="stepn">①</div><span>해결할 문제 상황 정의</span></div>
-        <div class="srow"><div class="stepn">②</div><span>필요한 데이터 종류와 수집 방법 결정</span></div>
-        <div class="srow"><div class="stepn">③</div><span>데이터 유형(정형/비정형) 명시</span></div>
-        <div class="srow"><div class="stepn">④</div><span>공공데이터 활용 가능성 탐색</span></div>
+      <div class="task"><h4>📋 설문지 분석 + 데이터 수집 계획서</h4>
+        <p>위 수업자료에서 설문지 1종을 선택하고, 문항 유형을 분석한 후 직접 데이터 수집 계획서를 작성하시오.</p>
+        <div class="srow"><div class="stepn">①</div><span>설문지 6종 중 1종 선택 후 PDF 다운로드</span></div>
+        <div class="srow"><div class="stepn">②</div><span>Q1~Q6의 문항 유형(선택형·리커트·서술형·순위형) 분석표 작성</span></div>
+        <div class="srow"><div class="stepn">③</div><span>구글 설문폼 참여 후 수집 과정 체험 기록</span></div>
+        <div class="srow"><div class="stepn">④</div><span>해결할 문제 상황 선택 → 데이터 수집 방법·유형 계획 작성</span></div>
       </div>
       <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody>
         <tr><td><b>문제 정의</b></td><td class="lv4">구체적·실현 가능</td><td class="lv3">대체로 구체적</td><td class="lv2">모호함</td><td class="lv1">정의 없음</td></tr>
@@ -202,6 +302,7 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
       </tbody></table>
       <div class="sclist">
         <div class="scitem"><label>정형·비정형·반정형 데이터를 구분할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>설문 문항 유형(선택·리커트·서술·순위형)을 구분할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
         <div class="scitem"><label>상황에 맞는 데이터 수집 방법을 선택할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
         <div class="scitem"><label>공공데이터의 활용 방법을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
       </div>
@@ -230,6 +331,7 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
       <div class="si sd" onclick="goTo('sec-goal')"><div class="dot sd">✓</div>학습목표</div>
       <div class="si sd" onclick="goTo('sec-concept')"><div class="dot sd">✓</div>개념설명</div>
       <div class="si sa" onclick="goTo('sec-interact')"><div class="dot sa">→</div>인터랙션</div>
+      <div class="si" onclick="goTo('sec-material')"><div class="dot" style="font-size:9px">📋</div>수업자료</div>
       <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
       <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
     </div></div>
