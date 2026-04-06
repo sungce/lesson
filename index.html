@@ -799,6 +799,96 @@
     .dash-stats { width: 100%; }
     .main { margin-left: 0; }
   }
+
+  /* ─── Unit I 서브메뉴 ─── */
+  .nav-sub {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 20px 7px 32px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all .15s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nav-sub:hover { background: var(--bg); color: var(--text); border-left-color: var(--unit-1); }
+  .sub-num {
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    background: var(--unit-1-light);
+    color: var(--unit-1);
+    font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-disabled { cursor: default; opacity: .5; pointer-events: none; }
+  .active-unit { color: var(--unit-1) !important; font-weight: 600 !important;
+    background: var(--unit-1-light) !important; border-left: 2px solid var(--unit-1) !important; }
+
+  /* ─── Unit I 소단원 카드 ─── */
+  .u1-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: all .18s;
+    position: relative;
+    overflow: hidden;
+  }
+  .u1-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--unit-1);
+    opacity: 0;
+    transition: opacity .18s;
+  }
+  .u1-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(108,101,204,.15);
+    border-color: var(--unit-1-light);
+  }
+  .u1-card:hover::before { opacity: 1; }
+  .u1-num {
+    font-size: 11px; font-weight: 700;
+    color: var(--unit-1); letter-spacing: .06em;
+    font-family: 'Courier New', monospace;
+  }
+  .u1-icon { font-size: 26px; margin: 2px 0; }
+  .u1-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .u1-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; flex: 1; }
+  .u1-meta { display: flex; gap: 5px; margin-top: 4px; }
+  .u1-tag {
+    font-size: 10px; padding: 2px 8px;
+    border-radius: 20px; font-weight: 500;
+    background: var(--bg); color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .u1-done { background: #EAF3DE; color: #3B6D11; border-color: #BFDFAA; }
+  .u1-arrow {
+    font-size: 11px; font-weight: 600;
+    color: var(--unit-1); margin-top: 6px;
+    opacity: 0; transition: opacity .15s;
+  }
+  .u1-card:hover .u1-arrow { opacity: 1; }
+
+  @media (max-width: 1100px) {
+    #view-unit1 .u1-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    #view-unit1 > div:last-child { grid-template-columns: 1fr; }
+  }
+
 </style>
 </head>
 <body>
@@ -820,30 +910,59 @@
 
     <div class="nav-section-label" style="margin-top:8px">단원</div>
 
-    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+    <!-- Unit I — 클릭 시 서브메뉴 토글 + 뷰 전환 -->
+    <a class="nav-item nav-unit1 active-unit" id="nav-unit1-head"
+       onclick="toggleUnitNav(); showView('unit1'); setActive(this)">
       <div class="nav-dot" style="background:var(--unit-1)"></div>
       I. 컴퓨팅 시스템
       <span class="nav-badge">13</span>
+      <span id="unit1-arrow" style="margin-left:2px;font-size:10px;color:var(--text-light)">▾</span>
     </a>
-    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+    <!-- Unit I 서브메뉴 -->
+    <div id="unit1-subnav" style="display:block">
+      <a class="nav-sub" href="unit-01/lesson-01/index.html">
+        <span class="sub-num">1</span>컴퓨터의 구성과 역할
+      </a>
+      <a class="nav-sub" href="unit-01/lesson-02/index.html">
+        <span class="sub-num">2</span>입력 장치와 출력 장치
+      </a>
+      <a class="nav-sub" href="unit-01/lesson-03/index.html">
+        <span class="sub-num">3</span>CPU와 메모리
+      </a>
+      <a class="nav-sub" href="unit-01/lesson-04/index.html">
+        <span class="sub-num">4</span>운영체제의 역할
+      </a>
+      <a class="nav-sub" href="unit-01/lesson-05/index.html">
+        <span class="sub-num">5</span>네트워크와 인터넷
+      </a>
+      <a class="nav-sub" href="unit-01/lesson-06/index.html">
+        <span class="sub-num">6</span>피지컬 컴퓨팅
+      </a>
+    </div>
+
+    <a class="nav-item nav-disabled">
       <div class="nav-dot" style="background:var(--unit-2)"></div>
       II. 데이터
       <span class="nav-badge">13</span>
+      <span style="margin-left:4px;font-size:10px;color:var(--text-light)">준비중</span>
     </a>
-    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+    <a class="nav-item nav-disabled">
       <div class="nav-dot" style="background:var(--unit-3)"></div>
       III. 알고리즘·프로그래밍
       <span class="nav-badge">22</span>
+      <span style="margin-left:4px;font-size:10px;color:var(--text-light)">준비중</span>
     </a>
-    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+    <a class="nav-item nav-disabled">
       <div class="nav-dot" style="background:var(--unit-4)"></div>
       IV. 인공지능
       <span class="nav-badge">13</span>
+      <span style="margin-left:4px;font-size:10px;color:var(--text-light)">준비중</span>
     </a>
-    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+    <a class="nav-item nav-disabled">
       <div class="nav-dot" style="background:var(--unit-5)"></div>
       V. 디지털 문화
       <span class="nav-badge">7</span>
+      <span style="margin-left:4px;font-size:10px;color:var(--text-light)">준비중</span>
     </a>
   </nav>
 
@@ -873,7 +992,7 @@
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
         저장
       </button>
-      <button class="btn btn-primary" onclick="location.href='unit-01/lesson-01/index.html'">
+      <button class="btn btn-primary" onclick="showView('unit1'); setActive(document.getElementById('nav-unit1-head'))">
         이어서 학습 →
       </button>
     </div>
@@ -907,7 +1026,7 @@
     </div>
     <div class="units-grid">
 
-      <div class="unit-overview-card" onclick="location.href='unit-01/lesson-01/index.html'" style="--c:var(--unit-1);--cl:var(--unit-1-light)">
+      <div class="unit-overview-card" onclick="showView('unit1'); setActive(document.getElementById('nav-unit1-head'))" style="--c:var(--unit-1);--cl:var(--unit-1-light)">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-1)"></div>
         <div class="unit-roman" style="color:var(--unit-1)">I</div>
         <h4>컴퓨팅 시스템</h4>
@@ -1079,343 +1198,107 @@
     </div>
   </section>
 
-  <!-- ─── LESSON VIEW ─── -->
-  <section class="view" id="view-lesson">
-    <div class="lesson-layout">
-
-      <!-- LEFT: Content -->
-      <div class="lesson-content">
-
-        <!-- 01 학습목표 -->
-        <div class="section-card" id="sec-goal">
-          <div class="section-card-header" onclick="toggleSection('sec-goal')">
-            <div class="section-num-badge" style="background:var(--unit-1-light);color:var(--unit-1)">01</div>
-            <h4>학습목표</h4>
-            <span class="time-tag">⏱ 5분</span>
-            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
-          </div>
-          <div class="section-card-body">
-            <div class="achievement-box">
-              <div class="achievement-code">[9정03-01]</div>
-              <div class="achievement-text">알고리즘의 개념과 중요성을 이해하고, 문제 해결을 위한 알고리즘을 설계할 수 있다.</div>
-            </div>
-
-            <ul class="goal-list">
-              <li>알고리즘의 정의와 특성(입력, 출력, 명확성, 유한성, 유효성)을 설명할 수 있다.</li>
-              <li>순서도의 기호와 표현 방법을 이해하고 간단한 순서도를 그릴 수 있다.</li>
-              <li>일상생활의 문제를 알고리즘으로 표현할 수 있다.</li>
-            </ul>
-
-            <div class="divider"></div>
-
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;font-weight:600">핵심 개념 미리보기</div>
-            <div class="concept-tags">
-              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">알고리즘</span>
-              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">순서도</span>
-              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">의사코드</span>
-              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">조건문</span>
-              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">반복문</span>
-            </div>
-
-            <div style="margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);font-size:12px;color:var(--text-muted)">
-              📌 <b>이전 차시 연결:</b> 지난 시간에는 데이터를 이진수로 표현하는 방법을 배웠습니다. 이번 시간에는 이 데이터를 처리하는 <em>알고리즘</em>의 개념을 학습합니다.
-            </div>
+  <!-- ─── UNIT I VIEW ─── -->
+  <section class="view" id="view-unit1">
+    <!-- 단원 헤더 -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-family:'DM Serif Display',serif;font-size:36px;color:var(--unit-1);line-height:1">I</span>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:3px">Unit I</div>
+            <h2 style="font-size:20px;font-weight:700;color:var(--text)">컴퓨팅 시스템</h2>
           </div>
         </div>
-
-        <!-- 02 개념설명 -->
-        <div class="section-card" id="sec-concept">
-          <div class="section-card-header" onclick="toggleSection('sec-concept')">
-            <div class="section-num-badge" style="background:var(--unit-2-light);color:var(--unit-2)">02</div>
-            <h4>개념설명</h4>
-            <span class="time-tag">⏱ 15분</span>
-            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
-          </div>
-          <div class="section-card-body">
-
-            <div class="concept-block">
-              <div class="concept-text">
-                <h5>알고리즘(Algorithm)이란?</h5>
-                <p>어떤 문제를 해결하기 위한 <strong>절차나 방법</strong>을 단계적으로 나타낸 것입니다. 좋은 알고리즘은 5가지 특성을 갖습니다: <em>입력, 출력, 명확성, 유한성, 유효성</em>.</p>
-              </div>
-              <div class="concept-visual">
-                <svg width="80" height="60" viewBox="0 0 80 60" fill="none">
-                  <rect x="10" y="5" width="60" height="14" rx="7" fill="#7B74D9" opacity=".7"/>
-                  <rect x="10" y="25" width="60" height="14" rx="3" fill="#D85A30" opacity=".7"/>
-                  <rect x="10" y="45" width="60" height="14" rx="7" fill="#1B9E72" opacity=".7"/>
-                  <line x1="40" y1="19" x2="40" y2="25" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
-                  <line x1="40" y1="39" x2="40" y2="45" stroke="#666" stroke-width="1.5"/>
-                  <text x="40" y="14" font-size="7" fill="white" text-anchor="middle" font-family="sans-serif">입력</text>
-                  <text x="40" y="34" font-size="7" fill="white" text-anchor="middle" font-family="sans-serif">처리(알고리즘)</text>
-                  <text x="40" y="54" font-size="7" fill="white" text-anchor="middle" font-family="sans-serif">출력</text>
-                </svg>
-                <span style="font-size:11px">입력 → 처리 → 출력 흐름</span>
-              </div>
-            </div>
-
-            <div class="concept-block">
-              <div class="concept-text">
-                <h5>순서도(Flowchart) 기호</h5>
-                <p>알고리즘을 시각적으로 표현하는 도구입니다. 각 도형은 의미가 정해져 있습니다.</p>
-              </div>
-              <div class="concept-visual">
-                <svg width="120" height="90" viewBox="0 0 120 90" fill="none" style="opacity:1">
-                  <ellipse cx="60" cy="10" rx="25" ry="8" fill="#EAF3DE" stroke="#5A9622" stroke-width="1.2"/>
-                  <text x="60" y="13" font-size="7" fill="#3B6D11" text-anchor="middle" font-family="sans-serif">시작/끝</text>
-                  <rect x="35" y="28" width="50" height="14" fill="#EEEDFE" stroke="#7B74D9" stroke-width="1.2"/>
-                  <text x="60" y="38" font-size="7" fill="#3C3489" text-anchor="middle" font-family="sans-serif">처리</text>
-                  <polygon points="60,52 85,62 60,72 35,62" fill="#FAEEDA" stroke="#D85A30" stroke-width="1.2"/>
-                  <text x="60" y="65" font-size="7" fill="#854F0B" text-anchor="middle" font-family="sans-serif">판단</text>
-                  <parallelogram/>
-                  <path d="M35 80 L45 76 L85 76 L75 84 L35 84 Z" fill="#E6F1FB" stroke="#3080D9" stroke-width="1.2"/>
-                  <text x="60" y="82" font-size="7" fill="#0C447C" text-anchor="middle" font-family="sans-serif">입출력</text>
-                </svg>
-              </div>
-            </div>
-
-            <div class="caution-box">
-              ⚠️ <div><b>자주 혼동하는 개념:</b> "알고리즘"과 "프로그램"은 다릅니다. 알고리즘은 문제 해결 절차를 설명한 <em>계획</em>이고, 프로그램은 그 알고리즘을 컴퓨터가 이해할 수 있는 언어로 <em>구현한 것</em>입니다.</div>
-            </div>
-
-            <div style="margin-top:14px;padding:10px 12px;background:var(--bg);border-radius:var(--radius-sm);font-size:12px;color:var(--text-muted)">
-              📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 교과서 pp.78–85 참고
-            </div>
-          </div>
-        </div>
-
-        <!-- 03 인터랙션 -->
-        <div class="section-card" id="sec-interact">
-          <div class="section-card-header" onclick="toggleSection('sec-interact')">
-            <div class="section-num-badge" style="background:var(--unit-3-light);color:var(--unit-3)">03</div>
-            <h4>인터랙션</h4>
-            <span class="time-tag">⏱ 15분</span>
-            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
-          </div>
-          <div class="section-card-body">
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;background:var(--bg);padding:10px 14px;border-radius:var(--radius-sm)">
-              💡 이 활동을 통해 <b>알고리즘의 순서와 조건 판단</b>이 어떻게 동작하는지 직접 확인할 수 있습니다.
-            </div>
-
-            <div class="interaction-type-bar">
-              <span class="type-badge selected" onclick="switchInteraction(this,'quiz')" style="background:var(--unit-1-light);color:var(--unit-1)">퀴즈</span>
-              <span class="type-badge" onclick="switchInteraction(this,'code')" style="background:var(--bg);color:var(--text-muted)">코딩 실습</span>
-            </div>
-
-            <!-- Quiz -->
-            <div id="interact-quiz">
-              <div class="quiz-container">
-                <div class="quiz-q">다음 중 알고리즘의 특성으로 <b>올바르지 않은</b> 것은?</div>
-                <div class="quiz-options">
-                  <div class="quiz-option" onclick="checkAnswer(this, false)">
-                    <span class="opt-num">①</span> 유한성: 알고리즘은 반드시 유한한 단계 후에 종료되어야 한다.
-                  </div>
-                  <div class="quiz-option" onclick="checkAnswer(this, false)">
-                    <span class="opt-num">②</span> 명확성: 각 단계의 지시가 명확하고 모호하지 않아야 한다.
-                  </div>
-                  <div class="quiz-option" onclick="checkAnswer(this, true)">
-                    <span class="opt-num">③</span> 무한성: 알고리즘은 무한히 반복되어야 더 정확한 결과를 낸다.
-                  </div>
-                  <div class="quiz-option" onclick="checkAnswer(this, false)">
-                    <span class="opt-num">④</span> 유효성: 각 단계는 실제로 수행 가능한 연산이어야 한다.
-                  </div>
-                </div>
-                <div class="quiz-feedback" id="quiz-feedback"></div>
-              </div>
-            </div>
-
-            <!-- Coding -->
-            <div id="interact-code" style="display:none">
-              <div class="code-container">
-                <div class="code-toolbar">
-                  <span class="code-lang">Python · starter 코드</span>
-                  <button class="code-btn" onclick="copyCode()">복사</button>
-                  <button class="code-btn run-btn" onclick="runCode()">▶ 실행</button>
-                </div>
-                <pre id="code-display"><span class="cm"># 최댓값 찾기 알고리즘</span>
-<span class="cm"># 빈칸을 채워 완성해보세요!</span>
-
-<span class="kw">def</span> <span class="fn">find_max</span>(numbers):
-    <span class="cm"># 첫 번째 값을 최댓값으로 초기화</span>
-    max_val = numbers[<span class="num">0</span>]
-    
-    <span class="kw">for</span> num <span class="kw">in</span> numbers:
-        <span class="cm"># 조건: 현재 값이 max_val보다 크면?</span>
-        <span class="kw">if</span> num _____ max_val:   <span class="cm"># 빈칸 채우기</span>
-            max_val = num
-    
-    <span class="kw">return</span> max_val
-
-<span class="cm"># 테스트</span>
-data = [<span class="num">3</span>, <span class="num">7</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">4</span>]
-<span class="fn">print</span>(<span class="str">"최댓값:"</span>, find_max(data))</pre>
-                <div class="code-output" id="code-output">>>> 최댓값: 9</div>
-              </div>
-              <div style="margin-top:10px;font-size:12px;color:var(--text-muted);padding:10px;background:var(--bg);border-radius:var(--radius-sm)">
-                💬 예상 출력: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;font-size:11px">최댓값: 9</code>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 04 수행평가 -->
-        <div class="section-card" id="sec-assess">
-          <div class="section-card-header" onclick="toggleSection('sec-assess')">
-            <div class="section-num-badge" style="background:var(--unit-4-light);color:var(--unit-4)">04</div>
-            <h4>수행평가</h4>
-            <span class="time-tag">⏱ 5분</span>
-            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
-          </div>
-          <div class="section-card-body">
-            <div class="task-spec">
-              <h5>📋 과제 명세서</h5>
-              <p><b>활동 목적:</b> 일상생활의 문제를 알고리즘으로 표현하는 능력을 기른다.<br>
-              <b>절차:</b> ① 문제 선정 → ② 입력/출력 정의 → ③ 순서도 작성 → ④ 의사코드 작성<br>
-              <b>제출 형식:</b> 손으로 그린 순서도 사진 또는 디지털 파일 (JPG/PDF)</p>
-            </div>
-
-            <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">채점 기준표 (루브릭)</div>
-            <table class="rubric-table">
-              <tr>
-                <th>평가 요소</th>
-                <th class="level-4">매우 잘함(4)</th>
-                <th class="level-2">보통(2)</th>
-                <th class="level-1">노력 필요(1)</th>
-              </tr>
-              <tr>
-                <td><b>알고리즘 정확성</b></td>
-                <td class="level-4">모든 경우를 빠짐없이 처리</td>
-                <td class="level-2">대부분 처리, 일부 누락</td>
-                <td class="level-1">주요 흐름 미완성</td>
-              </tr>
-              <tr>
-                <td><b>순서도 표현</b></td>
-                <td class="level-4">기호 정확, 흐름 명확</td>
-                <td class="level-2">일부 기호 오류</td>
-                <td class="level-1">기호 구분 불명확</td>
-              </tr>
-            </table>
-
-            <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin:12px 0 8px;text-transform:uppercase;letter-spacing:.06em">자기평가 체크리스트</div>
-            <div class="self-check">
-              <div class="check-row">
-                <label>알고리즘의 5가지 특성을 모두 설명할 수 있다.</label>
-                <select><option>선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select>
-              </div>
-              <div class="check-row">
-                <label>순서도 기호의 의미를 구별할 수 있다.</label>
-                <select><option>선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select>
-              </div>
-              <div class="check-row">
-                <label>간단한 문제를 순서도로 표현할 수 있다.</label>
-                <select><option>선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 05 확인하기 -->
-        <div class="section-card" id="sec-review">
-          <div class="section-card-header" onclick="toggleSection('sec-review')">
-            <div class="section-num-badge" style="background:var(--unit-5-light);color:var(--unit-5)">05</div>
-            <h4>확인하기</h4>
-            <span class="time-tag">⏱ 5분</span>
-            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
-          </div>
-          <div class="section-card-body">
-            <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">핵심 콕콕 정리</div>
-            <div class="summary-cards">
-              <div class="summary-card">
-                <strong>알고리즘</strong>
-                문제 해결을 위한 단계적 절차. 입력→처리→출력의 흐름.
-              </div>
-              <div class="summary-card">
-                <strong>순서도 핵심 기호</strong>
-                타원=시작/끝, 직사각형=처리, 마름모=판단, 평행사변형=입출력
-              </div>
-              <div class="summary-card">
-                <strong>알고리즘 5특성</strong>
-                입력, 출력, 명확성, 유한성, 유효성
-              </div>
-            </div>
-
-            <div style="margin:16px 0 10px;font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">단원 평가 문제</div>
-            <div style="background:var(--bg);border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;">
-              <b>1.</b> 알고리즘에서 "유한성"이 중요한 이유를 한 문장으로 설명하시오.<br>
-              <textarea style="width:100%;margin-top:8px;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:inherit;resize:vertical;min-height:60px;background:var(--surface)" placeholder="답을 입력하세요..."></textarea>
-            </div>
-
-            <div style="margin-top:14px;padding:12px 14px;background:var(--unit-5-light);border-radius:var(--radius-sm);font-size:12px;color:#3B6D11;border:1px solid rgba(90,150,34,.2)">
-              📖 <b>다음 차시 예고:</b> 다음 시간에는 파이썬으로 알고리즘을 직접 구현해봅니다. Pyodide 환경에서 코딩 실습을 진행합니다!
-            </div>
-
-            <div style="margin-top:12px">
-              <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">📚 심화 학습 자료</div>
-              <div style="display:flex;flex-direction:column;gap:4px">
-                <a href="#" style="font-size:12px;color:var(--unit-4);text-decoration:none;padding:6px 10px;background:var(--bg);border-radius:6px;display:block">→ 정렬 알고리즘 시각화 (외부 링크)</a>
-                <a href="#" style="font-size:12px;color:var(--unit-4);text-decoration:none;padding:6px 10px;background:var(--bg);border-radius:6px;display:block">→ 코딩으로 배우는 알고리즘 (EBS 영상)</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.6">하드웨어와 소프트웨어의 구성 원리부터 네트워크, 피지컬 컴퓨팅까지<br>컴퓨터가 어떻게 동작하는지 단계별로 탐구합니다.</p>
       </div>
-
-      <!-- RIGHT: Sidebar panel -->
-      <div class="lesson-sidebar-panel">
-
-        <div class="panel-card">
-          <h5>학습 진행</h5>
-          <div class="progress-steps">
-            <div class="step-row done" onclick="scrollToSection('sec-goal')">
-              <div class="step-circle done">✓</div>
-              <span>학습목표</span>
-            </div>
-            <div class="step-row done" onclick="scrollToSection('sec-concept')">
-              <div class="step-circle done">✓</div>
-              <span>개념설명</span>
-            </div>
-            <div class="step-row active" onclick="scrollToSection('sec-interact')">
-              <div class="step-circle active">→</div>
-              <span>인터랙션</span>
-            </div>
-            <div class="step-row" onclick="scrollToSection('sec-assess')">
-              <div class="step-circle">4</div>
-              <span>수행평가</span>
-            </div>
-            <div class="step-row" onclick="scrollToSection('sec-review')">
-              <div class="step-circle">5</div>
-              <span>확인하기</span>
-            </div>
-          </div>
+      <div style="display:flex;gap:10px;flex-shrink:0">
+        <div style="text-align:center;padding:12px 16px;background:var(--unit-1-light);border-radius:var(--radius-sm)">
+          <div style="font-size:20px;font-weight:700;color:var(--unit-1)">6</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">소단원</div>
         </div>
-
-        <div class="panel-card">
-          <h5>수업 타이머</h5>
-          <div class="timer-display">
-            <div class="timer-num" id="timer-display">45:00</div>
-            <div class="timer-label">남은 시간</div>
-          </div>
-          <div class="timer-btns">
-            <button class="btn" onclick="startTimer()" id="timer-start-btn">▶ 시작</button>
-            <button class="btn" onclick="resetTimer()">↺ 초기화</button>
-          </div>
+        <div style="text-align:center;padding:12px 16px;background:var(--bg);border-radius:var(--radius-sm)">
+          <div style="font-size:20px;font-weight:700;color:var(--text)">13</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">차시</div>
         </div>
-
-        <div class="panel-card">
-          <h5>현재 단원</h5>
-          <div style="font-size:12px;color:var(--text-muted);line-height:1.7">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-              <span style="width:8px;height:8px;border-radius:50%;background:var(--unit-3);flex-shrink:0"></span>
-              <b style="color:var(--text)">III. 알고리즘과 프로그래밍</b>
-            </div>
-            <div>소단원 1 / 10</div>
-            <div>인터랙션 비중: 50%</div>
-            <div>개발 난이도: <span style="color:var(--unit-3);font-weight:600">높음</span></div>
-          </div>
-        </div>
-
       </div>
+    </div>
+
+    <!-- 소단원 카드 그리드 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+
+      <a href="unit-01/lesson-01/index.html" class="u1-card">
+        <div class="u1-num">01</div>
+        <div class="u1-icon">💻</div>
+        <div class="u1-title">컴퓨터의 구성과 역할</div>
+        <div class="u1-desc">하드웨어·소프트웨어 개념, 드래그&드롭 분류 활동</div>
+        <div class="u1-meta">
+          <span class="u1-tag">2차시</span>
+          <span class="u1-tag u1-done">완료</span>
+        </div>
+        <div class="u1-arrow">학습하기 →</div>
+      </a>
+
+      <a href="unit-01/lesson-02/index.html" class="u1-card">
+        <div class="u1-num">02</div>
+        <div class="u1-icon">🖱️</div>
+        <div class="u1-title">입력 장치와 출력 장치</div>
+        <div class="u1-desc">입출력 장치 탐색기, 복합 장치의 이해</div>
+        <div class="u1-meta">
+          <span class="u1-tag">2차시</span>
+          <span class="u1-tag u1-done">완료</span>
+        </div>
+        <div class="u1-arrow">학습하기 →</div>
+      </a>
+
+      <a href="unit-01/lesson-03/index.html" class="u1-card">
+        <div class="u1-num">03</div>
+        <div class="u1-icon">🔲</div>
+        <div class="u1-title">CPU와 메모리</div>
+        <div class="u1-desc">명령어 처리 사이클, 메모리 계층 시뮬레이터</div>
+        <div class="u1-meta">
+          <span class="u1-tag">2차시</span>
+          <span class="u1-tag u1-done">완료</span>
+        </div>
+        <div class="u1-arrow">학습하기 →</div>
+      </a>
+
+      <a href="unit-01/lesson-04/index.html" class="u1-card">
+        <div class="u1-num">04</div>
+        <div class="u1-icon">⚙️</div>
+        <div class="u1-title">운영체제의 역할</div>
+        <div class="u1-desc">OS 기능 매칭, GUI·CLI 인터페이스 비교</div>
+        <div class="u1-meta">
+          <span class="u1-tag">2차시</span>
+          <span class="u1-tag u1-done">완료</span>
+        </div>
+        <div class="u1-arrow">학습하기 →</div>
+      </a>
+
+      <a href="unit-01/lesson-05/index.html" class="u1-card">
+        <div class="u1-num">05</div>
+        <div class="u1-icon">🌐</div>
+        <div class="u1-title">네트워크와 인터넷</div>
+        <div class="u1-desc">IP 주소·도메인, 패킷 전송 Canvas 시뮬레이터</div>
+        <div class="u1-meta">
+          <span class="u1-tag">2차시</span>
+          <span class="u1-tag u1-done">완료</span>
+        </div>
+        <div class="u1-arrow">학습하기 →</div>
+      </a>
+
+      <a href="unit-01/lesson-06/index.html" class="u1-card">
+        <div class="u1-num">06</div>
+        <div class="u1-icon">📡</div>
+        <div class="u1-title">피지컬 컴퓨팅</div>
+        <div class="u1-desc">센서 탐색기, 마이크로비트 LED 시뮬레이터</div>
+        <div class="u1-meta">
+          <span class="u1-tag">3차시</span>
+          <span class="u1-tag u1-done">완료</span>
+        </div>
+        <div class="u1-arrow">학습하기 →</div>
+      </a>
+
     </div>
   </section>
 
@@ -1425,7 +1308,18 @@ data = [<span class="num">3</span>, <span class="num">7</span>, <span class="num
   // View navigation
   function showView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.getElementById('view-' + id).classList.add('active');
+    var el = document.getElementById('view-' + id);
+    if (el) el.classList.add('active');
+  }
+
+  // Unit I 서브메뉴 토글
+  function toggleUnitNav() {
+    var sub = document.getElementById('unit1-subnav');
+    var arrow = document.getElementById('unit1-arrow');
+    if (!sub) return;
+    var open = sub.style.display !== 'none';
+    sub.style.display = open ? 'none' : 'block';
+    if (arrow) arrow.textContent = open ? '▸' : '▾';
   }
 
   function setActive(el) {
