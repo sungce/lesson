@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I-6. 피지컬 컴퓨팅 — 정보 교과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F4F0;--surface:#FFF;--border:#E2DFD6;--text:#1C1C1C;--muted:#696760;--light:#A8A59E;--unit:#6C65CC;--unit-dk:#4E48A8;--unit-lt:#ECEAFE;--unit-md:#C4C0F0;--green:#2A720E;--green-bg:#E8F3DC;--amber:#7A4E0A;--amber-bg:#FAF0DC;--red:#8C1E0E;--red-bg:#FAEBE6;--blue:#0A4E8C;--blue-bg:#E4F0FA;--rLG:14px;--rMD:10px;--rSM:8px;--SBW:224px;--TBH:52px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;display:flex;min-height:100vh}
+.sb{width:var(--SBW);background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
+.sb-top{padding:18px 16px 14px;border-bottom:1px solid var(--border)}.uchip{display:inline-flex;align-items:center;background:var(--unit-lt);color:var(--unit);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px}
+.sb-top h2{font-size:13px;font-weight:700;line-height:1.4}.smeta{font-size:11px;color:var(--light);margin-top:3px}.sb-nav{padding:6px 0;flex:1}.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);padding:8px 16px 4px}
+.na{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:12px;color:var(--muted);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}.na:hover{background:var(--bg);color:var(--text)}.na.on{color:var(--unit);font-weight:600;background:var(--unit-lt);border-left-color:var(--unit)}.na.done .nn{background:var(--green-bg);color:var(--green)}
+.nn{width:20px;height:20px;border-radius:50%;background:var(--border);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--muted)}.na.on .nn{background:var(--unit);color:#fff}
+.nbadge{margin-left:auto;font-size:10px;color:var(--light);background:var(--bg);border:1px solid var(--border);padding:1px 6px;border-radius:10px}.sb-foot{padding:12px 16px;border-top:1px solid var(--border)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:var(--rSM);border:1px solid var(--border);background:var(--surface);transition:all .12s}.ba:hover{background:var(--bg);color:var(--text)}
+.main{margin-left:var(--SBW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}.topbar{background:var(--surface);border-bottom:1px solid var(--border);height:var(--TBH);padding:0 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
+.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);flex:1}.bc a{color:var(--muted);text-decoration:none}.bc a:hover{color:var(--text)}.bc .sep{color:var(--border)}.bc .cur{color:var(--text);font-weight:500}.tbr{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 11px;font-size:11px}.bp{background:var(--unit);color:#fff;border-color:var(--unit)}.bp:hover{background:var(--unit-dk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
+.page{padding:22px 24px;flex:1}.g2{display:grid;grid-template-columns:1fr 256px;gap:18px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TBH) + 14px)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);margin-bottom:12px;overflow:hidden}.card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.ch{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;user-select:none;-webkit-user-select:none}.ch:hover{background:var(--bg)}.sn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:14px;font-weight:600;flex:1}
+.st{font-size:11px;color:var(--light);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:20px}.carr{font-size:11px;color:var(--light);transition:transform .2s;flex-shrink:0}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:20px}.card.collapsed .cb{display:none}
+.ach{background:var(--unit-lt);border:1px solid var(--unit-md);border-radius:var(--rSM);padding:12px 14px;margin-bottom:16px}.ach-c{font-family:'Courier New',monospace;font-size:11px;font-weight:700;color:var(--unit);margin-bottom:4px}.ach-t{font-size:13px;line-height:1.6}
+.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--border);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:18px;height:18px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ctags{display:flex;flex-wrap:wrap;gap:6px}.ctag{font-size:11px;padding:4px 11px;background:var(--bg);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--muted);transition:all .12s}.ctag:hover{background:var(--unit-lt);border-color:var(--unit-md);color:var(--unit)}
+.ibox{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:12px}.ibox.prev{background:var(--bg);border:1px solid var(--border);color:var(--muted)}.ibox.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.ibox.info{background:var(--blue-bg);border:1px solid #BACED8;color:var(--blue)}.ibox.ok{background:var(--green-bg);border:1px solid #BFDFAA;color:var(--green)}
+.div{height:1px;background:var(--border);margin:16px 0}.crow{display:grid;grid-template-columns:1fr 155px;gap:16px;align-items:start;margin-bottom:18px}
+.ct h4{font-size:13px;font-weight:700;margin-bottom:8px}.ct p{font-size:13px;color:var(--muted);line-height:1.75}.ct ul{padding-left:1rem;margin-top:7px}.ct ul li{font-size:13px;color:var(--muted);margin-bottom:4px;line-height:1.6}
+.cvis{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px;flex-shrink:0}
+.qwrap{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:16px}.qq{font-size:14px;font-weight:500;margin-bottom:13px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--unit);background:var(--unit-lt)}.opt.correct{border-color:#4A9020;background:var(--green-bg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--red-bg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
+.onum{width:22px;height:22px;border-radius:50%;background:var(--border);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
+.qfb{display:none;margin-top:11px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--green-bg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--red-bg);border:1px solid #F0B8A0;color:var(--red)}
+.rub{width:100%;border-collapse:collapse;font-size:12px}.rub th{background:var(--bg);padding:8px 10px;font-weight:600;border-bottom:1.5px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.rub td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
+.lv4{color:#1A6000!important;font-weight:500}.lv3{color:#2A6830!important}.lv2{color:#7A4E00!important}.lv1{color:#8A2000!important}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.scard{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:13px 14px;font-size:12px;line-height:1.65;color:var(--muted)}.scard strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--light);margin-bottom:5px}
+.sclist{display:flex;flex-direction:column;gap:5px}.scitem{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--border)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:4px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-family:inherit;color:var(--text);cursor:pointer;flex-shrink:0}
+.task{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px}.task h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}.task p{font-size:13px;color:var(--muted);line-height:1.75}.srow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--border);margin-top:8px;font-size:12px;color:var(--muted)}.stepn{width:20px;height:20px;border-radius:50%;background:var(--unit-lt);color:var(--unit);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ap{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);padding:15px;margin-bottom:12px}.ap h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--light);margin-bottom:10px}
+.slist{display:flex;flex-direction:column;gap:4px}.si{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--rSM);font-size:12px;color:var(--muted);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}.si.sa{background:var(--unit-lt);color:var(--unit);font-weight:500}.si.sd{color:var(--text)}
+.dot{width:22px;height:22px;border-radius:50%;background:var(--border);color:var(--light);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.dot.sa{background:var(--unit);color:#fff}.dot.sd{background:var(--green-bg);color:var(--green)}
+.td-num{font-size:32px;font-weight:300;letter-spacing:.05em;line-height:1;font-variant-numeric:tabular-nums;text-align:center;display:block}.td-lbl{font-size:10px;color:var(--light);text-align:center;margin-top:4px;margin-bottom:12px}
+.trow{display:flex;gap:6px}.trow .btn{flex:1;justify-content:center;font-size:11px}
+.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:6px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--unit);white-space:nowrap}.tdef{color:var(--muted)}
+.pbtrack{flex:1;height:6px;background:var(--unit-md);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--unit);border-radius:3px}
+
+/* 마이크로비트 시뮬레이터 */
+.mb-wrap{background:#1A1A1A;border-radius:16px;padding:18px;display:inline-flex;flex-direction:column;align-items:center;gap:12px;border:3px solid #333}
+.mb-screen{background:#000;border-radius:8px;padding:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:5px;width:170px}
+.led{width:24px;height:24px;border-radius:50%;background:#1A0000;transition:background .15s}
+.led.on{background:#FF2020;box-shadow:0 0 8px #FF2020}
+.mb-btns{display:flex;gap:40px}.mb-btn{width:34px;height:34px;border-radius:50%;background:#333;border:2px solid #555;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;font-weight:700;font-family:inherit;transition:all .12s}.mb-btn:hover{background:#555;color:#fff}.mb-btn:active{background:#6C65CC;color:#fff;transform:scale(.92)}
+.mb-status{font-size:11px;color:#888;font-family:'Courier New',monospace;min-height:18px;text-align:center}
+
+/* 센서 카드 */
+.sensor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.scard-s{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rMD);padding:12px 10px;text-align:center;cursor:pointer;transition:all .15s}
+.scard-s:hover{border-color:var(--unit-md);transform:translateY(-2px);box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.scard-s .sicon{font-size:28px;margin-bottom:5px}.scard-s .sname{font-size:12px;font-weight:600;margin-bottom:3px}.scard-s .sdesc{font-size:10px;color:var(--light)}
+.sdetail{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:13px 15px;font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px;min-height:56px;transition:all .2s}
+
+/* 블록 코딩 영역 */
+.block-area{background:#F0EFF8;border:1.5px solid var(--unit-md);border-radius:var(--rMD);padding:14px}
+.block-row{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.blk{padding:7px 13px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;user-select:none;transition:all .12s}
+.blk-event{background:#4CAF50;color:#fff}.blk-event:hover{background:#388E3C}
+.blk-action{background:#2196F3;color:#fff}.blk-action:hover{background:#1565C0}
+.blk-ctrl{background:#FF9800;color:#fff}.blk-ctrl:hover{background:#E65100}
+.blk-var{background:#9C27B0;color:#fff}.blk-var:hover{background:#6A1B9A}
+.blk-indent{padding-left:20px}
+
+@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.cvis{width:100%}.sgrid{grid-template-columns:1fr 1fr}.sensor-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){:root{--SBW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}.sensor-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<aside class="sb">
+  <div class="sb-top"><div class="uchip">◈ Unit I</div><h2>컴퓨팅 시스템</h2><div class="smeta">소단원 6/6 · 13차시</div></div>
+  <nav class="sb-nav">
+    <div class="nlbl">소단원 목록</div>
+    <a class="na done" href="#"><div class="nn">✓</div>컴퓨터의 구성과 역할</a>
+    <a class="na done" href="#"><div class="nn">✓</div>입력 장치와 출력 장치</a>
+    <a class="na done" href="#"><div class="nn">✓</div>CPU와 메모리</a>
+    <a class="na done" href="#"><div class="nn">✓</div>운영체제의 역할</a>
+    <a class="na done" href="#"><div class="nn">✓</div>네트워크와 인터넷</a>
+    <a class="na on"   href="#"><div class="nn">6</div>피지컬 컴퓨팅<span class="nbadge">3차시</span></a>
+  </nav>
+  <div class="sb-foot"><a class="ba" href="#">← 단원 목차</a></div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="bc"><a href="#">I. 컴퓨팅 시스템</a><span class="sep">›</span><span class="cur">6. 피지컬 컴퓨팅</span></div>
+    <div class="tbr">
+      <button class="btn bsm" onclick="markDone('06')">✓ 완료 표시</button>
+      <a class="btn bsm bp" href="#">단원 완료 →</a>
+    </div>
+  </header>
+
+  <div class="page"><div class="g2"><div class="cm">
+
+    <!-- 01 학습목표 -->
+    <div class="card" id="sec-goal">
+      <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:#ECEAFE;color:#6C65CC">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+      <div class="cb">
+        <div class="ach"><div class="ach-c">[9정01-06]</div><div class="ach-t">피지컬 컴퓨팅의 개념을 이해하고 센서와 마이크로컨트롤러를 활용한 프로그래밍의 기초를 경험할 수 있다.</div></div>
+        <ul class="glist">
+          <li><div class="gck">✓</div>피지컬 컴퓨팅의 개념과 활용 사례를 설명할 수 있다.</li>
+          <li><div class="gck">✓</div>센서의 종류와 역할을 이해하고 예시를 들 수 있다.</li>
+          <li><div class="gck">✓</div>마이크로비트의 기본 기능을 사용해 간단한 프로그램을 설계할 수 있다.</li>
+        </ul>
+        <div class="div"></div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--light);margin-bottom:8px">핵심 개념 미리보기</div>
+        <div class="ctags">
+          <span class="ctag" onclick="goTo('sec-concept')">피지컬 컴퓨팅</span>
+          <span class="ctag" onclick="goTo('sec-concept')">센서</span>
+          <span class="ctag" onclick="goTo('sec-concept')">액추에이터</span>
+          <span class="ctag" onclick="goTo('sec-concept')">마이크로비트</span>
+          <span class="ctag" onclick="goTo('sec-concept')">IoT</span>
+        </div>
+        <div class="ibox prev">📌 <div><b>이전 차시 연결:</b> 지금까지 소프트웨어와 하드웨어, 네트워크를 학습했습니다. 이번 소단원에서는 이 모든 것을 연결하여 <em>현실 세계를 제어하는 피지컬 컴퓨팅</em>을 경험합니다.</div></div>
+      </div>
+    </div>
+
+    <!-- 02 개념설명 -->
+    <div class="card" id="sec-concept">
+      <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:#E8F3DC;color:#2A720E">02</div><h3>개념설명</h3><span class="st">⏱ 20분</span><span class="carr">▾</span></div>
+      <div class="cb">
+
+        <div class="crow">
+          <div class="ct">
+            <h4>피지컬 컴퓨팅이란?</h4>
+            <p>소프트웨어(프로그램)가 <strong>물리적 세계</strong>의 센서·기기와 상호작용하는 기술입니다. 단순히 화면 안에 머물던 컴퓨팅이 현실 공간으로 확장됩니다.</p>
+            <ul>
+              <li><b>센서:</b> 빛·온도·움직임 등 물리 신호 → 디지털</li>
+              <li><b>액추에이터:</b> 디지털 신호 → LED 점등, 모터 회전</li>
+              <li><b>마이크로컨트롤러:</b> 아두이노, 마이크로비트 등</li>
+              <li><b>IoT:</b> 사물인터넷 — 피지컬 컴퓨팅 + 네트워크</li>
+            </ul>
+          </div>
+          <div class="cvis">
+            <svg viewBox="0 0 130 120" width="130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="122" height="28" rx="6" fill="#FAF0DC" stroke="#7A4E0A" stroke-width="1.2"/>
+              <text x="65" y="21" font-size="8.5" fill="#5A3000" text-anchor="middle" font-family="sans-serif" font-weight="bold">현실 세계 (빛·온도·소리)</text>
+              <path d="M65 32 L65 44" stroke="#999" stroke-width="1.5" marker-end="url(#pc1)"/>
+              <rect x="4" y="44" width="122" height="24" rx="6" fill="#ECEAFE" stroke="#6C65CC" stroke-width="1.5"/>
+              <text x="65" y="56" font-size="8.5" fill="#3A3090" text-anchor="middle" font-family="sans-serif" font-weight="bold">센서 (입력)</text>
+              <text x="65" y="66" font-size="7" fill="#6C65CC" text-anchor="middle" font-family="sans-serif">온도·빛·거리·소리·움직임</text>
+              <path d="M65 68 L65 78" stroke="#999" stroke-width="1.5" marker-end="url(#pc2)"/>
+              <rect x="4" y="78" width="122" height="24" rx="6" fill="#E8F3DC" stroke="#2A720E" stroke-width="1.5"/>
+              <text x="65" y="93" font-size="8.5" fill="#1A5000" text-anchor="middle" font-family="sans-serif" font-weight="bold">마이크로컨트롤러 (처리)</text>
+              <path d="M65 102 L65 112" stroke="#999" stroke-width="1.5" marker-end="url(#pc3)"/>
+              <text x="65" y="118" font-size="8" fill="#5A3000" text-anchor="middle" font-family="sans-serif" font-weight="bold">액추에이터 (출력) → LED·모터</text>
+              <defs>
+                <marker id="pc1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"/></marker>
+                <marker id="pc2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"/></marker>
+                <marker id="pc3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"/></marker>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        <div class="div"></div>
+        <h4 style="font-size:13px;font-weight:700;margin-bottom:10px">센서의 종류와 역할 — 클릭하여 탐구하기</h4>
+        <div class="sensor-grid">
+          <div class="scard-s" onclick="showSensor('temp')"><div class="sicon">🌡️</div><div class="sname">온도 센서</div><div class="sdesc">클릭하여 탐구</div></div>
+          <div class="scard-s" onclick="showSensor('light')"><div class="sicon">☀️</div><div class="sname">조도 센서</div><div class="sdesc">클릭하여 탐구</div></div>
+          <div class="scard-s" onclick="showSensor('touch')"><div class="sicon">👆</div><div class="sname">터치 센서</div><div class="sdesc">클릭하여 탐구</div></div>
+          <div class="scard-s" onclick="showSensor('motion')"><div class="sicon">🏃</div><div class="sname">움직임 센서</div><div class="sdesc">클릭하여 탐구</div></div>
+          <div class="scard-s" onclick="showSensor('sound')"><div class="sicon">🎵</div><div class="sname">소리 센서</div><div class="sdesc">클릭하여 탐구</div></div>
+          <div class="scard-s" onclick="showSensor('dist')"><div class="sicon">📏</div><div class="sname">거리 센서</div><div class="sdesc">클릭하여 탐구</div></div>
+        </div>
+        <div class="sdetail" id="sdetail">👆 위 센서 카드를 클릭하면 상세 정보가 표시됩니다.</div>
+
+        <div class="ibox warn">⚠️ <div><b>혼동 주의:</b> <strong>센서 ≠ 입력 장치</strong> (비슷하지만 다릅니다). 키보드·마우스는 사람이 의도적으로 조작하는 입력 장치이고, 센서는 환경의 물리량을 자동으로 측정합니다.</div></div>
+        <div class="ibox info">📖 <b>심화 학습:</b> 마이크로비트 시뮬레이터 <a href="https://makecode.microbit.org" target="_blank" style="color:var(--blue);font-weight:600">makecode.microbit.org</a> / 아두이노 시뮬레이터 <a href="https://wokwi.com" target="_blank" style="color:var(--blue);font-weight:600">wokwi.com</a></div>
+      </div>
+    </div>
+
+    <!-- 03 인터랙션 -->
+    <div class="card" id="sec-interact">
+      <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:#FAEBE6;color:#8C1E0E">03</div><h3>인터랙션 — 마이크로비트 시뮬레이터</h3><span class="st">⏱ 20분</span><span class="carr">▾</span></div>
+      <div class="cb">
+        <div class="ibox ok" style="margin-top:0;margin-bottom:16px">💡 버튼 A·B를 눌러 5×5 LED 디스플레이가 어떻게 반응하는지 확인해보세요. 아래 블록 코딩으로 동작을 이해합니다!</div>
+
+        <!-- 마이크로비트 -->
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;align-items:flex-start">
+          <div class="mb-wrap">
+            <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">micro:bit</div>
+            <div class="mb-screen" id="mb-led"></div>
+            <div class="mb-btns">
+              <button class="mb-btn" onclick="pressBtn('A')">A</button>
+              <button class="mb-btn" onclick="pressBtn('B')">B</button>
+            </div>
+            <div class="mb-status" id="mb-status">준비</div>
+          </div>
+          <div style="flex:1;min-width:200px">
+            <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">블록 코딩 (의사코드)</div>
+            <div class="block-area">
+              <div class="block-row"><div class="blk blk-event">🔘 버튼 A 눌렀을 때</div></div>
+              <div class="block-row blk-indent"><div class="blk blk-action">💡 LED 하트 표시</div></div>
+              <div class="block-row blk-indent"><div class="blk blk-var">⏱ 1초 기다리기</div></div>
+              <div class="block-row blk-indent"><div class="blk blk-action">🌑 LED 전체 끄기</div></div>
+              <div style="height:8px"></div>
+              <div class="block-row"><div class="blk blk-event">🔘 버튼 B 눌렀을 때</div></div>
+              <div class="block-row blk-indent"><div class="blk blk-action">💡 LED 체크 표시</div></div>
+              <div class="block-row blk-indent"><div class="blk blk-var">⏱ 1초 기다리기</div></div>
+              <div class="block-row blk-indent"><div class="blk blk-action">🌑 LED 전체 끄기</div></div>
+            </div>
+            <div class="ibox info" style="margin-top:10px;font-size:11px">💡 실제 마이크로비트 코딩은 <a href="https://makecode.microbit.org" target="_blank" style="color:var(--blue);font-weight:600">makecode.microbit.org</a> 에서 직접 체험해보세요!</div>
+          </div>
+        </div>
+
+        <!-- 퀴즈 -->
+        <div class="div"></div>
+        <div class="qwrap">
+          <div class="qq">다음 중 피지컬 컴퓨팅에서 <b>"액추에이터(Actuator)"</b>의 역할로 맞는 것은?</div>
+          <div class="qopts">
+            <div class="opt" onclick="checkQ(this,false,'센서는 빛·온도 등 물리량을 감지하여 디지털 신호로 변환하는 입력 장치입니다.')"><span class="onum">①</span>온도·빛 등 물리량을 감지하여 디지털 신호로 변환한다.</div>
+            <div class="opt" onclick="checkQ(this,true,'액추에이터는 디지털 신호를 받아 LED 점등·모터 회전 등 물리적 동작을 출력합니다.')"><span class="onum">②</span>디지털 신호를 받아 LED·모터 등 물리적 동작으로 출력한다.</div>
+            <div class="opt" onclick="checkQ(this,false,'마이크로컨트롤러는 센서 입력을 처리하여 액추에이터에 명령을 보내는 중앙 처리 장치입니다.')"><span class="onum">③</span>센서 데이터를 처리하고 명령을 결정하는 두뇌 역할을 한다.</div>
+            <div class="opt" onclick="checkQ(this,false,'와이파이 모듈은 데이터를 인터넷으로 전송하는 통신 장치입니다.')"><span class="onum">④</span>데이터를 인터넷으로 전송하는 통신 역할을 한다.</div>
+          </div>
+          <div class="qfb" id="qfb"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 수행평가 -->
+    <div class="card" id="sec-assess">
+      <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:#E4F0FA;color:#0A4E8C">04</div><h3>수행평가</h3><span class="st">⏱ 10분</span><span class="carr">▾</span></div>
+      <div class="cb">
+        <div class="task">
+          <h4>📋 스마트 기기 설계하기</h4>
+          <p>일상 속 문제를 해결하는 피지컬 컴퓨팅 기기를 <b>설계</b>하고 동작 흐름을 설명하시오.</p>
+          <div class="srow"><div class="stepn">①</div><span>해결하려는 문제 상황 설명 (예: "무단 침입 감지 시스템")</span></div>
+          <div class="srow"><div class="stepn">②</div><span>사용할 센서 종류와 이유 설명</span></div>
+          <div class="srow"><div class="stepn">③</div><span>마이크로컨트롤러의 처리 방식 설명</span></div>
+          <div class="srow"><div class="stepn">④</div><span>액추에이터 출력 방법 설명</span></div>
+          <div class="srow"><div class="stepn">⑤</div><span>간단한 순서도 또는 블록 코딩 스케치 첨부</span></div>
+        </div>
+        <table class="rub" style="margin-bottom:16px">
+          <thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead>
+          <tbody>
+            <tr><td><b>개념 적용</b></td><td class="lv4">센서·처리·출력 연결 정확</td><td class="lv3">2요소 연결</td><td class="lv2">1요소 설명</td><td class="lv1">개념 미적용</td></tr>
+            <tr><td><b>창의성</b></td><td class="lv4">독창적·현실적 설계</td><td class="lv3">참신한 아이디어</td><td class="lv2">일반적 수준</td><td class="lv1">기존 예시 반복</td></tr>
+            <tr><td><b>표현력</b></td><td class="lv4">흐름도·설명 명확</td><td class="lv3">대체로 명확</td><td class="lv2">부분적 표현</td><td class="lv1">표현 없음</td></tr>
+          </tbody>
+        </table>
+        <div class="sclist">
+          <div class="scitem"><label>피지컬 컴퓨팅에서 센서와 액추에이터의 역할을 구분할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+          <div class="scitem"><label>마이크로비트의 기본 구성과 기능을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+          <div class="scitem"><label>간단한 피지컬 컴퓨팅 시스템을 설계할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        </div>
+        <button class="btn bsm bok" style="margin-top:11px" onclick="saveSC('l06sc')">💾 저장</button>
+      </div>
+    </div>
+
+    <!-- 05 확인하기 -->
+    <div class="card" id="sec-review">
+      <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:#E8F3DC;color:#2A720E">05</div><h3>확인하기 — 단원 마무리</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+      <div class="cb">
+        <div class="sgrid">
+          <div class="scard"><strong>피지컬 컴퓨팅</strong>소프트웨어가 물리 세계와 상호작용. 센서(입력)→처리→액추에이터(출력) 흐름.</div>
+          <div class="scard"><strong>센서 종류</strong>온도·조도·터치·움직임·소리·거리 센서. 물리량을 디지털 신호로 변환.</div>
+          <div class="scard"><strong>마이크로비트</strong>5×5 LED, 버튼, 자이로, 온도 센서 내장. 블록·파이썬 코딩 가능.</div>
+        </div>
+
+        <!-- 단원 전체 정리 -->
+        <div style="background:var(--unit-lt);border:1px solid var(--unit-md);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--unit);margin-bottom:10px">🎓 I단원 전체 학습 흐름</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:11px">
+            <span style="background:#fff;border:1px solid var(--unit-md);padding:4px 9px;border-radius:5px;font-weight:600;color:#4E48A8">하드웨어·소프트웨어</span>
+            <span style="color:var(--light)">→</span>
+            <span style="background:#fff;border:1px solid var(--unit-md);padding:4px 9px;border-radius:5px;font-weight:600;color:#4E48A8">입출력 장치</span>
+            <span style="color:var(--light)">→</span>
+            <span style="background:#fff;border:1px solid var(--unit-md);padding:4px 9px;border-radius:5px;font-weight:600;color:#4E48A8">CPU·메모리</span>
+            <span style="color:var(--light)">→</span>
+            <span style="background:#fff;border:1px solid var(--unit-md);padding:4px 9px;border-radius:5px;font-weight:600;color:#4E48A8">OS</span>
+            <span style="color:var(--light)">→</span>
+            <span style="background:#fff;border:1px solid var(--unit-md);padding:4px 9px;border-radius:5px;font-weight:600;color:#4E48A8">네트워크</span>
+            <span style="color:var(--light)">→</span>
+            <span style="background:var(--unit);border:1px solid var(--unit-dk);padding:4px 9px;border-radius:5px;font-weight:700;color:#fff">피지컬 컴퓨팅 ✓</span>
+          </div>
+        </div>
+
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px;font-size:13px;margin-bottom:14px">
+          <strong>✏️ 단답형:</strong> "온도 센서가 측정한 아날로그 값을 마이크로컨트롤러가 처리하여 팬을 작동시킬 때, 팬은 <span style="display:inline-block;width:70px;border-bottom:1.5px solid var(--text)">&nbsp;</span>에 해당한다."
+          <textarea style="display:block;width:100%;margin-top:10px;padding:10px;border:1px solid var(--border);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:52px;background:var(--surface);outline:none" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='#6C65CC'" onblur="this.style.borderColor=''"></textarea>
+        </div>
+        <div class="ibox ok">🎉 <div><strong>I단원 컴퓨팅 시스템 완료!</strong> 다음 단원 <strong>II. 데이터</strong>에서는 이진수·픽셀·공공데이터 분석을 탐구합니다!</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ca">
+    <div class="ap"><h5>학습 진행</h5><div class="slist"><div class="si sd" onclick="goTo('sec-goal')"><div class="dot sd">✓</div>학습목표</div><div class="si sd" onclick="goTo('sec-concept')"><div class="dot sd">✓</div>개념설명</div><div class="si sa" onclick="goTo('sec-interact')"><div class="dot sa">→</div>인터랙션</div><div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div><div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div></div></div>
+    <div class="ap"><h5>수업 타이머</h5><span class="td-num" id="tnum">45:00</span><div class="td-lbl">수업 남은 시간</div><div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div></div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">센서</span><span class="tdef">물리량 → 디지털</span></div><div class="tterm"><span class="tw">액추에이터</span><span class="tdef">디지털 → 물리 동작</span></div><div class="tterm"><span class="tw">마이크로비트</span><span class="tdef">교육용 소형 컴퓨터</span></div><div class="tterm"><span class="tw">IoT</span><span class="tdef">사물인터넷</span></div></div></div>
+    <div class="ap" style="background:var(--unit-lt);border-color:var(--unit-md)"><h5 style="color:var(--unit)">단원 진도</h5><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div class="pbtrack"><div class="pbfill" style="width:100%"></div></div><span style="font-size:11px;font-weight:600;color:var(--unit)">6/6 ✓</span></div><div style="font-size:11px;color:var(--unit);font-weight:600">🎉 I단원 완료!</div></div>
+  </div>
+  </div></div>
+</main>
+
+<div id="toast" style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap"></div>
+
+<script>
+'use strict';
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
+function toggleSec(id){var el=document.getElementById(id);if(el)el.classList.toggle('collapsed');}
+function goTo(id){var el=document.getElementById(id);if(!el)return;window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-68,behavior:'smooth'});}
+var tR=2700,tRun=false,tIv=null;
+function pad(n){return n<10?'0'+n:''+n;}
+function renderT(){var el=document.getElementById('tnum');if(!el)return;el.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);el.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
+function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
+function resetTimer(){clearInterval(tIv);tRun=false;tR=2700;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
+function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');o.style.pointerEvents='none';});el.classList.add(ok?'correct':'wrong');var fb=document.getElementById('qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ ':'✗ 힌트: ')+msg;}}
+function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){toast('저장 실패');}}
+function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
+function markDone(n){try{var d=JSON.parse(localStorage.getItem('u01done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u01done',JSON.stringify(d));}catch(e){}toast('🎉 I단원 전체 완료! 수고하셨습니다!');}
+document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l06sc');initMB();});
+
+/* ── 센서 탐색기 ── */
+var sensors={
+  temp:{name:'온도 센서',icon:'🌡️',how:'주변 온도에 따라 저항값이 변하는 서미스터(NTC) 또는 반도체 소자를 사용합니다.',use:'스마트 에어컨 자동 조절, 냉장고 온도 유지, 화재 감지 시스템',example:'마이크로비트 내장 온도 센서로 실내 온도 측정 가능'},
+  light:{name:'조도 센서',icon:'☀️',how:'빛의 양에 따라 전기 저항이 변하는 CdS 소자나 포토다이오드를 사용합니다.',use:'가로등 자동 점등, 스마트폰 화면 밝기 자동 조절, 식물 재배 조명',example:'빛이 어두워지면 LED를 자동으로 켜는 장치'},
+  touch:{name:'터치 센서',icon:'👆',how:'인체의 정전용량(전기를 모으는 성질) 변화를 감지합니다. 터치스크린의 핵심 기술입니다.',use:'스마트폰 화면, 승강기 버튼, 스마트 가전 터치 패널',example:'마이크로비트의 핀(P0~P2)을 손가락으로 터치'},
+  motion:{name:'움직임 센서',icon:'🏃',how:'적외선(PIR)이 사람·동물의 열을 감지하거나, 가속도계로 기기의 기울기·흔들림을 측정합니다.',use:'자동문, 보안 카메라 트리거, 스마트폰 화면 회전',example:'마이크로비트를 흔들면 흔들림 감지(shake 이벤트)'},
+  sound:{name:'소리 센서',icon:'🎵',how:'마이크(콘덴서 마이크)가 소리 진동을 전기 신호로 변환합니다.',use:'목소리 명령 인식, 소음 측정, 박수 감지 전등',example:'마이크로비트 내장 마이크로 소리 크기 감지'},
+  dist:{name:'거리 센서',icon:'📏',how:'초음파 또는 적외선을 발사하고 반사되어 돌아오는 시간으로 거리를 계산합니다.',use:'자동차 후방 감지, 로봇 충돌 방지, 무인 택배함',example:'초음파 센서로 손의 거리를 측정해 볼륨 조절'}
+};
+function showSensor(id){
+  var s=sensors[id];
+  document.getElementById('sdetail').innerHTML='<strong style="font-size:13px">'+s.icon+' '+s.name+'</strong><br><b>작동 원리:</b> '+s.how+'<br><b>활용 예시:</b> '+s.use+'<br><b>마이크로비트:</b> '+s.example;
+}
+
+/* ── 마이크로비트 시뮬레이터 ── */
+var mbLeds=[];
+var heartPattern=[
+  0,1,0,1,0,
+  1,1,1,1,1,
+  1,1,1,1,1,
+  0,1,1,1,0,
+  0,0,1,0,0,
+];
+var checkPattern=[
+  0,0,0,0,0,
+  0,0,0,0,1,
+  0,0,0,1,0,
+  1,0,1,0,0,
+  0,1,0,0,0,
+];
+
+function initMB(){
+  var container=document.getElementById('mb-led');
+  if(!container)return;
+  container.innerHTML='';
+  mbLeds=[];
+  for(var i=0;i<25;i++){
+    var d=document.createElement('div');
+    d.className='led';
+    container.appendChild(d);
+    mbLeds.push(d);
+  }
+}
+
+function setPattern(pat){
+  pat.forEach(function(v,i){
+    if(mbLeds[i])mbLeds[i].className='led'+(v?' on':'');
+  });
+}
+
+function clearLeds(){
+  mbLeds.forEach(function(l){l.className='led';});
+}
+
+var mbTimer=null;
+function pressBtn(btn){
+  clearTimeout(mbTimer);
+  if(btn==='A'){
+    setPattern(heartPattern);
+    document.getElementById('mb-status').textContent='A 버튼 → 하트 ♥';
+    toast('버튼 A: 하트 표시! ♥');
+  } else {
+    setPattern(checkPattern);
+    document.getElementById('mb-status').textContent='B 버튼 → 체크 ✓';
+    toast('버튼 B: 체크 표시! ✓');
+  }
+  mbTimer=setTimeout(function(){
+    clearLeds();
+    document.getElementById('mb-status').textContent='준비';
+  },1200);
+}
+</script>
+</body>
+</html>
