@@ -75,6 +75,20 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);co
 
 @media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.cvis{width:100%}.sgrid{grid-template-columns:1fr 1fr}.sensor-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){:root{--SBW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}.sensor-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ── 피지컬 컴퓨팅 프로젝트 카드 ── */
+.proj-card{display:flex;flex-direction:column;gap:7px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rLG);padding:17px 15px;color:inherit;transition:all .18s;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit);opacity:0;transition:opacity .18s}
+.proj-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(108,101,204,.14);border-color:var(--unit-md)}
+.proj-card:hover::before{opacity:1}
+.proj-num{display:inline-block;font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;font-family:'Courier New',monospace;margin-bottom:2px;width:fit-content}
+.proj-icon{font-size:26px;line-height:1}
+.proj-title{font-size:13px;font-weight:700;color:var(--text);line-height:1.4}
+.proj-desc{font-size:12px;color:var(--muted);line-height:1.6;flex:1}
+.proj-footer{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:4px}
+.proj-tag{font-size:10px;padding:2px 8px;background:var(--bg);border:1px solid var(--border);border-radius:20px;color:var(--muted);font-weight:500}
+.proj-go{margin-left:auto;font-size:11px;font-weight:700;color:var(--unit);opacity:0;transition:opacity .15s}
+.proj-card:hover .proj-go{opacity:1}
 </style>
 </head>
 <body>
@@ -226,6 +240,67 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);co
             <div class="opt" onclick="checkQ(this,false,'와이파이 모듈은 데이터를 인터넷으로 전송하는 통신 장치입니다.')"><span class="onum">④</span>데이터를 인터넷으로 전송하는 통신 역할을 한다.</div>
           </div>
           <div class="qfb" id="qfb"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 04-추가 활동 프로젝트 -->
+    <div class="card" id="sec-projects">
+      <div class="ch" onclick="toggleSec('sec-projects')">
+        <div class="sn" style="background:#E4F0FA;color:#0A4E8C">📦</div>
+        <h3>피지컬 컴퓨팅 활동 프로젝트 4종</h3><span class="st">실습</span><span class="carr">▾</span>
+      </div>
+      <div class="cb">
+        <div class="ibox ok" style="margin-top:0;margin-bottom:18px">
+          💡 아래 프로젝트를 순서대로 학습하세요. 각 활동은 마이크로비트 실제 코딩과 연결됩니다.
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+
+          <a href="exercise-counter.html" class="proj-card" style="text-decoration:none">
+            <div class="proj-num" style="background:#E8F3DC;color:#2A720E">Ⅰ-2-01</div>
+            <div class="proj-icon">🏃</div>
+            <div class="proj-title">운동 횟수 표시 장치 만들기</div>
+            <div class="proj-desc">가속도 센서로 팔굽혀펴기·점프 횟수를 자동 카운트. LED 디스플레이에 실시간 표시.</div>
+            <div class="proj-footer">
+              <span class="proj-tag">가속도 센서</span><span class="proj-tag">LED 출력</span>
+              <span class="proj-go">시작하기 →</span>
+            </div>
+          </a>
+
+          <a href="sleep-temp.html" class="proj-card" style="text-decoration:none">
+            <div class="proj-num" style="background:#E4F0FA;color:#0A4E8C">Ⅰ-2-02</div>
+            <div class="proj-icon">🌡️</div>
+            <div class="proj-title">수면 온도 알림이 장치 만들기</div>
+            <div class="proj-desc">온도 센서가 수면 최적 온도(18–22°C)를 감지해 LED 색상으로 알림 출력.</div>
+            <div class="proj-footer">
+              <span class="proj-tag">온도 센서</span><span class="proj-tag">조건 판단</span>
+              <span class="proj-go">시작하기 →</span>
+            </div>
+          </a>
+
+          <a href="sound-animation.html" class="proj-card" style="text-decoration:none">
+            <div class="proj-num" style="background:#FAF0DC;color:#7A4E0A">Ⅰ-2-03</div>
+            <div class="proj-icon">🎵</div>
+            <div class="proj-title">소리 반응 애니메이션 장치 만들기</div>
+            <div class="proj-desc">마이크 센서로 소리 크기를 감지해 LED 매트릭스에 파동 애니메이션 출력.</div>
+            <div class="proj-footer">
+              <span class="proj-tag">마이크 센서</span><span class="proj-tag">LED 애니메이션</span>
+              <span class="proj-go">시작하기 →</span>
+            </div>
+          </a>
+
+          <a href="telepathy-game.html" class="proj-card" style="text-decoration:none">
+            <div class="proj-num" style="background:#ECEAFE;color:#6C65CC">Ⅰ-2-04</div>
+            <div class="proj-icon">🎮</div>
+            <div class="proj-title">이심전심 게임 장치 만들기</div>
+            <div class="proj-desc">두 마이크로비트가 무선 통신으로 서로 같은 버튼을 누르면 성공하는 협동 게임.</div>
+            <div class="proj-footer">
+              <span class="proj-tag">무선 통신</span><span class="proj-tag">버튼 입력</span>
+              <span class="proj-go">시작하기 →</span>
+            </div>
+          </a>
+
         </div>
       </div>
     </div>

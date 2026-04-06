@@ -889,6 +889,39 @@
     #view-unit1 > div:last-child { grid-template-columns: 1fr; }
   }
 
+
+  /* ─── nav-sub2 (3단계: lesson-06 활동) ─── */
+  .nav-sub2 {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 20px 6px 46px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all .12s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nav-sub2:hover {
+    background: var(--bg);
+    color: var(--text);
+    border-left-color: var(--unit-1);
+  }
+  .sub2-num {
+    width: 20px; height: 16px;
+    background: var(--unit-1-light);
+    color: var(--unit-1);
+    border-radius: 4px;
+    font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Courier New', monospace;
+  }
+  .nav-sub-toggle { cursor: pointer; }
+
 </style>
 </head>
 <body>
@@ -935,9 +968,28 @@
       <a class="nav-sub" href="unit-01/lesson-05/index.html">
         <span class="sub-num">5</span>네트워크와 인터넷
       </a>
-      <a class="nav-sub" href="unit-01/lesson-06/index.html">
+      <!-- lesson-06: 토글 + 서브서브 -->
+      <a class="nav-sub nav-sub-toggle" id="nav-l06-head"
+         onclick="toggleL06Sub(event)"
+         href="unit-01/lesson-06/index.html">
         <span class="sub-num">6</span>피지컬 컴퓨팅
+        <span id="l06-arrow" style="margin-left:auto;font-size:10px;color:var(--text-light);flex-shrink:0">▾</span>
       </a>
+      <!-- lesson-06 서브서브메뉴 -->
+      <div id="l06-subnav" style="display:block">
+        <a class="nav-sub2" href="unit-01/lesson-06/exercise-counter.html">
+          <span class="sub2-num">01</span>운동 횟수 표시 장치
+        </a>
+        <a class="nav-sub2" href="unit-01/lesson-06/sleep-temp.html">
+          <span class="sub2-num">02</span>수면 온도 알림이 장치
+        </a>
+        <a class="nav-sub2" href="unit-01/lesson-06/sound-animation.html">
+          <span class="sub2-num">03</span>소리 반응 애니메이션
+        </a>
+        <a class="nav-sub2" href="unit-01/lesson-06/telepathy-game.html">
+          <span class="sub2-num">04</span>이심전심 게임 장치
+        </a>
+      </div>
     </div>
 
     <a class="nav-item nav-disabled">
@@ -1291,9 +1343,10 @@
         <div class="u1-num">06</div>
         <div class="u1-icon">📡</div>
         <div class="u1-title">피지컬 컴퓨팅</div>
-        <div class="u1-desc">센서 탐색기, 마이크로비트 LED 시뮬레이터</div>
+        <div class="u1-desc">센서 탐색기, 마이크로비트 시뮬레이터 + 활동 프로젝트 4종</div>
         <div class="u1-meta">
           <span class="u1-tag">3차시</span>
+          <span class="u1-tag" style="background:#E4F0FA;color:#0A4E8C;border-color:#BEDAF5">활동 4종</span>
           <span class="u1-tag u1-done">완료</span>
         </div>
         <div class="u1-arrow">학습하기 →</div>
@@ -1310,6 +1363,18 @@
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     var el = document.getElementById('view-' + id);
     if (el) el.classList.add('active');
+  }
+
+
+  // lesson-06 서브서브메뉴 토글
+  function toggleL06Sub(e) {
+    var sub = document.getElementById('l06-subnav');
+    var arrow = document.getElementById('l06-arrow');
+    if (!sub) return;
+    // href 이동은 허용, toggle만
+    var open = sub.style.display !== 'none';
+    sub.style.display = open ? 'none' : 'block';
+    if (arrow) arrow.textContent = open ? '▸' : '▾';
   }
 
   // Unit I 서브메뉴 토글
