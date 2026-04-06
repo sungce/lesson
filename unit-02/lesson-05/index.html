@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>II-5. 데이터 수집과 분류 — 정보 교과</title>
+<title>II-5. 데이터 분석과 시각화 — 정보 교과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -67,31 +67,34 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 @media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
 
 
-.dtype-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.dtype-card{background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rMD,10px);padding:14px;transition:all .15s}
-.dtype-card:hover{border-color:var(--umd)}.dtype-card.ok{border-color:#4A9020;background:var(--gbg)}.dtype-card.ng{border-color:#B03020;background:var(--rbg)}
-.dtype-icon{font-size:22px;margin-bottom:6px}.dtype-title{font-size:12px;font-weight:700;margin-bottom:4px}.dtype-desc{font-size:11px;color:var(--mt);line-height:1.5;margin-bottom:8px}
-.dtype-sel{width:100%;font-size:11px;padding:5px 8px;border:1px solid var(--br);border-radius:6px;background:var(--sf);font-family:inherit;cursor:pointer}
-#dtype-res{display:none;padding:12px 14px;border-radius:var(--rSM);font-size:13px;margin-top:10px}
+.chart-wrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:16px;margin-bottom:14px}
+.chart-wrap h4{font-size:12px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.data-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}
+.data-table th{background:var(--ult);padding:7px 10px;font-weight:600;border-bottom:1.5px solid var(--umd);font-size:11px;color:var(--udk)}
+.data-table td{padding:4px 6px;border-bottom:1px solid var(--br)}
+.data-table input{width:100%;padding:5px 8px;border:1px solid var(--br);border-radius:5px;font-size:12px;font-family:inherit;background:var(--sf);outline:none}
+.data-table input:focus{border-color:var(--u)}
+#chart-cv{display:block;background:var(--sf);border:1px solid var(--br);border-radius:var(--rSM);width:100%;height:180px}
+.stat-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.stat-chip{padding:5px 12px;background:var(--ult);border:1px solid var(--umd);border-radius:20px;font-size:11px;font-weight:600;color:var(--u)}
 
 </style>
 </head>
 <body>
 <aside class="sb">
-  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 5/7 · 15차시</div></div>
+  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 5/6 · 15차시</div></div>
   <nav class="sb-nav"><div class="nlbl">소단원 목록</div><a class="na done" href="../lesson-01/index.html"><div class="nn">✓</div>데이터와 정보</a>
 <a class="na done" href="../lesson-02/index.html"><div class="nn">✓</div>이진수와 디지털 표현</a>
-<a class="na done" href="../lesson-03/index.html"><div class="nn">✓</div>문자와 이미지 표현</a>
-<a class="na done" href="../lesson-04/index.html"><div class="nn">✓</div>소리와 영상 표현</a>
-<a class="na on" href="../lesson-05/index.html"><div class="nn">5</div>데이터 수집과 분류<span class="nbadge">2차시</span></a>
-<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 분석과 시각화</a>
-<a class="na " href="../lesson-07/index.html"><div class="nn">7</div>데이터 활용과 빅데이터</a>
+<a class="na done" href="../lesson-03/index.html"><div class="nn">✓</div>데이터 표현</a>
+<a class="na done" href="../lesson-04/index.html"><div class="nn">✓</div>데이터 수집과 분류</a>
+<a class="na on" href="../lesson-05/index.html"><div class="nn">5</div>데이터 분석과 시각화<span class="nbadge">2차시</span></a>
+<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 활용과 빅데이터</a>
 </nav>
   <div class="sb-foot"><a class="ba" href="../../index.html">← 단원 목차</a></div>
 </aside>
 <main class="main">
   <header class="topbar">
-    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span class="bccur">5. 데이터 수집과 분류</span></div>
+    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span class="bccur">5. 데이터 분석과 시각화</span></div>
     <div class="tbr">
       <button class="btn bsm" onclick="markDone('05')">✓ 완료 표시</button>
       <a class="btn bsm bp" href="../lesson-06/index.html">다음 소단원 →</a>
@@ -102,18 +105,19 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
   <div class="card" id="sec-goal">
     <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--ult);color:var(--u)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="ach"><div class="ach-c">[9정02-04]</div><div class="ach-t">목적에 맞는 데이터 수집 방법을 선택하고 수집된 데이터를 유형에 따라 분류할 수 있다.</div></div>
+      <div class="ach"><div class="ach-c">[9정02-05]</div><div class="ach-t">수집한 데이터를 분석하고 적절한 차트로 시각화하여 의미 있는 정보를 추출할 수 있다.</div></div>
       <ul class="glist">
-        <li><div class="gck">✓</div>정형·비정형·반정형 데이터의 차이를 설명할 수 있다.</li>
-        <li><div class="gck">✓</div>데이터 수집 방법을 목적에 맞게 선택할 수 있다.</li>
-        <li><div class="gck">✓</div>공공데이터의 개념과 활용 방법을 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>평균·최솟값·최댓값 등 기술통계를 계산할 수 있다.</li>
+        <li><div class="gck">✓</div>데이터 특성에 맞는 차트 유형을 선택할 수 있다.</li>
+        <li><div class="gck">✓</div>시각화된 데이터에서 패턴·인사이트를 읽어낼 수 있다.</li>
       </ul>
       <div class="divl"></div>
       <div class="ctags">
-        <span class="ctag" onclick="goTo('sec-concept')">정형 데이터</span><span class="ctag" onclick="goTo('sec-concept')">비정형 데이터</span>
-        <span class="ctag" onclick="goTo('sec-concept')">공공데이터</span><span class="ctag" onclick="goTo('sec-concept')">설문조사</span>
+        <span class="ctag" onclick="goTo('sec-concept')">기술통계</span><span class="ctag" onclick="goTo('sec-concept')">평균</span>
+        <span class="ctag" onclick="goTo('sec-concept')">막대그래프</span><span class="ctag" onclick="goTo('sec-concept')">꺾은선</span>
+        <span class="ctag" onclick="goTo('sec-concept')">인사이트</span>
       </div>
-      <div class="ibox prev">📌 <div><b>이전 차시:</b> 소리와 영상의 디지털 표현을 배웠습니다. 이번에는 실제로 <em>데이터를 어떻게 수집하고 분류</em>하는지 탐구합니다.</div></div>
+      <div class="ibox prev">📌 <div><b>이전 차시:</b> 데이터 수집과 분류를 배웠습니다. 이번에는 수집된 데이터에서 <em>의미를 찾는 분석과 시각화</em>를 탐구합니다.</div></div>
     </div>
   </div>
   <div class="card" id="sec-concept">
@@ -121,67 +125,64 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
     <div class="cb">
       <div class="crow">
         <div class="ct">
-          <h4>데이터 유형 3가지</h4>
+          <h4>기술통계 — 데이터 요약</h4>
           <ul>
-            <li><b>정형 데이터:</b> 표(행·열) 구조. 엑셀, DB 테이블</li>
-            <li><b>비정형 데이터:</b> 구조 없음. 이미지·텍스트·영상·SNS</li>
-            <li><b>반정형 데이터:</b> 부분 구조. JSON, XML (태그 기반)</li>
+            <li><b>평균(Mean):</b> 전체 합 ÷ 개수</li>
+            <li><b>중앙값(Median):</b> 정렬 후 중간 값</li>
+            <li><b>최솟값·최댓값:</b> 분포 범위</li>
+            <li><b>범위(Range):</b> 최댓값 - 최솟값</li>
           </ul>
         </div>
-        <div class="cvis" style="flex-direction:column;gap:6px;font-size:11px">
-          <div style="background:var(--bbg);border:1px solid #BACED8;border-radius:6px;padding:8px;width:120px">
-            <div style="font-weight:700;color:var(--blue);margin-bottom:4px">정형</div>
-            <div style="font-family:monospace;font-size:10px;color:var(--mt)">이름 | 점수<br>김민준| 88</div>
-          </div>
-          <div style="background:var(--abg);border:1px solid #EDD070;border-radius:6px;padding:8px;width:120px">
-            <div style="font-weight:700;color:var(--amber);margin-bottom:4px">반정형</div>
-            <div style="font-family:monospace;font-size:10px;color:var(--mt)">{&quot;name&quot;:&quot;Kim&quot;,<br>&quot;score&quot;:88}</div>
-          </div>
-          <div style="background:var(--rbg);border:1px solid #F0B8A0;border-radius:6px;padding:8px;width:120px">
-            <div style="font-weight:700;color:var(--red);margin-bottom:4px">비정형</div>
-            <div style="font-size:10px;color:var(--mt)">📸 이미지<br>📝 SNS 글</div>
-          </div>
+        <div class="cvis">
+          <svg viewBox="0 0 130 90" width="130">
+            <line x1="10" y1="78" x2="120" y2="78" stroke="var(--br)" stroke-width="1"/>
+            <rect x="14" y="48" width="14" height="30" fill="var(--u)" opacity=".8" rx="2"/>
+            <rect x="32" y="32" width="14" height="46" fill="var(--u)" opacity=".9" rx="2"/>
+            <rect x="50" y="20" width="14" height="58" fill="var(--u)" rx="2"/>
+            <rect x="68" y="38" width="14" height="40" fill="var(--u)" opacity=".85" rx="2"/>
+            <rect x="86" y="52" width="14" height="26" fill="var(--u)" opacity=".7" rx="2"/>
+            <rect x="104" y="42" width="14" height="36" fill="var(--u)" opacity=".8" rx="2"/>
+            <line x1="10" y1="44" x2="120" y2="44" stroke="#F97316" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <text x="122" y="47" font-size="7" fill="#F97316" font-family="sans-serif" font-weight="bold">평균</text>
+          </svg>
         </div>
       </div>
       <div class="divl"></div>
-      <h4 style="font-size:13px;font-weight:700;margin-bottom:10px">데이터 수집 방법 비교</h4>
-      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">
-        <thead><tr style="background:var(--bg)">
-          <th style="padding:7px 10px;border-bottom:1.5px solid var(--br);font-size:11px;color:var(--mt);text-align:left">수집 방법</th>
-          <th style="padding:7px 10px;border-bottom:1.5px solid var(--br);font-size:11px;color:var(--mt);text-align:left">특징</th>
-          <th style="padding:7px 10px;border-bottom:1.5px solid var(--br);font-size:11px;color:var(--mt);text-align:left">예시</th>
-        </tr></thead>
-        <tbody>
-          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)"><b>설문조사</b></td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">사람에게 직접 질문</td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">구글폼, 종이 설문</td></tr>
-          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)"><b>센서 수집</b></td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">자동 측정·기록</td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">온도계, 미세먼지 센서</td></tr>
-          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)"><b>공공데이터</b></td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">정부·기관 공개 자료</td><td style="padding:7px 10px;color:var(--mt)">data.go.kr, 통계청</td></tr>
-        </tbody>
-      </table></div>
-      <div class="ibox info" style="margin-top:12px">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.114–125</div>
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:10px">차트 유형 선택 가이드</h4>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px;text-align:center"><div style="font-size:22px;margin-bottom:5px">📊</div><div style="font-size:12px;font-weight:700;margin-bottom:3px">막대그래프</div><div style="font-size:11px;color:var(--mt)">항목 간 비교<br>카테고리 데이터</div></div>
+        <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px;text-align:center"><div style="font-size:22px;margin-bottom:5px">📈</div><div style="font-size:12px;font-weight:700;margin-bottom:3px">꺾은선 그래프</div><div style="font-size:11px;color:var(--mt)">시간에 따른<br>연속 변화</div></div>
+        <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px;text-align:center"><div style="font-size:22px;margin-bottom:5px">🥧</div><div style="font-size:12px;font-weight:700;margin-bottom:3px">원형 차트</div><div style="font-size:11px;color:var(--mt)">전체 대비<br>구성 비율</div></div>
+      </div>
+      <div class="ibox info" style="margin-top:12px">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.126–137</div>
     </div>
   </div>
   <div class="card" id="sec-interact">
-    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:var(--rbg);color:var(--red)">03</div><h3>인터랙션 — 데이터 유형 분류 퀴즈</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
+    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:var(--rbg);color:var(--red)">03</div><h3>인터랙션 — 나만의 데이터 차트 만들기</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 아래 4개의 데이터 사례를 정형·비정형·반정형 중 올바른 유형으로 선택해보세요!</div>
-      <div class="dtype-grid" id="dtype-grid">
-        <div class="dtype-card" id="dc1"><div class="dtype-icon">📊</div><div class="dtype-title">학생 성적 엑셀 파일</div><div class="dtype-desc">이름·점수·등급이 행과 열로 정리된 표</div><select class="dtype-sel" id="ds1"><option value="">유형 선택</option><option>정형</option><option>비정형</option><option>반정형</option></select></div>
-        <div class="dtype-card" id="dc2"><div class="dtype-icon">📸</div><div class="dtype-title">인스타그램 사진</div><div class="dtype-desc">사용자가 업로드한 이미지 파일</div><select class="dtype-sel" id="ds2"><option value="">유형 선택</option><option>정형</option><option>비정형</option><option>반정형</option></select></div>
-        <div class="dtype-card" id="dc3"><div class="dtype-icon">📡</div><div class="dtype-title">날씨 API 응답</div><div class="dtype-desc">{"temp":22, "humidity":65} JSON 형식</div><select class="dtype-sel" id="ds3"><option value="">유형 선택</option><option>정형</option><option>비정형</option><option>반정형</option></select></div>
-        <div class="dtype-card" id="dc4"><div class="dtype-icon">📰</div><div class="dtype-title">뉴스 기사 텍스트</div><div class="dtype-desc">정해진 구조 없이 서술된 글</div><select class="dtype-sel" id="ds4"><option value="">유형 선택</option><option>정형</option><option>비정형</option><option>반정형</option></select></div>
+      <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 아래 표에 데이터를 직접 입력하면 막대그래프와 기술통계가 <b>실시간</b>으로 업데이트됩니다!</div>
+      <div class="chart-wrap">
+        <h4>▸ 데이터 입력 후 그래프 자동 생성</h4>
+        <table class="data-table">
+          <thead><tr><th>항목명</th><th>값</th></tr></thead>
+          <tbody id="data-tbody">
+            <tr><td><input type="text" value="월요일" oninput="drawChart()"></td><td><input type="number" value="85" min="0" max="200" oninput="drawChart()"></td></tr>
+            <tr><td><input type="text" value="화요일" oninput="drawChart()"></td><td><input type="number" value="92" min="0" max="200" oninput="drawChart()"></td></tr>
+            <tr><td><input type="text" value="수요일" oninput="drawChart()"></td><td><input type="number" value="78" min="0" max="200" oninput="drawChart()"></td></tr>
+            <tr><td><input type="text" value="목요일" oninput="drawChart()"></td><td><input type="number" value="96" min="0" max="200" oninput="drawChart()"></td></tr>
+            <tr><td><input type="text" value="금요일" oninput="drawChart()"></td><td><input type="number" value="88" min="0" max="200" oninput="drawChart()"></td></tr>
+          </tbody>
+        </table>
+        <canvas id="chart-cv" height="180"></canvas>
+        <div class="stat-row" id="stat-row"></div>
       </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn bsm bp" onclick="checkDtype()">✓ 확인</button>
-        <button class="btn bsm" onclick="resetDtype()">↺ 다시</button>
-      </div>
-      <div id="dtype-res"></div>
       <div class="qwrap">
-        <div class="qq">다음 중 <b>정형 데이터(Structured Data)</b>의 특징으로 옳은 것은?</div>
+        <div class="qq">시간에 따른 기온 변화처럼 <b>연속적인 변화 추이</b>를 표현하기에 가장 적합한 차트는?</div>
         <div class="qopts">
-          <div class="opt" onclick="checkQ(this,false,'이미지·영상은 구조가 없는 비정형 데이터입니다.')"><span class="onum">①</span>이미지나 영상처럼 구조가 없다.</div>
-          <div class="opt" onclick="checkQ(this,true,'정형 데이터는 행과 열로 구성된 표 형태로 데이터베이스나 스프레드시트에 저장됩니다.')"><span class="onum">②</span>행과 열로 구성된 표 형태로 저장된다.</div>
-          <div class="opt" onclick="checkQ(this,false,'SNS 게시글은 비정형 데이터의 대표적인 예입니다.')"><span class="onum">③</span>SNS 게시글처럼 자유로운 형식이다.</div>
-          <div class="opt" onclick="checkQ(this,false,'JSON은 태그와 값으로 구성된 반정형 데이터입니다.')"><span class="onum">④</span>JSON 형식처럼 태그와 값으로 구성된다.</div>
+          <div class="opt" onclick="checkQ(this,false,'막대그래프는 항목 간 크기 비교에 적합합니다. 시간 변화 추이보다는 비교에 사용합니다.')"><span class="onum">①</span>막대그래프</div>
+          <div class="opt" onclick="checkQ(this,true,'꺾은선 그래프는 시간 축(x축)과 함께 연속적인 변화 패턴을 가장 잘 표현합니다.')"><span class="onum">②</span>꺾은선 그래프</div>
+          <div class="opt" onclick="checkQ(this,false,'원형 차트는 전체에서 각 부분이 차지하는 비율(%)을 표현할 때 적합합니다.')"><span class="onum">③</span>원형 차트</div>
+          <div class="opt" onclick="checkQ(this,false,'산점도는 두 변수 간의 상관관계를 표현합니다.')"><span class="onum">④</span>산점도</div>
         </div>
         <div class="qfb"></div>
       </div>
@@ -190,21 +191,22 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
   <div class="card" id="sec-assess">
     <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="task"><h4>📋 데이터 수집 계획서</h4>
-        <p>학교 주변 문제를 데이터로 해결하는 프로젝트를 설계하시오.</p>
-        <div class="srow"><div class="stepn">①</div><span>해결할 문제 상황 정의</span></div>
-        <div class="srow"><div class="stepn">②</div><span>필요한 데이터 종류와 수집 방법 결정</span></div>
-        <div class="srow"><div class="stepn">③</div><span>데이터 유형(정형/비정형) 명시</span></div>
-        <div class="srow"><div class="stepn">④</div><span>공공데이터 활용 가능성 탐색</span></div>
+      <div class="task"><h4>📋 우리 반 데이터 분석 보고서</h4>
+        <p>설문으로 수집한 우리 반 데이터를 분석하고 시각화하여 의미 있는 정보를 도출하시오.</p>
+        <div class="srow"><div class="stepn">①</div><span>주제 결정 후 5명 이상 데이터 수집</span></div>
+        <div class="srow"><div class="stepn">②</div><span>기술통계(평균·최솟값·최댓값) 계산</span></div>
+        <div class="srow"><div class="stepn">③</div><span>적절한 차트 유형 선택 후 직접 그리기</span></div>
+        <div class="srow"><div class="stepn">④</div><span>시각화 결과에서 인사이트 1가지 서술</span></div>
       </div>
       <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody>
-        <tr><td><b>문제 정의</b></td><td class="lv4">구체적·실현 가능</td><td class="lv3">대체로 구체적</td><td class="lv2">모호함</td><td class="lv1">정의 없음</td></tr>
-        <tr><td><b>데이터 계획</b></td><td class="lv4">방법·유형 정확</td><td class="lv3">대체로 정확</td><td class="lv2">일부 누락</td><td class="lv1">계획 없음</td></tr>
+        <tr><td><b>분석 정확성</b></td><td class="lv4">통계값 모두 정확</td><td class="lv3">대부분 정확</td><td class="lv2">일부 오류</td><td class="lv1">계산 불가</td></tr>
+        <tr><td><b>시각화 적절성</b></td><td class="lv4">최적 차트 선택</td><td class="lv3">적절한 선택</td><td class="lv2">부적절</td><td class="lv1">차트 없음</td></tr>
+        <tr><td><b>인사이트</b></td><td class="lv4">의미 있는 해석</td><td class="lv3">단순 설명</td><td class="lv2">해석 모호</td><td class="lv1">해석 없음</td></tr>
       </tbody></table>
       <div class="sclist">
-        <div class="scitem"><label>정형·비정형·반정형 데이터를 구분할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        <div class="scitem"><label>상황에 맞는 데이터 수집 방법을 선택할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        <div class="scitem"><label>공공데이터의 활용 방법을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>평균·최솟값·최댓값을 계산할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>데이터에 맞는 차트 유형을 선택할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>차트에서 패턴이나 인사이트를 읽어낼 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
       </div>
       <button class="btn bsm bok" style="margin-top:11px" onclick="saveSC('l205sc')">💾 저장</button>
     </div>
@@ -213,15 +215,15 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
     <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:var(--gbg);color:var(--green)">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
       <div class="sgrid">
-        <div class="scard"><strong>정형 데이터</strong>표(행·열) 구조. 엑셀, DB. 검색·분석 용이.</div>
-        <div class="scard"><strong>비정형 데이터</strong>구조 없음. 이미지·텍스트·영상. 전체의 80%.</div>
-        <div class="scard"><strong>수집 방법</strong>설문·센서·공공데이터·스크래핑. 목적에 맞게 선택.</div>
+        <div class="scard"><strong>기술통계</strong>평균·중앙값·최솟값·최댓값으로 데이터 특성 요약.</div>
+        <div class="scard"><strong>차트 선택</strong>막대=비교, 꺾은선=추이 변화, 원형=비율.</div>
+        <div class="scard"><strong>인사이트</strong>데이터에서 발견한 패턴·경향성. 의사결정에 활용.</div>
       </div>
       <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
-        <b>✏️ 단답형:</b> 정부·기관이 국민에게 무료로 공개하는 데이터를 <span style="display:inline-block;width:70px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>라고 한다.
+        <b>✏️ 단답형:</b> 전체에서 각 항목의 비율을 표현하기 가장 적합한 차트는 <span style="display:inline-block;width:80px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>이다.
         <textarea style="display:block;width:100%;margin-top:10px;padding:9px;border:1px solid var(--br);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:50px;background:var(--sf)" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='var(--u)'" onblur="this.style.borderColor=''"></textarea>
       </div>
-      <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 수집한 데이터를 <strong>분석하고 시각화</strong>하는 방법을 탐구합니다!</div></div>
+      <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 마지막 소단원에서는 <strong>빅데이터 활용과 개인정보 보호</strong>를 탐구합니다!</div></div>
     </div>
   </div>
 
@@ -236,9 +238,9 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
     </div></div>
     <div class="ap"><h5>수업 타이머</h5><span class="td-num" id="tnum">45:00</span><div class="td-lbl">수업 남은 시간</div>
     <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div></div>
-    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">정형 데이터</span><span class="tdef">표 구조</span></div><div class="tterm"><span class="tw">비정형 데이터</span><span class="tdef">구조 없음</span></div><div class="tterm"><span class="tw">공공데이터</span><span class="tdef">정부 공개</span></div><div class="tterm"><span class="tw">JSON</span><span class="tdef">반정형 형식</span></div><div class="tterm"><span class="tw">스크래핑</span><span class="tdef">웹 자동 수집</span></div></div></div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">기술통계</span><span class="tdef">수치 요약</span></div><div class="tterm"><span class="tw">평균</span><span class="tdef">합÷개수</span></div><div class="tterm"><span class="tw">범위</span><span class="tdef">최대-최소</span></div><div class="tterm"><span class="tw">시각화</span><span class="tdef">차트·그래프</span></div><div class="tterm"><span class="tw">인사이트</span><span class="tdef">해석 결과</span></div></div></div>
     <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:71%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">5/7</span></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:83%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">5/6</span></div>
     </div>
   </div>
   </div></div>
@@ -260,38 +262,60 @@ function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');docum
 function markDone(n){try{var d=JSON.parse(localStorage.getItem('u02done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u02done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
 
 
-var dtypeAns = {ds1:'정형', ds2:'비정형', ds3:'반정형', ds4:'비정형'};
-function checkDtype() {
-  var ok=0, tot=0;
-  Object.keys(dtypeAns).forEach(function(k,i) {
-    var sel = document.getElementById(k);
-    var card = document.getElementById('dc'+(i+1));
-    if(!sel || !card) return;
-    var val = sel.value;
-    if(!val) return;
-    tot++;
-    card.classList.remove('ok','ng');
-    if(val === dtypeAns[k]) { card.classList.add('ok'); ok++; }
-    else { card.classList.add('ng'); }
+function drawChart() {
+  var cv = document.getElementById('chart-cv');
+  if(!cv) return;
+  var ctx = cv.getContext('2d');
+  var W = cv.offsetWidth || 400; cv.width = W; cv.height = 180;
+  var rows = document.querySelectorAll('#data-tbody tr');
+  var labels = [], vals = [];
+  rows.forEach(function(r) {
+    var inps = r.querySelectorAll('input');
+    labels.push((inps[0] && inps[0].value) ? inps[0].value.slice(0,5) : '항목');
+    vals.push(parseFloat((inps[1] && inps[1].value) ? inps[1].value : 0) || 0);
   });
-  var res = document.getElementById('dtype-res');
-  if(tot === 0) { toast('유형을 선택해주세요!'); return; }
-  res.style.display = 'block';
-  if(ok === tot) {
-    res.style.cssText='display:block;background:var(--gbg);border:1px solid #BFDFAA;color:#1A5000;padding:11px 14px;border-radius:8px;font-size:13px;margin-top:10px';
-    res.innerHTML = '🎉 완벽! ' + ok + '/' + tot + '개 모두 정답!';
-  } else {
-    res.style.cssText='display:block;background:var(--abg);border:1px solid #EDD070;color:#6A5000;padding:11px 14px;border-radius:8px;font-size:13px;margin-top:10px';
-    res.innerHTML = '📝 ' + ok + '/' + tot + ' 정답. 빨간 카드를 다시 확인하세요!';
-  }
+  var max = Math.max.apply(null, vals.concat([1]));
+  var PAD_L = 30, PAD_B = 22, PAD_T = 14, PAD_R = 10;
+  var chartH = 180 - PAD_T - PAD_B;
+  var barW = Math.min(38, Math.floor((W - PAD_L - PAD_R) / vals.length * 0.6));
+  var gap = (W - PAD_L - PAD_R) / vals.length;
+  ctx.clearRect(0,0,W,180);
+  ctx.fillStyle = '#FFF'; ctx.fillRect(0,0,W,180);
+  // gridlines
+  [0,25,50,75,100].forEach(function(p) {
+    var y = PAD_T + chartH * (1 - p/100);
+    ctx.strokeStyle = '#E2DFD6'; ctx.lineWidth = 0.7;
+    ctx.beginPath(); ctx.moveTo(PAD_L, y); ctx.lineTo(W - PAD_R, y); ctx.stroke();
+    ctx.fillStyle = '#A8A59E'; ctx.font = '9px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(Math.round(max * p/100), PAD_L - 3, y + 3);
+  });
+  // bars
+  vals.forEach(function(v, i) {
+    var x = PAD_L + i * gap + gap/2 - barW/2;
+    var bH = (v/max) * chartH;
+    var y = PAD_T + chartH - bH;
+    var g = ctx.createLinearGradient(0, y, 0, PAD_T + chartH);
+    g.addColorStop(0, '#1B9E72'); g.addColorStop(1, '#0E7A58');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    if(ctx.roundRect) ctx.roundRect(x, y, barW, bH, 3); else ctx.rect(x, y, barW, bH);
+    ctx.fill();
+    ctx.fillStyle = '#1C1C1C'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+    if(bH > 12) ctx.fillText(v, x + barW/2, y - 3);
+    ctx.fillStyle = '#696760'; ctx.font = '10px sans-serif';
+    ctx.fillText(labels[i], x + barW/2, 180 - 5);
+  });
+  // stats
+  var sum = vals.reduce(function(a,b){return a+b;}, 0);
+  var avg = vals.length ? (sum / vals.length).toFixed(1) : 0;
+  var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+  var sr = document.getElementById('stat-row');
+  if(sr) sr.innerHTML = '<span class="stat-chip">평균: ' + avg + '</span><span class="stat-chip">최솟값: ' + mn + '</span><span class="stat-chip">최댓값: ' + mx + '</span><span class="stat-chip">범위: ' + (mx-mn) + '</span>';
 }
-function resetDtype() {
-  ['dc1','dc2','dc3','dc4'].forEach(function(id){ var c=document.getElementById(id); if(c){c.classList.remove('ok','ng');} });
-  ['ds1','ds2','ds3','ds4'].forEach(function(id){ var s=document.getElementById(id); if(s)s.value=''; });
-  var res = document.getElementById('dtype-res'); if(res) res.style.display='none';
-  document.querySelectorAll('.opt').forEach(function(o){ o.className='opt'; o.style.pointerEvents=''; });
-  document.querySelectorAll('.qfb').forEach(function(f){ f.className='qfb'; f.innerHTML=''; });
-}
+document.addEventListener('DOMContentLoaded', function() {
+  drawChart();
+  document.querySelectorAll('#data-tbody input').forEach(function(inp){ inp.addEventListener('input', drawChart); });
+});
 
 document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l205sc');});
 </script>

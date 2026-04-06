@@ -12,13 +12,12 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
 body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.65;min-height:100vh}
 .topbar{background:var(--sf);border-bottom:1px solid var(--br);height:52px;padding:0 28px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
-.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mt);flex:1}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}.bcsep{color:var(--br)}.bccur{color:var(--tx);font-weight:500}
+.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mt);flex:1}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--br);background:var(--sf);color:var(--tx);text-decoration:none;transition:background .12s}.btn:hover{background:var(--bg)}.bp{background:var(--u);color:#fff;border-color:var(--u)}.bp:hover{background:var(--udk)}
 .page{padding:28px 32px;max-width:1100px;margin:0 auto}
 .hero{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);padding:28px 32px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
 .hero h2{font-size:22px;font-weight:700;margin-bottom:8px}.hero p{font-size:13px;color:var(--mt);line-height:1.7}
-.hero-stats{display:flex;gap:12px;flex-shrink:0}
-.stat{text-align:center;padding:12px 16px;background:var(--bg);border-radius:var(--rSM);min-width:72px}.stat-n{font-size:22px;font-weight:700;color:var(--u)}.stat-l{font-size:11px;color:var(--mt);margin-top:2px}
+.hero-stats{display:flex;gap:12px;flex-shrink:0}.stat{text-align:center;padding:12px 16px;background:var(--bg);border-radius:var(--rSM);min-width:72px}.stat-n{font-size:22px;font-weight:700;color:var(--u)}.stat-l{font-size:11px;color:var(--mt);margin-top:2px}
 .sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--lt);margin-bottom:14px}
 .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .lcard{display:flex;flex-direction:column;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rLG);padding:20px 18px;text-decoration:none;color:inherit;transition:all .18s;position:relative;overflow:hidden}
@@ -31,14 +30,14 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);co
 .ltag-u{background:var(--ult);color:var(--u);border-color:var(--umd)}
 .lgo{margin-left:auto;font-size:11px;font-weight:700;color:var(--u);opacity:0;transition:opacity .15s}
 .lcard:hover .lgo{opacity:1}
-.new-badge{font-size:9px;padding:1px 7px;background:var(--u);color:#fff;border-radius:20px;font-weight:700;margin-left:4px}
+.merged-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 8px;border-radius:20px;background:#F0F0FF;border:1px solid #C8C4F0;color:#4E48A8;font-weight:700;margin-left:4px}
 @media(max-width:900px){.card-grid{grid-template-columns:1fr 1fr}.hero{flex-direction:column}}
 @media(max-width:600px){.card-grid{grid-template-columns:1fr}.page{padding:16px 18px}}
 </style>
 </head>
 <body>
 <header class="topbar">
-  <div class="bc"><a href="../../index.html">정보 교과 학습 플랫폼</a><span class="bcsep">›</span><span class="bccur">II. 데이터</span></div>
+  <div class="bc"><a href="../../index.html">정보 교과 학습 플랫폼</a> › <span style="color:var(--tx);font-weight:500">II. 데이터</span></div>
   <a class="btn bp" href="lesson-01/index.html">시작하기 →</a>
 </header>
 <div class="page">
@@ -48,58 +47,59 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);co
         <span style="font-size:38px;font-weight:300;color:var(--u);line-height:1">II</span>
         <div><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lt);margin-bottom:3px">Unit II</div><h2>데이터</h2></div>
       </div>
-      <p>아날로그·디지털 표현부터 이진수·아스키코드·픽셀·소리·영상,<br>데이터 수집·분류·분석·시각화, 그리고 빅데이터와 개인정보 보호까지<br>데이터 기반 사고의 기초를 7개 소단원으로 탐구합니다.</p>
+      <p>아날로그·디지털 표현, 이진수 원리, 문자·이미지·소리·영상의 디지털 표현,<br>데이터 수집·분류·분석·시각화, 그리고 빅데이터와 개인정보 보호까지<br>데이터 기반 사고의 기초를 6개 소단원으로 탐구합니다.</p>
     </div>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-n">7</div><div class="stat-l">소단원</div></div>
-      <div class="stat"><div class="stat-n">15</div><div class="stat-l">차시</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">소단원</div></div>
+      <div class="stat"><div class="stat-n">13</div><div class="stat-l">차시</div></div>
       <div class="stat"><div class="stat-n">중상</div><div class="stat-l">난이도</div></div>
     </div>
   </div>
   <div class="sec-title">소단원 목록</div>
   <div class="card-grid">
+
     <a href="lesson-01/index.html" class="lcard">
       <div class="ln">II-01</div><div class="li">📊</div>
       <div class="lt">데이터와 정보</div>
       <div class="ld">아날로그·디지털 차이, 드래그&드롭 데이터vs정보 분류 활동</div>
       <div class="lf"><span class="ltag">2차시</span><span class="ltag ltag-u">9정02-01</span><div class="lgo">→</div></div>
     </a>
+
     <a href="lesson-02/index.html" class="lcard">
       <div class="ln">II-02</div><div class="li">🔢</div>
       <div class="lt">이진수와 디지털 표현</div>
-      <div class="ld">비트·바이트, 실시간 10진수↔2진수 변환기 + 비트 클릭 계산기</div>
+      <div class="ld">비트·바이트, 실시간 10↔2진수 변환기 + 비트 클릭 계산기</div>
       <div class="lf"><span class="ltag">2차시</span><span class="ltag ltag-u">9정02-02</span><div class="lgo">→</div></div>
     </a>
-    <a href="lesson-03/index.html" class="lcard">
-      <div class="ln">II-03</div><div class="li">🖼️</div>
-      <div class="lt">문자와 이미지 표현</div>
-      <div class="ld">아스키코드 탐색기, 6×6 픽셀 아트 메이커, RGB 색상 체계</div>
-      <div class="lf"><span class="ltag">2차시</span><span class="ltag ltag-u">9정02-03</span><div class="lgo">→</div></div>
+
+    <a href="lesson-03/index.html" class="lcard" style="border-color:var(--umd)">
+      <div class="ln">II-03</div><div class="li">🎨</div>
+      <div class="lt">데이터 표현 <span class="merged-badge">통합</span></div>
+      <div class="ld">문자(아스키)·이미지(픽셀·RGB)·소리(샘플링)·영상(프레임·FPS) 4가지 표현 원리 + 수업자료</div>
+      <div class="lf"><span class="ltag">3차시</span><span class="ltag ltag-u">9정02-03</span><div class="lgo">→</div></div>
     </a>
+
     <a href="lesson-04/index.html" class="lcard">
-      <div class="ln">II-04</div><div class="li">🎵</div>
-      <div class="lt">소리와 영상 표현 <span class="new-badge">NEW</span></div>
-      <div class="ld">샘플링 파형 시각화(슬라이더), 영상 프레임 탐색기, FPS 설정</div>
-      <div class="lf"><span class="ltag">2차시</span><span class="ltag ltag-u">9정02-03</span><div class="lgo">→</div></div>
-    </a>
-    <a href="lesson-05/index.html" class="lcard">
-      <div class="ln">II-05</div><div class="li">📥</div>
+      <div class="ln">II-04</div><div class="li">📥</div>
       <div class="lt">데이터 수집과 분류</div>
       <div class="ld">정형·비정형·반정형 분류 퀴즈, 공공데이터 수집 방법</div>
       <div class="lf"><span class="ltag">2차시</span><span class="ltag ltag-u">9정02-04</span><div class="lgo">→</div></div>
     </a>
-    <a href="lesson-06/index.html" class="lcard">
-      <div class="ln">II-06</div><div class="li">📈</div>
+
+    <a href="lesson-05/index.html" class="lcard">
+      <div class="ln">II-05</div><div class="li">📈</div>
       <div class="lt">데이터 분석과 시각화</div>
       <div class="ld">기술통계 계산, Canvas 실시간 막대그래프 + 기술통계 자동 계산</div>
       <div class="lf"><span class="ltag">3차시</span><span class="ltag ltag-u">9정02-05</span><div class="lgo">→</div></div>
     </a>
-    <a href="lesson-07/index.html" class="lcard">
-      <div class="ln">II-07</div><div class="li">🌐</div>
+
+    <a href="lesson-06/index.html" class="lcard">
+      <div class="ln">II-06</div><div class="li">🌐</div>
       <div class="lt">데이터 활용과 빅데이터</div>
       <div class="ld">빅데이터 3V, 활용 시나리오 적절성 판단, 개인정보 보호 윤리</div>
       <div class="lf"><span class="ltag">2차시</span><span class="ltag ltag-u">9정02-06</span><div class="lgo">→</div></div>
     </a>
+
   </div>
 </div>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>II-4. 소리와 영상 표현 — 정보 교과</title>
+<title>II-4. 데이터 수집과 분류 — 정보 교과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -67,35 +67,30 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 @media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
 
 
-.slider-wrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:16px;margin-bottom:14px}
-.slider-wrap h4{font-size:12px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
-.sv-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-.sv-lbl{font-size:12px;color:var(--mt);min-width:100px}
-input[type=range]{flex:1;min-width:100px;accent-color:var(--u)}
-.sv-val{font-size:13px;font-weight:700;color:var(--u);min-width:80px;font-family:'Courier New',monospace}
-#wave-canvas{display:block;width:100%;height:120px;border-radius:var(--rSM);background:var(--sf);border:1px solid var(--br);margin-bottom:8px}
-.frame-strip{display:flex;gap:4px;overflow-x:auto;padding:4px 0;margin-bottom:10px}
-.frame{border-radius:5px;flex-shrink:0;cursor:pointer;transition:transform .12s;border:2px solid transparent}
-.frame:hover{transform:scale(1.06)}.frame.active{border-color:var(--u)}
+.dtype-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.dtype-card{background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rMD,10px);padding:14px;transition:all .15s}
+.dtype-card:hover{border-color:var(--umd)}.dtype-card.ok{border-color:#4A9020;background:var(--gbg)}.dtype-card.ng{border-color:#B03020;background:var(--rbg)}
+.dtype-icon{font-size:22px;margin-bottom:6px}.dtype-title{font-size:12px;font-weight:700;margin-bottom:4px}.dtype-desc{font-size:11px;color:var(--mt);line-height:1.5;margin-bottom:8px}
+.dtype-sel{width:100%;font-size:11px;padding:5px 8px;border:1px solid var(--br);border-radius:6px;background:var(--sf);font-family:inherit;cursor:pointer}
+#dtype-res{display:none;padding:12px 14px;border-radius:var(--rSM);font-size:13px;margin-top:10px}
 
 </style>
 </head>
 <body>
 <aside class="sb">
-  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 4/7 · 15차시</div></div>
+  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 4/6 · 15차시</div></div>
   <nav class="sb-nav"><div class="nlbl">소단원 목록</div><a class="na done" href="../lesson-01/index.html"><div class="nn">✓</div>데이터와 정보</a>
 <a class="na done" href="../lesson-02/index.html"><div class="nn">✓</div>이진수와 디지털 표현</a>
-<a class="na done" href="../lesson-03/index.html"><div class="nn">✓</div>문자와 이미지 표현</a>
-<a class="na on" href="../lesson-04/index.html"><div class="nn">4</div>소리와 영상 표현<span class="nbadge">2차시</span></a>
-<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>데이터 수집과 분류</a>
-<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 분석과 시각화</a>
-<a class="na " href="../lesson-07/index.html"><div class="nn">7</div>데이터 활용과 빅데이터</a>
+<a class="na done" href="../lesson-03/index.html"><div class="nn">✓</div>데이터 표현</a>
+<a class="na on" href="../lesson-04/index.html"><div class="nn">4</div>데이터 수집과 분류<span class="nbadge">2차시</span></a>
+<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>데이터 분석과 시각화</a>
+<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 활용과 빅데이터</a>
 </nav>
   <div class="sb-foot"><a class="ba" href="../../index.html">← 단원 목차</a></div>
 </aside>
 <main class="main">
   <header class="topbar">
-    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span class="bccur">4. 소리와 영상 표현</span></div>
+    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span class="bccur">4. 데이터 수집과 분류</span></div>
     <div class="tbr">
       <button class="btn bsm" onclick="markDone('04')">✓ 완료 표시</button>
       <a class="btn bsm bp" href="../lesson-05/index.html">다음 소단원 →</a>
@@ -106,166 +101,126 @@ input[type=range]{flex:1;min-width:100px;accent-color:var(--u)}
   <div class="card" id="sec-goal">
     <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--ult);color:var(--u)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="ach"><div class="ach-c">[9정02-03 확장]</div><div class="ach-t">소리와 영상이 디지털로 표현되는 원리를 이해하고 샘플링, 프레임, 코덱의 개념을 설명할 수 있다.</div></div>
+      <div class="ach"><div class="ach-c">[9정02-04]</div><div class="ach-t">목적에 맞는 데이터 수집 방법을 선택하고 수집된 데이터를 유형에 따라 분류할 수 있다.</div></div>
       <ul class="glist">
-        <li><div class="gck">✓</div>소리의 디지털 표현 원리(샘플링 주파수, 비트 깊이)를 설명할 수 있다.</li>
-        <li><div class="gck">✓</div>영상의 디지털 표현 원리(프레임, FPS, 코덱)를 설명할 수 있다.</li>
-        <li><div class="gck">✓</div>샘플링 주파수와 음질의 관계를 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>정형·비정형·반정형 데이터의 차이를 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>데이터 수집 방법을 목적에 맞게 선택할 수 있다.</li>
+        <li><div class="gck">✓</div>공공데이터의 개념과 활용 방법을 설명할 수 있다.</li>
       </ul>
       <div class="divl"></div>
       <div class="ctags">
-        <span class="ctag" onclick="goTo('sec-concept')">샘플링</span><span class="ctag" onclick="goTo('sec-concept')">샘플링 주파수</span>
-        <span class="ctag" onclick="goTo('sec-concept')">비트 깊이</span><span class="ctag" onclick="goTo('sec-concept')">프레임</span>
-        <span class="ctag" onclick="goTo('sec-concept')">FPS</span><span class="ctag" onclick="goTo('sec-concept')">코덱</span>
+        <span class="ctag" onclick="goTo('sec-concept')">정형 데이터</span><span class="ctag" onclick="goTo('sec-concept')">비정형 데이터</span>
+        <span class="ctag" onclick="goTo('sec-concept')">공공데이터</span><span class="ctag" onclick="goTo('sec-concept')">설문조사</span>
       </div>
-      <div class="ibox prev">📌 <div><b>이전 차시:</b> 문자와 이미지를 디지털로 표현하는 방법을 배웠습니다. 이번에는 <em>소리와 동영상</em>의 디지털 표현을 탐구합니다.</div></div>
+      <div class="ibox prev">📌 <div><b>이전 차시:</b> 소리와 영상의 디지털 표현을 배웠습니다. 이번에는 실제로 <em>데이터를 어떻게 수집하고 분류</em>하는지 탐구합니다.</div></div>
     </div>
   </div>
-
   <div class="card" id="sec-concept">
     <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:var(--gbg);color:var(--green)">02</div><h3>개념설명</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
     <div class="cb">
       <div class="crow">
         <div class="ct">
-          <h4>소리의 디지털 표현</h4>
-          <p>소리는 <strong>아날로그 파형</strong>입니다. 이를 디지털로 변환하려면 파형을 일정 간격으로 <strong>샘플링(Sampling)</strong>하여 수치로 기록합니다.</p>
+          <h4>데이터 유형 3가지</h4>
           <ul>
-            <li><b>샘플링 주파수(Hz):</b> 1초에 샘플링하는 횟수. 높을수록 고음질</li>
-            <li><b>CD 품질:</b> 44,100 Hz (44.1kHz)</li>
-            <li><b>비트 깊이:</b> 각 샘플의 정밀도. 16bit = 65,536단계</li>
+            <li><b>정형 데이터:</b> 표(행·열) 구조. 엑셀, DB 테이블</li>
+            <li><b>비정형 데이터:</b> 구조 없음. 이미지·텍스트·영상·SNS</li>
+            <li><b>반정형 데이터:</b> 부분 구조. JSON, XML (태그 기반)</li>
           </ul>
         </div>
-        <div class="cvis">
-          <svg viewBox="0 0 130 100" width="130">
-            <text x="65" y="12" font-size="8.5" fill="var(--blue)" text-anchor="middle" font-family="sans-serif" font-weight="bold">아날로그 파형</text>
-            <path d="M4 55 C14 20,22 20,30 55 C38 90,46 90,54 55 C62 20,70 20,78 55 C86 90,94 90,102 55 C110 20,118 20,126 55" fill="none" stroke="var(--blue)" stroke-width="1.8"/>
-            <line x1="4" y1="55" x2="126" y2="55" stroke="#E2DFD6" stroke-width=".8"/>
-            <!-- 샘플 점 -->
-            <circle cx="12" cy="38" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
-            <circle cx="26" cy="72" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
-            <circle cx="40" cy="38" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
-            <circle cx="54" cy="72" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
-            <circle cx="68" cy="38" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
-            <circle cx="82" cy="72" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
-            <circle cx="96" cy="38" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
-            <circle cx="110" cy="72" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
-            <!-- 수직선 -->
-            <line x1="12" y1="38" x2="12" y2="55" stroke="var(--u)" stroke-width=".8" stroke-dasharray="2,2"/>
-            <line x1="26" y1="55" x2="26" y2="72" stroke="var(--u)" stroke-width=".8" stroke-dasharray="2,2"/>
-            <line x1="40" y1="38" x2="40" y2="55" stroke="var(--u)" stroke-width=".8" stroke-dasharray="2,2"/>
-            <line x1="54" y1="55" x2="54" y2="72" stroke="var(--u)" stroke-width=".8" stroke-dasharray="2,2"/>
-            <text x="65" y="90" font-size="8" fill="var(--u)" text-anchor="middle" font-family="sans-serif">● = 샘플링 포인트</text>
-          </svg>
-        </div>
-      </div>
-      <div class="crow">
-        <div class="ct">
-          <h4>영상의 디지털 표현</h4>
-          <p>동영상은 정지된 이미지(<strong>프레임</strong>)를 빠르게 연속 재생하는 원리입니다. <strong>FPS(Frame Per Second)</strong>는 초당 프레임 수를 의미합니다.</p>
-          <ul>
-            <li><b>영화:</b> 24 FPS</li>
-            <li><b>TV·게임:</b> 30~60 FPS</li>
-            <li><b>코덱(Codec):</b> 영상 압축·해제 알고리즘 (H.264, H.265)</li>
-            <li><b>해상도:</b> 720p, 1080p(FHD), 4K(UHD)</li>
-          </ul>
-        </div>
-        <div class="cvis" style="flex-direction:column;gap:6px;padding:12px">
-          <div style="display:flex;gap:4px">
-            <div style="width:28px;height:20px;background:linear-gradient(135deg,#FF6B6B,#FFE66D);border-radius:3px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">1</div>
-            <div style="width:28px;height:20px;background:linear-gradient(135deg,#FF8E53,#FED766);border-radius:3px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">2</div>
-            <div style="width:28px;height:20px;background:linear-gradient(135deg,#FFA07A,#FFD700);border-radius:3px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">3</div>
-            <div style="width:28px;height:20px;background:linear-gradient(135deg,#1B9E72,#A8D8C8);border-radius:3px;border:2px solid var(--u);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">4</div>
+        <div class="cvis" style="flex-direction:column;gap:6px;font-size:11px">
+          <div style="background:var(--bbg);border:1px solid #BACED8;border-radius:6px;padding:8px;width:120px">
+            <div style="font-weight:700;color:var(--blue);margin-bottom:4px">정형</div>
+            <div style="font-family:monospace;font-size:10px;color:var(--mt)">이름 | 점수<br>김민준| 88</div>
           </div>
-          <div style="font-size:8px;color:var(--lt);text-align:center">연속 프레임 → 동영상</div>
-          <div style="font-size:9px;color:var(--mt);text-align:center;background:var(--sf);padding:4px 8px;border-radius:4px;border:1px solid var(--br)">24~60 FPS</div>
+          <div style="background:var(--abg);border:1px solid #EDD070;border-radius:6px;padding:8px;width:120px">
+            <div style="font-weight:700;color:var(--amber);margin-bottom:4px">반정형</div>
+            <div style="font-family:monospace;font-size:10px;color:var(--mt)">{&quot;name&quot;:&quot;Kim&quot;,<br>&quot;score&quot;:88}</div>
+          </div>
+          <div style="background:var(--rbg);border:1px solid #F0B8A0;border-radius:6px;padding:8px;width:120px">
+            <div style="font-weight:700;color:var(--red);margin-bottom:4px">비정형</div>
+            <div style="font-size:10px;color:var(--mt)">📸 이미지<br>📝 SNS 글</div>
+          </div>
         </div>
       </div>
-      <div class="ibox warn">⚠️ <div><b>오개념:</b> FPS가 높을수록 용량도 급증합니다. 1080p 60FPS 영상은 30FPS보다 2배 많은 프레임 = 2배 큰 파일 크기입니다.</div></div>
-      <div class="ibox info" style="margin-top:8px">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.102–113</div>
+      <div class="divl"></div>
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:10px">데이터 수집 방법 비교</h4>
+      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr style="background:var(--bg)">
+          <th style="padding:7px 10px;border-bottom:1.5px solid var(--br);font-size:11px;color:var(--mt);text-align:left">수집 방법</th>
+          <th style="padding:7px 10px;border-bottom:1.5px solid var(--br);font-size:11px;color:var(--mt);text-align:left">특징</th>
+          <th style="padding:7px 10px;border-bottom:1.5px solid var(--br);font-size:11px;color:var(--mt);text-align:left">예시</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)"><b>설문조사</b></td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">사람에게 직접 질문</td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">구글폼, 종이 설문</td></tr>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)"><b>센서 수집</b></td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">자동 측정·기록</td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">온도계, 미세먼지 센서</td></tr>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)"><b>공공데이터</b></td><td style="padding:7px 10px;border-bottom:1px solid var(--br);color:var(--mt)">정부·기관 공개 자료</td><td style="padding:7px 10px;color:var(--mt)">data.go.kr, 통계청</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ibox info" style="margin-top:12px">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.114–125</div>
     </div>
   </div>
-
   <div class="card" id="sec-interact">
-    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:var(--rbg);color:var(--red)">03</div><h3>인터랙션 — 샘플링 시각화 + 프레임 탐색기</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
+    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:var(--rbg);color:var(--red)">03</div><h3>인터랙션 — 데이터 유형 분류 퀴즈</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 슬라이더를 움직여 <b>샘플링 주파수</b>가 음질에 미치는 영향을 시각화하고, 프레임 탐색기로 동영상 원리를 체험해보세요!</div>
-
-      <div class="slider-wrap">
-        <h4>▸ 소리 샘플링 시각화</h4>
-        <canvas id="wave-canvas" width="500" height="120"></canvas>
-        <div class="sv-row">
-          <span class="sv-lbl">샘플링 주파수</span>
-          <input type="range" id="sr-slider" min="2" max="40" value="8" oninput="drawWave()">
-          <span class="sv-val"><span id="sr-val">8</span> 포인트/초</span>
-        </div>
-        <div class="sv-row">
-          <span class="sv-lbl">비트 깊이</span>
-          <input type="range" id="bd-slider" min="2" max="8" value="4" oninput="drawWave()">
-          <span class="sv-val"><span id="bd-val">4</span> bit (<span id="bd-levels">16</span>단계)</span>
-        </div>
-        <div id="wave-desc" style="font-size:12px;color:var(--mt);margin-top:6px;padding:8px 10px;background:var(--sf);border-radius:var(--rSM);border:1px solid var(--br)"></div>
+      <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 아래 4개의 데이터 사례를 정형·비정형·반정형 중 올바른 유형으로 선택해보세요!</div>
+      <div class="dtype-grid" id="dtype-grid">
+        <div class="dtype-card" id="dc1"><div class="dtype-icon">📊</div><div class="dtype-title">학생 성적 엑셀 파일</div><div class="dtype-desc">이름·점수·등급이 행과 열로 정리된 표</div><select class="dtype-sel" id="ds1"><option value="">유형 선택</option><option>정형</option><option>비정형</option><option>반정형</option></select></div>
+        <div class="dtype-card" id="dc2"><div class="dtype-icon">📸</div><div class="dtype-title">인스타그램 사진</div><div class="dtype-desc">사용자가 업로드한 이미지 파일</div><select class="dtype-sel" id="ds2"><option value="">유형 선택</option><option>정형</option><option>비정형</option><option>반정형</option></select></div>
+        <div class="dtype-card" id="dc3"><div class="dtype-icon">📡</div><div class="dtype-title">날씨 API 응답</div><div class="dtype-desc">{"temp":22, "humidity":65} JSON 형식</div><select class="dtype-sel" id="ds3"><option value="">유형 선택</option><option>정형</option><option>비정형</option><option>반정형</option></select></div>
+        <div class="dtype-card" id="dc4"><div class="dtype-icon">📰</div><div class="dtype-title">뉴스 기사 텍스트</div><div class="dtype-desc">정해진 구조 없이 서술된 글</div><select class="dtype-sel" id="ds4"><option value="">유형 선택</option><option>정형</option><option>비정형</option><option>반정형</option></select></div>
       </div>
-
-      <div class="slider-wrap">
-        <h4>▸ 영상 프레임 탐색기</h4>
-        <div class="frame-strip" id="frame-strip"></div>
-        <div id="frame-preview" style="width:100%;height:80px;border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;transition:background .3s">프레임을 선택하세요</div>
-        <div class="sv-row">
-          <span class="sv-lbl">FPS 설정</span>
-          <input type="range" id="fps-slider" min="1" max="60" value="24" oninput="updateFPS()">
-          <span class="sv-val"><span id="fps-val">24</span> FPS</span>
-        </div>
-        <div id="fps-desc" style="font-size:12px;color:var(--mt);padding:8px 10px;background:var(--sf);border-radius:var(--rSM);border:1px solid var(--br)"></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn bsm bp" onclick="checkDtype()">✓ 확인</button>
+        <button class="btn bsm" onclick="resetDtype()">↺ 다시</button>
       </div>
-
+      <div id="dtype-res"></div>
       <div class="qwrap">
-        <div class="qq">소리를 디지털로 변환할 때 1초에 샘플링하는 횟수를 나타내는 단위는?</div>
+        <div class="qq">다음 중 <b>정형 데이터(Structured Data)</b>의 특징으로 옳은 것은?</div>
         <div class="qopts">
-          <div class="opt" onclick="checkQ(this,false,'비트 깊이는 각 샘플의 정밀도(단계 수)를 나타냅니다. 주파수와 다릅니다.')"><span class="onum">①</span>비트 깊이(bit depth)</div>
-          <div class="opt" onclick="checkQ(this,true,'샘플링 주파수(Hz)는 1초에 몇 번 샘플링하는지를 나타냅니다. CD는 44,100Hz입니다.')"><span class="onum">②</span>샘플링 주파수(Hz)</div>
-          <div class="opt" onclick="checkQ(this,false,'FPS(Frame Per Second)는 영상의 초당 프레임 수입니다. 소리와 관련 없습니다.')"><span class="onum">③</span>FPS(Frame Per Second)</div>
-          <div class="opt" onclick="checkQ(this,false,'코덱은 영상·음성 데이터를 압축·해제하는 알고리즘입니다.')"><span class="onum">④</span>코덱(Codec)</div>
+          <div class="opt" onclick="checkQ(this,false,'이미지·영상은 구조가 없는 비정형 데이터입니다.')"><span class="onum">①</span>이미지나 영상처럼 구조가 없다.</div>
+          <div class="opt" onclick="checkQ(this,true,'정형 데이터는 행과 열로 구성된 표 형태로 데이터베이스나 스프레드시트에 저장됩니다.')"><span class="onum">②</span>행과 열로 구성된 표 형태로 저장된다.</div>
+          <div class="opt" onclick="checkQ(this,false,'SNS 게시글은 비정형 데이터의 대표적인 예입니다.')"><span class="onum">③</span>SNS 게시글처럼 자유로운 형식이다.</div>
+          <div class="opt" onclick="checkQ(this,false,'JSON은 태그와 값으로 구성된 반정형 데이터입니다.')"><span class="onum">④</span>JSON 형식처럼 태그와 값으로 구성된다.</div>
         </div>
         <div class="qfb"></div>
       </div>
     </div>
   </div>
-
   <div class="card" id="sec-assess">
     <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="task"><h4>📋 소리·영상 디지털 표현 분석</h4>
-        <p>스마트폰으로 짧은 영상을 촬영한 후, 파일 정보를 분석하여 디지털 표현 원리를 서술하시오.</p>
-        <div class="srow"><div class="stepn">①</div><span>영상 파일 정보 확인 (해상도, FPS, 코덱, 오디오 샘플링 주파수)</span></div>
-        <div class="srow"><div class="stepn">②</div><span>1초 분량의 데이터 크기 계산 (이론값)</span></div>
-        <div class="srow"><div class="stepn">③</div><span>코덱 압축 전·후 크기 비교 및 압축률 계산</span></div>
+      <div class="task"><h4>📋 데이터 수집 계획서</h4>
+        <p>학교 주변 문제를 데이터로 해결하는 프로젝트를 설계하시오.</p>
+        <div class="srow"><div class="stepn">①</div><span>해결할 문제 상황 정의</span></div>
+        <div class="srow"><div class="stepn">②</div><span>필요한 데이터 종류와 수집 방법 결정</span></div>
+        <div class="srow"><div class="stepn">③</div><span>데이터 유형(정형/비정형) 명시</span></div>
+        <div class="srow"><div class="stepn">④</div><span>공공데이터 활용 가능성 탐색</span></div>
       </div>
       <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody>
-        <tr><td><b>개념 적용</b></td><td class="lv4">모든 용어 정확</td><td class="lv3">대부분 정확</td><td class="lv2">일부 오류</td><td class="lv1">적용 불가</td></tr>
-        <tr><td><b>계산 능력</b></td><td class="lv4">정확한 계산</td><td class="lv3">과정 맞음</td><td class="lv2">공식만</td><td class="lv1">계산 없음</td></tr>
+        <tr><td><b>문제 정의</b></td><td class="lv4">구체적·실현 가능</td><td class="lv3">대체로 구체적</td><td class="lv2">모호함</td><td class="lv1">정의 없음</td></tr>
+        <tr><td><b>데이터 계획</b></td><td class="lv4">방법·유형 정확</td><td class="lv3">대체로 정확</td><td class="lv2">일부 누락</td><td class="lv1">계획 없음</td></tr>
       </tbody></table>
       <div class="sclist">
-        <div class="scitem"><label>샘플링 주파수와 음질의 관계를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        <div class="scitem"><label>FPS와 영상 용량의 관계를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        <div class="scitem"><label>코덱의 역할을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>정형·비정형·반정형 데이터를 구분할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>상황에 맞는 데이터 수집 방법을 선택할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>공공데이터의 활용 방법을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
       </div>
       <button class="btn bsm bok" style="margin-top:11px" onclick="saveSC('l204sc')">💾 저장</button>
     </div>
   </div>
-
   <div class="card" id="sec-review">
     <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:var(--gbg);color:var(--green)">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
       <div class="sgrid">
-        <div class="scard"><strong>소리 디지털화</strong>샘플링 주파수(Hz) 높을수록 고음질. CD=44.1kHz. 비트 깊이=정밀도.</div>
-        <div class="scard"><strong>프레임·FPS</strong>정지 이미지 연속 재생=동영상. 영화24fps, 게임60fps.</div>
-        <div class="scard"><strong>코덱</strong>영상·음성 압축·해제 알고리즘. H.264, H.265, MP3, AAC.</div>
+        <div class="scard"><strong>정형 데이터</strong>표(행·열) 구조. 엑셀, DB. 검색·분석 용이.</div>
+        <div class="scard"><strong>비정형 데이터</strong>구조 없음. 이미지·텍스트·영상. 전체의 80%.</div>
+        <div class="scard"><strong>수집 방법</strong>설문·센서·공공데이터·스크래핑. 목적에 맞게 선택.</div>
       </div>
       <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
-        <b>✏️ 단답형:</b> 초당 24개의 프레임으로 구성된 영상에서 2분짜리 영상의 총 프레임 수는 <span style="display:inline-block;width:80px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>개이다.
+        <b>✏️ 단답형:</b> 정부·기관이 국민에게 무료로 공개하는 데이터를 <span style="display:inline-block;width:70px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>라고 한다.
         <textarea style="display:block;width:100%;margin-top:10px;padding:9px;border:1px solid var(--br);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:50px;background:var(--sf)" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='var(--u)'" onblur="this.style.borderColor=''"></textarea>
       </div>
-      <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 <strong>데이터 수집과 분류</strong> — 정형·비정형·반정형 데이터를 탐구합니다!</div></div>
+      <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 수집한 데이터를 <strong>분석하고 시각화</strong>하는 방법을 탐구합니다!</div></div>
     </div>
   </div>
 
@@ -280,9 +235,9 @@ input[type=range]{flex:1;min-width:100px;accent-color:var(--u)}
     </div></div>
     <div class="ap"><h5>수업 타이머</h5><span class="td-num" id="tnum">45:00</span><div class="td-lbl">수업 남은 시간</div>
     <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div></div>
-    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">샘플링 주파수</span><span class="tdef">1초 샘플링 횟수</span></div><div class="tterm"><span class="tw">비트 깊이</span><span class="tdef">샘플 정밀도</span></div><div class="tterm"><span class="tw">프레임</span><span class="tdef">정지 이미지 단위</span></div><div class="tterm"><span class="tw">FPS</span><span class="tdef">초당 프레임 수</span></div><div class="tterm"><span class="tw">코덱</span><span class="tdef">압축·해제 알고리즘</span></div></div></div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">정형 데이터</span><span class="tdef">표 구조</span></div><div class="tterm"><span class="tw">비정형 데이터</span><span class="tdef">구조 없음</span></div><div class="tterm"><span class="tw">공공데이터</span><span class="tdef">정부 공개</span></div><div class="tterm"><span class="tw">JSON</span><span class="tdef">반정형 형식</span></div><div class="tterm"><span class="tw">스크래핑</span><span class="tdef">웹 자동 수집</span></div></div></div>
     <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:57%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">4/7</span></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:67%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">4/6</span></div>
     </div>
   </div>
   </div></div>
@@ -304,106 +259,38 @@ function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');docum
 function markDone(n){try{var d=JSON.parse(localStorage.getItem('u02done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u02done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
 
 
-// ── 소리 샘플링 시각화 ──
-function drawWave() {
-  var cv = document.getElementById('wave-canvas');
-  if(!cv) return;
-  var ctx = cv.getContext('2d');
-  var W = cv.offsetWidth || 500;
-  cv.width = W; cv.height = 120;
-  var sr = parseInt(document.getElementById('sr-slider').value);
-  var bd = parseInt(document.getElementById('bd-slider').value);
-  var levels = Math.pow(2, bd);
-  document.getElementById('sr-val').textContent = sr;
-  document.getElementById('bd-val').textContent = bd;
-  document.getElementById('bd-levels').textContent = levels;
-
-  ctx.clearRect(0,0,W,120);
-  ctx.fillStyle = '#FFF'; ctx.fillRect(0,0,W,120);
-
-  // 원래 파형
-  ctx.strokeStyle = '#BACED8'; ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  for(var x=0; x<W; x++) {
-    var t = x/W * 2 * Math.PI * 3;
-    var y = 60 - 48 * (0.6*Math.sin(t) + 0.3*Math.sin(2.3*t) + 0.1*Math.sin(5*t));
-    if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  }
-  ctx.stroke();
-
-  // 샘플 포인트
-  ctx.fillStyle = '#1B9E72';
-  var step = W / sr;
-  var sampledPts = [];
-  for(var i=0; i<=sr; i++) {
-    var sx = i * step;
-    var t2 = (sx/W) * 2 * Math.PI * 3;
-    var raw = 60 - 48 * (0.6*Math.sin(t2) + 0.3*Math.sin(2.3*t2) + 0.1*Math.sin(5*t2));
-    var quantized = Math.round((raw / 120) * levels) / levels * 120;
-    sampledPts.push({x:sx, y:quantized});
-  }
-
-  // 양자화된 재구성 파형
-  ctx.strokeStyle = '#E8A020'; ctx.lineWidth = 1;
-  ctx.beginPath();
-  sampledPts.forEach(function(p,i){ if(i===0)ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y); });
-  ctx.stroke();
-
-  // 샘플 점 + 수직선
-  sampledPts.forEach(function(p) {
-    ctx.strokeStyle = 'rgba(27,158,114,.4)'; ctx.lineWidth = 0.8;
-    ctx.beginPath(); ctx.moveTo(p.x, 60); ctx.lineTo(p.x, p.y); ctx.stroke();
-    ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, 2*Math.PI);
-    ctx.fillStyle = '#1B9E72'; ctx.fill();
-    ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+var dtypeAns = {ds1:'정형', ds2:'비정형', ds3:'반정형', ds4:'비정형'};
+function checkDtype() {
+  var ok=0, tot=0;
+  Object.keys(dtypeAns).forEach(function(k,i) {
+    var sel = document.getElementById(k);
+    var card = document.getElementById('dc'+(i+1));
+    if(!sel || !card) return;
+    var val = sel.value;
+    if(!val) return;
+    tot++;
+    card.classList.remove('ok','ng');
+    if(val === dtypeAns[k]) { card.classList.add('ok'); ok++; }
+    else { card.classList.add('ng'); }
   });
-
-  var qual = sr < 8 ? '낮음 — 원래 파형을 제대로 재현하지 못합니다' : sr < 20 ? '중간 — 파형이 어느 정도 재현됩니다' : '높음 — 원래 파형에 가깝게 재현됩니다';
-  document.getElementById('wave-desc').innerHTML =
-    '🎵 샘플링 주파수 <strong style="color:var(--u)">' + sr + ' 포인트/초</strong> · 비트 깊이 <strong style="color:var(--amber)">' + bd + 'bit (' + levels + '단계)</strong> · 품질: <strong>' + qual + '</strong>';
+  var res = document.getElementById('dtype-res');
+  if(tot === 0) { toast('유형을 선택해주세요!'); return; }
+  res.style.display = 'block';
+  if(ok === tot) {
+    res.style.cssText='display:block;background:var(--gbg);border:1px solid #BFDFAA;color:#1A5000;padding:11px 14px;border-radius:8px;font-size:13px;margin-top:10px';
+    res.innerHTML = '🎉 완벽! ' + ok + '/' + tot + '개 모두 정답!';
+  } else {
+    res.style.cssText='display:block;background:var(--abg);border:1px solid #EDD070;color:#6A5000;padding:11px 14px;border-radius:8px;font-size:13px;margin-top:10px';
+    res.innerHTML = '📝 ' + ok + '/' + tot + ' 정답. 빨간 카드를 다시 확인하세요!';
+  }
 }
-
-// ── 영상 프레임 탐색기 ──
-var frameColors = [
-  ['#FF6B6B','#FF8E53'],['#4ECDC4','#44A08D'],['#667EEA','#764BA2'],
-  ['#F093FB','#F5576C'],['#4facfe','#00f2fe'],['#43e97b','#38f9d7'],
-  ['#fa709a','#fee140'],['#a18cd1','#fbc2eb']
-];
-var frameLabels = ['배경','인물 등장','인물 이동','클로즈업','대화','액션','반응','마무리'];
-
-function initFrames() {
-  var strip = document.getElementById('frame-strip');
-  if(!strip) return;
-  strip.innerHTML = '';
-  frameColors.forEach(function(cols, i) {
-    var f = document.createElement('div');
-    f.className = 'frame';
-    f.style.cssText = 'width:56px;height:38px;background:linear-gradient(135deg,'+cols[0]+','+cols[1]+');display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;';
-    f.textContent = i+1;
-    f.onclick = function() {
-      document.querySelectorAll('.frame').forEach(function(x){x.classList.remove('active');});
-      f.classList.add('active');
-      var prev = document.getElementById('frame-preview');
-      prev.style.background = 'linear-gradient(135deg,'+cols[0]+','+cols[1]+')';
-      prev.textContent = '프레임 ' + (i+1) + ' — ' + frameLabels[i];
-    };
-    strip.appendChild(f);
-  });
-  updateFPS();
+function resetDtype() {
+  ['dc1','dc2','dc3','dc4'].forEach(function(id){ var c=document.getElementById(id); if(c){c.classList.remove('ok','ng');} });
+  ['ds1','ds2','ds3','ds4'].forEach(function(id){ var s=document.getElementById(id); if(s)s.value=''; });
+  var res = document.getElementById('dtype-res'); if(res) res.style.display='none';
+  document.querySelectorAll('.opt').forEach(function(o){ o.className='opt'; o.style.pointerEvents=''; });
+  document.querySelectorAll('.qfb').forEach(function(f){ f.className='qfb'; f.innerHTML=''; });
 }
-
-function updateFPS() {
-  var fps = parseInt(document.getElementById('fps-slider').value);
-  document.getElementById('fps-val').textContent = fps;
-  var desc = fps < 15 ? '끊겨 보임 (잔상 효과 부족)' :
-             fps < 25 ? '영화급 (24fps: 영화 표준)' :
-             fps < 45 ? '방송·SNS (30fps: TV/스마트폰 표준)' :
-                        '게임·스포츠 (60fps 이상: 매우 부드러움)';
-  document.getElementById('fps-desc').innerHTML =
-    '🎬 <strong style="color:var(--u)">' + fps + ' FPS</strong> — 1초에 ' + fps + '개의 프레임 = <strong>' + desc + '</strong>';
-}
-
-document.addEventListener('DOMContentLoaded', function(){ drawWave(); initFrames(); });
 
 document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l204sc');});
 </script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>II-3. 문자와 이미지 표현 — 정보 교과</title>
+<title>II-3. 데이터 표현 — 정보 교과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +13,6 @@
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;color:#1C1C1C;font-size:14px;line-height:1.65;display:flex;min-height:100vh}
 :root{--u:#1B9E72;--udk:#0E7A58;--ult:#E1F5EE;--umd:#A8D8C8;--bg:#F5F4F0;--sf:#FFF;--br:#E2DFD6;--tx:#1C1C1C;--mt:#696760;--lt:#A8A59E;--green:#2A720E;--gbg:#E8F3DC;--amber:#7A4E0A;--abg:#FAF0DC;--red:#8C1E0E;--rbg:#FAEBE6;--blue:#0A4E8C;--bbg:#E4F0FA;--rLG:14px;--rMD:10px;--rSM:8px;--SW:224px;--TH:52px}
-/* sidebar */
 .sb{width:var(--SW);background:var(--sf);border-right:1px solid var(--br);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
 .sb-top{padding:18px 16px 14px;border-bottom:1px solid var(--br)}.uchip{display:inline-flex;align-items:center;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px}
 .sb-top h2{font-size:13px;font-weight:700;line-height:1.4}.smeta{font-size:11px;color:var(--lt);margin-top:3px}.sb-nav{padding:6px 0;flex:1}.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lt);padding:8px 16px 4px}
@@ -21,18 +20,15 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 .nn{width:20px;height:20px;border-radius:50%;background:var(--br);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--mt)}.na.on .nn{background:var(--u);color:#fff}
 .nbadge{margin-left:auto;font-size:10px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:1px 6px;border-radius:10px}
 .sb-foot{padding:12px 16px;border-top:1px solid var(--br)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mt);text-decoration:none;padding:6px 10px;border-radius:var(--rSM);border:1px solid var(--br);background:var(--sf);transition:all .12s}.ba:hover{background:var(--bg);color:var(--tx)}
-/* main */
 .main{margin-left:var(--SW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}
 .topbar{background:var(--sf);border-bottom:1px solid var(--br);height:var(--TH);padding:0 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
 .bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mt);flex:1}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}.bcsep{color:var(--br)}.bccur{color:var(--tx);font-weight:500}.tbr{display:flex;align-items:center;gap:8px}
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--br);background:var(--sf);color:var(--tx);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 11px;font-size:11px}.bp{background:var(--u);color:#fff;border-color:var(--u)}.bp:hover{background:var(--udk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
 .page{padding:22px 24px;flex:1}.g2{display:grid;grid-template-columns:1fr 256px;gap:18px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TH) + 14px)}
-/* cards */
 .card{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);margin-bottom:12px;overflow:hidden}.card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .ch{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--br);transition:background .12s;user-select:none}.ch:hover{background:var(--bg)}
 .sn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:14px;font-weight:600;flex:1}
 .st{font-size:11px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:2px 8px;border-radius:20px}.carr{font-size:11px;color:var(--lt);transition:transform .2s;flex-shrink:0}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:20px}.card.collapsed .cb{display:none}
-/* content helpers */
 .ach{background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:12px 14px;margin-bottom:16px}.ach-c{font-family:'Courier New',monospace;font-size:11px;font-weight:700;color:var(--u);margin-bottom:4px}.ach-t{font-size:13px;line-height:1.6}
 .glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--br);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:18px;height:18px;border-radius:50%;background:var(--gbg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .ctags{display:flex;flex-wrap:wrap;gap:6px}.ctag{font-size:11px;padding:4px 11px;background:var(--bg);border:1px solid var(--br);border-radius:20px;cursor:pointer;color:var(--mt);transition:all .12s}.ctag:hover{background:var(--ult);border-color:var(--umd);color:var(--u)}
@@ -41,19 +37,15 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 .crow{display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:start;margin-bottom:16px}
 .ct h4{font-size:13px;font-weight:700;margin-bottom:8px}.ct p{font-size:13px;color:var(--mt);line-height:1.75}.ct ul{padding-left:1rem;margin-top:7px}.ct ul li{font-size:13px;color:var(--mt);margin-bottom:4px;line-height:1.6}
 .cvis{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px}
-/* quiz */
 .qwrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:16px;margin-top:16px}.qq{font-size:14px;font-weight:500;margin-bottom:13px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:8px}
 .opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--u);background:var(--ult)}.opt.correct{border-color:#4A9020;background:var(--gbg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--rbg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
 .onum{width:22px;height:22px;border-radius:50%;background:var(--br);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
 .qfb{display:none;margin-top:11px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--rbg);border:1px solid #F0B8A0;color:var(--red)}
-/* assess */
 .rub{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px}.rub th{background:var(--bg);padding:8px 10px;font-weight:600;border-bottom:1.5px solid var(--br);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mt)}.rub td{padding:9px 10px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
 .lv4{color:#1A6000!important;font-weight:500}.lv3{color:#2A6830!important}.lv2{color:#7A4E00!important}.lv1{color:#8A2000!important}
 .task{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px;border-left:3px solid var(--blue)}.task h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}.task p{font-size:13px;color:var(--mt);line-height:1.75}.srow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--br);margin-top:8px;font-size:12px;color:var(--mt)}.stepn{width:20px;height:20px;border-radius:50%;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .sclist{display:flex;flex-direction:column;gap:5px}.scitem{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--br)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:4px 7px;border:1px solid var(--br);border-radius:6px;background:var(--sf);font-family:inherit;color:var(--tx);cursor:pointer;flex-shrink:0}
-/* review */
 .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.scard{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:13px 14px;font-size:12px;line-height:1.65;color:var(--mt)}.scard strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--lt);margin-bottom:5px}
-/* sidebar panel */
 .ap{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);padding:15px;margin-bottom:12px}.ap h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--lt);margin-bottom:10px}
 .slist{display:flex;flex-direction:column;gap:4px}.si{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--rSM);font-size:12px;color:var(--mt);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}.si.sa{background:var(--ult);color:var(--u);font-weight:500}.si.sd{color:var(--tx)}
 .dot{width:22px;height:22px;border-radius:50%;background:var(--br);color:var(--lt);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.dot.sa{background:var(--u);color:#fff}.dot.sd{background:var(--gbg);color:var(--green)}
@@ -61,39 +53,66 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 .trow{display:flex;gap:6px}.trow .btn{flex:1;justify-content:center;font-size:11px}
 .termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:6px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--br)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--u);white-space:nowrap}.tdef{color:var(--mt)}
 .pbtrack{height:6px;background:var(--umd);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--u);border-radius:3px}
-/* toast */
 #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
 @media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}}
 @media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
 
 
-.ascii-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;margin-bottom:10px}
-.ascii-cell{padding:5px 2px;text-align:center;border:1px solid var(--br);border-radius:5px;cursor:pointer;transition:all .12s}
-.ascii-cell:hover{border-color:var(--u);background:var(--ult)}.ascii-cell.sel{background:var(--u);color:#fff;border-color:var(--u)}
-.ascii-char{font-size:13px;font-weight:700}.ascii-dec{font-size:8px;color:var(--lt);font-family:monospace}.ascii-cell.sel .ascii-dec{color:rgba(255,255,255,.8)}
-.ascii-detail{font-size:12px;color:var(--mt);padding:9px 12px;background:var(--sf);border-radius:var(--rSM);border:1px solid var(--br);margin-top:8px}
+/* 탭 스위처 */
+.rep-tabs{display:flex;gap:0;border-bottom:2px solid var(--br);margin-bottom:18px;flex-wrap:wrap}
+.rep-tab{padding:9px 16px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:none;font-family:inherit;color:var(--mt);border-bottom:2.5px solid transparent;margin-bottom:-2px;transition:all .15s;white-space:nowrap}
+.rep-tab:hover{color:var(--tx)}.rep-tab.on{color:var(--u);border-bottom-color:var(--u);font-weight:700}
+.rep-panel{display:none}.rep-panel.on{display:block}
+
+/* ASCII 탐색기 */
+.ascii-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;margin-bottom:10px}
+.ac{padding:5px 2px;text-align:center;border:1px solid var(--br);border-radius:5px;cursor:pointer;transition:all .12s}
+.ac:hover{border-color:var(--u);background:var(--ult)}.ac.sel{background:var(--u);color:#fff;border-color:var(--u)}
+.ach{font-size:13px;font-weight:700}.adec{font-size:8px;color:var(--lt);font-family:monospace}.ac.sel .adec{color:rgba(255,255,255,.8)}
+.ascii-out{font-size:12px;padding:9px 12px;background:var(--sf);border-radius:var(--rSM);border:1px solid var(--br);margin-top:8px}
+
+/* 픽셀 아트 */
 .px-grid{display:inline-grid;gap:2px;margin-bottom:12px}
-.px-cell{width:32px;height:32px;border-radius:4px;cursor:pointer;border:1px solid rgba(0,0,0,.1);transition:transform .1s}
-.px-cell:hover{transform:scale(1.08);z-index:1}
+.px-cell{width:30px;height:30px;border-radius:4px;cursor:pointer;border:1px solid rgba(0,0,0,.08);transition:transform .1s}
+.px-cell:hover{transform:scale(1.1);z-index:1}
+
+/* 소리 파형 */
+#wave-cv{display:block;width:100%;height:120px;background:var(--sf);border:1px solid var(--br);border-radius:var(--rSM);margin-bottom:10px}
+.sv-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.sv-lbl{font-size:12px;color:var(--mt);min-width:100px}
+input[type=range]{flex:1;min-width:100px;accent-color:var(--u)}
+.sv-val{font-size:13px;font-weight:700;color:var(--u);min-width:90px;font-family:'Courier New',monospace}
+
+/* 프레임 탐색기 */
+.frame-strip{display:flex;gap:4px;overflow-x:auto;padding:4px 0;margin-bottom:10px}
+.frame{border-radius:5px;flex-shrink:0;cursor:pointer;transition:transform .12s;border:2px solid transparent;width:52px;height:36px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.frame:hover{transform:scale(1.06)}.frame.active{border-color:var(--u)}
+#frame-prev{width:100%;height:72px;border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;transition:background .3s;border:1px solid var(--br)}
+
+/* 수업자료 iframe */
+.mat-frame{width:100%;height:680px;border:none;border-radius:var(--rMD,10px);display:block}
+.mat-wrap{border:2px solid var(--umd);border-radius:var(--rLG);overflow:hidden;margin-top:4px}
+.mat-header{background:var(--ult);border-bottom:1px solid var(--umd);padding:10px 16px;display:flex;align-items:center;gap:10px}
+.mat-header span{font-size:12px;font-weight:700;color:var(--udk)}
+.mat-badge{font-size:10px;padding:2px 9px;border-radius:20px;background:var(--u);color:#fff;font-weight:700}
 
 </style>
 </head>
 <body>
 <aside class="sb">
-  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 3/7 · 15차시</div></div>
+  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 3/6 · 13차시</div></div>
   <nav class="sb-nav"><div class="nlbl">소단원 목록</div><a class="na done" href="../lesson-01/index.html"><div class="nn">✓</div>데이터와 정보</a>
 <a class="na done" href="../lesson-02/index.html"><div class="nn">✓</div>이진수와 디지털 표현</a>
-<a class="na on" href="../lesson-03/index.html"><div class="nn">3</div>문자와 이미지 표현<span class="nbadge">2차시</span></a>
-<a class="na " href="../lesson-04/index.html"><div class="nn">4</div>소리와 영상 표현</a>
-<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>데이터 수집과 분류</a>
-<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 분석과 시각화</a>
-<a class="na " href="../lesson-07/index.html"><div class="nn">7</div>데이터 활용과 빅데이터</a>
+<a class="na on" href="../lesson-03/index.html"><div class="nn">3</div>데이터 표현<span class="nbadge">3차시</span></a>
+<a class="na " href="../lesson-04/index.html"><div class="nn">4</div>데이터 수집과 분류</a>
+<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>데이터 분석과 시각화</a>
+<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 활용과 빅데이터</a>
 </nav>
   <div class="sb-foot"><a class="ba" href="../../index.html">← 단원 목차</a></div>
 </aside>
 <main class="main">
   <header class="topbar">
-    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span class="bccur">3. 문자와 이미지 표현</span></div>
+    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span class="bccur">3. 데이터 표현</span></div>
     <div class="tbr">
       <button class="btn bsm" onclick="markDone('03')">✓ 완료 표시</button>
       <a class="btn bsm bp" href="../lesson-04/index.html">다음 소단원 →</a>
@@ -104,110 +123,252 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
   <div class="card" id="sec-goal">
     <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--ult);color:var(--u)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="ach"><div class="ach-c">[9정02-03]</div><div class="ach-t">문자와 이미지가 디지털로 표현되는 원리를 이해하고 아스키코드와 픽셀의 개념을 설명할 수 있다.</div></div>
+      <div class="ach"><div class="ach-c">[9정02-03]</div><div class="ach-t">문자·이미지·소리·영상이 디지털로 표현되는 원리를 이해하고, 각각의 특성과 변환 방법을 설명할 수 있다.</div></div>
       <ul class="glist">
-        <li><div class="gck">✓</div>아스키(ASCII) 코드의 원리를 이해하고 문자를 이진수로 표현할 수 있다.</li>
-        <li><div class="gck">✓</div>픽셀과 해상도의 개념을 설명할 수 있다.</li>
-        <li><div class="gck">✓</div>RGB 색상 체계로 이미지를 표현하는 원리를 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>아스키코드와 유니코드로 문자가 이진수로 표현되는 원리를 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>픽셀·해상도·RGB로 이미지를 표현하는 원리를 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>샘플링 주파수와 비트 깊이로 소리를 디지털로 표현하는 원리를 설명할 수 있다.</li>
+        <li><div class="gck">✓</div>프레임·FPS·코덱으로 영상을 디지털로 표현하는 원리를 설명할 수 있다.</li>
       </ul>
       <div class="divl"></div>
       <div class="ctags">
-        <span class="ctag" onclick="goTo('sec-concept')">아스키코드</span><span class="ctag" onclick="goTo('sec-concept')">유니코드</span>
-        <span class="ctag" onclick="goTo('sec-concept')">픽셀</span><span class="ctag" onclick="goTo('sec-concept')">해상도</span>
-        <span class="ctag" onclick="goTo('sec-concept')">RGB</span>
+        <span class="ctag" onclick="goTo('sec-concept')">아스키코드</span>
+        <span class="ctag" onclick="goTo('sec-concept')">픽셀·RGB</span>
+        <span class="ctag" onclick="goTo('sec-concept')">샘플링 주파수</span>
+        <span class="ctag" onclick="goTo('sec-concept')">프레임·FPS</span>
+        <span class="ctag" onclick="goTo('sec-concept')">코덱</span>
       </div>
-      <div class="ibox prev">📌 <div><b>이전 차시:</b> 숫자를 이진수로 표현하는 방법을 배웠습니다. 이번에는 <em>문자와 이미지</em>를 이진수로 표현하는 방법을 탐구합니다.</div></div>
+      <div class="ibox prev">📌 <div><b>이전 차시:</b> 숫자를 이진수로 표현하는 방법을 배웠습니다. 이번에는 <em>문자·이미지·소리·영상</em> 모든 종류의 데이터를 디지털로 표현하는 원리를 탐구합니다.</div></div>
     </div>
   </div>
 
   <div class="card" id="sec-concept">
     <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:var(--gbg);color:var(--green)">02</div><h3>개념설명</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="crow">
-        <div class="ct">
-          <h4>아스키 코드(ASCII)</h4>
-          <p>컴퓨터는 문자를 숫자(이진수)로 저장합니다. <strong>아스키 코드</strong>는 영문자·숫자·특수문자 128개를 7비트로 약속한 표준입니다.</p>
-          <ul><li><b>A</b> = 65 = 01000001₂</li><li><b>a</b> = 97 = 01100001₂</li><li><b>0</b> = 48 = 00110000₂</li><li><b>유니코드:</b> 한글·이모지 포함 전 세계 문자</li></ul>
-        </div>
-        <div class="cvis">
-          <svg viewBox="0 0 130 100" width="130">
-            <rect x="4" y="4" width="122" height="20" rx="4" fill="var(--ult)" stroke="var(--u)" stroke-width="1.2"/>
-            <text x="65" y="17" font-size="12" fill="var(--udk)" text-anchor="middle" font-family="serif" font-weight="bold">H e l l o</text>
-            <path d="M26 24 L26 36" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
-            <path d="M50 24 L50 36" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
-            <path d="M74 24 L74 36" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
-            <rect x="4" y="36" width="122" height="18" rx="4" fill="var(--abg)" stroke="var(--amber)" stroke-width="1.2"/>
-            <text x="26" y="48" font-size="8" fill="var(--amber)" text-anchor="middle" font-family="monospace">72</text>
-            <text x="50" y="48" font-size="8" fill="var(--amber)" text-anchor="middle" font-family="monospace">101</text>
-            <text x="74" y="48" font-size="8" fill="var(--amber)" text-anchor="middle" font-family="monospace">108</text>
-            <path d="M26 54 L26 64" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
-            <path d="M50 54 L50 64" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
-            <path d="M74 54 L74 64" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
-            <rect x="4" y="64" width="122" height="28" rx="4" fill="#ECEAFE" stroke="#6C65CC" stroke-width="1.2"/>
-            <text x="20" y="76" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">0100</text>
-            <text x="20" y="85" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">1000</text>
-            <text x="50" y="76" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">0110</text>
-            <text x="50" y="85" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">0101</text>
-            <text x="80" y="76" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">0110</text>
-            <text x="80" y="85" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">1100</text>
-            <defs><marker id="m1" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#aaa"/></marker></defs>
-          </svg>
-        </div>
+      <div class="rep-tabs">
+        <button class="rep-tab on" onclick="switchTab('tab-text',this)">🔤 문자 표현</button>
+        <button class="rep-tab" onclick="switchTab('tab-image',this)">🖼️ 이미지 표현</button>
+        <button class="rep-tab" onclick="switchTab('tab-sound',this)">🎵 소리 표현</button>
+        <button class="rep-tab" onclick="switchTab('tab-video',this)">🎬 영상 표현</button>
       </div>
-      <div class="crow">
-        <div class="ct">
-          <h4>픽셀과 해상도</h4>
-          <p>디지털 이미지는 수많은 <strong>픽셀(Pixel)</strong>로 구성됩니다. 각 픽셀은 RGB 세 가지 색의 밝기(0~255)로 색상을 표현합니다.</p>
-          <ul><li><b>해상도:</b> 가로×세로 픽셀 수 (1920×1080)</li><li><b>RGB:</b> 빨강·초록·파랑 각 0~255</li><li><b>24비트 색상:</b> 픽셀 1개 = 3바이트</li></ul>
-        </div>
-        <div class="cvis" style="flex-direction:column;gap:4px">
-          <div style="display:grid;grid-template-columns:repeat(6,18px);gap:2px">
-            <div style="width:18px;height:18px;background:#FF0000;border-radius:2px"></div><div style="width:18px;height:18px;background:#FF7700;border-radius:2px"></div>
-            <div style="width:18px;height:18px;background:#FFFF00;border-radius:2px"></div><div style="width:18px;height:18px;background:#00CC00;border-radius:2px"></div>
-            <div style="width:18px;height:18px;background:#0055FF;border-radius:2px"></div><div style="width:18px;height:18px;background:#8800CC;border-radius:2px"></div>
-            <div style="width:18px;height:18px;background:#FFAAAA;border-radius:2px"></div><div style="width:18px;height:18px;background:#FFDDAA;border-radius:2px"></div>
-            <div style="width:18px;height:18px;background:#FFFFAA;border-radius:2px"></div><div style="width:18px;height:18px;background:#AAFFAA;border-radius:2px"></div>
-            <div style="width:18px;height:18px;background:#AACCFF;border-radius:2px"></div><div style="width:18px;height:18px;background:#DDAAFF;border-radius:2px"></div>
+
+      <div class="rep-panel on" id="tab-text">
+        <div class="crow">
+          <div class="ct">
+            <h4>문자 → 이진수: 아스키 코드(ASCII)</h4>
+            <p>컴퓨터는 문자를 직접 저장할 수 없기 때문에, 각 문자에 고유한 숫자를 부여합니다. <strong>아스키 코드</strong>는 영문자·숫자·특수문자 128개를 7비트(0~127)로 약속한 표준입니다.</p>
+            <ul>
+              <li><b>A</b> = 65₁₀ = 01000001₂</li>
+              <li><b>a</b> = 97₁₀ = 01100001₂</li>
+              <li><b>0</b> = 48₁₀ = 00110000₂</li>
+              <li><b>유니코드:</b> 한글·한자·이모지 포함, 전 세계 문자 표준</li>
+            </ul>
           </div>
-          <div style="font-size:9px;color:var(--lt)">픽셀 하나 = 색상 데이터</div>
+          <div class="cvis">
+            <svg viewBox="0 0 130 100" width="130">
+              <rect x="4" y="4" width="122" height="20" rx="4" fill="var(--ult)" stroke="var(--u)" stroke-width="1.2"/>
+              <text x="65" y="17" font-size="12" fill="var(--udk)" text-anchor="middle" font-family="serif" font-weight="bold">H e l l o</text>
+              <path d="M26 24 L26 36" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
+              <path d="M50 24 L50 36" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
+              <path d="M74 24 L74 36" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
+              <rect x="4" y="36" width="122" height="18" rx="4" fill="var(--abg)" stroke="var(--amber)" stroke-width="1.2"/>
+              <text x="26" y="48" font-size="8" fill="var(--amber)" text-anchor="middle" font-family="monospace">72</text>
+              <text x="50" y="48" font-size="8" fill="var(--amber)" text-anchor="middle" font-family="monospace">101</text>
+              <text x="74" y="48" font-size="8" fill="var(--amber)" text-anchor="middle" font-family="monospace">108</text>
+              <path d="M26 54 L26 64" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
+              <path d="M50 54 L50 64" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
+              <path d="M74 54 L74 64" stroke="#aaa" stroke-width="1.2" marker-end="url(#m1)"/>
+              <rect x="4" y="64" width="122" height="28" rx="4" fill="#ECEAFE" stroke="#6C65CC" stroke-width="1.2"/>
+              <text x="20" y="76" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">0100</text>
+              <text x="20" y="85" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">1000</text>
+              <text x="50" y="76" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">0110</text>
+              <text x="50" y="85" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">0101</text>
+              <text x="80" y="76" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">0110</text>
+              <text x="80" y="85" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="monospace">1100</text>
+              <defs><marker id="m1" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#aaa"/></marker></defs>
+            </svg>
+          </div>
         </div>
+        <div class="ibox warn">⚠️ <div><b>오개념:</b> 유니코드는 아스키코드의 확장입니다. 한글 '가'는 아스키코드에 없고, 유니코드에서 AC00₁₆(44032₁₀)으로 표현됩니다.</div></div>
       </div>
-      <div class="ibox warn">⚠️ <div><b>오개념:</b> 해상도는 화면 크기가 아닙니다. 같은 크기 화면도 픽셀 수가 많으면 더 선명합니다.</div></div>
-      <div class="ibox info" style="margin-top:8px">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.90–101</div>
+
+      <div class="rep-panel" id="tab-image">
+        <div class="crow">
+          <div class="ct">
+            <h4>이미지 → 픽셀 + RGB</h4>
+            <p>디지털 이미지는 수많은 작은 점인 <strong>픽셀(Pixel)</strong>로 구성됩니다. 각 픽셀은 빨강(R)·초록(G)·파랑(B) 세 색의 밝기(0~255)로 색상을 표현합니다.</p>
+            <ul>
+              <li><b>해상도:</b> 가로×세로 픽셀 수. 많을수록 선명</li>
+              <li><b>RGB(255,0,0):</b> 빨간색 / RGB(0,0,0): 검정</li>
+              <li><b>24비트 색상:</b> 픽셀 1개 = R·G·B 각 8bit = 3byte</li>
+            </ul>
+          </div>
+          <div class="cvis" style="flex-direction:column;gap:4px">
+            <div style="display:grid;grid-template-columns:repeat(6,18px);gap:2px">
+              <div style="width:18px;height:18px;background:#FF0000;border-radius:2px"></div><div style="width:18px;height:18px;background:#FF7700;border-radius:2px"></div>
+              <div style="width:18px;height:18px;background:#FFFF00;border-radius:2px"></div><div style="width:18px;height:18px;background:#00CC00;border-radius:2px"></div>
+              <div style="width:18px;height:18px;background:#0055FF;border-radius:2px"></div><div style="width:18px;height:18px;background:#8800CC;border-radius:2px"></div>
+              <div style="width:18px;height:18px;background:#FFAAAA;border-radius:2px"></div><div style="width:18px;height:18px;background:#FFDDAA;border-radius:2px"></div>
+              <div style="width:18px;height:18px;background:#FFFFAA;border-radius:2px"></div><div style="width:18px;height:18px;background:#AAFFAA;border-radius:2px"></div>
+              <div style="width:18px;height:18px;background:#AACCFF;border-radius:2px"></div><div style="width:18px;height:18px;background:#DDAAFF;border-radius:2px"></div>
+            </div>
+            <div style="font-size:9px;color:var(--lt)">픽셀 = 색상 데이터</div>
+          </div>
+        </div>
+        <div class="ibox warn">⚠️ <div><b>오개념:</b> 해상도는 화면 크기가 아닙니다. 같은 크기 화면이라도 픽셀 수가 많으면(고해상도) 더 선명합니다.</div></div>
+      </div>
+
+      <div class="rep-panel" id="tab-sound">
+        <div class="crow">
+          <div class="ct">
+            <h4>소리 → 샘플링</h4>
+            <p>소리는 연속적인 <strong>아날로그 파형</strong>입니다. 이를 디지털로 변환하려면 일정 간격으로 파형의 값을 기록하는 <strong>샘플링(Sampling)</strong>을 합니다.</p>
+            <ul>
+              <li><b>샘플링 주파수(Hz):</b> 1초에 측정하는 횟수. 높을수록 고음질</li>
+              <li><b>CD 품질:</b> 44,100 Hz (44.1kHz)</li>
+              <li><b>비트 깊이:</b> 각 샘플의 정밀도. 16bit = 65,536단계</li>
+            </ul>
+          </div>
+          <div class="cvis">
+            <svg viewBox="0 0 130 90" width="130">
+              <text x="65" y="10" font-size="8" fill="var(--blue)" text-anchor="middle" font-family="sans-serif" font-weight="bold">아날로그 파형</text>
+              <path d="M4 52 C14 18,22 18,30 52 C38 86,46 86,54 52 C62 18,70 18,78 52 C86 86,94 86,102 52 C110 18,118 18,126 52" fill="none" stroke="var(--blue)" stroke-width="1.8"/>
+              <circle cx="12" cy="36" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
+              <circle cx="26" cy="68" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
+              <circle cx="40" cy="36" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
+              <circle cx="54" cy="68" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
+              <circle cx="68" cy="36" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
+              <circle cx="82" cy="68" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
+              <circle cx="96" cy="36" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
+              <circle cx="110" cy="68" r="3.5" fill="var(--u)" stroke="#fff" stroke-width="1"/>
+              <text x="65" y="84" font-size="8" fill="var(--u)" text-anchor="middle" font-family="sans-serif">● = 샘플링 포인트</text>
+            </svg>
+          </div>
+        </div>
+        <div class="ibox warn">⚠️ <div><b>오개념:</b> 샘플링 주파수가 낮으면 원래 소리의 정보가 손실됩니다. 나이퀴스트 정리: 원음 최고 주파수의 2배 이상으로 샘플링해야 합니다.</div></div>
+      </div>
+
+      <div class="rep-panel" id="tab-video">
+        <div class="crow">
+          <div class="ct">
+            <h4>영상 → 프레임 + FPS</h4>
+            <p>동영상은 정지 이미지(<strong>프레임</strong>)를 빠르게 연속 재생하는 원리입니다. <strong>FPS</strong>(Frame Per Second)는 초당 프레임 수입니다.</p>
+            <ul>
+              <li><b>영화:</b> 24 FPS</li>
+              <li><b>TV·게임:</b> 30~60 FPS</li>
+              <li><b>코덱(Codec):</b> 영상 압축·해제 알고리즘 (H.264, H.265, VP9)</li>
+              <li><b>해상도:</b> 720p, 1080p(FHD), 4K(UHD)</li>
+            </ul>
+          </div>
+          <div class="cvis" style="flex-direction:column;gap:6px;padding:12px">
+            <div style="display:flex;gap:4px">
+              <div style="width:28px;height:20px;background:linear-gradient(135deg,#FF6B6B,#FFE66D);border-radius:3px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">1</div>
+              <div style="width:28px;height:20px;background:linear-gradient(135deg,#FF8E53,#FED766);border-radius:3px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">2</div>
+              <div style="width:28px;height:20px;background:linear-gradient(135deg,#FFA07A,#FFD700);border-radius:3px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">3</div>
+              <div style="width:28px;height:20px;background:linear-gradient(135deg,var(--u),var(--umd));border-radius:3px;border:2px solid var(--u);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">4</div>
+            </div>
+            <div style="font-size:8px;color:var(--lt);text-align:center">연속 프레임 → 동영상</div>
+            <div style="font-size:9px;background:var(--sf);padding:4px 8px;border-radius:4px;border:1px solid var(--br);text-align:center;color:var(--mt)">24~60 FPS</div>
+          </div>
+        </div>
+        <div class="ibox warn">⚠️ <div><b>오개념:</b> FPS가 높을수록 용량도 급증합니다. 1080p 60FPS는 30FPS보다 약 2배 큰 용량을 가집니다. 코덱으로 압축해서 줄입니다.</div></div>
+      </div>
+
+      <div class="ibox info" style="margin-top:14px">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.90–113</div>
     </div>
   </div>
 
   <div class="card" id="sec-interact">
-    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:var(--rbg);color:var(--red)">03</div><h3>인터랙션 — 아스키 탐색기 + 픽셀 아트 메이커</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
+    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:var(--rbg);color:var(--red)">03</div><h3>인터랙션 — 4가지 표현 체험하기</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 아스키 문자를 클릭하면 2진수 코드를 확인하고, 픽셀 아트 캔버스에서 직접 이미지를 그려보세요!</div>
+      <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 4개 탭을 모두 체험해보세요. 아스키 탐색기, 픽셀 아트, 소리 파형, 프레임 탐색기가 있습니다!</div>
 
-      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
-        <div style="font-size:11px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">▸ 아스키 코드 탐색기 (클릭하면 2진수 확인)</div>
-        <div class="ascii-grid" id="ascii-grid"></div>
-        <div class="ascii-detail" id="ascii-detail">💡 위의 문자를 클릭하면 10진수 코드와 2진수를 확인할 수 있습니다.</div>
+      <div class="rep-tabs" id="interact-tabs">
+        <button class="rep-tab on" onclick="switchInteract('ia-ascii',this)">🔤 아스키 탐색</button>
+        <button class="rep-tab" onclick="switchInteract('ia-pixel',this)">🖼️ 픽셀 아트</button>
+        <button class="rep-tab" onclick="switchInteract('ia-wave',this)">🎵 파형 시각화</button>
+        <button class="rep-tab" onclick="switchInteract('ia-frame',this)">🎬 프레임 탐색</button>
       </div>
 
-      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
-        <div style="font-size:11px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">▸ 픽셀 아트 메이커 (6×6)</div>
-        <div class="px-grid" id="px-grid" style="grid-template-columns:repeat(6,32px)"></div>
+      <!-- 아스키 탐색기 -->
+      <div class="rep-panel on" id="ia-ascii">
+        <div style="font-size:11px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px">▸ 문자를 클릭하면 2진수 코드를 확인할 수 있습니다</div>
+        <div class="ascii-grid" id="ascii-grid"></div>
+        <div class="ascii-out" id="ascii-out">💡 위의 문자를 클릭하세요!</div>
+      </div>
+
+      <!-- 픽셀 아트 -->
+      <div class="rep-panel" id="ia-pixel">
+        <div style="font-size:11px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px">▸ 픽셀 아트 메이커 (6×6) — 클릭해서 색칠하세요</div>
+        <div class="px-grid" id="px-grid" style="grid-template-columns:repeat(6,30px)"></div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <input type="color" id="px-color" value="#1B9E72" style="width:38px;height:28px;padding:2px;border:1px solid var(--br);border-radius:5px;cursor:pointer">
           <span style="font-size:12px;color:var(--mt)">색상 선택</span>
           <button class="btn bsm" onclick="pxReset()">↺ 초기화</button>
-          <span id="px-rgb" style="font-size:11px;color:var(--mt);margin-left:4px"></span>
+          <span id="px-rgb" style="font-size:11px;color:var(--u);font-family:monospace"></span>
         </div>
       </div>
 
+      <!-- 소리 파형 시각화 -->
+      <div class="rep-panel" id="ia-wave">
+        <div style="font-size:11px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px">▸ 슬라이더를 움직여 샘플링 주파수 변화를 확인하세요</div>
+        <canvas id="wave-cv" width="500" height="120"></canvas>
+        <div class="sv-row">
+          <span class="sv-lbl">샘플링 주파수</span>
+          <input type="range" id="sr-sl" min="2" max="40" value="8" oninput="drawWave()">
+          <span class="sv-val"><span id="sr-v">8</span> 포인트/초</span>
+        </div>
+        <div class="sv-row">
+          <span class="sv-lbl">비트 깊이</span>
+          <input type="range" id="bd-sl" min="2" max="8" value="4" oninput="drawWave()">
+          <span class="sv-val"><span id="bd-v">4</span>bit · <span id="bd-lv">16</span>단계</span>
+        </div>
+        <div id="wave-desc" style="font-size:12px;color:var(--mt);padding:8px 10px;background:var(--sf);border-radius:var(--rSM);border:1px solid var(--br)"></div>
+      </div>
+
+      <!-- 프레임 탐색기 -->
+      <div class="rep-panel" id="ia-frame">
+        <div style="font-size:11px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px">▸ 프레임을 클릭하고 FPS를 조절해보세요</div>
+        <div class="frame-strip" id="frame-strip"></div>
+        <div id="frame-prev" style="background:linear-gradient(135deg,#A8D8C8,#1B9E72)">프레임을 선택하세요</div>
+        <div class="sv-row">
+          <span class="sv-lbl">FPS 설정</span>
+          <input type="range" id="fps-sl" min="1" max="60" value="24" oninput="updateFPS()">
+          <span class="sv-val"><span id="fps-v">24</span> FPS</span>
+        </div>
+        <div id="fps-desc" style="font-size:12px;color:var(--mt);padding:8px 10px;background:var(--sf);border-radius:var(--rSM);border:1px solid var(--br)"></div>
+      </div>
+
       <div class="qwrap">
-        <div class="qq">아스키 코드에서 대문자 <b>'A'</b>의 10진수 코드값은?</div>
+        <div class="qq">다음 중 <b>아스키(ASCII) 코드</b>에 대한 설명으로 옳지 않은 것은?</div>
         <div class="qopts">
-          <div class="opt" onclick="checkQ(this,false,'64는 A 바로 이전 값입니다. A는 알파벳 첫 번째 대문자로 65입니다.')"><span class="onum">①</span>64</div>
-          <div class="opt" onclick="checkQ(this,true,'A=65, B=66, C=67... 대문자는 65부터 시작합니다. 이진수로는 01000001₂입니다.')"><span class="onum">②</span>65</div>
-          <div class="opt" onclick="checkQ(this,false,'97은 소문자 a의 아스키 코드입니다. 대소문자는 다른 코드를 가집니다.')"><span class="onum">③</span>97</div>
-          <div class="opt" onclick="checkQ(this,false,'48은 숫자 문자 0의 아스키 코드입니다.')"><span class="onum">④</span>48</div>
+          <div class="opt" onclick="checkQ(this,false,'영문자와 숫자를 포함한 128개 문자를 7비트로 약속한 것이 아스키코드 맞습니다.')"><span class="onum">①</span>영문자·숫자·특수문자 128개를 7비트(0~127)로 약속한 표준이다.</div>
+          <div class="opt" onclick="checkQ(this,false,'A=65, a=97로 대소문자는 다른 코드값을 가집니다.')"><span class="onum">②</span>대문자 A=65, 소문자 a=97로 대·소문자는 다른 코드값을 가진다.</div>
+          <div class="opt" onclick="checkQ(this,true,'한글은 아스키코드에 포함되지 않습니다. 한글은 유니코드로 표현되며, 아스키코드는 영문 128자만 포함합니다.')"><span class="onum">③</span>한글도 아스키코드에 포함되어 이진수로 표현된다.</div>
+          <div class="opt" onclick="checkQ(this,false,'유니코드는 전 세계 문자를 포함하는 확장된 표준으로, 아스키코드의 상위 호환입니다.')"><span class="onum">④</span>유니코드는 아스키코드의 한계를 보완해 전 세계 문자를 포함한다.</div>
         </div>
         <div class="qfb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ★ 추가 수업자료 섹션 ★ -->
+  <div class="card" id="sec-material">
+    <div class="ch" onclick="toggleSec('sec-material')">
+      <div class="sn" style="background:linear-gradient(135deg,#0f1f38,#1a3055);color:#00d4ff">📡</div>
+      <h3>추가 수업 자료 — 컴퓨터의 자료 표현</h3>
+      <span class="st" style="background:#0f1f38;border-color:#1a3055;color:#00d4ff">인터랙티브</span>
+      <span class="carr">▾</span>
+    </div>
+    <div class="cb" style="padding:0">
+      <div class="mat-wrap">
+        <div class="mat-header">
+          <span>🖥️</span>
+          <span>컴퓨터의 자료 표현 — 인터랙티브 학습 자료</span>
+          <span class="mat-badge">수(이진수) · 소리 · 이미지 · 영상</span>
+          <a href="material.html" target="_blank" class="btn bsm bp" style="margin-left:auto">새 탭으로 열기 ↗</a>
+        </div>
+        <iframe class="mat-frame" src="material.html" title="컴퓨터의 자료 표현 수업자료" loading="lazy"></iframe>
       </div>
     </div>
   </div>
@@ -215,20 +376,22 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
   <div class="card" id="sec-assess">
     <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="task"><h4>📋 픽셀 아트 + 아스키 메시지 만들기</h4>
-        <p>6×6 픽셀 아트를 직접 디자인하고, 자신의 이름(영문)을 아스키 코드로 변환하여 제출하시오.</p>
-        <div class="srow"><div class="stepn">①</div><span>6×6 픽셀 아트 디자인 (모눈종이 또는 위 캔버스)</span></div>
-        <div class="srow"><div class="stepn">②</div><span>사용한 색상 RGB 값 3가지 이상 기록</span></div>
-        <div class="srow"><div class="stepn">③</div><span>이름(영문 대문자) 아스키 코드 변환 기록</span></div>
+      <div class="task"><h4>📋 데이터 표현 방식 비교 분석</h4>
+        <p>문자·이미지·소리·영상 중 2가지를 선택하여 디지털 표현 원리를 비교 분석하는 표를 완성하시오.</p>
+        <div class="srow"><div class="stepn">①</div><span>2가지 데이터 유형 선택</span></div>
+        <div class="srow"><div class="stepn">②</div><span>각 유형의 변환 단위·표현 방법·특징 기록</span></div>
+        <div class="srow"><div class="stepn">③</div><span>두 유형의 공통점과 차이점 서술</span></div>
+        <div class="srow"><div class="stepn">④</div><span>수업 자료에서 인상 깊은 인터랙션 1가지 소개</span></div>
       </div>
       <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody>
-        <tr><td><b>아스키 변환</b></td><td class="lv4">이름 전체 정확</td><td class="lv3">대부분 정확</td><td class="lv2">일부 변환</td><td class="lv1">변환 불가</td></tr>
-        <tr><td><b>픽셀 이해</b></td><td class="lv4">RGB 정확 기록</td><td class="lv3">2가지 이상</td><td class="lv2">1가지</td><td class="lv1">기록 없음</td></tr>
+        <tr><td><b>개념 이해</b></td><td class="lv4">4가지 모두 정확</td><td class="lv3">3가지 정확</td><td class="lv2">2가지</td><td class="lv1">1가지 이하</td></tr>
+        <tr><td><b>비교 분석</b></td><td class="lv4">공통점·차이점 명확</td><td class="lv3">대체로 명확</td><td class="lv2">단순 나열</td><td class="lv1">분석 없음</td></tr>
       </tbody></table>
       <div class="sclist">
-        <div class="scitem"><label>아스키 코드의 역할을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        <div class="scitem"><label>픽셀과 해상도의 관계를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        <div class="scitem"><label>RGB로 색상을 표현하는 원리를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>아스키코드로 문자가 이진수로 표현됨을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>픽셀·RGB로 이미지가 표현됨을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>샘플링 주파수와 음질의 관계를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
+        <div class="scitem"><label>FPS와 영상 용량의 관계를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
       </div>
       <button class="btn bsm bok" style="margin-top:11px" onclick="saveSC('l203sc')">💾 저장</button>
     </div>
@@ -237,33 +400,35 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
   <div class="card" id="sec-review">
     <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:var(--gbg);color:var(--green)">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
     <div class="cb">
-      <div class="sgrid">
-        <div class="scard"><strong>아스키 코드</strong>영문자·숫자 7비트(0~127)로 약속. A=65, a=97, 0=48.</div>
-        <div class="scard"><strong>유니코드</strong>전 세계 문자 포함. 한글·이모지·특수문자 모두 표현.</div>
-        <div class="scard"><strong>픽셀·해상도</strong>이미지 최소 단위=픽셀. RGB 각 0~255. 해상도=가로×세로 픽셀수.</div>
+      <div class="sgrid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="scard"><strong>문자 표현</strong>아스키코드 7bit(128자). A=65, a=97. 한글은 유니코드(AC00₁₆).</div>
+        <div class="scard"><strong>이미지 표현</strong>픽셀 단위. RGB 각 0~255. 해상도=가로×세로 픽셀수.</div>
+        <div class="scard"><strong>소리 표현</strong>샘플링 주파수(Hz) 높을수록 고음질. CD=44.1kHz. 비트 깊이=정밀도.</div>
+        <div class="scard"><strong>영상 표현</strong>프레임 연속 재생=동영상. 영화24fps, 게임60fps. 코덱으로 압축.</div>
       </div>
       <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
-        <b>✏️ 단답형:</b> 디지털 이미지를 구성하는 최소 단위를 <span style="display:inline-block;width:60px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>이라고 한다.
+        <b>✏️ 단답형:</b> 디지털 이미지를 구성하는 최소 단위를 <span style="display:inline-block;width:60px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>이라 하고, 각 단위는 RGB 세 가지 색의 밝기로 색상을 표현한다.
         <textarea style="display:block;width:100%;margin-top:10px;padding:9px;border:1px solid var(--br);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:50px;background:var(--sf)" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='var(--u)'" onblur="this.style.borderColor=''"></textarea>
       </div>
-      <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 <strong>소리와 영상</strong>이 어떻게 디지털로 표현되는지 탐구합니다!</div></div>
+      <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 <strong>데이터 수집과 분류</strong> — 정형·비정형·반정형 데이터를 탐구합니다!</div></div>
     </div>
   </div>
 
   </div>
   <div class="ca">
     <div class="ap"><h5>학습 진행</h5><div class="slist">
-      <div class="si sd" onclick="goTo('sec-goal')"><div class="dot sd">✓</div>학습목표</div>
-      <div class="si sd" onclick="goTo('sec-concept')"><div class="dot sd">✓</div>개념설명</div>
-      <div class="si sa" onclick="goTo('sec-interact')"><div class="dot sa">→</div>인터랙션</div>
-      <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
-      <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
-    </div></div>
+  <div class="si sd" onclick="goTo('sec-goal')"><div class="dot sd">✓</div>학습목표</div>
+  <div class="si sd" onclick="goTo('sec-concept')"><div class="dot sd">✓</div>개념설명</div>
+  <div class="si sa" onclick="goTo('sec-interact')"><div class="dot sa">→</div>인터랙션</div>
+  <div class="si" onclick="goTo('sec-material')"><div class="dot" style="font-size:9px">📡</div>수업자료</div>
+  <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
+  <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
+</div></div>
     <div class="ap"><h5>수업 타이머</h5><span class="td-num" id="tnum">45:00</span><div class="td-lbl">수업 남은 시간</div>
     <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div></div>
-    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">아스키</span><span class="tdef">영문 문자 코드</span></div><div class="tterm"><span class="tw">유니코드</span><span class="tdef">전 세계 문자</span></div><div class="tterm"><span class="tw">픽셀</span><span class="tdef">이미지 최소 단위</span></div><div class="tterm"><span class="tw">RGB</span><span class="tdef">색상 3원소</span></div><div class="tterm"><span class="tw">해상도</span><span class="tdef">픽셀수=선명도</span></div></div></div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">아스키</span><span class="tdef">영문 문자 코드 표준</span></div><div class="tterm"><span class="tw">유니코드</span><span class="tdef">전 세계 문자 포함</span></div><div class="tterm"><span class="tw">픽셀</span><span class="tdef">이미지 최소 단위</span></div><div class="tterm"><span class="tw">RGB</span><span class="tdef">색상 3원소</span></div><div class="tterm"><span class="tw">샘플링 주파수</span><span class="tdef">1초 샘플링 횟수</span></div><div class="tterm"><span class="tw">비트 깊이</span><span class="tdef">샘플 정밀도</span></div><div class="tterm"><span class="tw">프레임</span><span class="tdef">정지 이미지 단위</span></div><div class="tterm"><span class="tw">FPS</span><span class="tdef">초당 프레임 수</span></div><div class="tterm"><span class="tw">코덱</span><span class="tdef">압축·해제 알고리즘</span></div></div></div>
     <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:42%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">3/7</span></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:50%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">3/6</span></div>
     </div>
   </div>
   </div></div>
@@ -285,22 +450,38 @@ function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');docum
 function markDone(n){try{var d=JSON.parse(localStorage.getItem('u02done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u02done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
 
 
+// ── 개념 탭 전환 ──
+function switchTab(id, btn) {
+  document.querySelectorAll('#sec-concept .rep-panel').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelectorAll('#sec-concept .rep-tab').forEach(function(b){ b.classList.remove('on'); });
+  var el = document.getElementById(id); if(el) el.classList.add('on');
+  if(btn) btn.classList.add('on');
+}
+// ── 인터랙션 탭 전환 ──
+function switchInteract(id, btn) {
+  document.querySelectorAll('#sec-interact .rep-panel').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelectorAll('#interact-tabs .rep-tab').forEach(function(b){ b.classList.remove('on'); });
+  var el = document.getElementById(id); if(el) el.classList.add('on');
+  if(btn) btn.classList.add('on');
+  if(id === 'ia-wave') drawWave();
+  if(id === 'ia-frame') initFrames();
+}
 // ── 아스키 탐색기 ──
 document.addEventListener('DOMContentLoaded', function() {
-  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*().,?';
+  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghij0123456789!@#$%^&*().,?';
   var ag = document.getElementById('ascii-grid');
   if(ag) {
     chars.split('').forEach(function(c) {
       var d = document.createElement('div');
-      d.className = 'ascii-cell';
-      d.innerHTML = '<div class="ascii-char">' + c + '</div><div class="ascii-dec">' + c.charCodeAt(0) + '</div>';
+      d.className = 'ac';
+      d.innerHTML = '<div class="ach">' + c + '</div><div class="adec">' + c.charCodeAt(0) + '</div>';
       d.onclick = function() {
-        document.querySelectorAll('.ascii-cell').forEach(function(x){ x.classList.remove('sel'); });
+        document.querySelectorAll('.ac').forEach(function(x){ x.classList.remove('sel'); });
         d.classList.add('sel');
         var code = c.charCodeAt(0);
         var bin = code.toString(2).padStart(8,'0');
-        document.getElementById('ascii-detail').innerHTML =
-          '<strong style="color:var(--u);font-size:15px">"' + c + '"</strong> = 10진수 <strong style="color:var(--amber)">' + code + '</strong> = 2진수 <strong style="color:var(--blue);font-family:monospace">' + bin + '</strong>';
+        document.getElementById('ascii-out').innerHTML =
+          '<strong style="color:var(--u);font-size:15px">"' + c + '"</strong> = 10진수 <strong style="color:var(--amber)">' + code + '</strong> = 2진수 <strong style="color:var(--blue);font-family:monospace;font-size:13px">' + bin + '</strong><br><span style="font-size:11px;color:var(--lt)">(' + bin.split('').map(function(b,i){return b==="1"?Math.pow(2,7-i)+"":"";}).filter(Boolean).join("+") + (code>0?" = "+code:"") + ")</span>";
       };
       ag.appendChild(d);
     });
@@ -309,24 +490,103 @@ document.addEventListener('DOMContentLoaded', function() {
   var pg = document.getElementById('px-grid');
   if(pg) {
     for(var i=0; i<36; i++) {
-      var cell = document.createElement('div');
-      cell.className = 'px-cell';
-      cell.style.background = '#F5F4F0';
-      (function(el){
-        el.onclick = function() {
+      (function(){
+        var cell = document.createElement('div');
+        cell.className = 'px-cell';
+        cell.style.background = '#F5F4F0';
+        cell.onclick = function() {
           var col = document.getElementById('px-color').value;
-          el.style.background = col;
-          var r = parseInt(col.slice(1,3),16), g = parseInt(col.slice(3,5),16), b = parseInt(col.slice(5,7),16);
+          cell.style.background = col;
+          var r=parseInt(col.slice(1,3),16), g=parseInt(col.slice(3,5),16), b=parseInt(col.slice(5,7),16);
           document.getElementById('px-rgb').textContent = 'RGB(' + r + ',' + g + ',' + b + ')';
         };
-      })(cell);
-      pg.appendChild(cell);
+        pg.appendChild(cell);
+      })();
     }
   }
+  drawWave();
+  initFrames();
 });
 function pxReset() {
-  document.querySelectorAll('.px-cell').forEach(function(c){ c.style.background = '#F5F4F0'; });
+  document.querySelectorAll('.px-cell').forEach(function(c){ c.style.background='#F5F4F0'; });
   document.getElementById('px-rgb').textContent = '';
+}
+// ── 소리 파형 시각화 ──
+function drawWave() {
+  var cv = document.getElementById('wave-cv');
+  if(!cv) return;
+  var ctx = cv.getContext('2d');
+  var W = cv.offsetWidth || 500; cv.width = W; cv.height = 120;
+  var sr = parseInt(document.getElementById('sr-sl').value);
+  var bd = parseInt(document.getElementById('bd-sl').value);
+  var levels = Math.pow(2, bd);
+  document.getElementById('sr-v').textContent = sr;
+  document.getElementById('bd-v').textContent = bd;
+  document.getElementById('bd-lv').textContent = levels;
+  ctx.clearRect(0,0,W,120);
+  ctx.fillStyle = '#FFF'; ctx.fillRect(0,0,W,120);
+  // 원래 파형
+  ctx.strokeStyle = '#BACED8'; ctx.lineWidth = 1.5; ctx.beginPath();
+  for(var x=0; x<W; x++) {
+    var t = x/W*2*Math.PI*3;
+    var y = 60 - 48*(0.6*Math.sin(t)+0.3*Math.sin(2.3*t)+0.1*Math.sin(5*t));
+    if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  // 샘플 포인트
+  var step = W/sr;
+  var pts = [];
+  for(var i=0; i<=sr; i++) {
+    var sx = i*step;
+    var t2 = (sx/W)*2*Math.PI*3;
+    var raw = 60 - 48*(0.6*Math.sin(t2)+0.3*Math.sin(2.3*t2)+0.1*Math.sin(5*t2));
+    var q = Math.round((raw/120)*levels)/levels*120;
+    pts.push({x:sx,y:q});
+  }
+  ctx.strokeStyle = '#F97316'; ctx.lineWidth = 1; ctx.beginPath();
+  pts.forEach(function(p,i){ if(i===0)ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y); });
+  ctx.stroke();
+  pts.forEach(function(p) {
+    ctx.strokeStyle='rgba(27,158,114,.3)';ctx.lineWidth=0.8;ctx.beginPath();ctx.moveTo(p.x,60);ctx.lineTo(p.x,p.y);ctx.stroke();
+    ctx.beginPath();ctx.arc(p.x,p.y,4,0,2*Math.PI);
+    ctx.fillStyle='#1B9E72';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
+  });
+  var qual = sr<8?'낮음 — 원래 파형을 제대로 재현하지 못합니다':sr<20?'중간 — 파형이 어느 정도 재현됩니다':'높음 — 원래 파형에 가깝게 재현됩니다';
+  var desc = document.getElementById('wave-desc');
+  if(desc) desc.innerHTML = '🎵 샘플링 <strong style="color:var(--u)">'+sr+'포인트/초</strong> · '+bd+'bit('+levels+'단계) · 품질: <strong>'+qual+'</strong>';
+}
+// ── 프레임 탐색기 ──
+var frameData = [
+  ['#FF6B6B','#FF8E53','배경 설정'],['#4ECDC4','#44A08D','인물 등장'],
+  ['#667EEA','#764BA2','이동 장면'],['#F093FB','#F5576C','클로즈업'],
+  ['#4facfe','#00f2fe','대화 장면'],['#43e97b','#38f9d7','액션'],
+  ['#fa709a','#fee140','반응 샷'],['#a18cd1','#fbc2eb','마무리']
+];
+function initFrames() {
+  var strip = document.getElementById('frame-strip');
+  if(!strip || strip.childElementCount > 0) { updateFPS(); return; }
+  frameData.forEach(function(fd, i) {
+    var f = document.createElement('div');
+    f.className = 'frame';
+    f.style.background = 'linear-gradient(135deg,'+fd[0]+','+fd[1]+')';
+    f.textContent = i+1;
+    f.onclick = function() {
+      document.querySelectorAll('.frame').forEach(function(x){x.classList.remove('active');});
+      f.classList.add('active');
+      var prev = document.getElementById('frame-prev');
+      prev.style.background = 'linear-gradient(135deg,'+fd[0]+','+fd[1]+')';
+      prev.textContent = '프레임 '+(i+1)+' — '+fd[2];
+    };
+    strip.appendChild(f);
+  });
+  updateFPS();
+}
+function updateFPS() {
+  var fps = parseInt(document.getElementById('fps-sl').value);
+  document.getElementById('fps-v').textContent = fps;
+  var desc = fps<15?'끊겨 보임':fps<25?'영화급 (24fps 표준)':fps<45?'방송·SNS (30fps)':'게임·스포츠 (60fps+)';
+  var el = document.getElementById('fps-desc');
+  if(el) el.innerHTML = '🎬 <strong style="color:var(--u)">'+fps+' FPS</strong> — 1초에 '+fps+'개 프레임 재생 · <strong>'+desc+'</strong>';
 }
 
 document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l203sc');});
