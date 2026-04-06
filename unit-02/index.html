@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>II. 데이터 — 정보 교과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F4F0;--surface:#FFF;--border:#E2DFD6;--text:#1C1C1C;--muted:#696760;--light:#A8A59E;--unit:#1B9E72;--unit-dk:#0E7A58;--unit-lt:#E1F5EE;--unit-md:#A8D8C8;--rLG:14px;--rSM:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;min-height:100vh}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);height:52px;padding:0 28px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
+.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);flex:1}.bc a{color:var(--muted);text-decoration:none}.bc a:hover{color:var(--text)}.bc .sep{color:var(--border)}.bc .cur{color:var(--text);font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);text-decoration:none;transition:background .12s}.btn:hover{background:var(--bg)}.bp{background:var(--unit);color:#fff;border-color:var(--unit)}.bp:hover{background:var(--unit-dk)}
+.page{padding:28px 32px;max-width:1100px;margin:0 auto}
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);padding:28px 32px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.hero-text h2{font-size:22px;font-weight:700;margin-bottom:8px}
+.hero-text p{font-size:13px;color:var(--muted);line-height:1.7}
+.hero-stats{display:flex;gap:12px;flex-shrink:0}
+.stat{text-align:center;padding:12px 16px;background:var(--bg);border-radius:var(--rSM);min-width:72px}
+.stat-n{font-size:22px;font-weight:700;color:var(--unit)}.stat-l{font-size:11px;color:var(--muted);margin-top:2px}
+.sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--light);margin-bottom:14px}
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.lcard{display:flex;flex-direction:column;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rLG);padding:20px 18px;text-decoration:none;color:inherit;transition:all .18s;position:relative;overflow:hidden}
+.lcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit);opacity:0;transition:opacity .18s}
+.lcard:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(27,158,114,.14);border-color:var(--unit-md)}.lcard:hover::before{opacity:1}
+.ln{font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--unit-lt);color:var(--unit);font-family:monospace;display:inline-block;margin-bottom:8px}
+.li{font-size:26px;margin-bottom:6px}.lt{font-size:14px;font-weight:700;margin-bottom:5px}.ld{font-size:12px;color:var(--muted);line-height:1.6;flex:1}
+.lf{display:flex;align-items:center;gap:5px;margin-top:10px;flex-wrap:wrap}
+.ltag{font-size:10px;padding:2px 8px;background:var(--bg);border:1px solid var(--border);border-radius:20px;color:var(--muted);font-weight:500}
+.lgo{margin-left:auto;font-size:11px;font-weight:700;color:var(--unit);opacity:0;transition:opacity .15s}
+.lcard:hover .lgo{opacity:1}
+@media(max-width:900px){.card-grid{grid-template-columns:1fr 1fr}.hero{flex-direction:column}}
+@media(max-width:600px){.card-grid{grid-template-columns:1fr}.page{padding:16px 18px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="bc"><a href="../../index.html">정보 교과 학습 플랫폼</a><span class="sep">›</span><span class="cur">II. 데이터</span></div>
+  <a class="btn bp" href="lesson-01/index.html">시작하기 →</a>
+</header>
+<div class="page">
+  <div class="hero">
+    <div class="hero-text">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span style="font-size:38px;font-weight:300;color:var(--unit);font-family:'DM Serif Display',serif;line-height:1">II</span>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:3px">Unit II</div>
+          <h2>데이터</h2>
+        </div>
+      </div>
+      <p>아날로그와 디지털의 차이부터 이진수·픽셀·아스키코드의 표현 원리,<br>데이터 수집·분류·분석·시각화, 그리고 빅데이터와 개인정보 보호까지<br>데이터 기반 사고의 기초를 단계별로 탐구합니다.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">소단원</div></div>
+      <div class="stat"><div class="stat-n">13</div><div class="stat-l">차시</div></div>
+      <div class="stat"><div class="stat-n">중상</div><div class="stat-l">난이도</div></div>
+    </div>
+  </div>
+
+  <div class="sec-title">소단원 목록</div>
+  <div class="card-grid">
+
+    <a href="lesson-01/index.html" class="lcard">
+      <div class="ln">II-01</div>
+      <div class="li">📊</div>
+      <div class="lt">데이터와 정보</div>
+      <div class="ld">데이터·정보의 차이, 아날로그·디지털 비교, 샘플링 개념</div>
+      <div class="lf"><span class="ltag">2차시</span><span class="ltag">[9정02-01]</span><div class="lgo">학습하기 →</div></div>
+    </a>
+
+    <a href="lesson-02/index.html" class="lcard">
+      <div class="ln">II-02</div>
+      <div class="li">🔢</div>
+      <div class="lt">이진수와 디지털 표현</div>
+      <div class="ld">비트·바이트, 10진수↔2진수 변환, 인터랙티브 변환기</div>
+      <div class="lf"><span class="ltag">2차시</span><span class="ltag">[9정02-02]</span><div class="lgo">학습하기 →</div></div>
+    </a>
+
+    <a href="lesson-03/index.html" class="lcard">
+      <div class="ln">II-03</div>
+      <div class="li">🖼️</div>
+      <div class="lt">문자와 이미지 표현</div>
+      <div class="ld">아스키코드 탐색기, 픽셀 아트 메이커, RGB 색상 체계</div>
+      <div class="lf"><span class="ltag">2차시</span><span class="ltag">[9정02-03]</span><div class="lgo">학습하기 →</div></div>
+    </a>
+
+    <a href="lesson-04/index.html" class="lcard">
+      <div class="ln">II-04</div>
+      <div class="li">📥</div>
+      <div class="lt">데이터 수집과 분류</div>
+      <div class="ld">정형·비정형·반정형, 설문·센서·공공데이터 수집 방법</div>
+      <div class="lf"><span class="ltag">2차시</span><span class="ltag">[9정02-04]</span><div class="lgo">학습하기 →</div></div>
+    </a>
+
+    <a href="lesson-05/index.html" class="lcard">
+      <div class="ln">II-05</div>
+      <div class="li">📈</div>
+      <div class="lt">데이터 분석과 시각화</div>
+      <div class="ld">기술통계(평균·최솟값·최댓값), Canvas 실시간 막대그래프</div>
+      <div class="lf"><span class="ltag">3차시</span><span class="ltag">[9정02-05]</span><div class="lgo">학습하기 →</div></div>
+    </a>
+
+    <a href="lesson-06/index.html" class="lcard">
+      <div class="ln">II-06</div>
+      <div class="li">🌐</div>
+      <div class="lt">데이터 활용과 빅데이터</div>
+      <div class="ld">빅데이터 3V, 사회적 활용 사례, 개인정보 보호·데이터 윤리</div>
+      <div class="lf"><span class="ltag">2차시</span><span class="ltag">[9정02-06]</span><div class="lgo">학습하기 →</div></div>
+    </a>
+
+  </div>
+</div>
+</body>
+</html>

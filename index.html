@@ -992,12 +992,21 @@
       </div>
     </div>
 
-    <a class="nav-item nav-disabled">
+    <a class="nav-item" id="nav-unit2-head"
+       onclick="toggleUnitNav2(); showView('unit2'); setActive(this)">
       <div class="nav-dot" style="background:var(--unit-2)"></div>
       II. 데이터
       <span class="nav-badge">13</span>
-      <span style="margin-left:4px;font-size:10px;color:var(--text-light)">준비중</span>
+      <span id="unit2-arrow" style="margin-left:2px;font-size:10px;color:var(--text-light)">▸</span>
     </a>
+    <div id="unit2-subnav" style="display:none">
+      <a class="nav-sub" href="unit-02/lesson-01/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">1</span>데이터와 정보</a>
+      <a class="nav-sub" href="unit-02/lesson-02/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">2</span>이진수와 디지털 표현</a>
+      <a class="nav-sub" href="unit-02/lesson-03/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">3</span>문자와 이미지 표현</a>
+      <a class="nav-sub" href="unit-02/lesson-04/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">4</span>데이터 수집과 분류</a>
+      <a class="nav-sub" href="unit-02/lesson-05/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">5</span>데이터 분석과 시각화</a>
+      <a class="nav-sub" href="unit-02/lesson-06/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">6</span>데이터 활용과 빅데이터</a>
+    </div>
     <a class="nav-item nav-disabled">
       <div class="nav-dot" style="background:var(--unit-3)"></div>
       III. 알고리즘·프로그래밍
@@ -1092,7 +1101,7 @@
         </div>
       </div>
 
-      <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('II. 데이터')" >
+      <div class="unit-overview-card" onclick="showView('unit2'); setActive(document.getElementById('nav-unit2-head'))" >
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-2)"></div>
         <div class="unit-roman" style="color:var(--unit-2)">II</div>
         <h4>데이터</h4>
@@ -1222,12 +1231,42 @@
         <span class="lesson-status status-done">완료</span>
         <span class="lesson-time">45분</span>
       </a>
-      <div class="lesson-row" data-unit="II" style="cursor:default;opacity:.6">
+      <a class="lesson-row" data-unit="II" href="unit-02/lesson-01/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-2-light);color:var(--unit-2)">📊</div>
+        <div class="lesson-info"><h5>II-1. 데이터와 정보</h5><p>아날로그·디지털, 데이터vs정보 분류</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">2차시</span>
+      </a>
+      <a class="lesson-row" data-unit="II" href="unit-02/lesson-02/index.html" style="text-decoration:none;color:inherit">
         <div class="lesson-icon" style="background:var(--unit-2-light);color:var(--unit-2)">🔢</div>
-        <div class="lesson-info"><h5>II. 데이터 (준비 중)</h5><p>이진수·픽셀·공공데이터 분석</p></div>
-        <span class="lesson-status status-locked">준비 중</span>
-        <span class="lesson-time">13차시</span>
-      </div>
+        <div class="lesson-info"><h5>II-2. 이진수와 디지털 표현</h5><p>비트·바이트, 10진수↔2진수 변환기</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">2차시</span>
+      </a>
+      <a class="lesson-row" data-unit="II" href="unit-02/lesson-03/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-2-light);color:var(--unit-2)">🖼️</div>
+        <div class="lesson-info"><h5>II-3. 문자와 이미지 표현</h5><p>아스키코드, 픽셀 아트, RGB</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">2차시</span>
+      </a>
+      <a class="lesson-row" data-unit="II" href="unit-02/lesson-04/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-2-light);color:var(--unit-2)">📥</div>
+        <div class="lesson-info"><h5>II-4. 데이터 수집과 분류</h5><p>정형·비정형·반정형, 공공데이터</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">2차시</span>
+      </a>
+      <a class="lesson-row" data-unit="II" href="unit-02/lesson-05/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-2-light);color:var(--unit-2)">📈</div>
+        <div class="lesson-info"><h5>II-5. 데이터 분석과 시각화</h5><p>기술통계, 실시간 차트 그리기</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="II" href="unit-02/lesson-06/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-2-light);color:var(--unit-2)">🌐</div>
+        <div class="lesson-info"><h5>II-6. 데이터 활용과 빅데이터</h5><p>빅데이터 3V, 개인정보 보호·윤리</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">2차시</span>
+      </a>
       <div class="lesson-row" data-unit="III" style="cursor:default;opacity:.6">
         <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🐍</div>
         <div class="lesson-info"><h5>III. 알고리즘과 프로그래밍 (준비 중)</h5><p>파이썬, 순서도, 정렬·탐색</p></div>
@@ -1355,6 +1394,77 @@
     </div>
   </section>
 
+
+  <!-- ─── UNIT II VIEW ─── -->
+  <section class="view" id="view-unit2">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-family:'DM Serif Display',serif;font-size:36px;color:var(--unit-2);line-height:1">II</span>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:3px">Unit II</div>
+            <h2 style="font-size:20px;font-weight:700;color:var(--text)">데이터</h2>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.6">아날로그·디지털, 이진수·픽셀·아스키코드 표현부터<br>데이터 수집·분석·시각화, 빅데이터와 개인정보 보호까지 탐구합니다.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-shrink:0">
+        <div style="text-align:center;padding:12px 16px;background:var(--unit-2-light);border-radius:var(--radius-sm)">
+          <div style="font-size:20px;font-weight:700;color:var(--unit-2)">6</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">소단원</div>
+        </div>
+        <div style="text-align:center;padding:12px 16px;background:var(--bg);border-radius:var(--radius-sm)">
+          <div style="font-size:20px;font-weight:700;color:var(--text)">13</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">차시</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <a href="unit-02/lesson-01/index.html" class="u1-card" style="--unit-c:var(--unit-2)">
+        <div class="u1-num" style="color:var(--unit-2)">01</div><div class="u1-icon">📊</div>
+        <div class="u1-title">데이터와 정보</div>
+        <div class="u1-desc">아날로그·디지털 차이, 데이터vs정보 분류 활동</div>
+        <div class="u1-meta"><span class="u1-tag">2차시</span><span class="u1-tag" style="background:var(--unit-2-light);color:var(--unit-2);border-color:#A8D8C8">9정02-01</span></div>
+        <div class="u1-arrow" style="color:var(--unit-2)">학습하기 →</div>
+      </a>
+      <a href="unit-02/lesson-02/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-2)">02</div><div class="u1-icon">🔢</div>
+        <div class="u1-title">이진수와 디지털 표현</div>
+        <div class="u1-desc">비트·바이트, 실시간 10진수↔2진수 변환기</div>
+        <div class="u1-meta"><span class="u1-tag">2차시</span><span class="u1-tag" style="background:var(--unit-2-light);color:var(--unit-2);border-color:#A8D8C8">9정02-02</span></div>
+        <div class="u1-arrow" style="color:var(--unit-2)">학습하기 →</div>
+      </a>
+      <a href="unit-02/lesson-03/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-2)">03</div><div class="u1-icon">🖼️</div>
+        <div class="u1-title">문자와 이미지 표현</div>
+        <div class="u1-desc">아스키 탐색기, 5×5 픽셀 아트 메이커, RGB</div>
+        <div class="u1-meta"><span class="u1-tag">2차시</span><span class="u1-tag" style="background:var(--unit-2-light);color:var(--unit-2);border-color:#A8D8C8">9정02-03</span></div>
+        <div class="u1-arrow" style="color:var(--unit-2)">학습하기 →</div>
+      </a>
+      <a href="unit-02/lesson-04/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-2)">04</div><div class="u1-icon">📥</div>
+        <div class="u1-title">데이터 수집과 분류</div>
+        <div class="u1-desc">정형·비정형·반정형 분류, 공공데이터 탐색</div>
+        <div class="u1-meta"><span class="u1-tag">2차시</span><span class="u1-tag" style="background:var(--unit-2-light);color:var(--unit-2);border-color:#A8D8C8">9정02-04</span></div>
+        <div class="u1-arrow" style="color:var(--unit-2)">학습하기 →</div>
+      </a>
+      <a href="unit-02/lesson-05/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-2)">05</div><div class="u1-icon">📈</div>
+        <div class="u1-title">데이터 분석과 시각화</div>
+        <div class="u1-desc">기술통계 계산, Canvas 실시간 막대그래프</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag" style="background:var(--unit-2-light);color:var(--unit-2);border-color:#A8D8C8">9정02-05</span></div>
+        <div class="u1-arrow" style="color:var(--unit-2)">학습하기 →</div>
+      </a>
+      <a href="unit-02/lesson-06/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-2)">06</div><div class="u1-icon">🌐</div>
+        <div class="u1-title">데이터 활용과 빅데이터</div>
+        <div class="u1-desc">빅데이터 3V, 활용 사례, 개인정보 보호·윤리</div>
+        <div class="u1-meta"><span class="u1-tag">2차시</span><span class="u1-tag" style="background:var(--unit-2-light);color:var(--unit-2);border-color:#A8D8C8">9정02-06</span></div>
+        <div class="u1-arrow" style="color:var(--unit-2)">학습하기 →</div>
+      </a>
+    </div>
+  </section>
+
 </main>
 
 <script>
@@ -1367,6 +1477,16 @@
 
 
   // lesson-06 서브서브메뉴 토글
+
+  function toggleUnitNav2() {
+    var sub = document.getElementById('unit2-subnav');
+    var arrow = document.getElementById('unit2-arrow');
+    if (!sub) return;
+    var open = sub.style.display !== 'none';
+    sub.style.display = open ? 'none' : 'block';
+    if (arrow) arrow.textContent = open ? '▸' : '▾';
+  }
+
   function toggleL06Sub(e) {
     var sub = document.getElementById('l06-subnav');
     var arrow = document.getElementById('l06-arrow');
