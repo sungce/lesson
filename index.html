@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보 교과 웹 학습 플랫폼</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --border: #E8E5DC;
+    --text: #1A1A1A;
+    --text-muted: #6B6860;
+    --text-light: #9B9890;
+
+    --unit-1: #7B74D9;
+    --unit-1-light: #EEEDFE;
+    --unit-2: #1B9E72;
+    --unit-2-light: #E1F5EE;
+    --unit-3: #D85A30;
+    --unit-3-light: #FAECE7;
+    --unit-4: #3080D9;
+    --unit-4-light: #E6F1FB;
+    --unit-5: #5A9622;
+    --unit-5-light: #EAF3DE;
+
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,.10);
+
+    --sidebar-w: 240px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 100;
+    transition: transform .3s ease;
+  }
+
+  .sidebar-logo {
+    padding: 22px 20px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-logo .logo-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+  .sidebar-logo h1 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .sidebar-logo .sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .sidebar-nav {
+    padding: 12px 0;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    padding: 8px 20px 4px;
+    margin-top: 4px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-muted);
+    border-radius: 0;
+    transition: all .15s;
+    border-left: 2px solid transparent;
+    text-decoration: none;
+  }
+  .nav-item:hover { background: var(--bg); color: var(--text); }
+  .nav-item.active {
+    color: var(--text);
+    font-weight: 600;
+    background: var(--bg);
+  }
+  .nav-item .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .nav-item .nav-badge {
+    margin-left: auto;
+    font-size: 10px;
+    background: var(--bg);
+    color: var(--text-muted);
+    padding: 1px 6px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .sidebar-footer {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--unit-3), var(--unit-1));
+    border-radius: 4px;
+    transition: width .8s ease;
+  }
+
+  /* ─── MAIN ─── */
+  .main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ─── TOP BAR ─── */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 28px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+  }
+  .topbar-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    flex: 1;
+  }
+  .topbar-breadcrumb .sep { color: var(--border); }
+  .topbar-breadcrumb .current { color: var(--text); font-weight: 500; }
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 500;
+    transition: all .15s;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--bg); border-color: #ccc; }
+  .btn-primary {
+    background: var(--text);
+    color: #fff;
+    border-color: var(--text);
+  }
+  .btn-primary:hover { opacity: .85; }
+
+  /* ─── VIEWS ─── */
+  .view { display: none; padding: 28px; animation: fadeIn .25s ease; }
+  .view.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* ─── DASHBOARD ─── */
+  .dash-hero {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .dash-hero-text h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .dash-hero-text p { font-size: 14px; color: var(--text-muted); }
+  .dash-stats {
+    display: flex;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .stat-card {
+    text-align: center;
+    padding: 14px 18px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    min-width: 80px;
+  }
+  .stat-num { font-size: 22px; font-weight: 700; }
+  .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .section-header h3 { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; }
+
+  .units-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .unit-overview-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    cursor: pointer;
+    transition: all .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .unit-overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .unit-overview-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+  }
+  .unit-roman {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .unit-overview-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .unit-overview-card .unit-meta-small { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+  .unit-tag-row { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .unit-progress-mini {
+    margin-top: 12px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .unit-progress-mini-fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+
+  .lessons-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .lessons-list-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lesson-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .lesson-row:last-child { border-bottom: none; }
+  .lesson-row:hover { background: var(--bg); }
+  .lesson-icon {
+    width: 34px; height: 34px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .lesson-info { flex: 1; }
+  .lesson-info h5 { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+  .lesson-info p { font-size: 11px; color: var(--text-muted); }
+  .lesson-status {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .status-done { background: #EAF3DE; color: #3B6D11; }
+  .status-current { background: #FAEEDA; color: #854F0B; }
+  .status-locked { background: var(--bg); color: var(--text-light); }
+  .lesson-time { font-size: 11px; color: var(--text-light); flex-shrink: 0; width: 40px; text-align: right; }
+
+  /* ─── LESSON VIEW ─── */
+  .lesson-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 20px;
+    align-items: start;
+  }
+  .lesson-content { min-width: 0; }
+  .lesson-sidebar-panel { position: sticky; top: 76px; }
+
+  /* Section Cards */
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .section-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .section-card-header:hover { background: var(--bg); }
+  .section-num-badge {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-card-header h4 { font-size: 14px; font-weight: 600; flex: 1; }
+  .section-card-header .time-tag {
+    font-size: 11px;
+    color: var(--text-light);
+    background: var(--bg);
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+  .section-card-body { padding: 20px; }
+  .section-card.collapsed .section-card-body { display: none; }
+
+  /* Achievement standard */
+  .achievement-box {
+    background: var(--unit-1-light);
+    border: 1px solid rgba(123,116,217,.2);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+  .achievement-code {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--unit-1);
+    margin-bottom: 4px;
+    font-family: monospace;
+  }
+  .achievement-text { font-size: 13px; color: var(--text); }
+
+  .goal-list { list-style: none; }
+  .goal-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  .goal-list li:last-child { border-bottom: none; }
+  .goal-list li::before {
+    content: '✓';
+    font-size: 11px;
+    color: var(--unit-5);
+    background: var(--unit-5-light);
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .concept-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .concept-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all .15s;
+    color: var(--text-muted);
+  }
+  .concept-tag:hover { border-color: var(--unit-1); color: var(--unit-1); }
+
+  /* Concept explanation */
+  .concept-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .concept-text h5 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .concept-text p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .concept-visual {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    font-size: 12px;
+    color: var(--text-light);
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+  }
+  .concept-visual svg { opacity: .4; }
+
+  .caution-box {
+    background: #FFFBF0;
+    border: 1px solid #F0D080;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #7A5A00;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 12px;
+  }
+
+  /* Interaction */
+  .interaction-type-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .type-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .type-badge.selected {
+    border-color: currentColor;
+  }
+
+  .quiz-container {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+  }
+  .quiz-q {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all .15s;
+  }
+  .quiz-option:hover { border-color: var(--unit-1); background: var(--unit-1-light); }
+  .quiz-option.correct { border-color: var(--unit-5); background: var(--unit-5-light); color: #2A5A08; }
+  .quiz-option.wrong { border-color: var(--unit-3); background: var(--unit-3-light); color: #7A2A0A; }
+  .quiz-option .opt-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--border);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .quiz-feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: var(--unit-5-light); color: #2A5A08; border: 1px solid rgba(90,150,34,.2); }
+  .quiz-feedback.wrong { background: var(--unit-3-light); color: #7A2A0A; border: 1px solid rgba(216,90,48,.2); }
+
+  /* Code block */
+  .code-container {
+    background: #1E1E2E;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .code-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    background: #2A2A3E;
+    gap: 8px;
+  }
+  .code-lang { font-size: 11px; color: #888; flex: 1; font-family: monospace; }
+  .code-btn {
+    font-size: 11px;
+    padding: 3px 10px;
+    background: rgba(255,255,255,.1);
+    color: #ccc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .15s;
+  }
+  .code-btn:hover { background: rgba(255,255,255,.2); }
+  .code-btn.run-btn { background: rgba(29,158,114,.3); color: #7ED9B8; }
+  .code-btn.run-btn:hover { background: rgba(29,158,114,.5); }
+  pre {
+    padding: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #CDD6F4;
+    overflow-x: auto;
+    margin: 0;
+  }
+  .kw { color: #CBA6F7; }
+  .fn { color: #89B4FA; }
+  .str { color: #A6E3A1; }
+  .cm { color: #6C7086; font-style: italic; }
+  .num { color: #FAB387; }
+  .code-output {
+    padding: 10px 14px;
+    background: #181825;
+    font-family: monospace;
+    font-size: 12px;
+    color: #A6E3A1;
+    border-top: 1px solid #333;
+    display: none;
+  }
+  .code-output.show { display: block; }
+
+  /* Performance section */
+  .task-spec {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .task-spec h5 { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--unit-4); }
+  .task-spec p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+  .rubric-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+  .rubric-table th {
+    background: var(--bg);
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--border);
+    color: var(--text-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .rubric-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .rubric-table tr:last-child td { border-bottom: none; }
+  .level-4 { color: #2A5A08; font-weight: 600; }
+  .level-3 { color: #4A6A28; }
+  .level-2 { color: #854F0B; }
+  .level-1 { color: #993C1D; }
+
+  .self-check { display: flex; flex-direction: column; gap: 6px; }
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+  }
+  .check-row label { flex: 1; cursor: pointer; }
+  .check-row select {
+    font-size: 11px;
+    padding: 3px 6px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    font-family: inherit;
+    color: var(--text);
+  }
+
+  /* Review section */
+  .summary-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .summary-card {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .summary-card strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-light); margin-bottom: 6px; }
+
+  /* Sidebar panel */
+  .panel-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .panel-card h5 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+  .progress-steps { display: flex; flex-direction: column; gap: 6px; }
+  .step-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    cursor: pointer;
+    transition: background .15s;
+    color: var(--text-muted);
+  }
+  .step-row:hover { background: var(--bg); }
+  .step-row.done { color: var(--text); }
+  .step-row.active { background: var(--bg); color: var(--text); font-weight: 500; }
+  .step-circle {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--border);
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--text-light);
+  }
+  .step-circle.done { background: var(--unit-5-light); color: var(--unit-5); }
+  .step-circle.active { background: var(--unit-3-light); color: var(--unit-3); }
+
+  .timer-display {
+    text-align: center;
+    padding: 10px 0;
+  }
+  .timer-num { font-size: 28px; font-weight: 300; color: var(--text); letter-spacing: .05em; }
+  .timer-label { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+  .timer-btns { display: flex; gap: 6px; margin-top: 10px; }
+  .timer-btns .btn { flex: 1; justify-content: center; font-size: 12px; padding: 6px; }
+
+  /* Divider */
+  .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+  /* Unit filter for dashboard */
+  .unit-filter {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    color: var(--text-muted);
+    font-family: inherit;
+    transition: all .15s;
+  }
+  .filter-btn:hover { border-color: #aaa; color: var(--text); }
+  .filter-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .units-grid { grid-template-columns: repeat(3, 1fr); }
+    .lesson-layout { grid-template-columns: 1fr; }
+    .lesson-sidebar-panel { position: static; }
+    .concept-block { grid-template-columns: 1fr; }
+    .summary-cards { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    :root { --sidebar-w: 0px; }
+    .sidebar { transform: translateX(-240px); }
+    .sidebar.open { transform: none; --sidebar-w: 240px; }
+    .units-grid { grid-template-columns: 1fr 1fr; }
+    .dash-hero { flex-direction: column; }
+    .dash-stats { width: 100%; }
+    .main { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── SIDEBAR ─── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-label">2022 개정 교육과정</div>
+    <h1>정보 교과<br>웹 학습 플랫폼</h1>
+    <div class="sub">중학교 1학년 · 총 68차시</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">홈</div>
+    <a class="nav-item active" onclick="showView('dashboard'); setActive(this)">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      대시보드
+    </a>
+
+    <div class="nav-section-label" style="margin-top:8px">단원</div>
+
+    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+      <div class="nav-dot" style="background:var(--unit-1)"></div>
+      I. 컴퓨팅 시스템
+      <span class="nav-badge">13</span>
+    </a>
+    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+      <div class="nav-dot" style="background:var(--unit-2)"></div>
+      II. 데이터
+      <span class="nav-badge">13</span>
+    </a>
+    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+      <div class="nav-dot" style="background:var(--unit-3)"></div>
+      III. 알고리즘·프로그래밍
+      <span class="nav-badge">22</span>
+    </a>
+    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+      <div class="nav-dot" style="background:var(--unit-4)"></div>
+      IV. 인공지능
+      <span class="nav-badge">13</span>
+    </a>
+    <a class="nav-item" onclick="showView('lesson'); setActive(this)">
+      <div class="nav-dot" style="background:var(--unit-5)"></div>
+      V. 디지털 문화
+      <span class="nav-badge">7</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="progress-label">
+      <span>전체 진도</span>
+      <span>12 / 68 차시</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:17%"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── MAIN ─── -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-breadcrumb">
+      <span id="breadcrumb-home">홈</span>
+      <span class="sep" id="breadcrumb-sep" style="display:none">›</span>
+      <span class="current" id="breadcrumb-current"></span>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn" onclick="alert('학습 기록 저장됨!')">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        저장
+      </button>
+      <button class="btn btn-primary" onclick="showView('lesson'); setBreadcrumb('III. 알고리즘과 프로그래밍')">
+        이어서 학습 →
+      </button>
+    </div>
+  </header>
+
+  <!-- ─── DASHBOARD VIEW ─── -->
+  <section class="view active" id="view-dashboard">
+    <div class="dash-hero">
+      <div class="dash-hero-text">
+        <h2>안녕하세요, 학습자님!<br>오늘도 함께 배워볼까요?</h2>
+        <p>2022 개정 교육과정 기반 · 5개 대단원 · 34개 소단원 · 68차시</p>
+      </div>
+      <div class="dash-stats">
+        <div class="stat-card">
+          <div class="stat-num" style="color:var(--unit-3)">12</div>
+          <div class="stat-label">완료 차시</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="color:var(--unit-4)">56</div>
+          <div class="stat-label">남은 차시</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="color:var(--unit-5)">85</div>
+          <div class="stat-label">평균 점수</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h3>대단원 개요</h3>
+    </div>
+    <div class="units-grid">
+
+      <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('I. 컴퓨팅 시스템')" style="--c:var(--unit-1);--cl:var(--unit-1-light)">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-1)"></div>
+        <div class="unit-roman" style="color:var(--unit-1)">I</div>
+        <h4>컴퓨팅 시스템</h4>
+        <div class="unit-meta-small">13차시 · 6소단원</div>
+        <div class="unit-tag-row">
+          <span class="chip" style="background:var(--unit-1-light);color:var(--unit-1)">피지컬 컴퓨팅</span>
+          <span class="chip" style="background:var(--bg);color:var(--text-muted)">센서</span>
+        </div>
+        <div class="unit-progress-mini">
+          <div class="unit-progress-mini-fill" style="width:60%;background:var(--unit-1)"></div>
+        </div>
+      </div>
+
+      <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('II. 데이터')" >
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-2)"></div>
+        <div class="unit-roman" style="color:var(--unit-2)">II</div>
+        <h4>데이터</h4>
+        <div class="unit-meta-small">13차시 · 6소단원</div>
+        <div class="unit-tag-row">
+          <span class="chip" style="background:var(--unit-2-light);color:var(--unit-2)">디지털 표현</span>
+          <span class="chip" style="background:var(--bg);color:var(--text-muted)">분석</span>
+        </div>
+        <div class="unit-progress-mini">
+          <div class="unit-progress-mini-fill" style="width:30%;background:var(--unit-2)"></div>
+        </div>
+      </div>
+
+      <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('III. 알고리즘과 프로그래밍')" style="border-color:#F0997B">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-3)"></div>
+        <div class="unit-roman" style="color:var(--unit-3)">III</div>
+        <h4>알고리즘과 프로그래밍</h4>
+        <div class="unit-meta-small">22차시 · 10소단원 · <b style="color:var(--unit-3)">최대 비중</b></div>
+        <div class="unit-tag-row">
+          <span class="chip" style="background:var(--unit-3-light);color:var(--unit-3)">파이썬</span>
+          <span class="chip" style="background:var(--bg);color:var(--text-muted)">알고리즘</span>
+        </div>
+        <div class="unit-progress-mini">
+          <div class="unit-progress-mini-fill" style="width:10%;background:var(--unit-3)"></div>
+        </div>
+      </div>
+
+      <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('IV. 인공지능')">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-4)"></div>
+        <div class="unit-roman" style="color:var(--unit-4)">IV</div>
+        <h4>인공지능</h4>
+        <div class="unit-meta-small">13차시 · 6소단원</div>
+        <div class="unit-tag-row">
+          <span class="chip" style="background:var(--unit-4-light);color:var(--unit-4)">머신러닝</span>
+          <span class="chip" style="background:var(--bg);color:var(--text-muted)">윤리</span>
+        </div>
+        <div class="unit-progress-mini">
+          <div class="unit-progress-mini-fill" style="width:0%;background:var(--unit-4)"></div>
+        </div>
+      </div>
+
+      <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('V. 디지털 문화')">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-5)"></div>
+        <div class="unit-roman" style="color:var(--unit-5)">V</div>
+        <h4>디지털 문화</h4>
+        <div class="unit-meta-small">7차시 · 6소단원</div>
+        <div class="unit-tag-row">
+          <span class="chip" style="background:var(--unit-5-light);color:var(--unit-5)">윤리</span>
+          <span class="chip" style="background:var(--bg);color:var(--text-muted)">저작권</span>
+        </div>
+        <div class="unit-progress-mini">
+          <div class="unit-progress-mini-fill" style="width:0%;background:var(--unit-5)"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Lesson list -->
+    <div class="section-header">
+      <h3>소단원 목록</h3>
+      <div class="unit-filter">
+        <button class="filter-btn active" onclick="filterLessons(this,'all')">전체</button>
+        <button class="filter-btn" onclick="filterLessons(this,'I')" style="color:var(--unit-1)">I</button>
+        <button class="filter-btn" onclick="filterLessons(this,'II')" style="color:var(--unit-2)">II</button>
+        <button class="filter-btn" onclick="filterLessons(this,'III')" style="color:var(--unit-3)">III</button>
+        <button class="filter-btn" onclick="filterLessons(this,'IV')" style="color:var(--unit-4)">IV</button>
+        <button class="filter-btn" onclick="filterLessons(this,'V')" style="color:var(--unit-5)">V</button>
+      </div>
+    </div>
+
+    <div class="lessons-list">
+      <div class="lessons-list-header">
+        <span>📚</span> 학습 목록
+      </div>
+
+      <div class="lesson-row" data-unit="I" onclick="showView('lesson'); setBreadcrumb('I-1. 컴퓨팅 시스템의 구성')">
+        <div class="lesson-icon" style="background:var(--unit-1-light);color:var(--unit-1)">💻</div>
+        <div class="lesson-info">
+          <h5>I-1. 컴퓨팅 시스템의 구성</h5>
+          <p>하드웨어와 소프트웨어의 관계, 입출력 장치</p>
+        </div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">45분</span>
+      </div>
+
+      <div class="lesson-row" data-unit="I" onclick="showView('lesson'); setBreadcrumb('I-2. 운영체제의 역할')">
+        <div class="lesson-icon" style="background:var(--unit-1-light);color:var(--unit-1)">⚙️</div>
+        <div class="lesson-info">
+          <h5>I-2. 운영체제의 역할</h5>
+          <p>OS 개념, 프로세스 관리, 파일 시스템</p>
+        </div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">45분</span>
+      </div>
+
+      <div class="lesson-row" data-unit="II" onclick="showView('lesson'); setBreadcrumb('II-1. 이진수와 디지털 표현')">
+        <div class="lesson-icon" style="background:var(--unit-2-light);color:var(--unit-2)">🔢</div>
+        <div class="lesson-info">
+          <h5>II-1. 이진수와 디지털 표현</h5>
+          <p>비트·바이트, 이진수 변환, 아스키코드</p>
+        </div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">45분</span>
+      </div>
+
+      <div class="lesson-row" data-unit="III" onclick="showView('lesson'); setBreadcrumb('III-1. 알고리즘의 개념')">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🔄</div>
+        <div class="lesson-info">
+          <h5>III-1. 알고리즘의 개념</h5>
+          <p>알고리즘 정의, 순서도, 의사코드</p>
+        </div>
+        <span class="lesson-status status-current">학습 중</span>
+        <span class="lesson-time">45분</span>
+      </div>
+
+      <div class="lesson-row" data-unit="III" onclick="showView('lesson'); setBreadcrumb('III-2. 파이썬 기초 문법')">
+        <div class="lesson-icon" style="background:var(--bg);color:var(--text-light)">🐍</div>
+        <div class="lesson-info">
+          <h5>III-2. 파이썬 기초 문법</h5>
+          <p>변수, 자료형, 입출력 함수</p>
+        </div>
+        <span class="lesson-status status-locked">미시작</span>
+        <span class="lesson-time">45분</span>
+      </div>
+
+      <div class="lesson-row" data-unit="IV" onclick="showView('lesson'); setBreadcrumb('IV-1. 인공지능의 이해')">
+        <div class="lesson-icon" style="background:var(--bg);color:var(--text-light)">🤖</div>
+        <div class="lesson-info">
+          <h5>IV-1. 인공지능의 이해</h5>
+          <p>AI 개념, 역사, 적용 사례</p>
+        </div>
+        <span class="lesson-status status-locked">미시작</span>
+        <span class="lesson-time">45분</span>
+      </div>
+
+      <div class="lesson-row" data-unit="V" onclick="showView('lesson'); setBreadcrumb('V-1. 디지털 사회와 시민의식')">
+        <div class="lesson-icon" style="background:var(--bg);color:var(--text-light)">🌐</div>
+        <div class="lesson-info">
+          <h5>V-1. 디지털 사회와 시민의식</h5>
+          <p>디지털 권리, 책임, 사이버 윤리</p>
+        </div>
+        <span class="lesson-status status-locked">미시작</span>
+        <span class="lesson-time">45분</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── LESSON VIEW ─── -->
+  <section class="view" id="view-lesson">
+    <div class="lesson-layout">
+
+      <!-- LEFT: Content -->
+      <div class="lesson-content">
+
+        <!-- 01 학습목표 -->
+        <div class="section-card" id="sec-goal">
+          <div class="section-card-header" onclick="toggleSection('sec-goal')">
+            <div class="section-num-badge" style="background:var(--unit-1-light);color:var(--unit-1)">01</div>
+            <h4>학습목표</h4>
+            <span class="time-tag">⏱ 5분</span>
+            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
+          </div>
+          <div class="section-card-body">
+            <div class="achievement-box">
+              <div class="achievement-code">[9정03-01]</div>
+              <div class="achievement-text">알고리즘의 개념과 중요성을 이해하고, 문제 해결을 위한 알고리즘을 설계할 수 있다.</div>
+            </div>
+
+            <ul class="goal-list">
+              <li>알고리즘의 정의와 특성(입력, 출력, 명확성, 유한성, 유효성)을 설명할 수 있다.</li>
+              <li>순서도의 기호와 표현 방법을 이해하고 간단한 순서도를 그릴 수 있다.</li>
+              <li>일상생활의 문제를 알고리즘으로 표현할 수 있다.</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;font-weight:600">핵심 개념 미리보기</div>
+            <div class="concept-tags">
+              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">알고리즘</span>
+              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">순서도</span>
+              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">의사코드</span>
+              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">조건문</span>
+              <span class="concept-tag" onclick="document.getElementById('sec-concept').scrollIntoView({behavior:'smooth'})">반복문</span>
+            </div>
+
+            <div style="margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);font-size:12px;color:var(--text-muted)">
+              📌 <b>이전 차시 연결:</b> 지난 시간에는 데이터를 이진수로 표현하는 방법을 배웠습니다. 이번 시간에는 이 데이터를 처리하는 <em>알고리즘</em>의 개념을 학습합니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 개념설명 -->
+        <div class="section-card" id="sec-concept">
+          <div class="section-card-header" onclick="toggleSection('sec-concept')">
+            <div class="section-num-badge" style="background:var(--unit-2-light);color:var(--unit-2)">02</div>
+            <h4>개념설명</h4>
+            <span class="time-tag">⏱ 15분</span>
+            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
+          </div>
+          <div class="section-card-body">
+
+            <div class="concept-block">
+              <div class="concept-text">
+                <h5>알고리즘(Algorithm)이란?</h5>
+                <p>어떤 문제를 해결하기 위한 <strong>절차나 방법</strong>을 단계적으로 나타낸 것입니다. 좋은 알고리즘은 5가지 특성을 갖습니다: <em>입력, 출력, 명확성, 유한성, 유효성</em>.</p>
+              </div>
+              <div class="concept-visual">
+                <svg width="80" height="60" viewBox="0 0 80 60" fill="none">
+                  <rect x="10" y="5" width="60" height="14" rx="7" fill="#7B74D9" opacity=".7"/>
+                  <rect x="10" y="25" width="60" height="14" rx="3" fill="#D85A30" opacity=".7"/>
+                  <rect x="10" y="45" width="60" height="14" rx="7" fill="#1B9E72" opacity=".7"/>
+                  <line x1="40" y1="19" x2="40" y2="25" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+                  <line x1="40" y1="39" x2="40" y2="45" stroke="#666" stroke-width="1.5"/>
+                  <text x="40" y="14" font-size="7" fill="white" text-anchor="middle" font-family="sans-serif">입력</text>
+                  <text x="40" y="34" font-size="7" fill="white" text-anchor="middle" font-family="sans-serif">처리(알고리즘)</text>
+                  <text x="40" y="54" font-size="7" fill="white" text-anchor="middle" font-family="sans-serif">출력</text>
+                </svg>
+                <span style="font-size:11px">입력 → 처리 → 출력 흐름</span>
+              </div>
+            </div>
+
+            <div class="concept-block">
+              <div class="concept-text">
+                <h5>순서도(Flowchart) 기호</h5>
+                <p>알고리즘을 시각적으로 표현하는 도구입니다. 각 도형은 의미가 정해져 있습니다.</p>
+              </div>
+              <div class="concept-visual">
+                <svg width="120" height="90" viewBox="0 0 120 90" fill="none" style="opacity:1">
+                  <ellipse cx="60" cy="10" rx="25" ry="8" fill="#EAF3DE" stroke="#5A9622" stroke-width="1.2"/>
+                  <text x="60" y="13" font-size="7" fill="#3B6D11" text-anchor="middle" font-family="sans-serif">시작/끝</text>
+                  <rect x="35" y="28" width="50" height="14" fill="#EEEDFE" stroke="#7B74D9" stroke-width="1.2"/>
+                  <text x="60" y="38" font-size="7" fill="#3C3489" text-anchor="middle" font-family="sans-serif">처리</text>
+                  <polygon points="60,52 85,62 60,72 35,62" fill="#FAEEDA" stroke="#D85A30" stroke-width="1.2"/>
+                  <text x="60" y="65" font-size="7" fill="#854F0B" text-anchor="middle" font-family="sans-serif">판단</text>
+                  <parallelogram/>
+                  <path d="M35 80 L45 76 L85 76 L75 84 L35 84 Z" fill="#E6F1FB" stroke="#3080D9" stroke-width="1.2"/>
+                  <text x="60" y="82" font-size="7" fill="#0C447C" text-anchor="middle" font-family="sans-serif">입출력</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="caution-box">
+              ⚠️ <div><b>자주 혼동하는 개념:</b> "알고리즘"과 "프로그램"은 다릅니다. 알고리즘은 문제 해결 절차를 설명한 <em>계획</em>이고, 프로그램은 그 알고리즘을 컴퓨터가 이해할 수 있는 언어로 <em>구현한 것</em>입니다.</div>
+            </div>
+
+            <div style="margin-top:14px;padding:10px 12px;background:var(--bg);border-radius:var(--radius-sm);font-size:12px;color:var(--text-muted)">
+              📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 교과서 pp.78–85 참고
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 인터랙션 -->
+        <div class="section-card" id="sec-interact">
+          <div class="section-card-header" onclick="toggleSection('sec-interact')">
+            <div class="section-num-badge" style="background:var(--unit-3-light);color:var(--unit-3)">03</div>
+            <h4>인터랙션</h4>
+            <span class="time-tag">⏱ 15분</span>
+            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
+          </div>
+          <div class="section-card-body">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;background:var(--bg);padding:10px 14px;border-radius:var(--radius-sm)">
+              💡 이 활동을 통해 <b>알고리즘의 순서와 조건 판단</b>이 어떻게 동작하는지 직접 확인할 수 있습니다.
+            </div>
+
+            <div class="interaction-type-bar">
+              <span class="type-badge selected" onclick="switchInteraction(this,'quiz')" style="background:var(--unit-1-light);color:var(--unit-1)">퀴즈</span>
+              <span class="type-badge" onclick="switchInteraction(this,'code')" style="background:var(--bg);color:var(--text-muted)">코딩 실습</span>
+            </div>
+
+            <!-- Quiz -->
+            <div id="interact-quiz">
+              <div class="quiz-container">
+                <div class="quiz-q">다음 중 알고리즘의 특성으로 <b>올바르지 않은</b> 것은?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="checkAnswer(this, false)">
+                    <span class="opt-num">①</span> 유한성: 알고리즘은 반드시 유한한 단계 후에 종료되어야 한다.
+                  </div>
+                  <div class="quiz-option" onclick="checkAnswer(this, false)">
+                    <span class="opt-num">②</span> 명확성: 각 단계의 지시가 명확하고 모호하지 않아야 한다.
+                  </div>
+                  <div class="quiz-option" onclick="checkAnswer(this, true)">
+                    <span class="opt-num">③</span> 무한성: 알고리즘은 무한히 반복되어야 더 정확한 결과를 낸다.
+                  </div>
+                  <div class="quiz-option" onclick="checkAnswer(this, false)">
+                    <span class="opt-num">④</span> 유효성: 각 단계는 실제로 수행 가능한 연산이어야 한다.
+                  </div>
+                </div>
+                <div class="quiz-feedback" id="quiz-feedback"></div>
+              </div>
+            </div>
+
+            <!-- Coding -->
+            <div id="interact-code" style="display:none">
+              <div class="code-container">
+                <div class="code-toolbar">
+                  <span class="code-lang">Python · starter 코드</span>
+                  <button class="code-btn" onclick="copyCode()">복사</button>
+                  <button class="code-btn run-btn" onclick="runCode()">▶ 실행</button>
+                </div>
+                <pre id="code-display"><span class="cm"># 최댓값 찾기 알고리즘</span>
+<span class="cm"># 빈칸을 채워 완성해보세요!</span>
+
+<span class="kw">def</span> <span class="fn">find_max</span>(numbers):
+    <span class="cm"># 첫 번째 값을 최댓값으로 초기화</span>
+    max_val = numbers[<span class="num">0</span>]
+    
+    <span class="kw">for</span> num <span class="kw">in</span> numbers:
+        <span class="cm"># 조건: 현재 값이 max_val보다 크면?</span>
+        <span class="kw">if</span> num _____ max_val:   <span class="cm"># 빈칸 채우기</span>
+            max_val = num
+    
+    <span class="kw">return</span> max_val
+
+<span class="cm"># 테스트</span>
+data = [<span class="num">3</span>, <span class="num">7</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">4</span>]
+<span class="fn">print</span>(<span class="str">"최댓값:"</span>, find_max(data))</pre>
+                <div class="code-output" id="code-output">>>> 최댓값: 9</div>
+              </div>
+              <div style="margin-top:10px;font-size:12px;color:var(--text-muted);padding:10px;background:var(--bg);border-radius:var(--radius-sm)">
+                💬 예상 출력: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;font-size:11px">최댓값: 9</code>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 04 수행평가 -->
+        <div class="section-card" id="sec-assess">
+          <div class="section-card-header" onclick="toggleSection('sec-assess')">
+            <div class="section-num-badge" style="background:var(--unit-4-light);color:var(--unit-4)">04</div>
+            <h4>수행평가</h4>
+            <span class="time-tag">⏱ 5분</span>
+            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
+          </div>
+          <div class="section-card-body">
+            <div class="task-spec">
+              <h5>📋 과제 명세서</h5>
+              <p><b>활동 목적:</b> 일상생활의 문제를 알고리즘으로 표현하는 능력을 기른다.<br>
+              <b>절차:</b> ① 문제 선정 → ② 입력/출력 정의 → ③ 순서도 작성 → ④ 의사코드 작성<br>
+              <b>제출 형식:</b> 손으로 그린 순서도 사진 또는 디지털 파일 (JPG/PDF)</p>
+            </div>
+
+            <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">채점 기준표 (루브릭)</div>
+            <table class="rubric-table">
+              <tr>
+                <th>평가 요소</th>
+                <th class="level-4">매우 잘함(4)</th>
+                <th class="level-2">보통(2)</th>
+                <th class="level-1">노력 필요(1)</th>
+              </tr>
+              <tr>
+                <td><b>알고리즘 정확성</b></td>
+                <td class="level-4">모든 경우를 빠짐없이 처리</td>
+                <td class="level-2">대부분 처리, 일부 누락</td>
+                <td class="level-1">주요 흐름 미완성</td>
+              </tr>
+              <tr>
+                <td><b>순서도 표현</b></td>
+                <td class="level-4">기호 정확, 흐름 명확</td>
+                <td class="level-2">일부 기호 오류</td>
+                <td class="level-1">기호 구분 불명확</td>
+              </tr>
+            </table>
+
+            <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin:12px 0 8px;text-transform:uppercase;letter-spacing:.06em">자기평가 체크리스트</div>
+            <div class="self-check">
+              <div class="check-row">
+                <label>알고리즘의 5가지 특성을 모두 설명할 수 있다.</label>
+                <select><option>선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select>
+              </div>
+              <div class="check-row">
+                <label>순서도 기호의 의미를 구별할 수 있다.</label>
+                <select><option>선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select>
+              </div>
+              <div class="check-row">
+                <label>간단한 문제를 순서도로 표현할 수 있다.</label>
+                <select><option>선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 확인하기 -->
+        <div class="section-card" id="sec-review">
+          <div class="section-card-header" onclick="toggleSection('sec-review')">
+            <div class="section-num-badge" style="background:var(--unit-5-light);color:var(--unit-5)">05</div>
+            <h4>확인하기</h4>
+            <span class="time-tag">⏱ 5분</span>
+            <span style="color:var(--text-light);font-size:12px;margin-left:4px">▾</span>
+          </div>
+          <div class="section-card-body">
+            <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">핵심 콕콕 정리</div>
+            <div class="summary-cards">
+              <div class="summary-card">
+                <strong>알고리즘</strong>
+                문제 해결을 위한 단계적 절차. 입력→처리→출력의 흐름.
+              </div>
+              <div class="summary-card">
+                <strong>순서도 핵심 기호</strong>
+                타원=시작/끝, 직사각형=처리, 마름모=판단, 평행사변형=입출력
+              </div>
+              <div class="summary-card">
+                <strong>알고리즘 5특성</strong>
+                입력, 출력, 명확성, 유한성, 유효성
+              </div>
+            </div>
+
+            <div style="margin:16px 0 10px;font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">단원 평가 문제</div>
+            <div style="background:var(--bg);border-radius:var(--radius-sm);padding:14px 16px;font-size:13px;">
+              <b>1.</b> 알고리즘에서 "유한성"이 중요한 이유를 한 문장으로 설명하시오.<br>
+              <textarea style="width:100%;margin-top:8px;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:inherit;resize:vertical;min-height:60px;background:var(--surface)" placeholder="답을 입력하세요..."></textarea>
+            </div>
+
+            <div style="margin-top:14px;padding:12px 14px;background:var(--unit-5-light);border-radius:var(--radius-sm);font-size:12px;color:#3B6D11;border:1px solid rgba(90,150,34,.2)">
+              📖 <b>다음 차시 예고:</b> 다음 시간에는 파이썬으로 알고리즘을 직접 구현해봅니다. Pyodide 환경에서 코딩 실습을 진행합니다!
+            </div>
+
+            <div style="margin-top:12px">
+              <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">📚 심화 학습 자료</div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <a href="#" style="font-size:12px;color:var(--unit-4);text-decoration:none;padding:6px 10px;background:var(--bg);border-radius:6px;display:block">→ 정렬 알고리즘 시각화 (외부 링크)</a>
+                <a href="#" style="font-size:12px;color:var(--unit-4);text-decoration:none;padding:6px 10px;background:var(--bg);border-radius:6px;display:block">→ 코딩으로 배우는 알고리즘 (EBS 영상)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Sidebar panel -->
+      <div class="lesson-sidebar-panel">
+
+        <div class="panel-card">
+          <h5>학습 진행</h5>
+          <div class="progress-steps">
+            <div class="step-row done" onclick="scrollToSection('sec-goal')">
+              <div class="step-circle done">✓</div>
+              <span>학습목표</span>
+            </div>
+            <div class="step-row done" onclick="scrollToSection('sec-concept')">
+              <div class="step-circle done">✓</div>
+              <span>개념설명</span>
+            </div>
+            <div class="step-row active" onclick="scrollToSection('sec-interact')">
+              <div class="step-circle active">→</div>
+              <span>인터랙션</span>
+            </div>
+            <div class="step-row" onclick="scrollToSection('sec-assess')">
+              <div class="step-circle">4</div>
+              <span>수행평가</span>
+            </div>
+            <div class="step-row" onclick="scrollToSection('sec-review')">
+              <div class="step-circle">5</div>
+              <span>확인하기</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <h5>수업 타이머</h5>
+          <div class="timer-display">
+            <div class="timer-num" id="timer-display">45:00</div>
+            <div class="timer-label">남은 시간</div>
+          </div>
+          <div class="timer-btns">
+            <button class="btn" onclick="startTimer()" id="timer-start-btn">▶ 시작</button>
+            <button class="btn" onclick="resetTimer()">↺ 초기화</button>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <h5>현재 단원</h5>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.7">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--unit-3);flex-shrink:0"></span>
+              <b style="color:var(--text)">III. 알고리즘과 프로그래밍</b>
+            </div>
+            <div>소단원 1 / 10</div>
+            <div>인터랙션 비중: 50%</div>
+            <div>개발 난이도: <span style="color:var(--unit-3);font-weight:600">높음</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // View navigation
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + id).classList.add('active');
+  }
+
+  function setActive(el) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function setBreadcrumb(text) {
+    document.getElementById('breadcrumb-sep').style.display = 'inline';
+    document.getElementById('breadcrumb-current').textContent = text;
+  }
+
+  // Section toggle
+  function toggleSection(id) {
+    document.getElementById(id).classList.toggle('collapsed');
+  }
+
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Lesson filter
+  function filterLessons(btn, unit) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.lesson-row').forEach(row => {
+      row.style.display = (unit === 'all' || row.dataset.unit === unit) ? 'flex' : 'none';
+    });
+  }
+
+  // Quiz
+  function checkAnswer(el, isCorrect) {
+    document.querySelectorAll('.quiz-option').forEach(o => {
+      o.onclick = null;
+      o.style.cursor = 'default';
+    });
+    const fb = document.getElementById('quiz-feedback');
+    if (isCorrect) {
+      el.classList.add('correct');
+      fb.className = 'quiz-feedback show correct';
+      fb.textContent = '✓ 정답입니다! "무한성"은 알고리즘의 특성이 아닙니다. 알고리즘은 반드시 유한한 단계 후 종료되어야 합니다.';
+    } else {
+      el.classList.add('wrong');
+      fb.className = 'quiz-feedback show wrong';
+      fb.textContent = '✗ 오답입니다. 힌트: 알고리즘이 영원히 실행된다면 컴퓨터는 어떻게 될까요? 다시 생각해보세요!';
+    }
+  }
+
+  // Interaction switch
+  function switchInteraction(btn, type) {
+    document.querySelectorAll('.type-badge').forEach(b => {
+      b.classList.remove('selected');
+      b.style.background = 'var(--bg)';
+      b.style.color = 'var(--text-muted)';
+    });
+    btn.classList.add('selected');
+    btn.style.background = 'var(--unit-1-light)';
+    btn.style.color = 'var(--unit-1)';
+    document.getElementById('interact-quiz').style.display = type === 'quiz' ? 'block' : 'none';
+    document.getElementById('interact-code').style.display = type === 'code' ? 'block' : 'none';
+  }
+
+  // Code actions
+  function runCode() {
+    document.getElementById('code-output').classList.add('show');
+  }
+  function copyCode() {
+    navigator.clipboard?.writeText(`def find_max(numbers):\n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val\n\ndata = [3, 7, 1, 9, 4]\nprint("최댓값:", find_max(data))`);
+    alert('코드가 복사되었습니다!');
+  }
+
+  // Timer
+  let timerInterval = null;
+  let remaining = 45 * 60;
+  let running = false;
+
+  function updateTimerDisplay() {
+    const m = Math.floor(remaining / 60).toString().padStart(2, '0');
+    const s = (remaining % 60).toString().padStart(2, '0');
+    document.getElementById('timer-display').textContent = m + ':' + s;
+  }
+
+  function startTimer() {
+    if (running) {
+      clearInterval(timerInterval);
+      running = false;
+      document.getElementById('timer-start-btn').textContent = '▶ 시작';
+    } else {
+      running = true;
+      document.getElementById('timer-start-btn').textContent = '⏸ 일시정지';
+      timerInterval = setInterval(() => {
+        if (remaining > 0) {
+          remaining--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          running = false;
+          document.getElementById('timer-start-btn').textContent = '▶ 시작';
+          alert('수업 시간이 종료되었습니다!');
+        }
+      }, 1000);
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    running = false;
+    remaining = 45 * 60;
+    updateTimerDisplay();
+    document.getElementById('timer-start-btn').textContent = '▶ 시작';
+  }
+</script>
+</body>
+</html>
