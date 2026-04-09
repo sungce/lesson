@@ -1026,12 +1026,21 @@
       <a class="nav-sub" href="unit-03/lesson-09/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">9</span>함수와 디버깅</a>
       <a class="nav-sub" href="unit-03/lesson-10/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">10</span>실생활과 학문 분야 문제 해결</a>
     </div>
-    <a class="nav-item nav-disabled">
+    <a class="nav-item" id="nav-unit4-head"
+       onclick="toggleUnitNav4(); showView('unit4'); setActive(this)">
       <div class="nav-dot" style="background:var(--unit-4)"></div>
       IV. 인공지능
       <span class="nav-badge">13</span>
-      <span style="margin-left:4px;font-size:10px;color:var(--text-light)">준비중</span>
+      <span id="unit4-arrow" style="margin-left:2px;font-size:10px;color:var(--text-light)">▸</span>
     </a>
+    <div id="unit4-subnav" style="display:none">
+      <a class="nav-sub" href="unit-04/lesson-01/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">1</span>인공지능의 개념과 특성</a>
+      <a class="nav-sub" href="unit-04/lesson-02/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">2</span>데이터와 학습</a>
+      <a class="nav-sub" href="unit-04/lesson-03/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">3</span>팔 이미지 운동 도우미</a>
+      <a class="nav-sub" href="unit-04/lesson-04/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">4</span>소리 데이터 웃음 계수</a>
+      <a class="nav-sub" href="unit-04/lesson-05/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">5</span>텍스트 영화 평가 시스템</a>
+      <a class="nav-sub" href="unit-04/lesson-06/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">6</span>인공지능 윤리적 문제 해결</a>
+    </div>
     <a class="nav-item nav-disabled">
       <div class="nav-dot" style="background:var(--unit-5)"></div>
       V. 디지털 문화
@@ -1043,7 +1052,7 @@
   <div class="sidebar-footer">
     <div class="progress-label">
       <span>전체 진도</span>
-      <span>34 / 68 차시</span>
+      <span>47 / 68 차시</span>
     </div>
     <div class="progress-bar">
       <div class="progress-fill" style="width:17%"></div>
@@ -1142,7 +1151,7 @@
         </div>
       </a>
 
-      <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('IV. 인공지능')">
+      <a class="unit-overview-card" href="unit-04/index.html" style="text-decoration:none;display:block;cursor:pointer">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-4)"></div>
         <div class="unit-roman" style="color:var(--unit-4)">IV</div>
         <h4>인공지능</h4>
@@ -1150,7 +1159,7 @@
         <div class="unit-tag-row">
           <span class="chip" style="background:var(--unit-4-light);color:var(--unit-4)">머신러닝</span>
           <span class="chip" style="background:var(--bg);color:var(--text-muted)">윤리</span>
-        </div>
+        </a>
         <div class="unit-progress-mini">
           <div class="unit-progress-mini-fill" style="width:0%;background:var(--unit-4)"></div>
         </div>
@@ -1340,12 +1349,42 @@
         <span class="lesson-status status-done">완료</span>
         <span class="lesson-time">3차시</span>
       </a>
-      <div class="lesson-row" data-unit="IV" style="cursor:default;opacity:.6">
+      <a class="lesson-row" data-unit="IV" href="unit-04/lesson-01/index.html" style="text-decoration:none;color:inherit">
         <div class="lesson-icon" style="background:var(--unit-4-light);color:var(--unit-4)">🤖</div>
-        <div class="lesson-info"><h5>IV. 인공지능 (준비 중)</h5><p>머신러닝 체험, AI 윤리</p></div>
-        <span class="lesson-status status-locked">준비 중</span>
-        <span class="lesson-time">13차시</span>
-      </div>
+        <div class="lesson-info"><h5>IV-1. 인공지능의 개념과 특성</h5><p>4가지 특성·AI vs 일반SW 분류</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">1차시</span>
+      </a>
+      <a class="lesson-row" data-unit="IV" href="unit-04/lesson-02/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-4-light);color:var(--unit-4)">📊</div>
+        <div class="lesson-info"><h5>IV-2. 데이터와 학습</h5><p>데이터 역할·레이블링·훈련/테스트 분류</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">2차시</span>
+      </a>
+      <a class="lesson-row" data-unit="IV" href="unit-04/lesson-03/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-4-light);color:var(--unit-4)">💪</div>
+        <div class="lesson-info"><h5>IV-3. 팔 이미지를 이용한 운동 도우미</h5><p>이미지 분류·티처블머신·엔트리 연동</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="IV" href="unit-04/lesson-04/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-4-light);color:var(--unit-4)">😄</div>
+        <div class="lesson-info"><h5>IV-4. 소리 데이터를 이용한 웃음 계수 시스템</h5><p>소리 분류·웃음 카운터 프로그램</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="IV" href="unit-04/lesson-05/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-4-light);color:var(--unit-4)">📝</div>
+        <div class="lesson-info"><h5>IV-5. 텍스트 데이터를 이용한 영화 평가 시스템</h5><p>텍스트 분류·감성 분석</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="IV" href="unit-04/lesson-06/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-4-light);color:var(--unit-4)">⚖️</div>
+        <div class="lesson-info"><h5>IV-6. 인공지능의 윤리적 문제 해결</h5><p>개인정보·편향·비식별화·윤리 토론</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">1차시</span>
+      </a>
       <div class="lesson-row" data-unit="V" style="cursor:default;opacity:.6">
         <div class="lesson-icon" style="background:var(--unit-5-light);color:var(--unit-5)">🌐</div>
         <div class="lesson-info"><h5>V. 디지털 문화 (준비 중)</h5><p>저작권, 사이버 윤리 토론</p></div>
@@ -1548,6 +1587,15 @@
   function toggleUnitNav2() {
     var sub = document.getElementById('unit2-subnav');
     var arrow = document.getElementById('unit2-arrow');
+    if (!sub) return;
+    var open = sub.style.display !== 'none';
+    sub.style.display = open ? 'none' : 'block';
+    if (arrow) arrow.textContent = open ? '▸' : '▾';
+  }
+
+  function toggleUnitNav4() {
+    var sub = document.getElementById('unit4-subnav');
+    var arrow = document.getElementById('unit4-arrow');
     if (!sub) return;
     var open = sub.style.display !== 'none';
     sub.style.display = open ? 'none' : 'block';
