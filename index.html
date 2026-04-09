@@ -1007,12 +1007,25 @@
       <a class="nav-sub" href="unit-02/lesson-05/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">5</span>데이터 분석과 시각화</a>
       <a class="nav-sub" href="unit-02/lesson-06/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">6</span>데이터 활용과 빅데이터</a>
     </div>
-    <a class="nav-item nav-disabled">
+    <a class="nav-item" id="nav-unit3-head"
+       onclick="toggleUnitNav3(); showView('unit3'); setActive(this)">
       <div class="nav-dot" style="background:var(--unit-3)"></div>
       III. 알고리즘·프로그래밍
       <span class="nav-badge">22</span>
-      <span style="margin-left:4px;font-size:10px;color:var(--text-light)">준비중</span>
+      <span id="unit3-arrow" style="margin-left:2px;font-size:10px;color:var(--text-light)">▸</span>
     </a>
+    <div id="unit3-subnav" style="display:none">
+      <a class="nav-sub" href="unit-03/lesson-01/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">1</span>문제의 상태와 구조화</a>
+      <a class="nav-sub" href="unit-03/lesson-02/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">2</span>문제의 추상화</a>
+      <a class="nav-sub" href="unit-03/lesson-03/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">3</span>알고리즘의 이해와 표현</a>
+      <a class="nav-sub" href="unit-03/lesson-04/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">4</span>알고리즘의 분석과 설계</a>
+      <a class="nav-sub" href="unit-03/lesson-05/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">5</span>프로그래밍 시작하기</a>
+      <a class="nav-sub" href="unit-03/lesson-06/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">6</span>논리 연산 프로그래밍</a>
+      <a class="nav-sub" href="unit-03/lesson-07/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">7</span>중첩 제어 구조 프로그래밍</a>
+      <a class="nav-sub" href="unit-03/lesson-08/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">8</span>리스트와 프로그래밍</a>
+      <a class="nav-sub" href="unit-03/lesson-09/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">9</span>함수와 디버깅</a>
+      <a class="nav-sub" href="unit-03/lesson-10/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">10</span>실생활과 학문 분야 문제 해결</a>
+    </div>
     <a class="nav-item nav-disabled">
       <div class="nav-dot" style="background:var(--unit-4)"></div>
       IV. 인공지능
@@ -1030,7 +1043,7 @@
   <div class="sidebar-footer">
     <div class="progress-label">
       <span>전체 진도</span>
-      <span>12 / 68 차시</span>
+      <span>34 / 68 차시</span>
     </div>
     <div class="progress-bar">
       <div class="progress-fill" style="width:17%"></div>
@@ -1115,19 +1128,19 @@
         </div>
       </div>
 
-      <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('III. 알고리즘과 프로그래밍')" style="border-color:#F0997B">
+      <a class="unit-overview-card" href="unit-03/index.html" style="border-color:#F0997B;text-decoration:none;display:block;cursor:pointer">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-3)"></div>
         <div class="unit-roman" style="color:var(--unit-3)">III</div>
         <h4>알고리즘과 프로그래밍</h4>
         <div class="unit-meta-small">22차시 · 10소단원 · <b style="color:var(--unit-3)">최대 비중</b></div>
         <div class="unit-tag-row">
-          <span class="chip" style="background:var(--unit-3-light);color:var(--unit-3)">파이썬</span>
+          <span class="chip" style="background:var(--unit-3-light);color:var(--unit-3)">🟢 엔트리</span>
           <span class="chip" style="background:var(--bg);color:var(--text-muted)">알고리즘</span>
         </div>
         <div class="unit-progress-mini">
-          <div class="unit-progress-mini-fill" style="width:10%;background:var(--unit-3)"></div>
+          <div class="unit-progress-mini-fill" style="width:50%;background:var(--unit-3)"></div>
         </div>
-      </div>
+      </a>
 
       <div class="unit-overview-card" onclick="showView('lesson'); setBreadcrumb('IV. 인공지능')">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-4)"></div>
@@ -1267,12 +1280,66 @@
         <span class="lesson-status status-done">완료</span>
         <span class="lesson-time">2차시</span>
       </a>
-      <div class="lesson-row" data-unit="III" style="cursor:default;opacity:.6">
-        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🐍</div>
-        <div class="lesson-info"><h5>III. 알고리즘과 프로그래밍 (준비 중)</h5><p>파이썬, 순서도, 정렬·탐색</p></div>
-        <span class="lesson-status status-locked">준비 중</span>
-        <span class="lesson-time">22차시</span>
-      </div>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-01/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🗺️</div>
+        <div class="lesson-info"><h5>III-1. 문제의 상태와 구조화</h5><p>초기·현재·목표 상태 정의, 강 건너기 시뮬레이터</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">1차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-02/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🔍</div>
+        <div class="lesson-info"><h5>III-2. 문제의 추상화</h5><p>문제 분해·핵심 요소 추출, 자판기 추상화 게임</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">1차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-03/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">📐</div>
+        <div class="lesson-info"><h5>III-3. 알고리즘의 이해와 표현</h5><p>자연어·순서도 표현, 순서도 블록 조립</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">1차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-04/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">⚖️</div>
+        <div class="lesson-info"><h5>III-4. 알고리즘의 분석과 설계</h5><p>4가지 전략(분할·시행착오·되추적·최선)</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">1차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-05/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🟢</div>
+        <div class="lesson-info"><h5>III-5. 프로그래밍 시작하기</h5><p>엔트리 사칙 연산 계산기, 6단계 프로그래밍 과정</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-06/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🔀</div>
+        <div class="lesson-info"><h5>III-6. 논리 연산 프로그래밍</h5><p>AND·OR·NOT, 놀이공원 입장료 계산기</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-07/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🔁</div>
+        <div class="lesson-info"><h5>III-7. 중첩 제어 구조 프로그래밍</h5><p>반복 속 반복, Canvas 패턴 생성기</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-08/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">📋</div>
+        <div class="lesson-info"><h5>III-8. 리스트와 프로그래밍</h5><p>리스트 추가·삭제·인덱스, OX 퀴즈 체험</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-09/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🔧</div>
+        <div class="lesson-info"><h5>III-9. 함수와 디버깅</h5><p>함수 정의·호출·재사용, 버그 찾기 게임</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
+      <a class="lesson-row" data-unit="III" href="unit-03/lesson-10/index.html" style="text-decoration:none;color:inherit">
+        <div class="lesson-icon" style="background:var(--unit-3-light);color:var(--unit-3)">🌐</div>
+        <div class="lesson-info"><h5>III-10. 실생활과 학문 분야 문제 해결</h5><p>번역기·전자 투표 시뮬레이터, 통합 프로젝트</p></div>
+        <span class="lesson-status status-done">완료</span>
+        <span class="lesson-time">3차시</span>
+      </a>
       <div class="lesson-row" data-unit="IV" style="cursor:default;opacity:.6">
         <div class="lesson-icon" style="background:var(--unit-4-light);color:var(--unit-4)">🤖</div>
         <div class="lesson-info"><h5>IV. 인공지능 (준비 중)</h5><p>머신러닝 체험, AI 윤리</p></div>
@@ -1481,6 +1548,15 @@
   function toggleUnitNav2() {
     var sub = document.getElementById('unit2-subnav');
     var arrow = document.getElementById('unit2-arrow');
+    if (!sub) return;
+    var open = sub.style.display !== 'none';
+    sub.style.display = open ? 'none' : 'block';
+    if (arrow) arrow.textContent = open ? '▸' : '▾';
+  }
+
+  function toggleUnitNav3() {
+    var sub = document.getElementById('unit3-subnav');
+    var arrow = document.getElementById('unit3-arrow');
     if (!sub) return;
     var open = sub.style.display !== 'none';
     sub.style.display = open ? 'none' : 'block';
