@@ -1,420 +1,462 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I-5. 네트워크와 인터넷 — 정보 교과</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>I-5. 소리에 반응하는 애니메이션 장치 만들기 — 정보 교과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F5F4F0;--surface:#FFF;--border:#E2DFD6;--text:#1C1C1C;--muted:#696760;--light:#A8A59E;--unit:#6C65CC;--unit-dk:#4E48A8;--unit-lt:#ECEAFE;--unit-md:#C4C0F0;--green:#2A720E;--green-bg:#E8F3DC;--amber:#7A4E0A;--amber-bg:#FAF0DC;--red:#8C1E0E;--red-bg:#FAEBE6;--blue:#0A4E8C;--blue-bg:#E4F0FA;--rLG:14px;--rMD:10px;--rSM:8px;--SBW:224px;--TBH:52px;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;display:flex;min-height:100vh}
-.sb{width:var(--SBW);background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
-.sb-top{padding:18px 16px 14px;border-bottom:1px solid var(--border)}.uchip{display:inline-flex;align-items:center;background:var(--unit-lt);color:var(--unit);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px}
-.sb-top h2{font-size:13px;font-weight:700;line-height:1.4}.smeta{font-size:11px;color:var(--light);margin-top:3px}.sb-nav{padding:6px 0;flex:1}.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);padding:8px 16px 4px}
-.na{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:12px;color:var(--muted);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}.na:hover{background:var(--bg);color:var(--text)}.na.on{color:var(--unit);font-weight:600;background:var(--unit-lt);border-left-color:var(--unit)}.na.done .nn{background:var(--green-bg);color:var(--green)}
-.nn{width:20px;height:20px;border-radius:50%;background:var(--border);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--muted)}.na.on .nn{background:var(--unit);color:#fff}
-.nbadge{margin-left:auto;font-size:10px;color:var(--light);background:var(--bg);border:1px solid var(--border);padding:1px 6px;border-radius:10px}.sb-foot{padding:12px 16px;border-top:1px solid var(--border)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:var(--rSM);border:1px solid var(--border);background:var(--surface);transition:all .12s}.ba:hover{background:var(--bg);color:var(--text)}
-.main{margin-left:var(--SBW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}.topbar{background:var(--surface);border-bottom:1px solid var(--border);height:var(--TBH);padding:0 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
-.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);flex:1}.bc a{color:var(--muted);text-decoration:none}.bc a:hover{color:var(--text)}.bc .sep{color:var(--border)}.bc .cur{color:var(--text);font-weight:500}.tbr{display:flex;align-items:center;gap:8px}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 11px;font-size:11px}.bp{background:var(--unit);color:#fff;border-color:var(--unit)}.bp:hover{background:var(--unit-dk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
-.page{padding:22px 24px;flex:1}.g2{display:grid;grid-template-columns:1fr 256px;gap:18px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TBH) + 14px)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);margin-bottom:12px;overflow:hidden}.card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.ch{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;user-select:none;-webkit-user-select:none}.ch:hover{background:var(--bg)}.sn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:14px;font-weight:600;flex:1}
-.st{font-size:11px;color:var(--light);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:20px}.carr{font-size:11px;color:var(--light);transition:transform .2s;flex-shrink:0}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:20px}.card.collapsed .cb{display:none}
-.ach{background:var(--unit-lt);border:1px solid var(--unit-md);border-radius:var(--rSM);padding:12px 14px;margin-bottom:16px}.ach-c{font-family:'Courier New',monospace;font-size:11px;font-weight:700;color:var(--unit);margin-bottom:4px}.ach-t{font-size:13px;line-height:1.6}
-.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--border);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:18px;height:18px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.ctags{display:flex;flex-wrap:wrap;gap:6px}.ctag{font-size:11px;padding:4px 11px;background:var(--bg);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--muted);transition:all .12s}.ctag:hover{background:var(--unit-lt);border-color:var(--unit-md);color:var(--unit)}
-.ibox{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:12px}.ibox.prev{background:var(--bg);border:1px solid var(--border);color:var(--muted)}.ibox.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.ibox.info{background:var(--blue-bg);border:1px solid #BACED8;color:var(--blue)}.ibox.ok{background:var(--green-bg);border:1px solid #BFDFAA;color:var(--green)}
-.div{height:1px;background:var(--border);margin:16px 0}.crow{display:grid;grid-template-columns:1fr 155px;gap:16px;align-items:start;margin-bottom:18px}
-.ct h4{font-size:13px;font-weight:700;margin-bottom:8px}.ct p{font-size:13px;color:var(--muted);line-height:1.75}.ct ul{padding-left:1rem;margin-top:7px}.ct ul li{font-size:13px;color:var(--muted);margin-bottom:4px;line-height:1.6}
-.cvis{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px;flex-shrink:0}
-.qwrap{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:16px}.qq{font-size:14px;font-weight:500;margin-bottom:13px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--unit);background:var(--unit-lt)}.opt.correct{border-color:#4A9020;background:var(--green-bg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--red-bg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
-.onum{width:22px;height:22px;border-radius:50%;background:var(--border);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
-.qfb{display:none;margin-top:11px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--green-bg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--red-bg);border:1px solid #F0B8A0;color:var(--red)}
-.rub{width:100%;border-collapse:collapse;font-size:12px}.rub th{background:var(--bg);padding:8px 10px;font-weight:600;border-bottom:1.5px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.rub td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
+body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;color:#1C1C1C;font-size:14px;line-height:1.65;display:flex;min-height:100vh}
+:root{--u:#6C65CC;--udk:#4E48A8;--ult:#ECEAFE;--umd:#C8C4F0;--bg:#F5F4F0;--sf:#FFF;--br:#E2DFD6;--tx:#1C1C1C;--mt:#696760;--lt:#A8A59E;--green:#2A720E;--gbg:#E8F3DC;--amber:#7A4E0A;--abg:#FAF0DC;--red:#8C1E0E;--rbg:#FAEBE6;--blue:#0A4E8C;--bbg:#E4F0FA;--rLG:14px;--rSM:8px;--SW:240px;--TH:52px}
+.sb{width:var(--SW);background:var(--sf);border-right:1px solid var(--br);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
+.sb-top{padding:16px 14px 12px;border-bottom:1px solid var(--br)}.uchip{display:inline-flex;align-items:center;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:6px}
+.sb-top h2{font-size:12px;font-weight:700;line-height:1.4}.smeta{font-size:10px;color:var(--lt);margin-top:3px}
+.sb-nav{padding:4px 0;flex:1}.nlbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lt);padding:7px 13px 3px}
+.na{display:flex;align-items:center;gap:8px;padding:7px 13px;font-size:11px;color:var(--mt);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}
+.na:hover{background:var(--bg);color:var(--tx)}.na.on{color:var(--u);font-weight:600;background:var(--ult);border-left-color:var(--u)}.na.done .nn{background:var(--gbg);color:var(--green)}
+.nn{width:18px;height:18px;border-radius:50%;background:var(--br);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--mt)}.na.on .nn{background:var(--u);color:#fff}
+.nbadge{margin-left:auto;font-size:9px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:1px 5px;border-radius:10px;white-space:nowrap}
+.sb-foot{padding:10px 13px;border-top:1px solid var(--br)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mt);text-decoration:none;padding:5px 9px;border-radius:var(--rSM);border:1px solid var(--br);background:var(--sf);transition:all .12s}.ba:hover{background:var(--bg)}
+.main{margin-left:var(--SW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}
+.topbar{background:var(--sf);border-bottom:1px solid var(--br);height:var(--TH);padding:0 20px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:90}
+.bc{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--mt);flex:1}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}.bcsep{color:var(--br)}.bccur{color:var(--tx);font-weight:500}.tbr{display:flex;align-items:center;gap:6px}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--br);background:var(--sf);color:var(--tx);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 9px;font-size:11px}.bp{background:var(--u);color:#fff;border-color:var(--u)}.bp:hover{background:var(--udk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
+.page{padding:20px 22px;flex:1}.g2{display:grid;grid-template-columns:1fr 248px;gap:16px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TH)+12px)}
+.card{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);margin-bottom:11px;overflow:hidden}
+.ch{display:flex;align-items:center;gap:9px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--br);transition:background .12s;user-select:none}.ch:hover{background:var(--bg)}
+.sn{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:13px;font-weight:600;flex:1}
+.st{font-size:10px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:2px 7px;border-radius:20px;white-space:nowrap}.carr{font-size:11px;color:var(--lt);transition:transform .2s}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:18px}.card.collapsed .cb{display:none}
+.ach{background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:10px 13px;margin-bottom:14px}.ach-c{font-family:monospace;font-size:11px;font-weight:700;color:var(--u);margin-bottom:3px}.ach-t{font-size:13px;line-height:1.6}
+.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:13px;border-bottom:1px solid var(--br);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:17px;height:17px;border-radius:50%;background:var(--gbg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ctags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}.ctag{font-size:11px;padding:3px 10px;background:var(--bg);border:1px solid var(--br);border-radius:20px;cursor:pointer;color:var(--mt);transition:all .12s}.ctag:hover{background:var(--ult);border-color:var(--umd);color:var(--u)}
+.ibox{display:flex;align-items:flex-start;gap:9px;padding:10px 13px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:10px}.prev{background:var(--bg);border:1px solid var(--br);color:var(--mt)}.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.info{background:var(--bbg);border:1px solid #BACED8;color:var(--blue)}.ok{background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}
+.divl{height:1px;background:var(--br);margin:13px 0}
+.crow{display:grid;grid-template-columns:1fr 148px;gap:13px;align-items:start;margin-bottom:13px}
+.ct h4{font-size:13px;font-weight:700;margin-bottom:7px}.ct p{font-size:13px;color:var(--mt);line-height:1.75}.ct ul{padding-left:1rem;margin-top:5px}.ct ul li{font-size:13px;color:var(--mt);margin-bottom:3px;line-height:1.6}
+.cvis{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px}
+/* ── 수행활동 (해보기) ── */
+.activity{background:linear-gradient(135deg,var(--ult),#F5F4FF);border:2px solid var(--umd);border-radius:var(--rLG);margin-bottom:11px;overflow:hidden}
+.act-head{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1.5px solid var(--umd);background:var(--ult);cursor:pointer;user-select:none}.act-head:hover{background:#E4E0FC}
+.act-badge{background:var(--u);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}.act-head h3{font-size:13px;font-weight:700;color:var(--udk);flex:1}
+.act-body{padding:18px}
+.act-step{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--sf);border:1px solid var(--br);border-radius:var(--rSM);margin-bottom:8px}
+.act-num{width:22px;height:22px;border-radius:50%;background:var(--u);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.act-step h4{font-size:12px;font-weight:700;margin-bottom:4px}.act-step p{font-size:12px;color:var(--mt);line-height:1.65}
+.act-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.act-table th{background:var(--u);color:#fff;padding:7px 10px;font-weight:600;font-size:11px;text-align:left}
+.act-table td{padding:8px 10px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.55}
+.act-table tr:last-child td{border-bottom:none}
+.act-input{width:100%;padding:8px 10px;border:1.5px solid var(--br);border-radius:var(--rSM);font-size:12px;font-family:inherit;background:var(--sf);outline:none;resize:vertical;min-height:52px;margin-top:4px}
+.act-input:focus{border-color:var(--u)}
+/* ── 마이크로비트 블록 ── */
+.mb-workspace{background:#1e1e2e;border-radius:var(--rSM);padding:14px;margin:8px 0;display:flex;flex-direction:column;gap:5px}
+.mb-row{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.mb-indent{margin-left:22px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.mb-indent2{margin-left:44px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.mb{display:inline-flex;align-items:center;gap:4px;padding:6px 11px;border-radius:6px;font-size:11px;font-family:'Courier New',monospace;font-weight:700;color:#fff;cursor:default}
+.mb-hole{display:inline-block;background:rgba(255,255,255,.2);border-radius:3px;padding:1px 7px;font-size:10px;min-width:20px;text-align:center}
+.mb-start{background:#FF8C00;box-shadow:0 3px 0 #B85A00}
+.mb-motion{background:#4A7ED9;box-shadow:0 3px 0 #2A50A0}
+.mb-led{background:#9B59B6;box-shadow:0 3px 0 #6C3483}
+.mb-input{background:#F39C12;box-shadow:0 3px 0 #C07000}
+.mb-logic{background:#E74C3C;box-shadow:0 3px 0 #A01010}
+.mb-loop{background:#27AE60;box-shadow:0 3px 0 #1A7A40}
+.mb-var{background:#3498DB;box-shadow:0 3px 0 #1A5A9A}
+.mb-music{background:#E91E63;box-shadow:0 3px 0 #880033}
+.mb-radio{background:#00BCD4;box-shadow:0 3px 0 #007A88}
+.mb-sensor{background:#FF6B35;box-shadow:0 3px 0 #C04010}
+/* ── quiz ── */
+.qwrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-top:13px}.qq{font-size:14px;font-weight:500;margin-bottom:11px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:7px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--u);background:var(--ult)}.opt.correct{border-color:#4A9020;background:var(--gbg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--rbg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
+.onum{width:21px;height:21px;border-radius:50%;background:var(--br);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
+.qfb{display:none;margin-top:9px;padding:10px 13px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--rbg);border:1px solid #F0B8A0;color:var(--red)}
+/* ── assess ── */
+.rub{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}.rub th{background:var(--bg);padding:7px 8px;font-weight:600;border-bottom:1.5px solid var(--br);text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mt)}.rub td{padding:8px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
 .lv4{color:#1A6000!important;font-weight:500}.lv3{color:#2A6830!important}.lv2{color:#7A4E00!important}.lv1{color:#8A2000!important}
-.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.scard{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:13px 14px;font-size:12px;line-height:1.65;color:var(--muted)}.scard strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--light);margin-bottom:5px}
-.sclist{display:flex;flex-direction:column;gap:5px}.scitem{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--border)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:4px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-family:inherit;color:var(--text);cursor:pointer;flex-shrink:0}
-.task{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px}.task h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}.task p{font-size:13px;color:var(--muted);line-height:1.75}.srow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--border);margin-top:8px;font-size:12px;color:var(--muted)}.stepn{width:20px;height:20px;border-radius:50%;background:var(--unit-lt);color:var(--unit);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.ap{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);padding:15px;margin-bottom:12px}.ap h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--light);margin-bottom:10px}
-.slist{display:flex;flex-direction:column;gap:4px}.si{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--rSM);font-size:12px;color:var(--muted);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}.si.sa{background:var(--unit-lt);color:var(--unit);font-weight:500}.si.sd{color:var(--text)}
-.dot{width:22px;height:22px;border-radius:50%;background:var(--border);color:var(--light);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.dot.sa{background:var(--unit);color:#fff}.dot.sd{background:var(--green-bg);color:var(--green)}
-.td-num{font-size:32px;font-weight:300;letter-spacing:.05em;line-height:1;font-variant-numeric:tabular-nums;text-align:center;display:block}.td-lbl{font-size:10px;color:var(--light);text-align:center;margin-top:4px;margin-bottom:12px}
-.trow{display:flex;gap:6px}.trow .btn{flex:1;justify-content:center;font-size:11px}
-.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:6px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--unit);white-space:nowrap}.tdef{color:var(--muted)}
-.pbtrack{flex:1;height:6px;background:var(--unit-md);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--unit);border-radius:3px}
-
-/* 패킷 시뮬레이터 */
-#net-canvas{display:block;background:#1A1A2E;border-radius:var(--rMD);width:100%;height:220px;cursor:pointer}
-.net-ctrl{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
-.net-log{background:#1A1A2E;border-radius:var(--rSM);padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#A6E3A1;line-height:1.9;margin-top:8px;min-height:60px;max-height:90px;overflow-y:auto}
-
-@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.cvis{width:100%}.sgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){:root{--SBW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
+.peer-check{width:100%;border-collapse:collapse;font-size:11px;margin-top:10px}
+.peer-check th{background:var(--ult);padding:6px 9px;font-weight:600;border-bottom:1.5px solid var(--umd);text-align:center;color:var(--u);font-size:10px}
+.peer-check td{padding:7px 9px;border-bottom:1px solid var(--br);color:var(--mt);text-align:center}
+.peer-check td:first-child{text-align:left;font-size:11px}
+.peer-check input[type=radio]{accent-color:var(--u)}
+/* ── sidebar ── */
+.ap{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);padding:13px;margin-bottom:10px}.ap h5{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--lt);margin-bottom:8px}
+.slist{display:flex;flex-direction:column;gap:3px}.si{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--rSM);font-size:11px;color:var(--mt);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}
+.dot{width:19px;height:19px;border-radius:50%;background:var(--br);color:var(--lt);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dot.sa{background:var(--u);color:#fff}.dot.sd{background:var(--gbg);color:var(--green)}
+.sclist{display:flex;flex-direction:column;gap:4px}.scitem{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--br)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:3px 6px;border:1px solid var(--br);border-radius:5px;background:var(--sf);font-family:inherit;color:var(--tx);cursor:pointer;flex-shrink:0}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.scard{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px 12px;font-size:12px;line-height:1.65;color:var(--mt)}.scard strong{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--lt);margin-bottom:4px}
+.td-num{font-size:28px;font-weight:300;text-align:center;display:block}.td-lbl{font-size:10px;color:var(--lt);text-align:center;margin-top:3px;margin-bottom:9px}
+.trow{display:flex;gap:5px}.trow .btn{flex:1;justify-content:center;font-size:10px}
+.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:5px;padding:4px 0;font-size:11px;border-bottom:1px solid var(--br)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--u);white-space:nowrap}.tdef{color:var(--mt)}
+.pbtrack{height:5px;background:var(--umd);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--u);border-radius:3px}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:9px 18px;border-radius:10px;font-size:12px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
+@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:13px 15px}.sgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <aside class="sb">
-  <div class="sb-top"><div class="uchip">◈ Unit I</div><h2>컴퓨팅 시스템</h2><div class="smeta">소단원 5/6 · 13차시</div></div>
-  <nav class="sb-nav">
-    <div class="nlbl">소단원 목록</div>
-    <a class="na done" href="../lesson-01/index.html"><div class="nn">✓</div>컴퓨터의 구성과 역할</a>
-    <a class="na done" href="../lesson-02/index.html"><div class="nn">✓</div>입력 장치와 출력 장치</a>
-    <a class="na done" href="../lesson-03/index.html"><div class="nn">✓</div>CPU와 메모리</a>
-    <a class="na done" href="../lesson-04/index.html"><div class="nn">✓</div>운영체제의 역할</a>
-    <a class="na on"   href="../lesson-05/index.html"><div class="nn">5</div>네트워크와 인터넷<span class="nbadge">2차시</span></a>
-    <a class="na" href="../lesson-06/index.html"><div class="nn">6</div>피지컬 컴퓨팅</a>
-  </nav>
+  <div class="sb-top"><div class="uchip">◈ Unit I</div><h2>컴퓨팅 시스템</h2><div class="smeta">중단원2: 피지컬 컴퓨팅 프로그래밍 · p.28~31</div></div>
+  <nav class="sb-nav"><div class="nlbl">소단원 목록</div><a class="na done" href="../lesson-01/index.html"><div class="nn">✓</div>컴퓨팅 시스템의 구성과 동작 원리</a>
+<a class="na done" href="../lesson-02/index.html"><div class="nn">✓</div>피지컬 컴퓨팅 시스템의 이해</a>
+<a class="na done" href="../lesson-03/index.html"><div class="nn">✓</div>운동 횟수 표시 장치 만들기</a>
+<a class="na done" href="../lesson-04/index.html"><div class="nn">✓</div>수면 온도 알림이 장치 만들기</a>
+<a class="na on" href="../lesson-05/index.html"><div class="nn">5</div>소리에 반응하는 애니메이션 장치 만들기<span class="nbadge">3차시</span></a>
+<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>이심전심 게임 장치 만들기</a>
+</nav>
   <div class="sb-foot"><a class="ba" href="../../index.html">← 단원 목차</a></div>
 </aside>
-
 <main class="main">
   <header class="topbar">
-    <div class="bc"><a href="#">I. 컴퓨팅 시스템</a><span class="sep">›</span><span class="cur">5. 네트워크와 인터넷</span></div>
+    <div class="bc"><a href="../../index.html">I. 컴퓨팅 시스템</a><span class="bcsep">›</span><span class="bccur">5. 소리에 반응하는 애니메이션 장치 만들기</span></div>
     <div class="tbr">
       <button class="btn bsm" onclick="markDone('05')">✓ 완료 표시</button>
       <a class="btn bsm bp" href="../lesson-06/index.html">다음 소단원 →</a>
     </div>
   </header>
-
   <div class="page"><div class="g2"><div class="cm">
 
-    <!-- 01 학습목표 -->
-    <div class="card" id="sec-goal">
-      <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:#ECEAFE;color:#6C65CC">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="ach"><div class="ach-c">[9정01-05]</div><div class="ach-t">네트워크의 개념과 인터넷 동작 원리를 이해하고 IP 주소와 프로토콜의 역할을 설명할 수 있다.</div></div>
-        <ul class="glist">
-          <li><div class="gck">✓</div>네트워크와 인터넷의 개념 차이를 설명할 수 있다.</li>
-          <li><div class="gck">✓</div>IP 주소와 도메인의 역할을 이해하고 설명할 수 있다.</li>
-          <li><div class="gck">✓</div>패킷 교환 방식으로 데이터가 전달되는 과정을 설명할 수 있다.</li>
-        </ul>
-        <div class="div"></div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--light);margin-bottom:8px">핵심 개념 미리보기</div>
-        <div class="ctags">
-          <span class="ctag" onclick="goTo('sec-concept')">네트워크</span>
-          <span class="ctag" onclick="goTo('sec-concept')">인터넷</span>
-          <span class="ctag" onclick="goTo('sec-concept')">IP 주소</span>
-          <span class="ctag" onclick="goTo('sec-concept')">도메인</span>
-          <span class="ctag" onclick="goTo('sec-concept')">패킷</span>
-          <span class="ctag" onclick="goTo('sec-concept')">프로토콜</span>
-        </div>
-        <div class="ibox prev">📌 <div><b>이전 차시 연결:</b> OS가 한 컴퓨터 내부 자원을 관리했다면, 이번 시간에는 컴퓨터들이 <em>서로 연결</em>되어 통신하는 네트워크와 인터넷의 원리를 탐구합니다.</div></div>
+<div class="card" id="sec-goal">
+  <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--ult);color:var(--u)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div class="ach"><div class="ach-c">[9정01-05] 피지컬 컴퓨팅 프로그래밍</div><div class="ach-t">소리 센서와 스피커를 활용하여 큰 소리가 나면 애니메이션과 멜로디가 재생되는 피지컬 컴퓨팅 시스템을 만들 수 있다. (pp.28~31)</div></div>
+    <ul class="glist">
+      <li><div class="gck">✓</div>소리 센서와 스피커의 특성을 설명할 수 있다.</li>
+      <li><div class="gck">✓</div>변수와 조건을 활용한 알고리즘을 설계할 수 있다.</li>
+      <li><div class="gck">✓</div>소리에 반응하는 LED 애니메이션·멜로디 장치를 MakeCode로 완성할 수 있다.</li>
+    </ul>
+    <div class="divl"></div>
+    <div class="ctags">
+      <span class="ctag" onclick="goTo('sec-concept')">소리 센서</span>
+      <span class="ctag" onclick="goTo('sec-concept')">스피커</span>
+      <span class="ctag" onclick="goTo('sec-concept')">변수</span>
+      <span class="ctag" onclick="goTo('sec-concept')">애니메이션</span>
+      <span class="ctag" onclick="goTo('sec-concept')">멜로디</span>
+    </div>
+    <div class="ibox prev">📌 <b>이전 차시:</b> 온도·빛 센서로 수면 온도 알림이를 만들었습니다. 이번에는 소리 센서와 스피커로 재미있는 애니메이션 장치를 만들어봅니다!</div>
+  </div>
+</div>
+
+<div class="card" id="sec-concept">
+  <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:var(--gbg);color:var(--green)">02</div><h3>개념설명</h3><span class="st">⏱ 20분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px">
+      <div style="background:var(--rbg);border:1px solid #F0B8A0;border-radius:var(--rSM);padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:5px">🎤 소리 센서</div>
+        <div style="font-size:12px;color:var(--mt);line-height:1.75">측정 범위: <b>0 ~ 255</b><br>뒷면 MICROPHONE 칩에 내장<br>큰 소리 감지 시 앞면 마이크 LED 점등<br>기준값으로 큰 소리 여부 판별</div>
+      </div>
+      <div style="background:var(--gbg);border:1px solid #BFDFAA;border-radius:var(--rSM);padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:5px">🔊 스피커</div>
+        <div style="font-size:12px;color:var(--mt);line-height:1.75">다양한 주파수로 음 출력<br>멜로디 블록 → 곡 재생<br>음표 블록 → 개별 음 재생<br>bpm 설정으로 속도 조절</div>
       </div>
     </div>
+    <div class="divl"></div>
+    <h4 style="font-size:13px;font-weight:700;margin-bottom:9px">알고리즘 설계 (4단계)</h4>
+    <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:13px;font-size:12px;color:var(--mt);line-height:2;margin-bottom:12px">
+      ➊ 시작 → '작동 시작' 변수 0 초기화 + 소리 기준값 250 설정 + 시작 멜로디 재생<br>
+      ➋ 큰 소리 감지 → '작동 시작' 변수에 <b>1</b> 저장<br>
+      ➌ '작동 시작' = 1 이면 → 뛰어오르는·뛰어내리는 <b>멜로디</b> 순서대로 출력<br>
+      ➍ '작동 시작' = 1 이면 → LED에 <b>춤 추는 애니메이션</b> 출력
+    </div>
+    <h4 style="font-size:13px;font-weight:700;margin-bottom:9px">MakeCode 블록 예시</h4>
+    <div class="mb-workspace">
+      <div class="mb-row"><span class="mb mb-start">🟢 시작하면</span></div>
+      <div class="mb-indent"><span class="mb mb-var">작동시작 ← 0</span></div>
+      <div class="mb-indent"><span class="mb mb-sensor">소리 기준값 250으로 설정</span></div>
+      <div class="mb-indent"><span class="mb mb-music">🎵 전원켜는 멜로디 재생</span></div>
+      <div class="mb-row"><span class="mb mb-sensor">🔊 큰 소리 감지 시</span></div>
+      <div class="mb-indent"><span class="mb mb-var">작동시작 ← 1</span></div>
+      <div class="mb-row"><span class="mb mb-loop">🔁 무한 반복</span></div>
+      <div class="mb-indent"><span class="mb mb-logic">만약 작동시작 = 1</span></div>
+      <div class="mb-indent2"><span class="mb mb-music">🎵 뛰어오르는 멜로디 (1번)</span></div>
+      <div class="mb-indent2"><span class="mb mb-music">🎵 뛰어내리는 멜로디 (1번)</span></div>
+      <div class="mb-indent2"><span class="mb mb-var">작동시작 ← 0</span></div>
+    </div>
+    <div class="ibox warn">⚠️ <b>핵심:</b> 멜로디 블록과 애니메이션 블록을 별도의 <b>무한 반복</b>에 넣어 동시에 실행되도록 설계합니다.</div>
+    <div class="ibox info">📖 <b>교과서 연계:</b> pp.28~31</div>
+  </div>
+</div>
 
-    <!-- 02 개념설명 -->
-    <div class="card" id="sec-concept">
-      <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:#E8F3DC;color:#2A720E">02</div><h3>개념설명</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
-      <div class="cb">
+<!-- ★ 수행 활동 ★ -->
+<div class="activity" id="sec-activity">
+  <div class="act-head" onclick="toggleSec('act-body-05')">
+    <span class="act-badge">★ 수행 활동</span>
+    <h3>스피커·소리 센서를 활용한 장치 만들기</h3>
+    <span style="font-size:10px;color:var(--udk);margin-left:auto">모둠 활동 | pp.31</span>
+    <span class="carr" style="color:var(--udk)">▾</span>
+  </div>
+  <div id="act-body-05" class="act-body">
+    <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 스피커와 소리 센서를 활용한 세 가지 수행 활동입니다. (교과서 p.31 해보기)</div>
 
-        <div class="crow">
-          <div class="ct">
-            <h4>네트워크 vs 인터넷</h4>
-            <p><strong>네트워크</strong>는 2대 이상의 기기가 연결되어 데이터를 주고받는 것, <strong>인터넷</strong>은 전 세계 네트워크들이 연결된 거대한 네트워크입니다.</p>
-            <ul>
-              <li><b>LAN:</b> 집·학교·사무실 내 좁은 범위</li>
-              <li><b>WAN:</b> 도시·국가·대륙을 잇는 넓은 범위</li>
-              <li><b>인터넷:</b> WAN들이 연결된 전 세계 망</li>
-            </ul>
-          </div>
-          <div class="cvis">
-            <svg viewBox="0 0 140 120" width="140" xmlns="http://www.w3.org/2000/svg">
-              <!-- LAN 1 -->
-              <circle cx="36" cy="38" r="26" fill="none" stroke="#6C65CC" stroke-width="1.5" stroke-dasharray="3,2"/>
-              <text x="36" y="18" font-size="7" fill="#6C65CC" text-anchor="middle" font-family="sans-serif" font-weight="bold">LAN A</text>
-              <rect x="24" y="30" width="24" height="16" rx="3" fill="#ECEAFE" stroke="#6C65CC" stroke-width="1"/>
-              <text x="36" y="40" font-size="6.5" fill="#4E48A8" text-anchor="middle" font-family="sans-serif">PC × 3</text>
-              <!-- LAN 2 -->
-              <circle cx="104" cy="38" r="26" fill="none" stroke="#0A4E8C" stroke-width="1.5" stroke-dasharray="3,2"/>
-              <text x="104" y="18" font-size="7" fill="#0A4E8C" text-anchor="middle" font-family="sans-serif" font-weight="bold">LAN B</text>
-              <rect x="92" y="30" width="24" height="16" rx="3" fill="#E4F0FA" stroke="#0A4E8C" stroke-width="1"/>
-              <text x="104" y="40" font-size="6.5" fill="#0A4E8C" text-anchor="middle" font-family="sans-serif">스마트폰</text>
-              <!-- WAN -->
-              <path d="M62 38 Q70 28 78 38" fill="none" stroke="#2A720E" stroke-width="2"/>
-              <text x="70" y="27" font-size="7" fill="#2A720E" text-anchor="middle" font-family="sans-serif" font-weight="bold">WAN</text>
-              <!-- Internet cloud -->
-              <ellipse cx="70" cy="88" rx="50" ry="24" fill="#FAF0DC" stroke="#7A4E0A" stroke-width="1.5"/>
-              <text x="70" y="86" font-size="9" fill="#7A4E0A" text-anchor="middle" font-family="sans-serif" font-weight="bold">인터넷</text>
-              <text x="70" y="98" font-size="7" fill="#7A4E0A" text-anchor="middle" font-family="sans-serif">전 세계 네트워크 연결</text>
-              <path d="M36 64 L36 72 Q50 80 60 82" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
-              <path d="M104 64 L104 72 Q90 80 80 82" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
-            </svg>
-          </div>
+    <!-- 활동 1: 학교 종 노래 -->
+    <div style="background:var(--sf);border:2px solid var(--umd);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--u);margin-bottom:8px">📋 활동 1 — 학교 종 노래 재생 프로그램 (pp.31)</div>
+      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:12px;margin-bottom:10px">
+        <div style="font-size:11px;font-weight:700;color:var(--mt);margin-bottom:8px">🎵 학교 종 악보 (솔=G4, 라=A4, 미=E4, 도=C4, 레=D4)</div>
+        <div style="font-family:monospace;font-size:11px;color:var(--mt);line-height:2">
+          학-교-종-이-땡-땡-땡: 솔솔라라솔솔미<br>
+          어-서-모-이-자: 솔솔미미레<br>
+          선-생-님-이-우-리-를: 솔솔라라솔솔미<br>
+          기-다-리-신-다: 솔미레미도
         </div>
-
-        <div class="div"></div>
-
-        <div class="crow">
-          <div class="ct">
-            <h4>IP 주소와 도메인</h4>
-            <p>인터넷상의 모든 기기는 고유한 <strong>IP 주소</strong>(주민등록번호 같은 것)를 가집니다. 사람이 기억하기 쉽게 영문 주소로 변환한 것이 <strong>도메인</strong>입니다.</p>
-            <ul>
-              <li><b>IPv4:</b> 192.168.0.1 (숫자 4묶음, 약 43억 개)</li>
-              <li><b>IPv6:</b> 128비트, 거의 무한대 주소</li>
-              <li><b>도메인:</b> google.com → DNS가 IP로 변환</li>
-              <li><b>DNS:</b> 도메인↔IP 주소 변환 서버</li>
-            </ul>
-          </div>
-          <div class="cvis">
-            <svg viewBox="0 0 140 110" width="140" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="8" width="132" height="22" rx="5" fill="#E8F3DC" stroke="#2A720E" stroke-width="1.2"/>
-              <text x="70" y="22" font-size="8.5" fill="#1A5000" text-anchor="middle" font-family="sans-serif" font-weight="bold">www.google.com</text>
-              <path d="M70 30 L70 42" stroke="#999" stroke-width="1.5" marker-end="url(#dn1)"/>
-              <rect x="20" y="42" width="100" height="22" rx="5" fill="#FAF0DC" stroke="#7A4E0A" stroke-width="1.2"/>
-              <text x="70" y="52" font-size="7.5" fill="#5A3000" text-anchor="middle" font-family="sans-serif" font-weight="bold">DNS 서버 (주소록)</text>
-              <text x="70" y="62" font-size="6.5" fill="#7A4E0A" text-anchor="middle" font-family="sans-serif">도메인 → IP 변환</text>
-              <path d="M70 64 L70 76" stroke="#999" stroke-width="1.5" marker-end="url(#dn2)"/>
-              <rect x="4" y="76" width="132" height="22" rx="5" fill="#ECEAFE" stroke="#6C65CC" stroke-width="1.2"/>
-              <text x="70" y="91" font-size="8.5" fill="#3A3090" text-anchor="middle" font-family="sans-serif" font-weight="bold">142.250.196.110 (IP 주소)</text>
-              <defs>
-                <marker id="dn1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"/></marker>
-                <marker id="dn2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"/></marker>
-              </defs>
-            </svg>
-          </div>
-        </div>
-
-        <div class="div"></div>
-        <h4 style="font-size:13px;font-weight:700;margin-bottom:10px">패킷 교환 방식</h4>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.75">데이터를 한 번에 통째로 보내지 않고, 작은 조각인 <strong>패킷</strong>으로 분할하여 여러 경로로 전송한 뒤 목적지에서 재조립합니다. 이 방식 덕분에 네트워크 혼잡을 피하고 효율적으로 전달할 수 있습니다.</p>
-        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:12px">
-          <div style="padding:8px 12px;background:#ECEAFE;border:1px solid #C4C0F0;border-radius:6px;font-size:12px;font-weight:600;color:#4E48A8;white-space:nowrap">📦 패킷 1</div>
-          <div style="font-size:18px;color:var(--light)">+</div>
-          <div style="padding:8px 12px;background:#ECEAFE;border:1px solid #C4C0F0;border-radius:6px;font-size:12px;font-weight:600;color:#4E48A8;white-space:nowrap">📦 패킷 2</div>
-          <div style="font-size:18px;color:var(--light)">+</div>
-          <div style="padding:8px 12px;background:#ECEAFE;border:1px solid #C4C0F0;border-radius:6px;font-size:12px;font-weight:600;color:#4E48A8;white-space:nowrap">📦 패킷 3</div>
-          <div style="font-size:18px;color:var(--light)">→</div>
-          <div style="padding:8px 14px;background:#E8F3DC;border:1px solid #BFDFAA;border-radius:6px;font-size:12px;font-weight:600;color:#1A5000;white-space:nowrap">🗂️ 원본 데이터 재조립</div>
-        </div>
-        <div class="ibox warn">⚠️ <div><b>혼동 주의:</b> <strong>인터넷 ≠ 웹(WWW)</strong>. 인터넷은 물리적 통신망이고, 웹(www)은 그 위에서 실행되는 서비스 중 하나입니다. 이메일·FTP도 인터넷을 사용하지만 웹은 아닙니다.</div></div>
-        <div class="ibox info">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.54–65 참고</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px" id="piano-keys"></div>
+        <div id="song-display" style="font-size:12px;color:var(--u);margin-top:7px;font-weight:700;min-height:18px"></div>
       </div>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <button class="btn bsm bp" onclick="playSong()">▶ 학교 종 재생</button>
+        <button class="btn bsm" onclick="stopSong()">⏹ 정지</button>
+      </div>
+      <textarea class="act-input" placeholder="MakeCode로 학교 종 노래를 작성하는 방법을 기록하세요.&#10;힌트: 음악 블록의 '음표 연주' 블록을 사용합니다.&#10;G4=솔, A4=라, E4=미, C4=도, D4=레"></textarea>
     </div>
 
-    <!-- 03 인터랙션 -->
-    <div class="card" id="sec-interact">
-      <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:#FAEBE6;color:#8C1E0E">03</div><h3>인터랙션 — 패킷 전송 시뮬레이터</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 <b>전송 시작</b>을 눌러 내 컴퓨터에서 서버까지 패킷이 어떻게 이동하는지 관찰해보세요!</div>
+    <!-- 활동 2: 어울리는 애니메이션 -->
+    <div style="background:var(--sf);border:2px solid var(--umd);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--u);margin-bottom:8px">📋 활동 2 — 노래에 어울리는 애니메이션 구상</div>
+      <div style="font-size:12px;color:var(--mt);margin-bottom:9px">학교 종 노래와 어울리는 LED 애니메이션을 구상하고, 각 장면을 5×5 LED 격자에 그려보세요.</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">
+        <div id="led-grid-1" style="padding:10px;background:#1e1e2e;border-radius:var(--rSM);cursor:pointer"></div>
+        <div id="led-grid-2" style="padding:10px;background:#1e1e2e;border-radius:var(--rSM);cursor:pointer"></div>
+        <div id="led-grid-3" style="padding:10px;background:#1e1e2e;border-radius:var(--rSM);cursor:pointer"></div>
+      </div>
+      <div style="font-size:10px;color:var(--lt);margin-bottom:8px">LED 격자를 클릭하여 켜고 끄세요</div>
+      <textarea class="act-input" placeholder="애니메이션 구상 설명:&#10;예) 학교 종 소리에 맞춰 학교 건물 모양, 종 모양 등을 표현..."></textarea>
+    </div>
 
-        <canvas id="net-canvas"></canvas>
-        <div class="net-ctrl">
-          <button class="btn bsm bp" onclick="startSim()">▶ 전송 시작</button>
-          <button class="btn bsm" onclick="resetSim()">↺ 초기화</button>
-          <span id="sim-status" style="font-size:12px;color:var(--muted)">시작 버튼을 눌러주세요</span>
-        </div>
-        <div class="net-log" id="net-log">// 패킷 전송 로그가 여기에 표시됩니다...</div>
-
-        <div class="div"></div>
-        <div class="qwrap">
-          <div class="qq">인터넷에서 데이터를 전송할 때 사용하는 기본 프로토콜 묶음으로 올바른 것은?</div>
-          <div class="qopts">
-            <div class="opt" onclick="checkQ(this,false,'HTTP는 웹 페이지 전송에 특화된 프로토콜입니다. 인터넷 전체의 기반 프로토콜은 아닙니다.')"><span class="onum">①</span>HTTP / HTTPS</div>
-            <div class="opt" onclick="checkQ(this,true,'TCP/IP는 인터넷의 근본적인 통신 프로토콜로, 데이터 전송(TCP)과 주소 지정(IP)을 담당합니다.')"><span class="onum">②</span>TCP/IP</div>
-            <div class="opt" onclick="checkQ(this,false,'FTP는 파일 전송에 특화된 프로토콜로, 인터넷 기반 프로토콜이 아닙니다.')"><span class="onum">③</span>FTP</div>
-            <div class="opt" onclick="checkQ(this,false,'DNS는 도메인 이름을 IP 주소로 변환하는 서비스이지, 데이터 전송 프로토콜이 아닙니다.')"><span class="onum">④</span>DNS</div>
+    <!-- 활동 3: 박수 소리 누적 비교 -->
+    <div style="background:var(--sf);border:2px solid var(--umd);border-radius:var(--rSM);padding:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--u);margin-bottom:8px">📋 활동 3 — 두 모둠 박수 소리 누적 비교 장치 (pp.31)</div>
+      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px;margin-bottom:10px;font-size:12px;color:var(--mt);line-height:1.9">
+        <b>조건:</b><br>① A 버튼 → 5초 동안 소리 크기를 그래프로 보여주며 값 누적 저장<br>② B 버튼 → 5초 동안 소리 크기를 그래프로 보여주며 값 누적 저장<br>③ 로고 터치 → A와 B 누적값 비교 후 큰 쪽 문자('A' or 'B') 출력
+      </div>
+      <div style="background:#1e1e2e;border-radius:var(--rSM);padding:14px;margin-bottom:10px">
+        <div style="font-size:10px;color:#aaa;margin-bottom:8px;text-align:center">박수 소리 대결 시뮬레이터</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div style="text-align:center">
+            <button class="btn bsm" id="btn-a-clap" onclick="startClap('A')" style="width:100%;background:#4A7ED9;color:#fff;border-color:#2A50A0;font-size:13px;font-weight:700">A 모둠 박수!</button>
+            <div id="a-bar" style="height:60px;background:#333;border-radius:4px;margin-top:7px;overflow:hidden;position:relative">
+              <div id="a-fill" style="position:absolute;bottom:0;width:100%;background:#4A7ED9;height:0%;transition:height .3s;border-radius:4px"></div>
+            </div>
+            <div id="a-score" style="font-size:12px;color:#4A7ED9;margin-top:4px;font-weight:700">0점</div>
           </div>
-          <div class="qfb" id="qfb"></div>
+          <div style="text-align:center">
+            <button class="btn bsm" id="btn-b-clap" onclick="startClap('B')" style="width:100%;background:#E74C3C;color:#fff;border-color:#A01010;font-size:13px;font-weight:700">B 모둠 박수!</button>
+            <div id="b-bar" style="height:60px;background:#333;border-radius:4px;margin-top:7px;overflow:hidden;position:relative">
+              <div id="b-fill" style="position:absolute;bottom:0;width:100%;background:#E74C3C;height:0%;transition:height .3s;border-radius:4px"></div>
+            </div>
+            <div id="b-score" style="font-size:12px;color:#E74C3C;margin-top:4px;font-weight:700">0점</div>
+          </div>
         </div>
+        <button class="btn bsm" id="btn-logo" onclick="showResult()" style="width:100%;background:#FF6B35;color:#fff;border-color:#C04010;font-size:13px">🏆 로고 터치 → 결과 확인</button>
+        <div id="clap-result" style="font-size:16px;font-weight:700;text-align:center;margin-top:10px;color:#FF6B35;min-height:24px"></div>
+        <div id="clap-timer" style="font-size:10px;color:#aaa;text-align:center;min-height:16px"></div>
       </div>
+      <textarea class="act-input" placeholder="알고리즘 작성:&#10;A 버튼 → 5초 타이머 시작, 소리 센서값 누적(A_누적)&#10;B 버튼 → 5초 타이머 시작, 소리 센서값 누적(B_누적)&#10;로고 터치 → 만약 A_누적 > B_누적 이면: 'A' 출력..."></textarea>
     </div>
 
-    <!-- 04 수행평가 -->
-    <div class="card" id="sec-assess">
-      <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:#E4F0FA;color:#0A4E8C">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="task">
-          <h4>📋 인터넷 없는 하루 시뮬레이션</h4>
-          <p>인터넷이 갑자기 사라진다면 하루 생활이 어떻게 달라지는지 분석하고, 네트워크 기술의 중요성을 서술하시오.</p>
-          <div class="srow"><div class="stepn">①</div><span>하루 중 인터넷을 사용하는 활동 5가지 조사</span></div>
-          <div class="srow"><div class="stepn">②</div><span>인터넷 없이 그 활동을 어떻게 대체할 수 있는지 설명</span></div>
-          <div class="srow"><div class="stepn">③</div><span>네트워크 기술의 사회적 중요성 한 단락으로 서술</span></div>
-        </div>
-        <table class="rub" style="margin-bottom:16px">
-          <thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead>
-          <tbody>
-            <tr><td><b>개념 연결</b></td><td class="lv4">활동과 네트워크 개념 정확 연결</td><td class="lv3">대체로 연결</td><td class="lv2">일부만 연결</td><td class="lv1">연결 없음</td></tr>
-            <tr><td><b>비판적 사고</b></td><td class="lv4">대안과 중요성 구체적 제시</td><td class="lv3">대체로 구체적</td><td class="lv2">단순 나열</td><td class="lv1">내용 부실</td></tr>
-          </tbody>
-        </table>
-        <div class="sclist">
-          <div class="scitem"><label>네트워크와 인터넷의 차이를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-          <div class="scitem"><label>IP 주소와 도메인의 역할을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-          <div class="scitem"><label>패킷 교환 방식의 장점을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        </div>
-        <button class="btn bsm bok" style="margin-top:11px" onclick="saveSC('l05sc')">💾 저장</button>
-      </div>
+    <!-- 평가하기 -->
+    <div style="margin-top:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--mt);margin-bottom:8px">📝 평가하기 (교과서 p.30)</div>
+      <div style="overflow-x:auto;margin-top:12px"><table class="peer-check"><thead><tr><th style="text-align:left">평가 항목</th><th colspan="2">자기 평가</th><th colspan="2">동료 평가</th></tr></thead><tbody><tr><td>애니메이션 시작을 감지하여 작동 시작 변수가 활성화되는가?</td><td><label><input type="radio" name="pe0a" value="예"> 예</label></td><td><label><input type="radio" name="pe0a" value="아니요"> 아니요</label></td><td><label><input type="radio" name="pe0b" value="예"> 예</label></td><td><label><input type="radio" name="pe0b" value="아니요"> 아니요</label></td></tr><tr><td>음악이나 애니메이션을 한 번 실행하면 작동 시작 변수가 초기화되는가?</td><td><label><input type="radio" name="pe1a" value="예"> 예</label></td><td><label><input type="radio" name="pe1a" value="아니요"> 아니요</label></td><td><label><input type="radio" name="pe1b" value="예"> 예</label></td><td><label><input type="radio" name="pe1b" value="아니요"> 아니요</label></td></tr><tr><td>음악과 애니메이션의 재생 속도와 간격이 맞는가?</td><td><label><input type="radio" name="pe2a" value="예"> 예</label></td><td><label><input type="radio" name="pe2a" value="아니요"> 아니요</label></td><td><label><input type="radio" name="pe2b" value="예"> 예</label></td><td><label><input type="radio" name="pe2b" value="아니요"> 아니요</label></td></tr></tbody></table></div>
     </div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn bsm bp" onclick="saveActivity('l105_act')">💾 활동 저장</button>
+      <a href="https://makecode.microbit.org" target="_blank" class="btn bsm" style="background:#0078D4;color:#fff;border-color:#005A9E">MakeCode 열기 ↗</a>
+    </div>
+  </div>
+</div>
 
-    <!-- 05 확인하기 -->
-    <div class="card" id="sec-review">
-      <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:#E8F3DC;color:#2A720E">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="sgrid">
-          <div class="scard"><strong>네트워크/인터넷</strong>네트워크: 기기 연결망. 인터넷: 전 세계 네트워크 연결. LAN(좁은범위) / WAN(넓은범위).</div>
-          <div class="scard"><strong>IP &amp; 도메인</strong>IP: 기기의 고유 주소. 도메인: 기억하기 쉬운 영문 이름. DNS가 도메인→IP 변환.</div>
-          <div class="scard"><strong>패킷 교환</strong>데이터를 패킷 조각으로 분할 전송 후 재조립. 여러 경로 사용으로 효율·안정성 향상.</div>
-        </div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px;font-size:13px;margin-bottom:14px">
-          <strong>✏️ 단답형:</strong> "www.naver.com처럼 숫자 IP 주소 대신 사용하는 기억하기 쉬운 주소 체계를 <span style="display:inline-block;width:60px;border-bottom:1.5px solid var(--text)">&nbsp;</span>이라고 한다."
-          <textarea style="display:block;width:100%;margin-top:10px;padding:10px;border:1px solid var(--border);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:52px;background:var(--surface);outline:none" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='#6C65CC'" onblur="this.style.borderColor=''"></textarea>
-        </div>
-        <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 마지막 소단원에서는 소프트웨어로 현실 세계를 제어하는 <strong>피지컬 컴퓨팅</strong> — 센서와 마이크로비트를 탐구합니다!</div></div>
-      </div>
+<div class="card" id="sec-assess">
+  <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:12px;margin-bottom:12px;border-left:3px solid var(--u)">
+      <h4 style="font-size:13px;font-weight:700;color:var(--u);margin-bottom:7px">📋 소리 반응 애니메이션 + 학교 종 노래 프로그램</h4>
+      <p style="font-size:13px;color:var(--mt)">소리 센서와 스피커를 활용한 프로그램 2가지를 MakeCode로 완성하고 모둠 발표를 수행하시오.</p>
     </div>
+    <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody><tr><td><b>소리 감지</b></td><td class="lv4">기준값 설정·큰 소리 감지 정확</td><td class="lv3">부분 정확</td><td class="lv2">감지만</td><td class="lv1">없음</td></tr><tr><td><b>멜로디·애니메이션</b></td><td class="lv4">멜로디+애니메이션 동시 실행</td><td class="lv3">한 가지 실행</td><td class="lv2">재생만</td><td class="lv1">없음</td></tr><tr><td><b>노래 프로그램</b></td><td class="lv4">학교 종 전체 음 정확 구현</td><td class="lv3">절반 이상</td><td class="lv2">일부만</td><td class="lv1">없음</td></tr></tbody></table>
+    <div class="sclist"><div class="scitem"><label>소리 센서와 스피커의 특성을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div><div class="scitem"><label>변수와 조건으로 알고리즘을 설계할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div><div class="scitem"><label>소리에 반응하는 애니메이션·멜로디 프로그램을 작성할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div></div>
+    <button class="btn bsm bok" style="margin-top:10px" onclick="saveSC('l105sc')">💾 저장</button>
+  </div>
+</div>
+
+<div class="card" id="sec-review">
+  <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:var(--gbg);color:var(--green)">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div class="sgrid">
+      <div class="scard"><strong>소리 센서</strong>0~255 소리 크기. 기준값으로 큰 소리 판별.</div>
+      <div class="scard"><strong>작동 시작 변수</strong>0=대기, 1=작동. 큰 소리 시 1로 변경.</div>
+      <div class="scard"><strong>무한 반복 병렬</strong>멜로디·애니메이션을 별도 반복으로 동시 실행.</div>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:13px;margin-bottom:12px"><b>✏️ 단답형:</b> 소리에 반응하는 애니메이션 장치에서 큰 소리가 감지되었을 때 1, 대기 상태일 때 0을 저장하는 것을 <span style="display:inline-block;width:50px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>(이)라고 한다.<textarea style="display:block;width:100%;margin-top:9px;padding:9px;border:1px solid var(--br);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:48px;background:var(--sf)" placeholder="정답을 입력하세요..."></textarea></div>
+    <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 마지막으로 <strong>라디오 무선 통신</strong>으로 이심전심 게임 장치를 만들어봅니다! (pp.32~35)</div></div>
+  </div>
+</div>
 
   </div>
-
   <div class="ca">
-    <div class="ap"><h5>학습 진행</h5><div class="slist"><div class="si sd" onclick="goTo('sec-goal')"><div class="dot sd">✓</div>학습목표</div><div class="si sd" onclick="goTo('sec-concept')"><div class="dot sd">✓</div>개념설명</div><div class="si sa" onclick="goTo('sec-interact')"><div class="dot sa">→</div>인터랙션</div><div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div><div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div></div></div>
-    <div class="ap"><h5>수업 타이머</h5><span class="td-num" id="tnum">45:00</span><div class="td-lbl">수업 남은 시간</div><div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div></div>
-    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">IP 주소</span><span class="tdef">기기 고유 번호</span></div><div class="tterm"><span class="tw">도메인</span><span class="tdef">영문 주소 이름</span></div><div class="tterm"><span class="tw">DNS</span><span class="tdef">도메인↔IP 변환</span></div><div class="tterm"><span class="tw">패킷</span><span class="tdef">데이터 조각</span></div></div></div>
-    <div class="ap" style="background:var(--unit-lt);border-color:var(--unit-md)"><h5 style="color:var(--unit)">단원 진도</h5><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div class="pbtrack"><div class="pbfill" style="width:83%"></div></div><span style="font-size:11px;font-weight:600;color:var(--unit)">5/6</span></div></div>
+    <div class="ap"><h5>학습 진행</h5><div class="slist">
+      <div class="si" onclick="goTo('sec-goal')"><div class="dot sd">1</div>학습목표</div>
+      <div class="si" onclick="goTo('sec-concept')"><div class="dot">2</div>개념설명</div>
+      <div class="si" onclick="goTo('sec-activity')"><div class="dot sa">★</div>수행 활동</div>
+      <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
+      <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
+    </div></div>
+    <div class="ap"><h5>수업 타이머</h5>
+      <span class="td-num" id="tnum">02:15</span>
+      <div class="td-lbl">3차시 (135분)</div>
+      <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺</button></div>
+    </div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">소리 센서</span><span class="tdef">0~255 소리 크기</span></div><div class="tterm"><span class="tw">큰 소리 이벤트</span><span class="tdef">기준값 초과 시 실행</span></div><div class="tterm"><span class="tw">변수 플래그</span><span class="tdef">0=대기, 1=작동</span></div><div class="tterm"><span class="tw">멜로디 블록</span><span class="tdef">음악 재생 블록</span></div><div class="tterm"><span class="tw">무한 반복</span><span class="tdef">병렬 실행</span></div></div></div>
+    <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
+      <div style="display:flex;align-items:center;gap:7px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:77%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">5/6</span></div>
+    </div>
+    <div class="ap" style="background:#F0FDF4;border-color:#BBF7D0">
+      <h5 style="color:#166534">🔧 마이크로비트</h5>
+      <a href="https://makecode.microbit.org" target="_blank" class="btn bsm" style="width:100%;justify-content:center;background:#0078D4;color:#fff;border-color:#005A9E;margin-bottom:5px">MakeCode 열기 ↗</a>
+      <a href="https://makecode.microbit.org/#editor" target="_blank" class="btn bsm" style="width:100%;justify-content:center;font-size:10px;color:var(--mt)">시뮬레이터 ↗</a>
+    </div>
   </div>
   </div></div>
 </main>
-
-<div id="toast" style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap"></div>
-
+<div id="toast"></div>
 <script>
-'use strict';
-function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
-function toggleSec(id){var el=document.getElementById(id);if(el)el.classList.toggle('collapsed');}
-function goTo(id){var el=document.getElementById(id);if(!el)return;window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-68,behavior:'smooth'});}
-var tR=2700,tRun=false,tIv=null;
+tR=135;window._tInit=135;
+
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
+function toggleSec(id){var e=document.getElementById(id);if(e)e.classList.toggle('collapsed');}
+function goTo(id){var e=document.getElementById(id);if(!e)return;window.scrollTo({top:e.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});}
+var tR,tRun=false,tIv=null;
 function pad(n){return n<10?'0'+n:''+n;}
-function renderT(){var el=document.getElementById('tnum');if(!el)return;el.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);el.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
+function renderT(){var e=document.getElementById('tnum');if(!e)return;e.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);e.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
 function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
-function resetTimer(){clearInterval(tIv);tRun=false;tR=2700;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
-function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');o.style.pointerEvents='none';});el.classList.add(ok?'correct':'wrong');var fb=document.getElementById('qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ ':'✗ 힌트: ')+msg;}}
-function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){toast('저장 실패');}}
+function resetTimer(){clearInterval(tIv);tRun=false;if(window._tInit)tR=window._tInit;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
+function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
+function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){}}
 function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
-function markDone(n){try{var d=JSON.parse(localStorage.getItem('u01done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u01done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료로 표시되었습니다!');}
-document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l05sc');initCanvas();});
-
-/* ── 패킷 전송 시뮬레이터 (Canvas) ── */
-var cv,ctx,W,H,animId=null,simRunning=false;
-var nodes=[],packets=[],logLines=[];
-
-function initCanvas(){
-  cv=document.getElementById('net-canvas');
-  if(!cv)return;
-  W=cv.offsetWidth; H=220; cv.width=W; cv.height=H;
-  ctx=cv.getContext('2d');
-  nodes=[
-    {x:W*0.08,y:H/2,label:'내 PC',color:'#6C65CC',icon:'💻'},
-    {x:W*0.28,y:H*0.3,label:'라우터 A',color:'#7A4E0A',icon:'📡'},
-    {x:W*0.28,y:H*0.7,label:'라우터 B',color:'#7A4E0A',icon:'📡'},
-    {x:W*0.55,y:H*0.3,label:'라우터 C',color:'#0A4E8C',icon:'📡'},
-    {x:W*0.55,y:H*0.7,label:'라우터 D',color:'#0A4E8C',icon:'📡'},
-    {x:W*0.92,y:H/2,label:'서버',color:'#2A720E',icon:'🖥️'},
-  ];
-  packets=[];
-  drawNet();
+function markDone(n){try{var d=JSON.parse(localStorage.getItem('u01done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u01done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
+function saveActivity(key){
+  var d={};
+  document.querySelectorAll('.act-input').forEach(function(el,i){d['a'+i]=el.value;});
+  document.querySelectorAll('.peer-check input[type=radio]:checked').forEach(function(el){d['r_'+el.name]=el.value;});
+  try{localStorage.setItem(key,JSON.stringify(d));toast('✅ 수행 활동이 저장되었습니다!');}catch(e){}
+}
+function loadActivity(key){
+  try{
+    var d=JSON.parse(localStorage.getItem(key)||'{}');
+    document.querySelectorAll('.act-input').forEach(function(el,i){if(d['a'+i])el.value=d['a'+i];});
+    Object.keys(d).filter(function(k){return k.startsWith('r_');}).forEach(function(k){
+      var el=document.querySelector('input[type=radio][name="'+k.slice(2)+'"][value="'+d[k]+'"]');
+      if(el)el.checked=true;
+    });
+  }catch(e){}
 }
 
-function drawNet(){
-  if(!ctx)return;
-  ctx.clearRect(0,0,W,H);
-  // edges
-  var edges=[[0,1],[0,2],[1,3],[2,4],[3,5],[4,5],[1,4],[2,3]];
-  ctx.strokeStyle='#3A3A5A'; ctx.lineWidth=1.5;
-  edges.forEach(function(e){
-    ctx.beginPath();ctx.moveTo(nodes[e[0]].x,nodes[e[0]].y);
-    ctx.lineTo(nodes[e[1]].x,nodes[e[1]].y);ctx.stroke();
-  });
-  // nodes
-  nodes.forEach(function(n){
-    ctx.beginPath();ctx.arc(n.x,n.y,16,0,Math.PI*2);
-    ctx.fillStyle=n.color+'33';ctx.fill();
-    ctx.strokeStyle=n.color;ctx.lineWidth=2;ctx.stroke();
-    ctx.font='15px serif';ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(n.icon,n.x,n.y);
-    ctx.fillStyle='#CDD6F4';ctx.font='bold 9px sans-serif';ctx.textBaseline='top';
-    ctx.fillText(n.label,n.x,n.y+18);
-  });
-  // packets
-  packets.forEach(function(p){
-    if(!p.done){
-      ctx.beginPath();ctx.arc(p.x,p.y,7,0,Math.PI*2);
-      ctx.fillStyle=p.color;ctx.fill();
-      ctx.fillStyle='#fff';ctx.font='bold 8px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillText(p.id,p.x,p.y);
-    }
-  });
-}
 
-function addLog(msg){
-  logLines.push(msg);
-  if(logLines.length>8)logLines.shift();
-  var el=document.getElementById('net-log');
-  if(el){el.innerHTML=logLines.map(function(l){return l;}).join('<br>');el.scrollTop=el.scrollHeight;}
-}
-
-var routes=[
-  [0,1,3,5],
-  [0,2,4,5],
-  [0,1,4,5],
+// 학교 종 음표
+var songNotes = [
+  {note:'G4',dur:0.5},{note:'G4',dur:0.5},{note:'A4',dur:0.5},{note:'A4',dur:0.5},
+  {note:'G4',dur:0.5},{note:'G4',dur:0.5},{note:'E4',dur:1},
+  {note:'G4',dur:0.5},{note:'G4',dur:0.5},{note:'E4',dur:0.5},{note:'E4',dur:0.5},{note:'D4',dur:1},
+  {note:'G4',dur:0.5},{note:'G4',dur:0.5},{note:'A4',dur:0.5},{note:'A4',dur:0.5},
+  {note:'G4',dur:0.5},{note:'G4',dur:0.5},{note:'E4',dur:1},
+  {note:'G4',dur:0.5},{note:'E4',dur:0.5},{note:'D4',dur:0.5},{note:'E4',dur:0.5},{note:'C4',dur:1}
 ];
-var pktColors=['#89B4FA','#CBA6F7','#A6E3A1'];
+var noteFreq = {C4:261,D4:293,E4:329,G4:392,A4:440};
+var noteNames = {C4:'도',D4:'레',E4:'미',G4:'솔',A4:'라'};
+var audioCtx = null;
+var songTimer = null;
 
-function startSim(){
-  if(simRunning)return;
-  simRunning=true;
-  packets=[];
-  logLines=[];
-  addLog('// 전송 시작: 데이터를 3개 패킷으로 분할');
-  document.getElementById('sim-status').textContent='패킷 전송 중...';
-  var delay=0;
-  routes.forEach(function(route,ri){
-    setTimeout(function(){
-      sendPacket(ri+1,route,pktColors[ri]);
-      addLog('📦 패킷 '+(ri+1)+' 경로: '+route.map(function(i){return nodes[i].label;}).join(' → '));
-    },delay);
-    delay+=600;
-  });
-  setTimeout(function(){
-    addLog('✅ 목적지에서 패킷 1+2+3 재조립 완료!');
-    document.getElementById('sim-status').textContent='✅ 전송 완료! 패킷 3개 모두 도착';
-    simRunning=false;
-    toast('패킷 전송 완료! 서버에서 데이터를 재조립했습니다 🎉');
-  },delay+1200);
-}
-
-function sendPacket(id,route,color){
-  var step=0;
-  var pkt={id:id,x:nodes[route[0]].x,y:nodes[route[0]].y,color:color,done:false};
-  packets.push(pkt);
-  function move(){
-    if(step>=route.length-1){pkt.done=true;drawNet();return;}
-    var from=nodes[route[step]],to=nodes[route[step+1]];
-    var progress=0;
-    var iv=setInterval(function(){
-      progress+=0.05;
-      pkt.x=from.x+(to.x-from.x)*progress;
-      pkt.y=from.y+(to.y-from.y)*progress;
-      drawNet();
-      if(progress>=1){clearInterval(iv);step++;move();}
-    },30);
+function playSong(){
+  if(songTimer){clearTimeout(songTimer);}
+  try{audioCtx = new (window.AudioContext || window.webkitAudioContext)();}catch(e){toast('오디오 재생 불가');return;}
+  var idx = 0;
+  var disp = document.getElementById('song-display');
+  function playNext(){
+    if(idx >= songNotes.length){if(disp)disp.textContent='🎵 재생 완료!';return;}
+    var n = songNotes[idx];
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.frequency.value = noteFreq[n.note] || 440;
+    osc.type = 'square';
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + n.dur * 0.45);
+    osc.start(); osc.stop(audioCtx.currentTime + n.dur * 0.5);
+    if(disp) disp.textContent = '♪ ' + (noteNames[n.note]||n.note) + ' (' + n.note + ')';
+    idx++;
+    songTimer = setTimeout(playNext, n.dur * 500);
   }
-  move();
+  playNext();
+}
+function stopSong(){if(songTimer)clearTimeout(songTimer);if(audioCtx)audioCtx.close();var d=document.getElementById('song-display');if(d)d.textContent='⏹ 정지';}
+
+// LED 그리드
+var ledGrids = {1:Array(25).fill(0), 2:Array(25).fill(0), 3:Array(25).fill(0)};
+function buildLedGrid(id){
+  var div = document.getElementById('led-grid-'+id);
+  if(!div) return;
+  div.innerHTML = '';
+  var grid = document.createElement('div');
+  grid.style.cssText = 'display:grid;grid-template-columns:repeat(5,1fr);gap:3px';
+  for(var i=0;i<25;i++){
+    (function(idx){
+      var dot = document.createElement('div');
+      dot.style.cssText = 'width:14px;height:14px;border-radius:50%;background:'+(ledGrids[id][idx]?'#FF6B35':'#333')+';cursor:pointer;transition:background .15s';
+      dot.onclick = function(){ledGrids[id][idx]=ledGrids[id][idx]?0:1;buildLedGrid(id);};
+      grid.appendChild(dot);
+    })(i);
+  }
+  div.appendChild(grid);
+  var lbl = document.createElement('div');
+  lbl.style.cssText = 'font-size:9px;color:#888;text-align:center;margin-top:4px';
+  lbl.textContent = '장면 '+id;
+  div.appendChild(lbl);
 }
 
-function resetSim(){
-  if(animId)cancelAnimationFrame(animId);
-  simRunning=false;
-  packets=[];
-  logLines=['// 패킷 전송 로그가 여기에 표시됩니다...'];
-  var el=document.getElementById('net-log');
-  if(el)el.innerHTML=logLines[0];
-  document.getElementById('sim-status').textContent='시작 버튼을 눌러주세요';
-  drawNet();
+// 박수 시뮬레이터
+var clapScores = {A:0, B:0};
+var clapActive = null;
+var clapIv = null;
+function startClap(team){
+  if(clapActive) return;
+  clapActive = team;
+  var other = team==='A'?'B':'A';
+  document.getElementById('btn-'+team.toLowerCase()+'-clap').disabled = true;
+  document.getElementById('btn-'+other.toLowerCase()+'-clap').disabled = true;
+  var t = 0; var score = 0;
+  var disp = document.getElementById('clap-timer');
+  clapIv = setInterval(function(){
+    t += 0.2;
+    var rand = Math.floor(Math.random()*30);
+    score += rand;
+    var pct = Math.min(100, score/500*100);
+    document.getElementById(team.toLowerCase()+'-fill').style.height = pct+'%';
+    document.getElementById(team.toLowerCase()+'-score').textContent = score+'점';
+    if(disp) disp.textContent = team+' 모둠 측정 중... '+(5-t).toFixed(1)+'초';
+    if(t >= 5){
+      clearInterval(clapIv);
+      clapScores[team] = score;
+      clapActive = null;
+      document.getElementById('btn-'+team.toLowerCase()+'-clap').disabled = false;
+      document.getElementById('btn-'+other.toLowerCase()+'-clap').disabled = false;
+      if(disp) disp.textContent = '측정 완료! 로고 버튼으로 결과 확인';
+    }
+  }, 200);
 }
+function showResult(){
+  var r = document.getElementById('clap-result');
+  if(!r) return;
+  if(clapScores.A===0 && clapScores.B===0){r.textContent='먼저 A·B 모둠 박수를 측정하세요!';return;}
+  if(clapScores.A > clapScores.B) r.innerHTML='🏆 A 모둠 승리! ('+clapScores.A+' > '+clapScores.B+')';
+  else if(clapScores.B > clapScores.A) r.innerHTML='🏆 B 모둠 승리! ('+clapScores.B+' > '+clapScores.A+')';
+  else r.innerHTML='🤝 무승부! ('+clapScores.A+' = '+clapScores.B+')';
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  [1,2,3].forEach(buildLedGrid);
+});
+
+document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l105sc');loadActivity('l105sc_act');});
 </script>
-</body>
-</html>
+</body></html>

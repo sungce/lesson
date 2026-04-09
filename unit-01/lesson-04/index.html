@@ -1,342 +1,375 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I-4. 운영체제의 역할 — 정보 교과</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>I-4. 수면 온도 알림이 장치 만들기 — 정보 교과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F5F4F0;--surface:#FFF;--border:#E2DFD6;--text:#1C1C1C;--muted:#696760;--light:#A8A59E;--unit:#6C65CC;--unit-dk:#4E48A8;--unit-lt:#ECEAFE;--unit-md:#C4C0F0;--green:#2A720E;--green-bg:#E8F3DC;--amber:#7A4E0A;--amber-bg:#FAF0DC;--red:#8C1E0E;--red-bg:#FAEBE6;--blue:#0A4E8C;--blue-bg:#E4F0FA;--rLG:14px;--rMD:10px;--rSM:8px;--SBW:224px;--TBH:52px;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;display:flex;min-height:100vh}
-.sb{width:var(--SBW);background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
-.sb-top{padding:18px 16px 14px;border-bottom:1px solid var(--border)}.uchip{display:inline-flex;align-items:center;background:var(--unit-lt);color:var(--unit);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px}
-.sb-top h2{font-size:13px;font-weight:700;line-height:1.4}.smeta{font-size:11px;color:var(--light);margin-top:3px}.sb-nav{padding:6px 0;flex:1}.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);padding:8px 16px 4px}
-.na{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:12px;color:var(--muted);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}.na:hover{background:var(--bg);color:var(--text)}.na.on{color:var(--unit);font-weight:600;background:var(--unit-lt);border-left-color:var(--unit)}.na.done .nn{background:var(--green-bg);color:var(--green)}
-.nn{width:20px;height:20px;border-radius:50%;background:var(--border);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--muted)}.na.on .nn{background:var(--unit);color:#fff}
-.nbadge{margin-left:auto;font-size:10px;color:var(--light);background:var(--bg);border:1px solid var(--border);padding:1px 6px;border-radius:10px}.sb-foot{padding:12px 16px;border-top:1px solid var(--border)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:var(--rSM);border:1px solid var(--border);background:var(--surface);transition:all .12s}.ba:hover{background:var(--bg);color:var(--text)}
-.main{margin-left:var(--SBW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}.topbar{background:var(--surface);border-bottom:1px solid var(--border);height:var(--TBH);padding:0 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
-.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);flex:1}.bc a{color:var(--muted);text-decoration:none}.bc a:hover{color:var(--text)}.bc .sep{color:var(--border)}.bc .cur{color:var(--text);font-weight:500}.tbr{display:flex;align-items:center;gap:8px}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 11px;font-size:11px}.bp{background:var(--unit);color:#fff;border-color:var(--unit)}.bp:hover{background:var(--unit-dk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
-.page{padding:22px 24px;flex:1}.g2{display:grid;grid-template-columns:1fr 256px;gap:18px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TBH) + 14px)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);margin-bottom:12px;overflow:hidden}.card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.ch{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;user-select:none;-webkit-user-select:none}.ch:hover{background:var(--bg)}.sn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:14px;font-weight:600;flex:1}
-.st{font-size:11px;color:var(--light);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:20px}.carr{font-size:11px;color:var(--light);transition:transform .2s;flex-shrink:0}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:20px}.card.collapsed .cb{display:none}
-.ach{background:var(--unit-lt);border:1px solid var(--unit-md);border-radius:var(--rSM);padding:12px 14px;margin-bottom:16px}.ach-c{font-family:'Courier New',monospace;font-size:11px;font-weight:700;color:var(--unit);margin-bottom:4px}.ach-t{font-size:13px;line-height:1.6}
-.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--border);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:18px;height:18px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.ctags{display:flex;flex-wrap:wrap;gap:6px}.ctag{font-size:11px;padding:4px 11px;background:var(--bg);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--muted);transition:all .12s}.ctag:hover{background:var(--unit-lt);border-color:var(--unit-md);color:var(--unit)}
-.ibox{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:12px}.ibox.prev{background:var(--bg);border:1px solid var(--border);color:var(--muted)}.ibox.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.ibox.info{background:var(--blue-bg);border:1px solid #BACED8;color:var(--blue)}.ibox.ok{background:var(--green-bg);border:1px solid #BFDFAA;color:var(--green)}
-.div{height:1px;background:var(--border);margin:16px 0}.crow{display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:start;margin-bottom:18px}
-.ct h4{font-size:13px;font-weight:700;margin-bottom:8px}.ct p{font-size:13px;color:var(--muted);line-height:1.75}.ct ul{padding-left:1rem;margin-top:7px}.ct ul li{font-size:13px;color:var(--muted);margin-bottom:4px;line-height:1.6}
-.cvis{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px;flex-shrink:0}
-.qwrap{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:16px}.qq{font-size:14px;font-weight:500;margin-bottom:13px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--unit);background:var(--unit-lt)}.opt.correct{border-color:#4A9020;background:var(--green-bg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--red-bg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
-.onum{width:22px;height:22px;border-radius:50%;background:var(--border);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
-.qfb{display:none;margin-top:11px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--green-bg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--red-bg);border:1px solid #F0B8A0;color:var(--red)}
-.rub{width:100%;border-collapse:collapse;font-size:12px}.rub th{background:var(--bg);padding:8px 10px;font-weight:600;border-bottom:1.5px solid var(--border);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.rub td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
+body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;color:#1C1C1C;font-size:14px;line-height:1.65;display:flex;min-height:100vh}
+:root{--u:#6C65CC;--udk:#4E48A8;--ult:#ECEAFE;--umd:#C8C4F0;--bg:#F5F4F0;--sf:#FFF;--br:#E2DFD6;--tx:#1C1C1C;--mt:#696760;--lt:#A8A59E;--green:#2A720E;--gbg:#E8F3DC;--amber:#7A4E0A;--abg:#FAF0DC;--red:#8C1E0E;--rbg:#FAEBE6;--blue:#0A4E8C;--bbg:#E4F0FA;--rLG:14px;--rSM:8px;--SW:240px;--TH:52px}
+.sb{width:var(--SW);background:var(--sf);border-right:1px solid var(--br);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
+.sb-top{padding:16px 14px 12px;border-bottom:1px solid var(--br)}.uchip{display:inline-flex;align-items:center;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:6px}
+.sb-top h2{font-size:12px;font-weight:700;line-height:1.4}.smeta{font-size:10px;color:var(--lt);margin-top:3px}
+.sb-nav{padding:4px 0;flex:1}.nlbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lt);padding:7px 13px 3px}
+.na{display:flex;align-items:center;gap:8px;padding:7px 13px;font-size:11px;color:var(--mt);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}
+.na:hover{background:var(--bg);color:var(--tx)}.na.on{color:var(--u);font-weight:600;background:var(--ult);border-left-color:var(--u)}.na.done .nn{background:var(--gbg);color:var(--green)}
+.nn{width:18px;height:18px;border-radius:50%;background:var(--br);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--mt)}.na.on .nn{background:var(--u);color:#fff}
+.nbadge{margin-left:auto;font-size:9px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:1px 5px;border-radius:10px;white-space:nowrap}
+.sb-foot{padding:10px 13px;border-top:1px solid var(--br)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mt);text-decoration:none;padding:5px 9px;border-radius:var(--rSM);border:1px solid var(--br);background:var(--sf);transition:all .12s}.ba:hover{background:var(--bg)}
+.main{margin-left:var(--SW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}
+.topbar{background:var(--sf);border-bottom:1px solid var(--br);height:var(--TH);padding:0 20px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:90}
+.bc{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--mt);flex:1}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}.bcsep{color:var(--br)}.bccur{color:var(--tx);font-weight:500}.tbr{display:flex;align-items:center;gap:6px}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--br);background:var(--sf);color:var(--tx);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 9px;font-size:11px}.bp{background:var(--u);color:#fff;border-color:var(--u)}.bp:hover{background:var(--udk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
+.page{padding:20px 22px;flex:1}.g2{display:grid;grid-template-columns:1fr 248px;gap:16px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TH)+12px)}
+.card{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);margin-bottom:11px;overflow:hidden}
+.ch{display:flex;align-items:center;gap:9px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--br);transition:background .12s;user-select:none}.ch:hover{background:var(--bg)}
+.sn{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:13px;font-weight:600;flex:1}
+.st{font-size:10px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:2px 7px;border-radius:20px;white-space:nowrap}.carr{font-size:11px;color:var(--lt);transition:transform .2s}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:18px}.card.collapsed .cb{display:none}
+.ach{background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:10px 13px;margin-bottom:14px}.ach-c{font-family:monospace;font-size:11px;font-weight:700;color:var(--u);margin-bottom:3px}.ach-t{font-size:13px;line-height:1.6}
+.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:13px;border-bottom:1px solid var(--br);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:17px;height:17px;border-radius:50%;background:var(--gbg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ctags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}.ctag{font-size:11px;padding:3px 10px;background:var(--bg);border:1px solid var(--br);border-radius:20px;cursor:pointer;color:var(--mt);transition:all .12s}.ctag:hover{background:var(--ult);border-color:var(--umd);color:var(--u)}
+.ibox{display:flex;align-items:flex-start;gap:9px;padding:10px 13px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:10px}.prev{background:var(--bg);border:1px solid var(--br);color:var(--mt)}.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.info{background:var(--bbg);border:1px solid #BACED8;color:var(--blue)}.ok{background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}
+.divl{height:1px;background:var(--br);margin:13px 0}
+.crow{display:grid;grid-template-columns:1fr 148px;gap:13px;align-items:start;margin-bottom:13px}
+.ct h4{font-size:13px;font-weight:700;margin-bottom:7px}.ct p{font-size:13px;color:var(--mt);line-height:1.75}.ct ul{padding-left:1rem;margin-top:5px}.ct ul li{font-size:13px;color:var(--mt);margin-bottom:3px;line-height:1.6}
+.cvis{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px}
+/* ── 수행활동 (해보기) ── */
+.activity{background:linear-gradient(135deg,var(--ult),#F5F4FF);border:2px solid var(--umd);border-radius:var(--rLG);margin-bottom:11px;overflow:hidden}
+.act-head{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1.5px solid var(--umd);background:var(--ult);cursor:pointer;user-select:none}.act-head:hover{background:#E4E0FC}
+.act-badge{background:var(--u);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}.act-head h3{font-size:13px;font-weight:700;color:var(--udk);flex:1}
+.act-body{padding:18px}
+.act-step{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--sf);border:1px solid var(--br);border-radius:var(--rSM);margin-bottom:8px}
+.act-num{width:22px;height:22px;border-radius:50%;background:var(--u);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.act-step h4{font-size:12px;font-weight:700;margin-bottom:4px}.act-step p{font-size:12px;color:var(--mt);line-height:1.65}
+.act-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.act-table th{background:var(--u);color:#fff;padding:7px 10px;font-weight:600;font-size:11px;text-align:left}
+.act-table td{padding:8px 10px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.55}
+.act-table tr:last-child td{border-bottom:none}
+.act-input{width:100%;padding:8px 10px;border:1.5px solid var(--br);border-radius:var(--rSM);font-size:12px;font-family:inherit;background:var(--sf);outline:none;resize:vertical;min-height:52px;margin-top:4px}
+.act-input:focus{border-color:var(--u)}
+/* ── 마이크로비트 블록 ── */
+.mb-workspace{background:#1e1e2e;border-radius:var(--rSM);padding:14px;margin:8px 0;display:flex;flex-direction:column;gap:5px}
+.mb-row{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.mb-indent{margin-left:22px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.mb-indent2{margin-left:44px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.mb{display:inline-flex;align-items:center;gap:4px;padding:6px 11px;border-radius:6px;font-size:11px;font-family:'Courier New',monospace;font-weight:700;color:#fff;cursor:default}
+.mb-hole{display:inline-block;background:rgba(255,255,255,.2);border-radius:3px;padding:1px 7px;font-size:10px;min-width:20px;text-align:center}
+.mb-start{background:#FF8C00;box-shadow:0 3px 0 #B85A00}
+.mb-motion{background:#4A7ED9;box-shadow:0 3px 0 #2A50A0}
+.mb-led{background:#9B59B6;box-shadow:0 3px 0 #6C3483}
+.mb-input{background:#F39C12;box-shadow:0 3px 0 #C07000}
+.mb-logic{background:#E74C3C;box-shadow:0 3px 0 #A01010}
+.mb-loop{background:#27AE60;box-shadow:0 3px 0 #1A7A40}
+.mb-var{background:#3498DB;box-shadow:0 3px 0 #1A5A9A}
+.mb-music{background:#E91E63;box-shadow:0 3px 0 #880033}
+.mb-radio{background:#00BCD4;box-shadow:0 3px 0 #007A88}
+.mb-sensor{background:#FF6B35;box-shadow:0 3px 0 #C04010}
+/* ── quiz ── */
+.qwrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-top:13px}.qq{font-size:14px;font-weight:500;margin-bottom:11px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:7px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--u);background:var(--ult)}.opt.correct{border-color:#4A9020;background:var(--gbg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--rbg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
+.onum{width:21px;height:21px;border-radius:50%;background:var(--br);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
+.qfb{display:none;margin-top:9px;padding:10px 13px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--rbg);border:1px solid #F0B8A0;color:var(--red)}
+/* ── assess ── */
+.rub{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}.rub th{background:var(--bg);padding:7px 8px;font-weight:600;border-bottom:1.5px solid var(--br);text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mt)}.rub td{padding:8px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
 .lv4{color:#1A6000!important;font-weight:500}.lv3{color:#2A6830!important}.lv2{color:#7A4E00!important}.lv1{color:#8A2000!important}
-.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.scard{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:13px 14px;font-size:12px;line-height:1.65;color:var(--muted)}.scard strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--light);margin-bottom:5px}
-.sclist{display:flex;flex-direction:column;gap:5px}.scitem{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--border)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:4px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-family:inherit;color:var(--text);cursor:pointer;flex-shrink:0}
-.task{background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px}.task h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}.task p{font-size:13px;color:var(--muted);line-height:1.75}.srow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--border);margin-top:8px;font-size:12px;color:var(--muted)}.stepn{width:20px;height:20px;border-radius:50%;background:var(--unit-lt);color:var(--unit);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.ap{background:var(--surface);border:1px solid var(--border);border-radius:var(--rLG);padding:15px;margin-bottom:12px}.ap h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--light);margin-bottom:10px}
-.slist{display:flex;flex-direction:column;gap:4px}.si{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--rSM);font-size:12px;color:var(--muted);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}.si.sa{background:var(--unit-lt);color:var(--unit);font-weight:500}.si.sd{color:var(--text)}
-.dot{width:22px;height:22px;border-radius:50%;background:var(--border);color:var(--light);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.dot.sa{background:var(--unit);color:#fff}.dot.sd{background:var(--green-bg);color:var(--green)}
-.td-num{font-size:32px;font-weight:300;letter-spacing:.05em;line-height:1;font-variant-numeric:tabular-nums;text-align:center;display:block}.td-lbl{font-size:10px;color:var(--light);text-align:center;margin-top:4px;margin-bottom:12px}
-.trow{display:flex;gap:6px}.trow .btn{flex:1;justify-content:center;font-size:11px}
-.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:6px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--unit);white-space:nowrap}.tdef{color:var(--muted)}
-.pbtrack{flex:1;height:6px;background:var(--unit-md);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--unit);border-radius:3px}
-/* OS compare */
-.os-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.mitem{padding:11px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rSM);font-size:12px;cursor:pointer;transition:all .12s;line-height:1.55}
-.mitem:hover{border-color:var(--unit);background:var(--unit-lt)}.mitem.ok{border-color:#4A9020;background:var(--green-bg);pointer-events:none}.mitem.ng{border-color:#B03020;background:var(--red-bg);pointer-events:none}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.cvis{width:100%}.sgrid{grid-template-columns:1fr 1fr}.os-grid{grid-template-columns:1fr}}
-@media(max-width:720px){:root{--SBW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
+.peer-check{width:100%;border-collapse:collapse;font-size:11px;margin-top:10px}
+.peer-check th{background:var(--ult);padding:6px 9px;font-weight:600;border-bottom:1.5px solid var(--umd);text-align:center;color:var(--u);font-size:10px}
+.peer-check td{padding:7px 9px;border-bottom:1px solid var(--br);color:var(--mt);text-align:center}
+.peer-check td:first-child{text-align:left;font-size:11px}
+.peer-check input[type=radio]{accent-color:var(--u)}
+/* ── sidebar ── */
+.ap{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);padding:13px;margin-bottom:10px}.ap h5{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--lt);margin-bottom:8px}
+.slist{display:flex;flex-direction:column;gap:3px}.si{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--rSM);font-size:11px;color:var(--mt);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}
+.dot{width:19px;height:19px;border-radius:50%;background:var(--br);color:var(--lt);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dot.sa{background:var(--u);color:#fff}.dot.sd{background:var(--gbg);color:var(--green)}
+.sclist{display:flex;flex-direction:column;gap:4px}.scitem{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--br)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:3px 6px;border:1px solid var(--br);border-radius:5px;background:var(--sf);font-family:inherit;color:var(--tx);cursor:pointer;flex-shrink:0}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.scard{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px 12px;font-size:12px;line-height:1.65;color:var(--mt)}.scard strong{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--lt);margin-bottom:4px}
+.td-num{font-size:28px;font-weight:300;text-align:center;display:block}.td-lbl{font-size:10px;color:var(--lt);text-align:center;margin-top:3px;margin-bottom:9px}
+.trow{display:flex;gap:5px}.trow .btn{flex:1;justify-content:center;font-size:10px}
+.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:5px;padding:4px 0;font-size:11px;border-bottom:1px solid var(--br)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--u);white-space:nowrap}.tdef{color:var(--mt)}
+.pbtrack{height:5px;background:var(--umd);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--u);border-radius:3px}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:9px 18px;border-radius:10px;font-size:12px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
+@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:13px 15px}.sgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <aside class="sb">
-  <div class="sb-top"><div class="uchip">◈ Unit I</div><h2>컴퓨팅 시스템</h2><div class="smeta">소단원 4/6 · 13차시</div></div>
-  <nav class="sb-nav">
-    <div class="nlbl">소단원 목록</div>
-    <a class="na done" href="../lesson-01/index.html"><div class="nn">✓</div>컴퓨터의 구성과 역할</a>
-    <a class="na done" href="../lesson-02/index.html"><div class="nn">✓</div>입력 장치와 출력 장치</a>
-    <a class="na done" href="../lesson-03/index.html"><div class="nn">✓</div>CPU와 메모리</a>
-    <a class="na on"   href="../lesson-04/index.html"><div class="nn">4</div>운영체제의 역할<span class="nbadge">2차시</span></a>
-    <a class="na" href="../lesson-05/index.html"><div class="nn">5</div>네트워크와 인터넷</a>
-    <a class="na" href="../lesson-06/index.html"><div class="nn">6</div>피지컬 컴퓨팅</a>
-  </nav>
+  <div class="sb-top"><div class="uchip">◈ Unit I</div><h2>컴퓨팅 시스템</h2><div class="smeta">중단원2: 피지컬 컴퓨팅 프로그래밍 · p.24~27</div></div>
+  <nav class="sb-nav"><div class="nlbl">소단원 목록</div><a class="na done" href="../lesson-01/index.html"><div class="nn">✓</div>컴퓨팅 시스템의 구성과 동작 원리</a>
+<a class="na done" href="../lesson-02/index.html"><div class="nn">✓</div>피지컬 컴퓨팅 시스템의 이해</a>
+<a class="na done" href="../lesson-03/index.html"><div class="nn">✓</div>운동 횟수 표시 장치 만들기</a>
+<a class="na on" href="../lesson-04/index.html"><div class="nn">4</div>수면 온도 알림이 장치 만들기<span class="nbadge">2차시</span></a>
+<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>소리에 반응하는 애니메이션 장치 만들기</a>
+<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>이심전심 게임 장치 만들기</a>
+</nav>
   <div class="sb-foot"><a class="ba" href="../../index.html">← 단원 목차</a></div>
 </aside>
-
 <main class="main">
   <header class="topbar">
-    <div class="bc"><a href="#">I. 컴퓨팅 시스템</a><span class="sep">›</span><span class="cur">4. 운영체제의 역할</span></div>
+    <div class="bc"><a href="../../index.html">I. 컴퓨팅 시스템</a><span class="bcsep">›</span><span class="bccur">4. 수면 온도 알림이 장치 만들기</span></div>
     <div class="tbr">
       <button class="btn bsm" onclick="markDone('04')">✓ 완료 표시</button>
       <a class="btn bsm bp" href="../lesson-05/index.html">다음 소단원 →</a>
     </div>
   </header>
-
   <div class="page"><div class="g2"><div class="cm">
 
-    <!-- 01 학습목표 -->
-    <div class="card" id="sec-goal">
-      <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:#ECEAFE;color:#6C65CC">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="ach"><div class="ach-c">[9정01-04]</div><div class="ach-t">운영체제의 기능과 종류를 이해하고 사용자 인터페이스의 차이를 비교할 수 있다.</div></div>
-        <ul class="glist">
-          <li><div class="gck">✓</div>운영체제(OS)의 역할과 필요성을 설명할 수 있다.</li>
-          <li><div class="gck">✓</div>대표적인 운영체제의 종류와 특징을 구분할 수 있다.</li>
-          <li><div class="gck">✓</div>GUI와 CLI의 차이점을 비교하고 각 장단점을 설명할 수 있다.</li>
-        </ul>
-        <div class="div"></div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--light);margin-bottom:8px">핵심 개념 미리보기</div>
-        <div class="ctags">
-          <span class="ctag" onclick="goTo('sec-concept')">운영체제</span>
-          <span class="ctag" onclick="goTo('sec-concept')">OS</span>
-          <span class="ctag" onclick="goTo('sec-concept')">커널</span>
-          <span class="ctag" onclick="goTo('sec-concept')">GUI</span>
-          <span class="ctag" onclick="goTo('sec-concept')">CLI</span>
-          <span class="ctag" onclick="goTo('sec-concept')">멀티태스킹</span>
-        </div>
-        <div class="ibox prev">📌 <div><b>이전 차시 연결:</b> CPU와 메모리가 하드웨어의 핵심이었다면, 이번 시간에는 그 하드웨어를 통제하는 소프트웨어의 핵심인 <em>운영체제</em>를 학습합니다.</div></div>
+<div class="card" id="sec-goal">
+  <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--ult);color:var(--u)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div class="ach"><div class="ach-c">[9정01-04] 피지컬 컴퓨팅 프로그래밍</div><div class="ach-t">온도 센서와 빛 감지 센서를 활용하여 밤과 낮을 구분하고 밤에 방 안의 온도를 표시해 주는 장치를 만들 수 있다. (pp.24~27)</div></div>
+    <ul class="glist">
+      <li><div class="gck">✓</div>온도 센서와 빛 감지 센서의 측정 범위와 원리를 설명할 수 있다.</li>
+      <li><div class="gck">✓</div>빛 감지 센서로 밤·낮을 구분하는 알고리즘을 설계할 수 있다.</li>
+      <li><div class="gck">✓</div>수면 온도 알림이 장치 프로그램을 MakeCode로 작성할 수 있다.</li>
+    </ul>
+    <div class="divl"></div>
+    <div class="ctags">
+      <span class="ctag" onclick="goTo('sec-concept')">온도 센서</span>
+      <span class="ctag" onclick="goTo('sec-concept')">빛 감지 센서</span>
+      <span class="ctag" onclick="goTo('sec-concept')">조건문</span>
+      <span class="ctag" onclick="goTo('sec-concept')">야간 알림</span>
+    </div>
+    <div class="ibox prev">📌 <b>이전 차시:</b> 가속도 센서로 운동 횟수를 감지했습니다. 이번에는 온도·빛 센서를 조합하여 야간 수면 온도 알림이를 만듭니다.</div>
+  </div>
+</div>
+
+<div class="card" id="sec-concept">
+  <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:var(--gbg);color:var(--green)">02</div><h3>개념설명</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px">
+      <div style="background:var(--abg);border:1px solid #EDD070;border-radius:var(--rSM);padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:6px">🌡️ 온도 센서</div>
+        <div style="font-size:12px;color:var(--mt);line-height:1.75">측정 범위: <b>-5 ~ 50℃</b><br>주변 온도를 수치로 측정<br><b>계절별 실내 적정 온도:</b><br>봄·가을: 19~23℃ / 여름: 24~27℃ / 겨울: 18~21℃</div>
+      </div>
+      <div style="background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--u);margin-bottom:6px">☀️ 빛 감지 센서</div>
+        <div style="font-size:12px;color:var(--mt);line-height:1.75">측정 범위: <b>0(어두움) ~ 255(밝음)</b><br>주변 밝기로 밤·낮 구분<br><b>기준값 예: 128</b><br>128 미만 = 밤 / 128 이상 = 낮</div>
       </div>
     </div>
-
-    <!-- 02 개념설명 -->
-    <div class="card" id="sec-concept">
-      <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:#E8F3DC;color:#2A720E">02</div><h3>개념설명</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="crow">
-          <div class="ct">
-            <h4>운영체제(OS)란?</h4>
-            <p>하드웨어와 응용 프로그램 사이에서 <strong>중개자 역할</strong>을 하는 시스템 소프트웨어입니다.</p>
-            <ul>
-              <li><b>자원 관리:</b> CPU·메모리·저장 장치 할당·회수</li>
-              <li><b>프로세스 관리:</b> 여러 프로그램 동시 실행 (멀티태스킹)</li>
-              <li><b>파일 시스템:</b> 파일 생성·저장·삭제·검색</li>
-              <li><b>보안:</b> 사용자 인증, 접근 권한 제어</li>
-            </ul>
-          </div>
-          <div class="cvis">
-            <svg viewBox="0 0 124 124" width="124" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="116" height="22" rx="5" fill="#E8F3DC" stroke="#2A720E" stroke-width="1.2"/>
-              <text x="62" y="18" font-size="8.5" fill="#1A5000" text-anchor="middle" font-family="sans-serif" font-weight="bold">응용 소프트웨어 (앱)</text>
-              <rect x="4" y="32" width="116" height="28" rx="5" fill="#ECEAFE" stroke="#6C65CC" stroke-width="1.5"/>
-              <text x="62" y="48" font-size="9" fill="#3A3090" text-anchor="middle" font-family="sans-serif" font-weight="bold">운영체제 (OS)</text>
-              <text x="62" y="58" font-size="7" fill="#6C65CC" text-anchor="middle" font-family="sans-serif">자원관리 · 프로세스 · 보안</text>
-              <rect x="4" y="66" width="116" height="22" rx="5" fill="#FAF0DC" stroke="#7A4E0A" stroke-width="1.2"/>
-              <text x="62" y="80" font-size="8.5" fill="#5A3000" text-anchor="middle" font-family="sans-serif" font-weight="bold">커널 (하드웨어 직접 제어)</text>
-              <rect x="4" y="94" width="116" height="22" rx="5" fill="#E4F0FA" stroke="#0A4E8C" stroke-width="1.2"/>
-              <text x="62" y="108" font-size="8.5" fill="#0A3060" text-anchor="middle" font-family="sans-serif" font-weight="bold">하드웨어 (CPU · RAM · 디스크)</text>
-              <path d="M62 94 L62 88" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
-              <path d="M62 66 L62 60" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
-            </svg>
-          </div>
-        </div>
-
-        <div class="div"></div>
-        <h4 style="font-size:13px;font-weight:700;margin-bottom:12px">GUI vs CLI — 사용자 인터페이스 비교</h4>
-        <div class="os-grid">
-          <!-- CLI -->
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px">CLI (명령줄 인터페이스)</div>
-            <div style="background:#1A1A2E;border-radius:8px;overflow:hidden">
-              <div style="background:#2A2A3E;padding:6px 10px;display:flex;align-items:center;gap:5px">
-                <span style="width:9px;height:9px;border-radius:50%;background:#FF5F56;display:inline-block"></span>
-                <span style="width:9px;height:9px;border-radius:50%;background:#FFBD2E;display:inline-block"></span>
-                <span style="width:9px;height:9px;border-radius:50%;background:#27C93F;display:inline-block"></span>
-                <span style="font-size:10px;color:#666;margin-left:6px">Terminal</span>
-              </div>
-              <div style="padding:10px 12px;font-family:'Courier New',monospace;font-size:11px;color:#A6E3A1;line-height:2">
-                <span style="color:#89B4FA">user@pc:~$</span> <span style="color:#CDD6F4">ls</span><br>
-                Documents  Downloads<br>
-                <span style="color:#89B4FA">user@pc:~$</span> <span style="color:#CDD6F4">cd Documents</span><br>
-                <span style="color:#89B4FA">user@pc:~/Documents$</span> <span style="display:inline-block;width:8px;height:12px;background:#CDD6F4;vertical-align:middle;animation:blink 1s infinite"></span>
-              </div>
-            </div>
-            <div style="font-size:11px;color:var(--muted);margin-top:7px;line-height:1.9">
-              <span style="background:#E8F3DC;color:#2A720E;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600">장점</span> 빠름, 자동화·스크립팅 가능<br>
-              <span style="background:#FAEBE6;color:#8C1E0E;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600">단점</span> 명령어 암기 필요
-            </div>
-          </div>
-          <!-- GUI -->
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px">GUI (그래픽 사용자 인터페이스)</div>
-            <div style="background:#F0F0F8;border:1px solid var(--border);border-radius:8px;overflow:hidden">
-              <div style="background:#ECEAFE;padding:6px 10px;font-size:11px;font-weight:600;color:#4E48A8;border-bottom:1px solid #C4C0F0">🖥️ 내 컴퓨터</div>
-              <div style="padding:10px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px">
-                <div style="text-align:center;font-size:20px;padding:6px 2px;border-radius:6px;cursor:pointer;transition:background .12s" onmouseover="this.style.background='#ECEAFE'" onmouseout="this.style.background=''">📁<div style="font-size:9px;color:var(--muted);margin-top:2px">문서</div></div>
-                <div style="text-align:center;font-size:20px;padding:6px 2px;border-radius:6px;cursor:pointer;transition:background .12s" onmouseover="this.style.background='#ECEAFE'" onmouseout="this.style.background=''">📥<div style="font-size:9px;color:var(--muted);margin-top:2px">다운로드</div></div>
-                <div style="text-align:center;font-size:20px;padding:6px 2px;border-radius:6px;cursor:pointer;transition:background .12s" onmouseover="this.style.background='#ECEAFE'" onmouseout="this.style.background=''">🌐<div style="font-size:9px;color:var(--muted);margin-top:2px">브라우저</div></div>
-                <div style="text-align:center;font-size:20px;padding:6px 2px;border-radius:6px;cursor:pointer;transition:background .12s" onmouseover="this.style.background='#ECEAFE'" onmouseout="this.style.background=''">⚙️<div style="font-size:9px;color:var(--muted);margin-top:2px">설정</div></div>
-              </div>
-            </div>
-            <div style="font-size:11px;color:var(--muted);margin-top:7px;line-height:1.9">
-              <span style="background:#E8F3DC;color:#2A720E;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600">장점</span> 직관적, 쉬운 학습<br>
-              <span style="background:#FAEBE6;color:#8C1E0E;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600">단점</span> 시스템 자원 더 사용
-            </div>
-          </div>
-        </div>
-
-        <div style="overflow-x:auto;margin-top:14px">
-          <table style="width:100%;border-collapse:collapse;font-size:12px">
-            <thead><tr style="background:var(--bg)">
-              <th style="padding:8px 10px;text-align:left;border-bottom:1.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600">운영체제</th>
-              <th style="padding:8px 10px;text-align:left;border-bottom:1.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600">제조사</th>
-              <th style="padding:8px 10px;text-align:left;border-bottom:1.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600">주요 기기</th>
-              <th style="padding:8px 10px;text-align:left;border-bottom:1.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600">특징</th>
-            </tr></thead>
-            <tbody>
-              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)"><b>Windows 11</b></td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">Microsoft</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">PC·노트북</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">점유율 1위, 호환성 우수</td></tr>
-              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)"><b>macOS</b></td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">Apple</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">Mac·MacBook</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">안정성·디자인 우수</td></tr>
-              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)"><b>Android</b></td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">Google</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">스마트폰·태블릿</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">오픈소스, 다양한 기기</td></tr>
-              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)"><b>iOS</b></td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">Apple</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">iPhone·iPad</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted)">보안 우수, 폐쇄 생태계</td></tr>
-              <tr><td style="padding:9px 10px;color:var(--muted)"><b>Linux</b></td><td style="padding:9px 10px;color:var(--muted)">오픈소스</td><td style="padding:9px 10px;color:var(--muted)">서버·개발 환경</td><td style="padding:9px 10px;color:var(--muted)">무료, 높은 안정성</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="ibox info">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.42–53 참고</div>
-      </div>
+    <div class="divl"></div>
+    <h4 style="font-size:13px;font-weight:700;margin-bottom:9px">알고리즘 설계 (3단계)</h4>
+    <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:13px;font-size:12px;color:var(--mt);line-height:2;margin-bottom:12px">
+      ➊ <b>A 버튼</b> → 현재 온도를 LED 스크린에 출력<br>
+      ➋ <b>B 버튼</b> → 빛 감지 센서로 밤(🌙)/낮(☀️) 아이콘 표현<br>
+      ➌ <b>흔들림 감지</b> → 밤이면 온도에 따라 ↓(낮음)/🫀(적정)/↑(높음) 표시
     </div>
+    <h4 style="font-size:13px;font-weight:700;margin-bottom:9px">MakeCode 블록 (핵심: 야간 온도 안내)</h4>
+    <div class="mb-workspace">
+      <div class="mb-row"><span class="mb mb-sensor">📳 흔들림 감지 시</span></div>
+      <div class="mb-indent"><span class="mb mb-logic">만약 빛센서 < 128 (밤)</span></div>
+      <div class="mb-indent2"><span class="mb mb-logic">만약 온도 < 19 (너무 낮음)</span></div>
+      <div class="mb-indent2"><span class="mb mb-led">LED: ↓ (온도 낮음)</span></div>
+      <div class="mb-indent2"><span class="mb mb-logic">아니고 온도 > 23 (너무 높음)</span></div>
+      <div class="mb-indent2"><span class="mb mb-led">LED: ↑ (온도 높음)</span></div>
+      <div class="mb-indent2"><span class="mb mb-logic">아니면 (적정)</span></div>
+      <div class="mb-indent2"><span class="mb mb-led">LED: 🫀 (적정 온도)</span></div>
+      <div class="mb-indent"><span class="mb mb-logic">아니면 (낮)</span></div>
+      <div class="mb-indent2"><span class="mb mb-led">LED 화면 지우기</span></div>
+    </div>
+    <div class="ibox info">📖 <b>교과서 연계:</b> pp.24~27 / 봄 기준: 적정 온도 19~23℃</div>
+  </div>
+</div>
 
-    <!-- 03 인터랙션 -->
-    <div class="card" id="sec-interact">
-      <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:#FAEBE6;color:#8C1E0E">03</div><h3>인터랙션 — OS 기능 매칭</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="ibox ok" style="margin-top:0;margin-bottom:16px">💡 상황 설명을 읽고, 해당 상황을 가능하게 하는 <b>OS 기능</b>을 선택해보세요!</div>
+<!-- ★ 수행 활동 ★ -->
+<div class="activity" id="sec-activity">
+  <div class="act-head" onclick="toggleSec('act-body-04')">
+    <span class="act-badge">★ 수행 활동</span>
+    <h3>빛 감지·온도 센서를 활용한 장치 만들기</h3>
+    <span style="font-size:10px;color:var(--udk);margin-left:auto">모둠 활동 | pp.27</span>
+    <span class="carr" style="color:var(--udk)">▾</span>
+  </div>
+  <div id="act-body-04" class="act-body">
+    <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 빛 감지 센서와 온도 센서를 활용하는 두 가지 장치를 만들어봅니다. (교과서 p.27 해보기)</div>
 
-        <div id="q1-block" style="margin-bottom:18px">
-          <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:12px 14px;margin-bottom:9px;font-size:13px"><b>상황 1:</b> 스마트폰에서 카카오톡 대화 중에 유튜브 음악도 동시에 재생됩니다.</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
-            <div class="mitem" onclick="matchQ('q1',this,'wrong','파일 시스템')">파일 시스템 관리</div>
-            <div class="mitem" onclick="matchQ('q1',this,'correct','프로세스 관리')">프로세스 관리 (멀티태스킹)</div>
-            <div class="mitem" onclick="matchQ('q1',this,'wrong','보안 인증')">사용자 보안 인증</div>
-            <div class="mitem" onclick="matchQ('q1',this,'wrong','GUI 렌더링')">GUI 그래픽 렌더링</div>
-          </div>
-          <div id="q1-fb" style="display:none;padding:9px 13px;border-radius:var(--rSM);font-size:12px;margin-top:8px;line-height:1.6"></div>
+    <!-- 활동 1: 스마트 가로등 -->
+    <div style="background:var(--sf);border:2px solid var(--umd);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--u);margin-bottom:8px">📋 활동 1 — 스마트 가로등 프로그램 만들기</div>
+      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px;margin-bottom:10px;font-size:12px;color:var(--mt)">
+        <b>조건 (1단계):</b> 빛 감지 센서값 ≥ 128 → 가로등 꺼짐 / 128 미만 → 최대 밝기로 켜짐<br>
+        <b>조건 (2단계):</b> 128↑ → 꺼짐 / 85~128 → 조금 어두움(중간 밝기) / 85↓ → 완전 어두움(최대 밝기)
+      </div>
+      <div style="font-size:12px;font-weight:600;color:var(--mt);margin-bottom:7px">알고리즘 작성 (2단계 포함)</div>
+      <textarea class="act-input" placeholder="1단계 알고리즘:&#10;만약 빛센서 ≥ 128 이면: LED 꺼짐&#10;아니면: LED 최대 밝기&#10;&#10;2단계 알고리즘: (밝기 3단계 조절)&#10;..."></textarea>
+
+      <!-- 시뮬레이터 -->
+      <div style="background:#1a2040;border-radius:var(--rSM);padding:14px;margin-top:10px;text-align:center">
+        <div style="font-size:10px;color:#aaa;margin-bottom:8px">스마트 가로등 시뮬레이터</div>
+        <div style="margin-bottom:9px">
+          <label style="font-size:11px;color:#aaa">주변 밝기 (빛 감지 센서값)</label><br>
+          <input type="range" id="light-range" min="0" max="255" value="150" oninput="updateStreetLight()" style="width:80%;margin-top:5px;accent-color:var(--u)">
+          <span id="light-val" style="font-size:12px;color:var(--u);margin-left:6px;font-weight:700">150</span>
         </div>
-
-        <div id="q2-block" style="margin-bottom:18px">
-          <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:12px 14px;margin-bottom:9px;font-size:13px"><b>상황 2:</b> 스마트폰의 잠금화면에서 지문을 인식하여 잠금이 해제됩니다.</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
-            <div class="mitem" onclick="matchQ('q2',this,'wrong','자원 관리')">CPU 자원 관리</div>
-            <div class="mitem" onclick="matchQ('q2',this,'wrong','파일 시스템')">파일 시스템 관리</div>
-            <div class="mitem" onclick="matchQ('q2',this,'correct','보안 인증')">사용자 보안 인증</div>
-            <div class="mitem" onclick="matchQ('q2',this,'wrong','멀티태스킹')">멀티태스킹 처리</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:16px">
+          <div style="text-align:center">
+            <div id="streetlight-icon" style="font-size:40px;transition:all .4s">💡</div>
+            <div id="streetlight-label" style="font-size:11px;color:#aaa;margin-top:4px">낮 → 꺼짐</div>
           </div>
-          <div id="q2-fb" style="display:none;padding:9px 13px;border-radius:var(--rSM);font-size:12px;margin-top:8px;line-height:1.6"></div>
-        </div>
-
-        <div class="div"></div>
-        <div class="qwrap">
-          <div class="qq">다음 중 운영체제(OS)의 종류가 <b>아닌</b> 것은?</div>
-          <div class="qopts">
-            <div class="opt" onclick="checkQ(this,false,'Windows는 Microsoft가 개발한 PC용 운영체제입니다.')"><span class="onum">①</span>Windows 11</div>
-            <div class="opt" onclick="checkQ(this,false,'Android는 Google이 개발한 모바일 운영체제입니다.')"><span class="onum">②</span>Android</div>
-            <div class="opt" onclick="checkQ(this,true,'카카오톡은 메신저 응용 소프트웨어(앱)입니다. OS가 아닙니다!')"><span class="onum">③</span>카카오톡</div>
-            <div class="opt" onclick="checkQ(this,false,'macOS는 Apple이 개발한 Mac 컴퓨터용 운영체제입니다.')"><span class="onum">④</span>macOS</div>
+          <div style="text-align:left;font-size:11px;color:#aaa;line-height:2">
+            <div id="sl-cond1" style="padding:3px 7px;border-radius:4px">🟡 빛 ≥ 128: 꺼짐</div>
+            <div id="sl-cond2" style="padding:3px 7px;border-radius:4px">⬜ 빛 85~128: 중간</div>
+            <div id="sl-cond3" style="padding:3px 7px;border-radius:4px">⬜ 빛 < 85: 최대</div>
           </div>
-          <div class="qfb" id="qfb"></div>
         </div>
       </div>
     </div>
 
-    <!-- 04 수행평가 -->
-    <div class="card" id="sec-assess">
-      <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:#E4F0FA;color:#0A4E8C">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="task">
-          <h4>📋 OS 없는 세상 상상하기</h4>
-          <p>운영체제가 없다면 어떤 일이 일어날지 상상하여, OS의 필요성을 설명하는 글을 작성하시오.</p>
-          <div class="srow"><div class="stepn">①</div><span>OS가 없을 때 발생하는 문제 2가지 이상 제시</span></div>
-          <div class="srow"><div class="stepn">②</div><span>각 문제에 대한 OS의 해결 방법 설명</span></div>
-          <div class="srow"><div class="stepn">③</div><span>5~8문장 분량 (200~300자)</span></div>
-        </div>
-        <table class="rub" style="margin-bottom:16px">
-          <thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead>
-          <tbody>
-            <tr><td><b>개념 이해</b></td><td class="lv4">OS 역할 3가지 이상 정확</td><td class="lv3">2가지 정확</td><td class="lv2">1가지 설명</td><td class="lv1">설명 없음</td></tr>
-            <tr><td><b>논리적 서술</b></td><td class="lv4">문제-해결 구조 명확</td><td class="lv3">대체로 명확</td><td class="lv2">나열만</td><td class="lv1">무관한 내용</td></tr>
-          </tbody>
-        </table>
-        <div class="sclist">
-          <div class="scitem"><label>운영체제의 필요성과 주요 기능을 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-          <div class="scitem"><label>GUI와 CLI의 차이를 예시로 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-          <div class="scitem"><label>OS 종류를 3가지 이상 나열할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        </div>
-        <button class="btn bsm bok" style="margin-top:11px" onclick="saveSC('l04sc')">💾 저장</button>
+    <!-- 활동 2: 선풍기 속도 -->
+    <div style="background:var(--sf);border:2px solid var(--umd);border-radius:var(--rSM);padding:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--u);margin-bottom:8px">📋 활동 2 — 온도에 따른 선풍기 속도 조절 애니메이션 (pp.27)</div>
+      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px;margin-bottom:10px;font-size:12px;color:var(--mt);line-height:1.9">
+        <b>조건:</b> 30℃↑=초강풍 / 28~30℃=강풍 / 25~28℃=약풍 / 22~25℃=미풍 / 22℃↓=정지
       </div>
+      <div style="text-align:center;background:#1a2040;border-radius:var(--rSM);padding:14px;margin-bottom:10px">
+        <div style="font-size:10px;color:#aaa;margin-bottom:6px">온도 입력 (℃)</div>
+        <input type="range" id="temp-range" min="15" max="35" value="22" oninput="updateFan()" style="width:80%;accent-color:var(--u)">
+        <span id="temp-val" style="font-size:12px;color:var(--u);margin-left:6px;font-weight:700">22℃</span>
+        <div id="fan-display" style="font-size:48px;margin:10px 0;transition:all .3s">⚪</div>
+        <div id="fan-label" style="font-size:13px;color:#FF6B35;font-weight:700">정지</div>
+        <div id="fan-speed-bar" style="height:8px;background:#333;border-radius:4px;overflow:hidden;margin-top:8px;width:80%;margin-left:auto;margin-right:auto">
+          <div id="fan-bar-fill" style="height:100%;background:var(--u);width:0%;transition:width .4s;border-radius:4px"></div>
+        </div>
+      </div>
+      <textarea class="act-input" placeholder="알고리즘 작성:&#10;만약 온도 ≥ 30 이면: 초강풍 (애니메이션 빠르게)&#10;아니고 온도 ≥ 28 이면: 강풍&#10;..."></textarea>
     </div>
 
-    <!-- 05 확인하기 -->
-    <div class="card" id="sec-review">
-      <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:#E8F3DC;color:#2A720E">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-      <div class="cb">
-        <div class="sgrid">
-          <div class="scard"><strong>OS 역할</strong>하드웨어 자원 관리, 프로세스 관리(멀티태스킹), 파일 시스템, 사용자 보안 인증 제공.</div>
-          <div class="scard"><strong>GUI vs CLI</strong>GUI: 아이콘·마우스, 직관적. CLI: 텍스트 명령어, 빠르고 자동화 가능. 각각 장단점 있음.</div>
-          <div class="scard"><strong>OS 종류</strong>Windows·macOS·Linux(PC), Android·iOS(모바일). 기기와 목적에 맞게 선택.</div>
-        </div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rSM);padding:14px;font-size:13px;margin-bottom:14px">
-          <strong>✏️ 단답형:</strong> "아이콘과 마우스를 사용하는 그래픽 기반 인터페이스를 <span style="display:inline-block;width:50px;border-bottom:1.5px solid var(--text)">&nbsp;</span>라고 하고, 텍스트 명령어를 입력하는 방식을 <span style="display:inline-block;width:50px;border-bottom:1.5px solid var(--text)">&nbsp;</span>라고 한다."
-          <textarea style="display:block;width:100%;margin-top:10px;padding:10px;border:1px solid var(--border);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:52px;background:var(--surface);outline:none" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='#6C65CC'" onblur="this.style.borderColor=''"></textarea>
-        </div>
-        <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 컴퓨터들이 어떻게 서로 연결되는지 — <strong>네트워크와 인터넷</strong>의 원리를 탐구합니다!</div></div>
-      </div>
+    <!-- 평가하기 -->
+    <div style="margin-top:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--mt);margin-bottom:8px">📝 평가하기 (교과서 p.26)</div>
+      <div style="overflow-x:auto;margin-top:12px"><table class="peer-check"><thead><tr><th style="text-align:left">평가 항목</th><th colspan="2">자기 평가</th><th colspan="2">동료 평가</th></tr></thead><tbody><tr><td>A 버튼을 누르면 현재 온도가 출력되는가?</td><td><label><input type="radio" name="pe0a" value="예"> 예</label></td><td><label><input type="radio" name="pe0a" value="아니요"> 아니요</label></td><td><label><input type="radio" name="pe0b" value="예"> 예</label></td><td><label><input type="radio" name="pe0b" value="아니요"> 아니요</label></td></tr><tr><td>낮과 밤을 구분하는 기준값이 올바르게 설정되었는가?</td><td><label><input type="radio" name="pe1a" value="예"> 예</label></td><td><label><input type="radio" name="pe1a" value="아니요"> 아니요</label></td><td><label><input type="radio" name="pe1b" value="예"> 예</label></td><td><label><input type="radio" name="pe1b" value="아니요"> 아니요</label></td></tr><tr><td>B 버튼을 누르면 주변 상태에 따라 낮과 밤을 인식하는가?</td><td><label><input type="radio" name="pe2a" value="예"> 예</label></td><td><label><input type="radio" name="pe2a" value="아니요"> 아니요</label></td><td><label><input type="radio" name="pe2b" value="예"> 예</label></td><td><label><input type="radio" name="pe2b" value="아니요"> 아니요</label></td></tr><tr><td>야간에 적정 온도 상태를 올바르게 안내하는가?</td><td><label><input type="radio" name="pe3a" value="예"> 예</label></td><td><label><input type="radio" name="pe3a" value="아니요"> 아니요</label></td><td><label><input type="radio" name="pe3b" value="예"> 예</label></td><td><label><input type="radio" name="pe3b" value="아니요"> 아니요</label></td></tr></tbody></table></div>
     </div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn bsm bp" onclick="saveActivity('l104_act')">💾 활동 저장</button>
+      <a href="https://makecode.microbit.org" target="_blank" class="btn bsm" style="background:#0078D4;color:#fff;border-color:#005A9E">MakeCode 열기 ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="sec-assess">
+  <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:12px;margin-bottom:12px;border-left:3px solid var(--u)">
+      <h4 style="font-size:13px;font-weight:700;color:var(--u);margin-bottom:7px">📋 수면 온도 알림이 + 스마트 가로등 완성</h4>
+      <p style="font-size:13px;color:var(--mt)">온도·빛 감지 센서를 활용한 피지컬 컴퓨팅 프로그램 2가지를 MakeCode로 완성하시오.</p>
+    </div>
+    <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody><tr><td><b>센서 활용</b></td><td class="lv4">온도·빛 센서 정확 조합</td><td class="lv3">1가지 정확</td><td class="lv2">센서 사용만</td><td class="lv1">없음</td></tr><tr><td><b>조건 처리</b></td><td class="lv4">다중 조건 정확 구현</td><td class="lv3">2단계 구현</td><td class="lv2">1단계</td><td class="lv1">없음</td></tr><tr><td><b>결과 출력</b></td><td class="lv4">LED 아이콘 정상 표시</td><td class="lv3">부분 표시</td><td class="lv2">단순 수치</td><td class="lv1">없음</td></tr></tbody></table>
+    <div class="sclist"><div class="scitem"><label>온도·빛 감지 센서의 범위와 원리를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div><div class="scitem"><label>조건문으로 밤·낮을 구분하는 알고리즘을 설계할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div><div class="scitem"><label>수면 온도 알림이 프로그램을 MakeCode로 작성할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div></div>
+    <button class="btn bsm bok" style="margin-top:10px" onclick="saveSC('l104sc')">💾 저장</button>
+  </div>
+</div>
+
+<div class="card" id="sec-review">
+  <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:var(--gbg);color:var(--green)">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div class="sgrid">
+      <div class="scard"><strong>온도 센서</strong>-5~50℃ 측정. 봄·가을 적정: 19~23℃.</div>
+      <div class="scard"><strong>빛 감지 센서</strong>0~255 측정. 128 미만=밤, 이상=낮.</div>
+      <div class="scard"><strong>다중 조건</strong>if→else if→else로 3단계 이상 분기 가능.</div>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:13px;margin-bottom:12px"><b>✏️ 단답형:</b> 빛 감지 센서값이 128 미만이면 밤, 128 이상이면 낮으로 판별할 때 사용하는 기준값을 <span style="display:inline-block;width:60px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>이라고 한다.<textarea style="display:block;width:100%;margin-top:9px;padding:9px;border:1px solid var(--br);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:48px;background:var(--sf)" placeholder="정답을 입력하세요..."></textarea></div>
+    <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 소리 센서와 스피커로 <strong>소리에 반응하는 애니메이션 장치</strong>를 만들어봅니다! (pp.28~31)</div></div>
+  </div>
+</div>
 
   </div>
-
   <div class="ca">
-    <div class="ap">
-      <h5>학습 진행</h5>
-      <div class="slist">
-        <div class="si sd" onclick="goTo('sec-goal')"><div class="dot sd">✓</div>학습목표</div>
-        <div class="si sd" onclick="goTo('sec-concept')"><div class="dot sd">✓</div>개념설명</div>
-        <div class="si sa" onclick="goTo('sec-interact')"><div class="dot sa">→</div>인터랙션</div>
-        <div class="si"    onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
-        <div class="si"    onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
-      </div>
+    <div class="ap"><h5>학습 진행</h5><div class="slist">
+      <div class="si" onclick="goTo('sec-goal')"><div class="dot sd">1</div>학습목표</div>
+      <div class="si" onclick="goTo('sec-concept')"><div class="dot">2</div>개념설명</div>
+      <div class="si" onclick="goTo('sec-activity')"><div class="dot sa">★</div>수행 활동</div>
+      <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
+      <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
+    </div></div>
+    <div class="ap"><h5>수업 타이머</h5>
+      <span class="td-num" id="tnum">01:30</span>
+      <div class="td-lbl">2차시 (90분)</div>
+      <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺</button></div>
     </div>
-    <div class="ap"><h5>수업 타이머</h5><span class="td-num" id="tnum">45:00</span><div class="td-lbl">수업 남은 시간</div><div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div></div>
-    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">OS</span><span class="tdef">운영체제</span></div><div class="tterm"><span class="tw">GUI</span><span class="tdef">그래픽 인터페이스</span></div><div class="tterm"><span class="tw">CLI</span><span class="tdef">명령줄 인터페이스</span></div><div class="tterm"><span class="tw">커널</span><span class="tdef">하드웨어 직접 제어</span></div></div></div>
-    <div class="ap" style="background:var(--unit-lt);border-color:var(--unit-md)"><h5 style="color:var(--unit)">단원 진도</h5><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div class="pbtrack"><div class="pbfill" style="width:66%"></div></div><span style="font-size:11px;font-weight:600;color:var(--unit)">4/6</span></div></div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">온도 센서</span><span class="tdef">-5~50℃ 측정</span></div><div class="tterm"><span class="tw">빛 감지 센서</span><span class="tdef">0~255 밝기</span></div><div class="tterm"><span class="tw">기준값</span><span class="tdef">센서값 비교 기준</span></div><div class="tterm"><span class="tw">조건문</span><span class="tdef">if/else 분기</span></div><div class="tterm"><span class="tw">야간 적정</span><span class="tdef">봄·가을 19~23℃</span></div></div></div>
+    <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
+      <div style="display:flex;align-items:center;gap:7px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:54%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">4/6</span></div>
+    </div>
+    <div class="ap" style="background:#F0FDF4;border-color:#BBF7D0">
+      <h5 style="color:#166534">🔧 마이크로비트</h5>
+      <a href="https://makecode.microbit.org" target="_blank" class="btn bsm" style="width:100%;justify-content:center;background:#0078D4;color:#fff;border-color:#005A9E;margin-bottom:5px">MakeCode 열기 ↗</a>
+      <a href="https://makecode.microbit.org/#editor" target="_blank" class="btn bsm" style="width:100%;justify-content:center;font-size:10px;color:var(--mt)">시뮬레이터 ↗</a>
+    </div>
   </div>
   </div></div>
 </main>
-
-<div id="toast" style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap"></div>
-
+<div id="toast"></div>
 <script>
-'use strict';
-function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
-function toggleSec(id){var el=document.getElementById(id);if(el)el.classList.toggle('collapsed');}
-function goTo(id){var el=document.getElementById(id);if(!el)return;window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-68,behavior:'smooth'});}
-var tR=2700,tRun=false,tIv=null;
-function pad(n){return n<10?'0'+n:''+n;}
-function renderT(){var el=document.getElementById('tnum');if(!el)return;el.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);el.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
-function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
-function resetTimer(){clearInterval(tIv);tRun=false;tR=2700;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
-function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');o.style.pointerEvents='none';});el.classList.add(ok?'correct':'wrong');var fb=document.getElementById('qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ ':'✗ 힌트: ')+msg;}}
-function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){toast('저장 실패');}}
-function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
-function markDone(n){try{var d=JSON.parse(localStorage.getItem('u01done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u01done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료로 표시되었습니다!');}
-document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l04sc');});
+tR=90;window._tInit=90;
 
-function matchQ(qid,el,result,label){
-  var block=el.parentElement;
-  block.querySelectorAll('.mitem').forEach(function(m){m.style.pointerEvents='none';m.classList.add('ng');});
-  el.classList.remove('ng'); el.classList.add(result==='correct'?'ok':'ng');
-  var fb=document.getElementById(qid+'-fb');
-  fb.style.display='block';
-  if(result==='correct'){fb.style.cssText='display:block;background:#E8F3DC;border:1px solid #BFDFAA;color:#1A5000;padding:9px 13px;border-radius:8px;font-size:12px;line-height:1.6';fb.innerHTML='✓ 정답! 운영체제의 <b>'+label+'</b> 기능 덕분에 가능합니다.';}
-  else{fb.style.cssText='display:block;background:#FAEBE6;border:1px solid #F0B8A0;color:#6A1000;padding:9px 13px;border-radius:8px;font-size:12px;line-height:1.6';fb.innerHTML='✗ 힌트: <b>'+label+'</b>은(는) 이 상황과 다른 기능입니다. 다시 생각해보세요!';}
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
+function toggleSec(id){var e=document.getElementById(id);if(e)e.classList.toggle('collapsed');}
+function goTo(id){var e=document.getElementById(id);if(!e)return;window.scrollTo({top:e.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});}
+var tR,tRun=false,tIv=null;
+function pad(n){return n<10?'0'+n:''+n;}
+function renderT(){var e=document.getElementById('tnum');if(!e)return;e.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);e.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
+function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
+function resetTimer(){clearInterval(tIv);tRun=false;if(window._tInit)tR=window._tInit;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
+function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
+function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){}}
+function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
+function markDone(n){try{var d=JSON.parse(localStorage.getItem('u01done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u01done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
+function saveActivity(key){
+  var d={};
+  document.querySelectorAll('.act-input').forEach(function(el,i){d['a'+i]=el.value;});
+  document.querySelectorAll('.peer-check input[type=radio]:checked').forEach(function(el){d['r_'+el.name]=el.value;});
+  try{localStorage.setItem(key,JSON.stringify(d));toast('✅ 수행 활동이 저장되었습니다!');}catch(e){}
 }
+function loadActivity(key){
+  try{
+    var d=JSON.parse(localStorage.getItem(key)||'{}');
+    document.querySelectorAll('.act-input').forEach(function(el,i){if(d['a'+i])el.value=d['a'+i];});
+    Object.keys(d).filter(function(k){return k.startsWith('r_');}).forEach(function(k){
+      var el=document.querySelector('input[type=radio][name="'+k.slice(2)+'"][value="'+d[k]+'"]');
+      if(el)el.checked=true;
+    });
+  }catch(e){}
+}
+
+
+function updateStreetLight(){
+  var v = parseInt(document.getElementById('light-range').value);
+  document.getElementById('light-val').textContent = v;
+  var icon = document.getElementById('streetlight-icon');
+  var lbl = document.getElementById('streetlight-label');
+  var c1=document.getElementById('sl-cond1'), c2=document.getElementById('sl-cond2'), c3=document.getElementById('sl-cond3');
+  [c1,c2,c3].forEach(function(e){e.style.background='';e.style.color='#aaa';});
+  if(v >= 128){icon.textContent='⚫';icon.style.filter='';lbl.textContent='낮 → 가로등 꺼짐';c1.style.background='#2A4020';c1.style.color='#88CC66';}
+  else if(v >= 85){icon.textContent='🟡';icon.style.filter='drop-shadow(0 0 6px #FFA)';lbl.textContent='조금 어두움 → 중간 밝기';c2.style.background='#402A20';c2.style.color='#FFCC66';}
+  else{icon.textContent='💡';icon.style.filter='drop-shadow(0 0 12px #FFD700)';lbl.textContent='완전 어두움 → 최대 밝기';c3.style.background='#402010';c3.style.color='#FF8844';}
+}
+var fanAnim = null;
+function updateFan(){
+  var t = parseInt(document.getElementById('temp-range').value);
+  document.getElementById('temp-val').textContent = t + '℃';
+  var icons = ['⚪','🌀','💨','🌪️','🌊'];
+  var labels = ['정지','미풍','약풍','강풍','초강풍'];
+  var speeds = [0, 20, 45, 70, 100];
+  var delays = [0, 600, 350, 200, 100];
+  var level = t >= 30 ? 4 : t >= 28 ? 3 : t >= 25 ? 2 : t >= 22 ? 1 : 0;
+  document.getElementById('fan-label').textContent = labels[level];
+  document.getElementById('fan-bar-fill').style.width = speeds[level] + '%';
+  clearInterval(fanAnim);
+  if(level > 0){
+    var frames = ['🌀','⭕','🔄','💫'];
+    var fi = 0;
+    fanAnim = setInterval(function(){
+      document.getElementById('fan-display').textContent = frames[fi % frames.length]; fi++;
+    }, delays[level]);
+  } else {
+    document.getElementById('fan-display').textContent = '⚪';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){updateStreetLight();updateFan();});
+
+document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l104sc');loadActivity('l104sc_act');});
 </script>
-</body>
-</html>
+</body></html>
