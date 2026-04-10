@@ -86,10 +86,7 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 .dot{width:19px;height:19px;border-radius:50%;background:var(--br);color:var(--lt);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .dot.sa{background:var(--u);color:#fff}.dot.sd{background:var(--gbg);color:var(--green)}
 .sclist{display:flex;flex-direction:column;gap:4px}.scitem{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--br)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:3px 6px;border:1px solid var(--br);border-radius:5px;background:var(--sf);font-family:inherit;color:var(--tx);cursor:pointer;flex-shrink:0}
-.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.scard{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px 12px;font-size:12px;line-height:1.65;color:var(--mt)}.scard strong{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--lt);margin-bottom:4px}
-.td-num{font-size:28px;font-weight:300;text-align:center;display:block}.td-lbl{font-size:10px;color:var(--lt);text-align:center;margin-top:3px;margin-bottom:9px}
-.trow{display:flex;gap:5px}.trow .btn{flex:1;justify-content:center;font-size:10px}
-.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:5px;padding:4px 0;font-size:11px;border-bottom:1px solid var(--br)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--u);white-space:nowrap}.tdef{color:var(--mt)}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.scard{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px 12px;font-size:12px;line-height:1.65;color:var(--mt)}.scard strong{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--lt);margin-bottom:4px}.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:5px;padding:4px 0;font-size:11px;border-bottom:1px solid var(--br)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--u);white-space:nowrap}.tdef{color:var(--mt)}
 .pbtrack{height:5px;background:var(--umd);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--u);border-radius:3px}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:9px 18px;border-radius:10px;font-size:12px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
 @media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}}
@@ -291,12 +288,7 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
       <div class="si" onclick="goTo('sec-activity')"><div class="dot sa">★</div>수행 활동</div>
       <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
       <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
-    </div></div>
-    <div class="ap"><h5>수업 타이머</h5>
-      <span class="td-num" id="tnum">00:45</span>
-      <div class="td-lbl">1차시 (45분)</div>
-      <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺</button></div>
-    </div>
+    </div></div></div>
     <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">컴퓨팅 시스템</span><span class="tdef">HW+SW 결합 장치</span></div><div class="tterm"><span class="tw">하드웨어</span><span class="tdef">물리적 전자장치</span></div><div class="tterm"><span class="tw">소프트웨어</span><span class="tdef">명령어·데이터 집합</span></div><div class="tterm"><span class="tw">운영 체제</span><span class="tdef">시스템 SW, 중개 역할</span></div><div class="tterm"><span class="tw">SoC</span><span class="tdef">CPU+GPU 통합 칩</span></div></div></div>
     <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
       <div style="display:flex;align-items:center;gap:7px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:8%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">1/6</span></div>
@@ -311,16 +303,10 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 </main>
 <div id="toast"></div>
 <script>
-tR=45;window._tInit=45;
 
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
 function toggleSec(id){var e=document.getElementById(id);if(e)e.classList.toggle('collapsed');}
 function goTo(id){var e=document.getElementById(id);if(!e)return;window.scrollTo({top:e.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});}
-var tR,tRun=false,tIv=null;
-function pad(n){return n<10?'0'+n:''+n;}
-function renderT(){var e=document.getElementById('tnum');if(!e)return;e.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);e.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
-function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
-function resetTimer(){clearInterval(tIv);tRun=false;if(window._tInit)tR=window._tInit;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
 function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
 function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){}}
 function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
@@ -343,6 +329,6 @@ function loadActivity(key){
 }
 
 
-document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l101sc');loadActivity('l101sc_act');});
+document.addEventListener('DOMContentLoaded',function(){loadSC('l101sc');loadActivity('l101sc_act');});
 </script>
 </body></html>
