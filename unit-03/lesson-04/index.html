@@ -68,45 +68,55 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 .fc-io{background:#E8F3DC;border:1.5px solid var(--green);color:var(--green);padding:6px 14px;font-size:11px;font-weight:500;border-radius:4px}
 .fc-arr{color:var(--lt);font-size:12px}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:9px 18px;border-radius:10px;font-size:12px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
-.crow{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}}
-.page{padding:13px 15px}.sgrid{grid-template-columns:1fr}}
-
-/* ── 반응형 최적화 v2 ── */
-canvas{max-width:100%;height:auto;display:block;box-sizing:border-box}
-table{width:100%}
+/* ══ 반응형 레이아웃 ══ */
+*,*::before,*::after{box-sizing:border-box}
+img,canvas,video{max-width:100%;height:auto;display:block}
+table{width:100%;border-collapse:collapse}
 .act-table,.peer-check,.rub{table-layout:fixed;word-break:break-word}
-.act-table td,.act-table th,.rub td,.rub th,.peer-check td,.peer-check th{min-width:44px;word-break:break-word}
-.act-body{overflow-x:hidden}
-.act-step>div{min-width:0;flex:1;overflow-wrap:break-word}
+.act-table td,.act-table th,
+.rub td,.rub th,
+.peer-check td,.peer-check th{min-width:44px;word-break:break-word;overflow-wrap:break-word}
+.act-step>div{min-width:0;flex:1;overflow-wrap:break-word;word-break:break-word}
+.act-body,.cb{overflow-x:hidden}
 .act-input{width:100%;box-sizing:border-box}
 .mb-workspace,.mb-row,.mb-indent,.mb-indent2{flex-wrap:wrap}
+.sim-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* 1100px 이하 */
 @media(max-width:1100px){
   .g2{grid-template-columns:1fr}
   .ca{position:static}
   .crow{grid-template-columns:1fr}
   .sgrid{grid-template-columns:1fr 1fr}
 }
+
+/* 900px 이하 */
 @media(max-width:900px){
   .ca{display:none}
   .page{padding:16px 14px}
   .cb,.act-body{padding:13px}
   .sgrid{grid-template-columns:1fr 1fr}
+  .crow{grid-template-columns:1fr}
 }
+
+/* 640px 이하 */
 @media(max-width:640px){
   .page{padding:11px 10px}
   .cb,.act-body{padding:10px}
   .sgrid{grid-template-columns:1fr}
   .act-step{flex-direction:column;gap:5px}
   .act-num{margin-bottom:0}
-  .mb,.mb-hole{font-size:10px;padding:4px 7px}
-  .btn{font-size:11px;padding:5px 8px}
   .ch h3{font-size:12px}
+  .btn{font-size:11px;padding:5px 8px}
   .act-table td,.act-table th{padding:5px 6px;font-size:11px}
   .rub td,.rub th{padding:5px 6px;font-size:11px}
   .peer-check td,.peer-check th{padding:5px 6px;font-size:10px}
   .scard{font-size:11px}
   .opt{font-size:12px;padding:8px 10px}
+  .mb,.mb-hole{font-size:10px;padding:4px 7px}
 }
+
+/* 480px 이하 */
 @media(max-width:480px){
   :root{--SW:0px}
   .sb{display:none}
@@ -115,6 +125,7 @@ table{width:100%}
   .page{padding:8px 9px}
   .cb,.act-body{padding:9px}
   .tbr .btn:last-child{display:none}
+  .sgrid{grid-template-columns:1fr}
 }
 </style>
 </head>
