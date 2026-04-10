@@ -40,14 +40,14 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
 .activity{background:linear-gradient(135deg,var(--ult),#EDFFF6);border:2px solid var(--umd);border-radius:var(--rLG);margin-bottom:11px;overflow:hidden}
 .act-head{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1.5px solid var(--umd);background:var(--ult);cursor:pointer;user-select:none}.act-head:hover{background:#D0EEE3}
 .act-badge{background:var(--u);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}.act-head h3{font-size:13px;font-weight:700;color:var(--udk);flex:1}.act-body{padding:18px}
-.act-step{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--sf);border:1px solid var(--br);border-radius:var(--rSM);margin-bottom:8px}
+.act-step{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--sf);border:1px solid var(--br);border-radius:var(--rSM);margin-bottom:8pxmin-height:160px;}
 .act-num{width:22px;height:22px;border-radius:50%;background:var(--u);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .act-step h4{font-size:12px;font-weight:700;margin-bottom:4px}.act-step p{font-size:12px;color:var(--mt);line-height:1.65}
 .act-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
 .act-table th{background:var(--u);color:#fff;padding:7px 10px;font-weight:600;font-size:11px;text-align:left}
 .act-table td{padding:8px 10px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.55}
 .act-table tr:last-child td{border-bottom:none}
-.act-input{width:100%;padding:8px 10px;border:1.5px solid var(--br);border-radius:var(--rSM);font-size:12px;font-family:inherit;background:var(--sf);outline:none;resize:vertical;min-height:52px;margin-top:4px}
+.act-input{width:100%;padding:8px 10px;border:1.5px solid var(--br);border-radius:var(--rSM);font-size:12px;font-family:inherit;background:var(--sf);outline:none;resize:vertical;min-height:88px;margin-top:4px}
 .act-input:focus{border-color:var(--u)}
 /* ── quiz ── */
 .qwrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-top:13px}.qq{font-size:14px;font-weight:500;margin-bottom:11px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:7px}
@@ -170,11 +170,11 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
         <table style="width:100%;border-collapse:collapse;font-size:12px">
           <thead><tr style="background:var(--u)"><th style="padding:7px 10px;color:#fff">이름</th><th style="padding:7px 10px;color:#fff">1차 신청 동아리</th><th style="padding:7px 10px;color:#fff">2차 신청 동아리</th></tr></thead>
           <tbody id="club-table-body">
-            <tr><td style="padding:6px 10px;border-bottom:1px solid var(--br)">민지</td><td><input class="act-input" style="min-height:28px;resize:none"></td><td><input class="act-input" style="min-height:28px;resize:none"></td></tr>
-            <tr><td style="padding:6px 10px;border-bottom:1px solid var(--br)">준호</td><td><input class="act-input" style="min-height:28px;resize:none"></td><td><input class="act-input" style="min-height:28px;resize:none"></td></tr>
-            <tr><td style="padding:6px 10px;border-bottom:1px solid var(--br)">소연</td><td><input class="act-input" style="min-height:28px;resize:none"></td><td><input class="act-input" style="min-height:28px;resize:none"></td></tr>
-            <tr><td style="padding:6px 10px;border-bottom:1px solid var(--br)">태현</td><td><input class="act-input" style="min-height:28px;resize:none"></td><td><input class="act-input" style="min-height:28px;resize:none"></td></tr>
-            <tr><td style="padding:6px 10px">채원</td><td><input class="act-input" style="min-height:28px;resize:none"></td><td><input class="act-input" style="min-height:28px;resize:none"></td></tr>
+            <tr><td style="padding:6px 10px;border-bottom:1px solid var(--br)">민지</td><td><input class="act-input" style="min-height:44px;resize:none"></td><td><input class="act-input" style="min-height:44px;resize:none"></td></tr>
+            <tr><td style="padding:6px 10px;border-bottom:1px solid var(--br)">준호</td><td><input class="act-input" style="min-height:44px;resize:none"></td><td><input class="act-input" style="min-height:44px;resize:none"></td></tr>
+            <tr><td style="padding:6px 10px;border-bottom:1px solid var(--br)">소연</td><td><input class="act-input" style="min-height:44px;resize:none"></td><td><input class="act-input" style="min-height:44px;resize:none"></td></tr>
+            <tr><td style="padding:6px 10px;border-bottom:1px solid var(--br)">태현</td><td><input class="act-input" style="min-height:44px;resize:none"></td><td><input class="act-input" style="min-height:44px;resize:none"></td></tr>
+            <tr><td style="padding:6px 10px">채원</td><td><input class="act-input" style="min-height:44px;resize:none"></td><td><input class="act-input" style="min-height:44px;resize:none"></td></tr>
           </tbody>
         </table>
       </div>
@@ -194,7 +194,7 @@ body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;colo
         </div>
         <div>
           <div style="font-size:11px;font-weight:700;color:var(--mt);margin-bottom:6px">취미·관심사 그래프형 다이어그램</div>
-          <textarea class="act-input" style="min-height:160px" placeholder="'나의 취미와 관심사'를 주제로 서로 관련 있는 단어를 연결하는 그래프형 다이어그램을 구상하고 설명하세요.&#10;예) 취미-음악-가창력-노래 / 취미-운동-축구-농구..."></textarea>
+          <textarea class="act-input" style="min-height:120px" placeholder="'나의 취미와 관심사'를 주제로 서로 관련 있는 단어를 연결하는 그래프형 다이어그램을 구상하고 설명하세요.&#10;예) 취미-음악-가창력-노래 / 취미-운동-축구-농구..."></textarea>
         </div>
       </div>
     </div>
