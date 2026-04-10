@@ -1,359 +1,334 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>II-1. 데이터와 정보 — 정보 교과</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>II-1. 디지털 형태의 데이터 — 정보 교과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
 body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#F5F4F0;color:#1C1C1C;font-size:14px;line-height:1.65;display:flex;min-height:100vh}
-:root{--u:#1B9E72;--udk:#0E7A58;--ult:#E1F5EE;--umd:#A8D8C8;--bg:#F5F4F0;--sf:#FFF;--br:#E2DFD6;--tx:#1C1C1C;--mt:#696760;--lt:#A8A59E;--green:#2A720E;--gbg:#E8F3DC;--amber:#7A4E0A;--abg:#FAF0DC;--red:#8C1E0E;--rbg:#FAEBE6;--blue:#0A4E8C;--bbg:#E4F0FA;--rLG:14px;--rMD:10px;--rSM:8px;--SW:224px;--TH:52px}
-/* sidebar */
+:root{--u:#1B9E72;--udk:#0F6B4C;--ult:#E2F5EE;--umd:#A8DFC8;--bg:#F5F4F0;--sf:#FFF;--br:#E2DFD6;--tx:#1C1C1C;--mt:#696760;--lt:#A8A59E;--green:#2A720E;--gbg:#E8F3DC;--amber:#7A4E0A;--abg:#FAF0DC;--red:#8C1E0E;--rbg:#FAEBE6;--blue:#0A4E8C;--bbg:#E4F0FA;--rLG:14px;--rSM:8px;--SW:240px;--TH:52px}
 .sb{width:var(--SW);background:var(--sf);border-right:1px solid var(--br);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;overflow-y:auto;z-index:100}
-.sb-top{padding:18px 16px 14px;border-bottom:1px solid var(--br)}.uchip{display:inline-flex;align-items:center;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px}
-.sb-top h2{font-size:13px;font-weight:700;line-height:1.4}.smeta{font-size:11px;color:var(--lt);margin-top:3px}.sb-nav{padding:6px 0;flex:1}.nlbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lt);padding:8px 16px 4px}
-.na{display:flex;align-items:center;gap:9px;padding:9px 16px;font-size:12px;color:var(--mt);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}.na:hover{background:var(--bg);color:var(--tx)}.na.on{color:var(--u);font-weight:600;background:var(--ult);border-left-color:var(--u)}.na.done .nn{background:var(--gbg);color:var(--green)}
-.nn{width:20px;height:20px;border-radius:50%;background:var(--br);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--mt)}.na.on .nn{background:var(--u);color:#fff}
-.nbadge{margin-left:auto;font-size:10px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:1px 6px;border-radius:10px}
-.sb-foot{padding:12px 16px;border-top:1px solid var(--br)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mt);text-decoration:none;padding:6px 10px;border-radius:var(--rSM);border:1px solid var(--br);background:var(--sf);transition:all .12s}.ba:hover{background:var(--bg);color:var(--tx)}
-/* main */
+.sb-top{padding:16px 14px 12px;border-bottom:1px solid var(--br)}.uchip{display:inline-flex;align-items:center;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:6px}
+.sb-top h2{font-size:12px;font-weight:700;line-height:1.4}.smeta{font-size:10px;color:var(--lt);margin-top:3px}
+.sb-nav{padding:4px 0;flex:1}.nlbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lt);padding:7px 13px 3px}
+.na{display:flex;align-items:center;gap:8px;padding:7px 13px;font-size:11px;color:var(--mt);text-decoration:none;border-left:2.5px solid transparent;transition:background .12s}
+.na:hover{background:var(--bg);color:var(--tx)}.na.on{color:var(--u);font-weight:600;background:var(--ult);border-left-color:var(--u)}.na.done .nn{background:var(--gbg);color:var(--green)}
+.nn{width:18px;height:18px;border-radius:50%;background:var(--br);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--mt)}.na.on .nn{background:var(--u);color:#fff}
+.nbadge{margin-left:auto;font-size:9px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:1px 5px;border-radius:10px;white-space:nowrap}
+.sb-foot{padding:10px 13px;border-top:1px solid var(--br)}.ba{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mt);text-decoration:none;padding:5px 9px;border-radius:var(--rSM);border:1px solid var(--br);background:var(--sf);transition:all .12s}.ba:hover{background:var(--bg)}
 .main{margin-left:var(--SW);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}
-.topbar{background:var(--sf);border-bottom:1px solid var(--br);height:var(--TH);padding:0 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90}
-.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mt);flex:1}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}.bcsep{color:var(--br)}.bccur{color:var(--tx);font-weight:500}.tbr{display:flex;align-items:center;gap:8px}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--br);background:var(--sf);color:var(--tx);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 11px;font-size:11px}.bp{background:var(--u);color:#fff;border-color:var(--u)}.bp:hover{background:var(--udk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
-.page{padding:22px 24px;flex:1}.g2{display:grid;grid-template-columns:1fr 256px;gap:18px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TH) + 14px)}
-/* cards */
-.card{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);margin-bottom:12px;overflow:hidden}.card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.ch{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--br);transition:background .12s;user-select:none}.ch:hover{background:var(--bg)}
-.sn{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:14px;font-weight:600;flex:1}
-.st{font-size:11px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:2px 8px;border-radius:20px}.carr{font-size:11px;color:var(--lt);transition:transform .2s;flex-shrink:0}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:20px}.card.collapsed .cb{display:none}
-/* content helpers */
-.ach{background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:12px 14px;margin-bottom:16px}.ach-c{font-family:'Courier New',monospace;font-size:11px;font-weight:700;color:var(--u);margin-bottom:4px}.ach-t{font-size:13px;line-height:1.6}
-.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--br);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:18px;height:18px;border-radius:50%;background:var(--gbg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.ctags{display:flex;flex-wrap:wrap;gap:6px}.ctag{font-size:11px;padding:4px 11px;background:var(--bg);border:1px solid var(--br);border-radius:20px;cursor:pointer;color:var(--mt);transition:all .12s}.ctag:hover{background:var(--ult);border-color:var(--umd);color:var(--u)}
-.ibox{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:12px}.prev{background:var(--bg);border:1px solid var(--br);color:var(--mt)}.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.info{background:var(--bbg);border:1px solid #BACED8;color:var(--blue)}.ok{background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}
-.divl{height:1px;background:var(--br);margin:16px 0}
-.crow{display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:start;margin-bottom:16px}
-.ct h4{font-size:13px;font-weight:700;margin-bottom:8px}.ct p{font-size:13px;color:var(--mt);line-height:1.75}.ct ul{padding-left:1rem;margin-top:7px}.ct ul li{font-size:13px;color:var(--mt);margin-bottom:4px;line-height:1.6}
+.topbar{background:var(--sf);border-bottom:1px solid var(--br);height:var(--TH);padding:0 20px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:90}
+.bc{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--mt);flex:1}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}.bcsep{color:var(--br)}.tbr{display:flex;align-items:center;gap:6px}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:var(--rSM);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--br);background:var(--sf);color:var(--tx);text-decoration:none;transition:background .12s;white-space:nowrap}.btn:hover{background:var(--bg)}.bsm{padding:5px 9px;font-size:11px}.bp{background:var(--u);color:#fff;border-color:var(--u)}.bp:hover{background:var(--udk)}.bok{background:var(--green);color:#fff;border-color:var(--green)}
+.page{padding:20px 22px;flex:1}.g2{display:grid;grid-template-columns:1fr 248px;gap:16px;align-items:start}.cm{min-width:0}.ca{position:sticky;top:calc(var(--TH)+12px)}
+.card{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);margin-bottom:11px;overflow:hidden}
+.ch{display:flex;align-items:center;gap:9px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--br);transition:background .12s;user-select:none}.ch:hover{background:var(--bg)}
+.sn{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}.ch h3{font-size:13px;font-weight:600;flex:1}
+.st{font-size:10px;color:var(--lt);background:var(--bg);border:1px solid var(--br);padding:2px 7px;border-radius:20px;white-space:nowrap}.carr{font-size:11px;color:var(--lt);transition:transform .2s}.card.collapsed .carr{transform:rotate(-90deg)}.cb{padding:18px}.card.collapsed .cb{display:none}
+.ach{background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:10px 13px;margin-bottom:14px}.ach-c{font-family:monospace;font-size:11px;font-weight:700;color:var(--u);margin-bottom:3px}.ach-t{font-size:13px;line-height:1.6}
+.glist{list-style:none}.glist li{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:13px;border-bottom:1px solid var(--br);line-height:1.6}.glist li:last-child{border-bottom:none}.gck{width:17px;height:17px;border-radius:50%;background:var(--gbg);color:var(--green);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ctags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}.ctag{font-size:11px;padding:3px 10px;background:var(--bg);border:1px solid var(--br);border-radius:20px;cursor:pointer;color:var(--mt);transition:all .12s}.ctag:hover{background:var(--ult);border-color:var(--umd);color:var(--u)}
+.ibox{display:flex;align-items:flex-start;gap:9px;padding:10px 13px;border-radius:var(--rSM);font-size:12px;line-height:1.6;margin-top:10px}.prev{background:var(--bg);border:1px solid var(--br);color:var(--mt)}.warn{background:#FFFBEC;border:1px solid #EDD070;color:#6A5000}.info{background:var(--bbg);border:1px solid #BACED8;color:var(--blue)}.ok{background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}
+.divl{height:1px;background:var(--br);margin:13px 0}
+.crow{display:grid;grid-template-columns:1fr 148px;gap:13px;align-items:start;margin-bottom:13px}
+.ct h4{font-size:13px;font-weight:700;margin-bottom:7px}.ct p{font-size:13px;color:var(--mt);line-height:1.75}.ct ul{padding-left:1rem;margin-top:5px}.ct ul li{font-size:13px;color:var(--mt);margin-bottom:3px;line-height:1.6}
 .cvis{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);display:flex;align-items:center;justify-content:center;padding:8px}
-/* quiz */
-.qwrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:16px;margin-top:16px}.qq{font-size:14px;font-weight:500;margin-bottom:13px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--u);background:var(--ult)}.opt.correct{border-color:#4A9020;background:var(--gbg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--rbg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
-.onum{width:22px;height:22px;border-radius:50%;background:var(--br);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
-.qfb{display:none;margin-top:11px;padding:11px 14px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--rbg);border:1px solid #F0B8A0;color:var(--red)}
-/* assess */
-.rub{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px}.rub th{background:var(--bg);padding:8px 10px;font-weight:600;border-bottom:1.5px solid var(--br);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mt)}.rub td{padding:9px 10px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
+/* ── 수행활동 카드 ── */
+.activity{background:linear-gradient(135deg,var(--ult),#EDFFF6);border:2px solid var(--umd);border-radius:var(--rLG);margin-bottom:11px;overflow:hidden}
+.act-head{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1.5px solid var(--umd);background:var(--ult);cursor:pointer;user-select:none}.act-head:hover{background:#D0EEE3}
+.act-badge{background:var(--u);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}.act-head h3{font-size:13px;font-weight:700;color:var(--udk);flex:1}.act-body{padding:18px}
+.act-step{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--sf);border:1px solid var(--br);border-radius:var(--rSM);margin-bottom:8px}
+.act-num{width:22px;height:22px;border-radius:50%;background:var(--u);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.act-step h4{font-size:12px;font-weight:700;margin-bottom:4px}.act-step p{font-size:12px;color:var(--mt);line-height:1.65}
+.act-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.act-table th{background:var(--u);color:#fff;padding:7px 10px;font-weight:600;font-size:11px;text-align:left}
+.act-table td{padding:8px 10px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.55}
+.act-table tr:last-child td{border-bottom:none}
+.act-input{width:100%;padding:8px 10px;border:1.5px solid var(--br);border-radius:var(--rSM);font-size:12px;font-family:inherit;background:var(--sf);outline:none;resize:vertical;min-height:52px;margin-top:4px}
+.act-input:focus{border-color:var(--u)}
+/* ── quiz ── */
+.qwrap{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-top:13px}.qq{font-size:14px;font-weight:500;margin-bottom:11px;line-height:1.55}.qopts{display:flex;flex-direction:column;gap:7px}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);cursor:pointer;font-size:13px;line-height:1.5;transition:all .12s}.opt:hover{border-color:var(--u);background:var(--ult)}.opt.correct{border-color:#4A9020;background:var(--gbg);color:#1A5000;pointer-events:none}.opt.wrong{border-color:#B03020;background:var(--rbg);color:#6A1000;pointer-events:none}.opt.locked{pointer-events:none;opacity:.55}
+.onum{width:21px;height:21px;border-radius:50%;background:var(--br);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.opt.correct .onum{background:#4A9020;color:#fff}.opt.wrong .onum{background:#B03020;color:#fff}
+.qfb{display:none;margin-top:9px;padding:10px 13px;border-radius:var(--rSM);font-size:12px;line-height:1.6}.qfb.ok{display:block;background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)}.qfb.err{display:block;background:var(--rbg);border:1px solid #F0B8A0;color:var(--red)}
+/* ── assess ── */
+.rub{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}.rub th{background:var(--bg);padding:7px 8px;font-weight:600;border-bottom:1.5px solid var(--br);text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mt)}.rub td{padding:8px;border-bottom:1px solid var(--br);color:var(--mt);vertical-align:top;line-height:1.5}.rub tr:last-child td{border-bottom:none}
 .lv4{color:#1A6000!important;font-weight:500}.lv3{color:#2A6830!important}.lv2{color:#7A4E00!important}.lv1{color:#8A2000!important}
-.task{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px 16px;margin-bottom:14px;border-left:3px solid var(--blue)}.task h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}.task p{font-size:13px;color:var(--mt);line-height:1.75}.srow{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-top:1px solid var(--br);margin-top:8px;font-size:12px;color:var(--mt)}.stepn{width:20px;height:20px;border-radius:50%;background:var(--ult);color:var(--u);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.sclist{display:flex;flex-direction:column;gap:5px}.scitem{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--br)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:4px 7px;border:1px solid var(--br);border-radius:6px;background:var(--sf);font-family:inherit;color:var(--tx);cursor:pointer;flex-shrink:0}
-/* review */
-.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.scard{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:13px 14px;font-size:12px;line-height:1.65;color:var(--mt)}.scard strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--lt);margin-bottom:5px}
-/* sidebar panel */
-.ap{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);padding:15px;margin-bottom:12px}.ap h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--lt);margin-bottom:10px}
-.slist{display:flex;flex-direction:column;gap:4px}.si{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--rSM);font-size:12px;color:var(--mt);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}.si.sa{background:var(--ult);color:var(--u);font-weight:500}.si.sd{color:var(--tx)}
-.dot{width:22px;height:22px;border-radius:50%;background:var(--br);color:var(--lt);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.dot.sa{background:var(--u);color:#fff}.dot.sd{background:var(--gbg);color:var(--green)}
-.td-num{font-size:32px;font-weight:300;letter-spacing:.05em;text-align:center;display:block;font-variant-numeric:tabular-nums}.td-lbl{font-size:10px;color:var(--lt);text-align:center;margin-top:4px;margin-bottom:12px}
-.trow{display:flex;gap:6px}.trow .btn{flex:1;justify-content:center;font-size:11px}
-.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:6px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--br)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--u);white-space:nowrap}.tdef{color:var(--mt)}
-.pbtrack{height:6px;background:var(--umd);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--u);border-radius:3px}
-/* toast */
-#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
+.peer-check{width:100%;border-collapse:collapse;font-size:11px;margin-top:10px}.peer-check th{background:var(--ult);padding:6px 9px;font-weight:600;border-bottom:1.5px solid var(--umd);text-align:center;color:var(--u);font-size:10px}.peer-check td{padding:7px 9px;border-bottom:1px solid var(--br);color:var(--mt);text-align:center}.peer-check td:first-child{text-align:left;font-size:11px}.peer-check input[type=radio]{accent-color:var(--u)}
+/* ── sidebar widgets ── */
+.ap{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);padding:13px;margin-bottom:10px}.ap h5{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--lt);margin-bottom:8px}
+.slist{display:flex;flex-direction:column;gap:3px}.si{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--rSM);font-size:11px;color:var(--mt);cursor:pointer;transition:background .12s}.si:hover{background:var(--bg)}
+.dot{width:19px;height:19px;border-radius:50%;background:var(--br);color:var(--lt);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}.dot.sa{background:var(--u);color:#fff}.dot.sd{background:var(--gbg);color:var(--green)}
+.sclist{display:flex;flex-direction:column;gap:4px}.scitem{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--bg);border-radius:var(--rSM);font-size:12px;border:1px solid var(--br)}.scitem label{flex:1;line-height:1.5}.scitem select{font-size:11px;padding:3px 6px;border:1px solid var(--br);border-radius:5px;background:var(--sf);font-family:inherit;color:var(--tx);cursor:pointer;flex-shrink:0}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.scard{background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:11px 12px;font-size:12px;line-height:1.65;color:var(--mt)}.scard strong{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--lt);margin-bottom:4px}
+.td-num{font-size:28px;font-weight:300;text-align:center;display:block}.td-lbl{font-size:10px;color:var(--lt);text-align:center;margin-top:3px;margin-bottom:9px}
+.trow{display:flex;gap:5px}.trow .btn{flex:1;justify-content:center;font-size:10px}
+.termlist{display:flex;flex-direction:column}.tterm{display:flex;align-items:baseline;gap:5px;padding:4px 0;font-size:11px;border-bottom:1px solid var(--br)}.tterm:last-child{border-bottom:none}.tw{font-weight:600;color:var(--u);white-space:nowrap}.tdef{color:var(--mt)}
+.pbtrack{height:5px;background:var(--umd);border-radius:3px;overflow:hidden}.pbfill{height:100%;background:var(--u);border-radius:3px}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#1C1C1C;color:#fff;padding:9px 18px;border-radius:10px;font-size:12px;font-family:inherit;z-index:9999;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap}
 @media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:14px 16px}.sgrid{grid-template-columns:1fr}}
-
-
-.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:12px;background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);margin-bottom:12px}
-.zones{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.zone{border:2px dashed var(--br);border-radius:var(--rSM);padding:12px;min-height:110px;transition:all .15s}
-.zone.dz{border-color:#7CB8F0}.zone.iz{border-color:var(--umd)}.zone.over{background:rgba(27,158,114,.07);border-color:var(--u)}
-.zone h4{font-size:12px;font-weight:700;margin-bottom:9px}.drop-area{display:flex;flex-wrap:wrap;gap:6px;min-height:44px}
-.chip{padding:6px 13px;background:var(--sf);border:1.5px solid var(--br);border-radius:20px;font-size:12px;font-weight:500;cursor:grab;user-select:none;transition:all .12s;white-space:nowrap}
-.chip:hover{border-color:var(--u);transform:translateY(-1px);box-shadow:0 2px 8px rgba(27,158,114,.15)}.chip.dragging{opacity:.3}
-.chip.ok-chip{border-color:#4A9020;background:var(--gbg);color:#1A5000}.chip.ng-chip{border-color:#B03020;background:var(--rbg);color:#6A1000}
-#cl-result{display:none;padding:12px 15px;border-radius:var(--rSM);font-size:13px;margin-top:10px}
-
+@media(max-width:720px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.page{padding:13px 15px}.sgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <aside class="sb">
-  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">소단원 1/7 · 15차시</div></div>
-  <nav class="sb-nav"><div class="nlbl">소단원 목록</div><a class="na on" href="../lesson-01/index.html"><div class="nn">1</div>데이터와 정보<span class="nbadge">2차시</span></a>
-<a class="na " href="../lesson-02/index.html"><div class="nn">2</div>이진수와 디지털 표현</a>
-<a class="na " href="../lesson-03/index.html"><div class="nn">3</div>문자와 이미지 표현</a>
-<a class="na " href="../lesson-04/index.html"><div class="nn">4</div>소리와 영상 표현</a>
-<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>데이터 수집과 분류</a>
-<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>데이터 분석과 시각화</a>
-<a class="na " href="../lesson-07/index.html"><div class="nn">7</div>데이터 활용과 빅데이터</a>
+  <div class="sb-top"><div class="uchip">◈ Unit II</div><h2>데이터</h2><div class="smeta">중단원1: 데이터의 표현 · p.45~47</div></div>
+  <nav class="sb-nav"><div class="nlbl">소단원 목록</div><a class="na on" href="../lesson-01/index.html"><div class="nn">1</div>디지털 형태의 데이터<span class="nbadge">2차시</span></a>
+<a class="na " href="../lesson-02/index.html"><div class="nn">2</div>다양한 데이터의 디지털 표현</a>
+<a class="na " href="../lesson-03/index.html"><div class="nn">3</div>데이터의 수집과 관리</a>
+<a class="na " href="../lesson-04/index.html"><div class="nn">4</div>데이터의 구조화와 분석</a>
+<a class="na " href="../lesson-05/index.html"><div class="nn">5</div>인기 공유 동영상 데이터 분석</a>
+<a class="na " href="../lesson-06/index.html"><div class="nn">6</div>급식 잔반 데이터 분석</a>
 </nav>
   <div class="sb-foot"><a class="ba" href="../../index.html">← 단원 목차</a></div>
 </aside>
 <main class="main">
   <header class="topbar">
-    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span class="bccur">1. 데이터와 정보</span></div>
+    <div class="bc"><a href="../../index.html">II. 데이터</a><span class="bcsep">›</span><span style="color:var(--tx);font-weight:500">1. 디지털 형태의 데이터</span></div>
     <div class="tbr">
-      <button class="btn bsm" onclick="markDone('01')">✓ 완료 표시</button>
+      <button class="btn bsm" onclick="toast('완료 표시!')">✓ 완료 표시</button>
       <a class="btn bsm bp" href="../lesson-02/index.html">다음 소단원 →</a>
     </div>
   </header>
   <div class="page"><div class="g2"><div class="cm">
 
-  <div class="card" id="sec-goal">
-    <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--ult);color:var(--u)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-    <div class="cb">
-      <div class="ach"><div class="ach-c">[9정02-01]</div><div class="ach-t">데이터와 정보의 개념을 이해하고, 아날로그와 디지털의 차이를 설명할 수 있다.</div></div>
-      <ul class="glist">
-        <li><div class="gck">✓</div>데이터와 정보의 차이를 예시를 들어 설명할 수 있다.</li>
-        <li><div class="gck">✓</div>아날로그 신호와 디지털 신호의 특징을 비교할 수 있다.</li>
-        <li><div class="gck">✓</div>디지털 표현의 장점을 3가지 이상 설명할 수 있다.</li>
-      </ul>
-      <div class="divl"></div>
-      <div class="ctags">
-        <span class="ctag" onclick="goTo('sec-concept')">데이터</span>
-        <span class="ctag" onclick="goTo('sec-concept')">정보</span>
-        <span class="ctag" onclick="goTo('sec-concept')">아날로그</span>
-        <span class="ctag" onclick="goTo('sec-concept')">디지털</span>
-        <span class="ctag" onclick="goTo('sec-concept')">샘플링</span>
-      </div>
-      <div class="ibox prev">📌 <div><b>이전 차시 연결:</b> I단원에서 하드웨어·소프트웨어를 배웠습니다. 이번 II단원에서는 컴퓨터가 처리하는 <em>데이터</em>의 본질부터 탐구합니다.</div></div>
+<div class="card" id="sec-goal">
+  <div class="ch" onclick="toggleSec('sec-goal')"><div class="sn" style="background:var(--ult);color:var(--u)">01</div><h3>학습목표</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div class="ach"><div class="ach-c">[9정02-01] 데이터의 표현</div><div class="ach-t">디지털 형태의 데이터가 갖는 특징과 장점을 설명하고, 실생활 데이터가 디지털로 활용될 때의 긍정적 가치를 탐색할 수 있다. (pp.45~47)</div></div>
+    <ul class="glist">
+      <li><div class="gck">✓</div>생활 속 데이터의 유형(문자·숫자·이미지·소리·동영상)을 설명할 수 있다.</li>
+      <li><div class="gck">✓</div>아날로그와 디지털의 차이를 설명할 수 있다.</li>
+      <li><div class="gck">✓</div>디지털 데이터의 저장·가공·전송 특징과 장점을 분석할 수 있다.</li>
+    </ul>
+    <div class="divl"></div>
+    <div class="ctags">
+      <span class="ctag" onclick="goTo('sec-concept')">데이터</span>
+      <span class="ctag" onclick="goTo('sec-concept')">디지털</span>
+      <span class="ctag" onclick="goTo('sec-concept')">아날로그</span>
+      <span class="ctag" onclick="goTo('sec-concept')">저장·가공·전송</span>
     </div>
+    <div class="ibox prev">📌 <b>II단원 시작:</b> 우리는 매일 문자·사진·음악·동영상을 주고받습니다. 이 모든 것이 디지털 데이터입니다. 이 단원에서 데이터의 표현과 분석을 탐구합니다.</div>
   </div>
+</div>
 
-  <div class="card" id="sec-concept">
-    <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:var(--gbg);color:var(--green)">02</div><h3>개념설명</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
-    <div class="cb">
-      <div class="crow">
-        <div class="ct">
-          <h4>데이터 vs 정보</h4>
-          <p><strong>데이터(Data)</strong>는 처리되지 않은 원시 사실·수치이고,<br><strong>정보(Information)</strong>는 데이터를 목적에 맞게 처리·분석하여 의미를 부여한 것입니다.</p>
-          <ul><li><b>데이터 예:</b> 37.5, 36.8, 38.1 (체온 측정값)</li><li><b>정보 예:</b> "3명 중 1명 발열 의심" (분석 결과)</li></ul>
-        </div>
-        <div class="cvis">
-          <svg viewBox="0 0 130 110" width="130" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="4" width="122" height="26" rx="6" fill="#E4F0FA" stroke="#0A4E8C" stroke-width="1.2"/>
-            <text x="65" y="18" font-size="9" fill="#0A4E8C" text-anchor="middle" font-family="sans-serif" font-weight="bold">데이터 (원시 사실)</text>
-            <text x="65" y="28" font-size="7.5" fill="#0A4E8C" text-anchor="middle" font-family="sans-serif">37.5, 36.8, 38.1 °C</text>
-            <path d="M65 30 L65 44" stroke="#999" stroke-width="1.5" marker-end="url(#a1)"/>
-            <rect x="18" y="44" width="94" height="22" rx="5" fill="var(--ult)" stroke="var(--u)" stroke-width="1.5"/>
-            <text x="65" y="58" font-size="8.5" fill="var(--udk)" text-anchor="middle" font-family="sans-serif" font-weight="bold">처리·분석</text>
-            <path d="M65 66 L65 78" stroke="#999" stroke-width="1.5" marker-end="url(#a2)"/>
-            <rect x="4" y="78" width="122" height="26" rx="6" fill="var(--gbg)" stroke="var(--green)" stroke-width="1.2"/>
-            <text x="65" y="92" font-size="9" fill="var(--green)" text-anchor="middle" font-family="sans-serif" font-weight="bold">정보 (의미 있는 결과)</text>
-            <text x="65" y="102" font-size="7.5" fill="var(--green)" text-anchor="middle" font-family="sans-serif">"1명 발열 의심"</text>
-            <defs><marker id="a1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"/></marker><marker id="a2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"/></marker></defs>
-          </svg>
-        </div>
-      </div>
-      <div class="crow">
-        <div class="ct">
-          <h4>아날로그 vs 디지털</h4>
-          <p><strong>아날로그</strong>는 연속적인 물리량(무한히 세밀),<br><strong>디지털</strong>은 0과 1의 불연속 이진 신호입니다.</p>
-          <ul><li><b>샘플링:</b> 아날로그 → 디지털 변환 과정</li><li><b>장점:</b> 복사해도 품질 유지, 오류 정정 가능</li></ul>
-        </div>
-        <div class="cvis">
-          <svg viewBox="0 0 130 90" width="130" xmlns="http://www.w3.org/2000/svg">
-            <text x="28" y="12" font-size="8" fill="#0A4E8C" text-anchor="middle" font-family="sans-serif" font-weight="bold">아날로그</text>
-            <path d="M4 55 Q18 20 32 55 Q46 90 60 55" fill="none" stroke="#0A4E8C" stroke-width="2"/>
-            <text x="28" y="82" font-size="7" fill="#696760" text-anchor="middle" font-family="sans-serif">연속 신호</text>
-            <text x="100" y="12" font-size="8" fill="var(--u)" text-anchor="middle" font-family="sans-serif" font-weight="bold">디지털</text>
-            <path d="M72 55 L72 25 L80 25 L80 55 L88 55 L88 25 L96 25 L96 55 L104 55 L104 25 L112 25 L112 55 L120 55" fill="none" stroke="var(--u)" stroke-width="2"/>
-            <text x="96" y="82" font-size="7" fill="#696760" text-anchor="middle" font-family="sans-serif">0과 1</text>
-            <line x1="65" y1="5" x2="65" y2="85" stroke="#E2DFD6" stroke-width="1" stroke-dasharray="4,3"/>
-          </svg>
-        </div>
-      </div>
-      <div class="ibox warn">⚠️ <div><b>오개념 주의:</b> 디지털이 무조건 더 정확한 것이 아닙니다. 샘플링 주파수가 낮으면 원래 신호 정보가 손실됩니다.</div></div>
-      <div class="ibox info" style="margin-top:8px">📖 <b>교과서 연계:</b> ○○출판사 1학년 정보 pp.70–79</div>
+<div class="card" id="sec-concept">
+  <div class="ch" onclick="toggleSec('sec-concept')"><div class="sn" style="background:var(--gbg);color:var(--green)">02</div><h3>개념설명</h3><span class="st">⏱ 20분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <h4 style="font-size:13px;font-weight:700;margin-bottom:9px">① 생활 속 데이터의 유형</h4>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:13px">
+      <div style="text-align:center;padding:10px 6px;background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM)"><div style="font-size:20px;margin-bottom:4px">📝</div><div style="font-size:10px;font-weight:700;color:var(--u)">문자·숫자</div><div style="font-size:9px;color:var(--mt);margin-top:2px">한글, 영문자, 기호, 가격, 점수</div></div>
+      <div style="text-align:center;padding:10px 6px;background:var(--bbg);border:1px solid #BACED8;border-radius:var(--rSM)"><div style="font-size:20px;margin-bottom:4px">🖼️</div><div style="font-size:10px;font-weight:700;color:var(--blue)">이미지</div><div style="font-size:9px;color:var(--mt);margin-top:2px">사진, 그림, 만화</div></div>
+      <div style="text-align:center;padding:10px 6px;background:var(--abg);border:1px solid #EDD070;border-radius:var(--rSM)"><div style="font-size:20px;margin-bottom:4px">🎵</div><div style="font-size:10px;font-weight:700;color:var(--amber)">소리</div><div style="font-size:9px;color:var(--mt);margin-top:2px">음악, 안내 방송</div></div>
+      <div style="text-align:center;padding:10px 6px;background:var(--gbg);border:1px solid #BFDFAA;border-radius:var(--rSM)"><div style="font-size:20px;margin-bottom:4px">🎬</div><div style="font-size:10px;font-weight:700;color:var(--green)">동영상</div><div style="font-size:9px;color:var(--mt);margin-top:2px">영화, 드라마</div></div>
+      <div style="text-align:center;padding:10px 6px;background:var(--rbg);border:1px solid #F0B8A0;border-radius:var(--rSM)"><div style="font-size:20px;margin-bottom:4px">📊</div><div style="font-size:10px;font-weight:700;color:var(--red)">측정값</div><div style="font-size:9px;color:var(--mt);margin-top:2px">관찰·측정으로 얻는 값</div></div>
     </div>
+    <div class="divl"></div>
+    <h4 style="font-size:13px;font-weight:700;margin-bottom:9px">② 아날로그 vs 디지털</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px">
+      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--mt);margin-bottom:6px">📟 아날로그(Analog)</div>
+        <div style="font-size:12px;color:var(--mt);line-height:1.75">데이터를 <b>연속적인 신호</b>로 나타내는 것<br>예: 수은 온도계의 연속적인 눈금</div>
+      </div>
+      <div style="background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--u);margin-bottom:6px">💻 디지털(Digital)</div>
+        <div style="font-size:12px;color:var(--mt);line-height:1.75">데이터를 <b>불연속적인 숫자(0과 1)</b>로 명확하게 표현<br>예: 디지털 온도계의 숫자 표시</div>
+      </div>
+    </div>
+    <div class="divl"></div>
+    <h4 style="font-size:13px;font-weight:700;margin-bottom:9px">③ 디지털 데이터의 특징과 장점</h4>
+    <div style="overflow-x:auto;margin-bottom:12px">
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr style="background:var(--u)"><th style="padding:8px 10px;color:#fff;font-size:11px">특징</th><th style="padding:8px 10px;color:#fff;font-size:11px">설명</th><th style="padding:8px 10px;color:#fff;font-size:11px">장점</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:8px 10px;border-bottom:1px solid var(--br);font-weight:600;color:var(--u)">💾 저장</td><td style="padding:8px 10px;border-bottom:1px solid var(--br);color:var(--mt)">분량이 늘어도 부피·무게 증가 없음</td><td style="padding:8px 10px;border-bottom:1px solid var(--br);color:var(--mt)">다양한 형태의 많은 데이터를 효율적으로 저장</td></tr>
+          <tr><td style="padding:8px 10px;border-bottom:1px solid var(--br);font-weight:600;color:var(--u)">⚙️ 가공</td><td style="padding:8px 10px;border-bottom:1px solid var(--br);color:var(--mt)">검색·수정·분석이 쉬움</td><td style="padding:8px 10px;border-bottom:1px solid var(--br);color:var(--mt)">다양한 분야 데이터를 가공하여 유용한 정보 획득</td></tr>
+          <tr><td style="padding:8px 10px;font-weight:600;color:var(--u)">📡 전송</td><td style="padding:8px 10px;color:var(--mt)">전송 시 손실 거의 없고 빠름</td><td style="padding:8px 10px;color:var(--mt)">디지털 기기 간 호환·공유가 쉬움</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ibox warn">⚠️ <b>디지털의 단점:</b> 아날로그→디지털 변환 시 완전한 복원 불가 / 배터리 방전·전기 없으면 이용 불가</div>
+    <div class="ibox info">📖 <b>교과서 연계:</b> pp.45~47 / 버스 안의 다양한 데이터 유형 → 디지털 특징·장점 비교</div>
   </div>
+</div>
 
-  <div class="card" id="sec-interact">
-    <div class="ch" onclick="toggleSec('sec-interact')"><div class="sn" style="background:var(--rbg);color:var(--red)">03</div><h3>인터랙션 — 데이터·정보 드래그 분류</h3><span class="st">⏱ 15분</span><span class="carr">▾</span></div>
-    <div class="cb">
-      <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 아래 항목을 <b>데이터</b>와 <b>정보</b> 영역으로 드래그하여 분류하세요. 완료 후 정답을 확인하세요!</div>
-      <div style="font-size:11px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px">▸ 분류할 항목 (드래그 또는 터치)</div>
-      <div class="pool" id="pool">
-        <div class="chip" draggable="true" data-ans="data">📊 22°C (기온 측정)</div>
-        <div class="chip" draggable="true" data-ans="info">📈 올해 평균기온 +1.2°C 상승</div>
-        <div class="chip" draggable="true" data-ans="data">🔢 1, 0, 1, 1, 0</div>
-        <div class="chip" draggable="true" data-ans="info">🌡️ 발열 환자 3명 발생</div>
-        <div class="chip" draggable="true" data-ans="data">💧 65% (습도 수치)</div>
-        <div class="chip" draggable="true" data-ans="info">☔ 오늘 우산 필요</div>
-        <div class="chip" draggable="true" data-ans="data">🔋 4.2V (배터리 전압)</div>
-        <div class="chip" draggable="true" data-ans="info">🔋 배터리 잔량 20% 경고</div>
-      </div>
-      <div class="zones">
-        <div class="zone dz" id="zone-data" ondragover="ev.preventDefault();ev.currentTarget.classList.add('over')" ondragleave="ev.currentTarget.classList.remove('over')" ondrop="dropTo(ev,'data')">
-          <h4 style="color:#0A4E8C">📦 데이터 (원시 사실)</h4>
-          <div class="drop-area" id="zone-data-area"></div>
+<!-- ★ 수행 활동 ★ -->
+<div class="activity" id="sec-activity">
+  <div class="act-head" onclick="toggleSec('act-body-01')">
+    <span class="act-badge">★ 수행 활동</span>
+    <h3>디지털 데이터의 가치 탐색해 보기</h3>
+    <span style="font-size:10px;color:var(--udk);margin-left:auto">모둠 활동 | pp.47</span>
+    <span class="carr" style="color:var(--udk)">▾</span>
+  </div>
+  <div id="act-body-01" class="act-body">
+    <div class="ibox ok" style="margin-top:0;margin-bottom:14px">💡 디지털 데이터를 사용할 수 없다면 어떻게 될지 비교하고, 아날로그→디지털 변화 사례를 탐색해봅니다. (교과서 p.47 해보기)</div>
+    <div class="act-step">
+      <div class="act-num">1</div>
+      <div><h4>디지털 vs 비디지털 비교 토의</h4>
+        <p>디지털 데이터를 사용하지 못할 때 동일한 일을 하려면 어떻게 해야 할지, 그 차이점을 작성해보세요.</p>
+        <div style="overflow-x:auto">
+          <table class="act-table">
+            <thead><tr><th>상황</th><th>디지털 데이터를 이용하는 모습</th><th>디지털 데이터를 이용할 수 없을 때</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600;color:var(--u)">버스 이용할 때</td>
+                <td style="font-size:11px;color:var(--lt)">예) 교통 카드, 스마트폰 앱으로 위치 확인</td>
+                <td><input class="act-input" style="min-height:52px" placeholder="디지털 없으면 어떻게 할까요?"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;color:var(--u)">교실에서 수업할 때</td>
+                <td style="font-size:11px;color:var(--lt)">예) 태블릿 스마트TV 연결, 온라인 토론</td>
+                <td><input class="act-input" style="min-height:52px" placeholder="디지털 없으면 어떻게 할까요?"></td>
+              </tr>
+              <tr>
+                <td><input class="act-input" style="min-height:36px;resize:none" placeholder="직접 상황 입력..."></td>
+                <td><input class="act-input" style="min-height:52px" placeholder="디지털 이용 모습"></td>
+                <td><input class="act-input" style="min-height:52px" placeholder="디지털 없으면?"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="zone iz" id="zone-info" ondragover="ev.preventDefault();ev.currentTarget.classList.add('over')" ondragleave="ev.currentTarget.classList.remove('over')" ondrop="dropTo(ev,'info')">
-          <h4 style="color:var(--u)">💡 정보 (처리된 결과)</h4>
-          <div class="drop-area" id="zone-info-area"></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn bsm bp" onclick="checkCls()">✓ 정답 확인</button>
-        <button class="btn bsm" onclick="resetCls()">↺ 다시 하기</button>
-      </div>
-      <div id="cl-result"></div>
-      <div class="qwrap">
-        <div class="qq">다음 중 <b>정보(Information)</b>에 해당하는 것은?</div>
-        <div class="qopts">
-          <div class="opt" onclick="checkQ(this,false,'37.5°C는 처리되지 않은 원시 측정값(데이터)입니다.')"><span class="onum">①</span>37.5°C (체온 측정값)</div>
-          <div class="opt" onclick="checkQ(this,false,'0101이라는 이진값 자체는 원시 데이터입니다.')"><span class="onum">②</span>0101 (이진 데이터)</div>
-          <div class="opt" onclick="checkQ(this,true,'데이터를 분석·처리해 의사결정에 활용 가능한 의미를 부여한 것이 정보입니다.')"><span class="onum">③</span>"이 반 평균 체온 36.8°C — 정상 범위"</div>
-          <div class="opt" onclick="checkQ(this,false,'65%는 원시 측정 수치(데이터)입니다.')"><span class="onum">④</span>65% (습도 측정값)</div>
-        </div>
-        <div class="qfb"></div>
       </div>
     </div>
+    <div class="act-step">
+      <div class="act-num">2</div>
+      <div><h4>아날로그 → 디지털 변화 사례 탐구</h4>
+        <p>과거에 아날로그 방식이었지만 현재 디지털로 변화된 것을 찾아 특징과 가치를 정리하세요.</p>
+        <div style="background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:11px;margin-bottom:10px;font-size:12px;color:var(--mt)">
+          <b>예시:</b> 편지(아날로그) → 전자 우편(디지털)<br>
+          • 아날로그: 종이에 손으로 쓰고 우표 붙여 우체통에 넣음, 며칠 소요<br>
+          • 디지털: 키보드 입력 후 전송, 사진·문서 등 다양한 데이터 전송 가능, 즉시 전달<br>
+          • 얻을 수 있는 가치: 시간과 비용 절약, 다양한 형식의 데이터 공유 가능
+        </div>
+        <div style="overflow-x:auto">
+          <table class="act-table">
+            <thead><tr><th>아날로그 방식</th><th>디지털 방식</th><th>디지털 사용으로 얻을 수 있는 가치</th></tr></thead>
+            <tbody>
+              <tr><td><input class="act-input" style="min-height:48px" placeholder="아날로그 방식 예)"></td><td><input class="act-input" style="min-height:48px" placeholder="디지털 방식 예)"></td><td><input class="act-input" style="min-height:48px" placeholder="얻을 수 있는 가치는?"></td></tr>
+              <tr><td><input class="act-input" style="min-height:48px" placeholder="아날로그 방식 예)"></td><td><input class="act-input" style="min-height:48px" placeholder="디지털 방식 예)"></td><td><input class="act-input" style="min-height:48px" placeholder="얻을 수 있는 가치는?"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="act-step">
+      <div class="act-num">3</div>
+      <div><h4>디지털 데이터 가치 시뮬레이터</h4>
+        <p>아래 카드를 클릭하여 각 특징이 우리 생활에 어떤 가치를 만드는지 확인해보세요.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px" id="value-cards">
+          <div onclick="showValue('저장')" style="background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);padding:12px;text-align:center;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--u)'" onmouseout="this.style.borderColor='var(--br)'"><div style="font-size:24px;margin-bottom:5px">💾</div><div style="font-size:11px;font-weight:700">저장</div></div>
+          <div onclick="showValue('가공')" style="background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);padding:12px;text-align:center;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--u)'" onmouseout="this.style.borderColor='var(--br)'"><div style="font-size:24px;margin-bottom:5px">⚙️</div><div style="font-size:11px;font-weight:700">가공</div></div>
+          <div onclick="showValue('전송')" style="background:var(--sf);border:1.5px solid var(--br);border-radius:var(--rSM);padding:12px;text-align:center;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--u)'" onmouseout="this.style.borderColor='var(--br)'"><div style="font-size:24px;margin-bottom:5px">📡</div><div style="font-size:11px;font-weight:700">전송</div></div>
+        </div>
+        <div id="value-desc" style="background:var(--ult);border:1px solid var(--umd);border-radius:var(--rSM);padding:12px;margin-top:9px;font-size:12px;color:var(--udk);min-height:52px">카드를 클릭하면 설명이 나타납니다</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn bsm bp" onclick="saveActivity('l201_act')">💾 활동 저장</button>
+      <button class="btn bsm" onclick="toast('모둠원과 발표해봅시다!')">🗣️ 모둠 발표</button>
+    </div>
   </div>
+</div>
 
-  <div class="card" id="sec-assess">
-    <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-    <div class="cb">
-      <div class="task"><h4>📋 데이터→정보 변환 프로젝트</h4>
-        <p>주변에서 수집 가능한 데이터를 선택해 의미 있는 정보로 변환하는 과정을 기록하시오.</p>
-        <div class="srow"><div class="stepn">①</div><span>수집할 데이터 종류와 방법 결정</span></div>
-        <div class="srow"><div class="stepn">②</div><span>데이터 5개 이상 수집</span></div>
-        <div class="srow"><div class="stepn">③</div><span>분석 방법 적용 (평균·비교·분류)</span></div>
-        <div class="srow"><div class="stepn">④</div><span>도출된 정보를 한 문장으로 서술</span></div>
-      </div>
-      <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody>
-        <tr><td><b>개념 이해</b></td><td class="lv4">명확 구분·예시</td><td class="lv3">대체로 구분</td><td class="lv2">혼용</td><td class="lv1">구분 불가</td></tr>
-        <tr><td><b>분석 적용</b></td><td class="lv4">적절 분석→정보 도출</td><td class="lv3">부분 분석</td><td class="lv2">단순 나열</td><td class="lv1">분석 없음</td></tr>
-      </tbody></table>
-      <div class="sclist">
-        <div class="scitem"><label>데이터와 정보의 차이를 예시로 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        <div class="scitem"><label>아날로그와 디지털의 차이를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-        <div class="scitem"><label>디지털 표현의 장점을 3가지 말할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div>
-      </div>
-      <button class="btn bsm bok" style="margin-top:11px" onclick="saveSC('l201sc')">💾 저장</button>
+<div class="card" id="sec-assess">
+  <div class="ch" onclick="toggleSec('sec-assess')"><div class="sn" style="background:var(--bbg);color:var(--blue)">04</div><h3>수행평가</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:12px;margin-bottom:12px;border-left:3px solid var(--u)">
+      <h4 style="font-size:13px;font-weight:700;color:var(--u);margin-bottom:7px">📋 디지털 데이터의 가치 분석 보고서</h4>
+      <p style="font-size:13px;color:var(--mt)">우리 생활에서 아날로그에서 디지털로 변화한 사례 2가지를 분석하고, 디지털 데이터의 저장·가공·전송 특징과 연결하여 그 가치를 서술하시오.</p>
     </div>
+    <table class="rub"><thead><tr><th>평가 요소</th><th class="lv4">매우 잘함(4)</th><th class="lv3">잘함(3)</th><th class="lv2">보통(2)</th><th class="lv1">노력 필요(1)</th></tr></thead><tbody><tr><td><b>사례 선정</b></td><td class="lv4">적절한 사례 2개+특징 연결</td><td class="lv3">1개 연결</td><td class="lv2">사례만 나열</td><td class="lv1">없음</td></tr><tr><td><b>가치 서술</b></td><td class="lv4">저장·가공·전송 3가지 연결</td><td class="lv3">2가지 연결</td><td class="lv2">1가지</td><td class="lv1">없음</td></tr></tbody></table>
+    <div class="sclist"><div class="scitem"><label>생활 속 데이터 유형 5가지를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div><div class="scitem"><label>아날로그와 디지털의 차이를 설명할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div><div class="scitem"><label>디지털 데이터의 저장·가공·전송 특징과 장점을 분석할 수 있다.</label><select><option value="">선택</option><option>매우 그렇다</option><option>그렇다</option><option>아직 모르겠다</option></select></div></div>
+    <button class="btn bsm bok" style="margin-top:10px" onclick="saveSC('l201sc')">💾 저장</button>
   </div>
+</div>
 
-  <div class="card" id="sec-review">
-    <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:var(--gbg);color:var(--green)">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
-    <div class="cb">
-      <div class="sgrid">
-        <div class="scard"><strong>데이터</strong>처리 전 원시 사실·수치. 37.5°C, 65%, 0101 등.</div>
-        <div class="scard"><strong>정보</strong>데이터를 처리·분석해 의미 부여. 의사결정에 활용.</div>
-        <div class="scard"><strong>디지털</strong>연속 아날로그→0과 1. 복사·전송·오류정정 유리.</div>
-      </div>
-      <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:14px;margin-bottom:14px">
-        <b>✏️ 단답형:</b> 아날로그 신호를 디지털로 변환하는 과정을 <span style="display:inline-block;width:70px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>이라 한다.
-        <textarea style="display:block;width:100%;margin-top:10px;padding:9px;border:1px solid var(--br);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:50px;background:var(--sf)" placeholder="정답을 입력하세요..." onfocus="this.style.borderColor='var(--u)'" onblur="this.style.borderColor=''"></textarea>
-      </div>
-      <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 다음 소단원에서는 <strong>이진수와 디지털 표현</strong> — 10진수↔2진수 변환 원리를 학습합니다!</div></div>
+<div class="card" id="sec-review">
+  <div class="ch" onclick="toggleSec('sec-review')"><div class="sn" style="background:var(--gbg);color:var(--green)">05</div><h3>확인하기</h3><span class="st">⏱ 5분</span><span class="carr">▾</span></div>
+  <div class="cb">
+    <div class="sgrid">
+      <div class="scard"><strong>데이터 5유형</strong>문자·숫자·이미지·소리·동영상. 관찰·측정으로 얻는 값.</div>
+      <div class="scard"><strong>아날로그 vs 디지털</strong>연속적 vs 불연속(0과 1). 디지털=명확한 숫자 표현.</div>
+      <div class="scard"><strong>디지털 3특징</strong>저장(효율적)·가공(검색·분석)·전송(빠르고 호환).</div>
     </div>
+    <div style="background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);padding:13px;margin-bottom:12px"><b>✏️ 단답형:</b> 디지털 데이터에서 데이터를 검색·수정·분석하기 쉬워 다양한 분야의 데이터를 처리하여 유용한 정보를 얻을 수 있는 특징을 <span style="display:inline-block;width:40px;border-bottom:1.5px solid var(--tx)">&nbsp;</span>(이)라고 한다.<textarea style="display:block;width:100%;margin-top:9px;padding:9px;border:1px solid var(--br);border-radius:var(--rSM);font-size:13px;font-family:inherit;resize:vertical;min-height:48px;background:var(--sf)" placeholder="정답을 입력하세요..."></textarea></div>
+    <div class="qwrap"><div class="qq">디지털 데이터의 특징에 대한 설명으로 옳지 않은 것은?</div><div class="qopts"><div class="opt" onclick="checkQ(this,false,'저장 분량이 늘어나도 부피와 무게가 증가하지 않는 것은 디지털의 저장 특징입니다.')"><span class="onum">①</span>분량이 늘어나도 부피나 무게가 증가하지 않는다.</div><div class="opt" onclick="checkQ(this,false,'빠르고 효율적으로 전송되는 것은 디지털 전송 특징입니다.')"><span class="onum">②</span>전송 시 손실이 거의 없고 빠르게 전송된다.</div><div class="opt" onclick="checkQ(this,true,'검색·수정·분석이 쉬운 것은 디지털 데이터의 가공 특징입니다. "어렵다"는 설명은 틀렸습니다.')"><span class="onum">③</span>컴퓨터 시스템에서 검색, 수정, 분석하기 어렵다.</div><div class="opt" onclick="checkQ(this,false,'디지털 기기 간 호환성이 좋은 것은 디지털 전송의 장점입니다.')"><span class="onum">④</span>디지털 기기 간 호환이 잘 되고 공유가 쉽다.</div></div><div class="qfb"></div></div>
+    <div class="ibox ok">📖 <div><strong>다음 차시 예고:</strong> 문자·이미지·소리·동영상 데이터를 <strong>이진수로 표현하는 방법</strong>을 탐구합니다! (pp.48~54)</div></div>
   </div>
+</div>
 
   </div>
   <div class="ca">
     <div class="ap"><h5>학습 진행</h5><div class="slist">
-      <div class="si sd" onclick="goTo('sec-goal')"><div class="dot sd">✓</div>학습목표</div>
-      <div class="si sd" onclick="goTo('sec-concept')"><div class="dot sd">✓</div>개념설명</div>
-      <div class="si sa" onclick="goTo('sec-interact')"><div class="dot sa">→</div>인터랙션</div>
+      <div class="si" onclick="goTo('sec-goal')"><div class="dot sd">1</div>학습목표</div>
+      <div class="si" onclick="goTo('sec-concept')"><div class="dot">2</div>개념설명</div>
+      <div class="si" onclick="goTo('sec-activity')"><div class="dot sa">★</div>수행 활동</div>
       <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
       <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
     </div></div>
-    <div class="ap"><h5>수업 타이머</h5><span class="td-num" id="tnum">45:00</span><div class="td-lbl">수업 남은 시간</div>
-    <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div></div>
-    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">데이터</span><span class="tdef">처리 전 원시 사실</span></div><div class="tterm"><span class="tw">정보</span><span class="tdef">처리된 의미 결과</span></div><div class="tterm"><span class="tw">아날로그</span><span class="tdef">연속 신호</span></div><div class="tterm"><span class="tw">디지털</span><span class="tdef">0과 1 신호</span></div><div class="tterm"><span class="tw">샘플링</span><span class="tdef">아→디 변환</span></div></div></div>
+    <div class="ap"><h5>수업 타이머</h5>
+      <span class="td-num" id="tnum">01:30</span>
+      <div class="td-lbl">2차시 (90분)</div>
+      <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺</button></div>
+    </div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">데이터</span><span class="tdef">관찰·측정으로 얻는 값</span></div><div class="tterm"><span class="tw">아날로그</span><span class="tdef">연속적 신호</span></div><div class="tterm"><span class="tw">디지털</span><span class="tdef">불연속적 숫자(0,1)</span></div><div class="tterm"><span class="tw">저장</span><span class="tdef">부피·무게 증가 없음</span></div><div class="tterm"><span class="tw">가공</span><span class="tdef">검색·수정·분석 용이</span></div><div class="tterm"><span class="tw">전송</span><span class="tdef">손실 없고 빠름</span></div></div></div>
     <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:14%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">1/7</span></div>
+      <div style="display:flex;align-items:center;gap:7px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:15%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">1/6</span></div>
+    </div>
+    <div class="ap" style="background:#F0FDF4;border-color:#BBF7D0">
+      <h5 style="color:#166534">🔗 데이터 도구</h5>
+      <a href="https://codap.concord.org" target="_blank" class="btn bsm" style="width:100%;justify-content:center;background:var(--u);color:#fff;border-color:var(--udk);margin-bottom:5px">코답(CODAP) 열기 ↗</a>
+      <a href="https://kosis.kr" target="_blank" class="btn bsm" style="width:100%;justify-content:center;font-size:10px;color:var(--mt)">국가통계포털 ↗</a>
     </div>
   </div>
   </div></div>
 </main>
 <div id="toast"></div>
 <script>
+tR=90;window._tInit=90;
 
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
 function toggleSec(id){var e=document.getElementById(id);if(e)e.classList.toggle('collapsed');}
-function goTo(id){var e=document.getElementById(id);if(!e)return;window.scrollTo({top:e.getBoundingClientRect().top+window.pageYOffset-68,behavior:'smooth'});}
-var tR=2700,tRun=false,tIv=null;
+function goTo(id){var e=document.getElementById(id);if(!e)return;window.scrollTo({top:e.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});}
+var tR,tRun=false,tIv=null;
 function pad(n){return n<10?'0'+n:''+n;}
 function renderT(){var e=document.getElementById('tnum');if(!e)return;e.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);e.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
 function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
-function resetTimer(){clearInterval(tIv);tRun=false;tR=2700;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
-function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');o.style.pointerEvents='none';});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
-function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){toast('저장 실패');}}
+function resetTimer(){clearInterval(tIv);tRun=false;if(window._tInit)tR=window._tInit;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
+function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
+function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){}}
 function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
-function markDone(n){try{var d=JSON.parse(localStorage.getItem('u02done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u02done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
-
-
-// ── 드래그 분류 ──
-var dragged = null;
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.chip').forEach(function(c) {
-    c.addEventListener('dragstart', function(e) {
-      dragged = c;
-      setTimeout(function(){ c.classList.add('dragging'); }, 0);
-      e.dataTransfer.effectAllowed = 'move';
-    });
-    c.addEventListener('dragend', function() {
-      c.classList.remove('dragging');
-      document.querySelectorAll('.zone').forEach(function(z){ z.classList.remove('over'); });
-    });
-    // 터치 지원
-    c.addEventListener('touchstart', function(e){ dragged = c; }, {passive:true});
-  });
-  document.querySelectorAll('.zone').forEach(function(z) {
-    z.addEventListener('dragover', function(e){ e.preventDefault(); z.classList.add('over'); });
-    z.addEventListener('dragleave', function(){ z.classList.remove('over'); });
-    z.addEventListener('drop', function(e){
-      e.preventDefault(); z.classList.remove('over');
-      if(dragged) { z.querySelector('.drop-area').appendChild(dragged); dragged = null; }
-    });
-  });
-});
-function dropTo(ev, kind) {
-  ev.preventDefault();
-  document.getElementById('zone-'+kind).classList.remove('over');
-  if(dragged){ document.getElementById('zone-'+kind+'-area').appendChild(dragged); dragged=null; }
+function saveActivity(key){
+  var d={};
+  document.querySelectorAll('.act-input').forEach(function(el,i){d['a'+i]=el.value;});
+  document.querySelectorAll('.peer-check input[type=radio]:checked').forEach(function(el){d['r_'+el.name]=el.value;});
+  try{localStorage.setItem(key,JSON.stringify(d));toast('✅ 수행 활동이 저장되었습니다!');}catch(e){}
 }
-function checkCls() {
-  var ok=0, tot=0;
-  ['data','info'].forEach(function(k){
-    document.querySelectorAll('#zone-'+k+'-area .chip').forEach(function(c){
-      tot++;
-      var correct = c.dataset.ans === k;
-      c.classList.remove('ok-chip','ng-chip');
-      c.classList.add(correct ? 'ok-chip' : 'ng-chip');
-      if(correct) ok++;
+function loadActivity(key){
+  try{
+    var d=JSON.parse(localStorage.getItem(key)||'{}');
+    document.querySelectorAll('.act-input').forEach(function(el,i){if(d['a'+i])el.value=d['a'+i];});
+    Object.keys(d).filter(function(k){return k.startsWith('r_');}).forEach(function(k){
+      var el=document.querySelector('input[type=radio][name="'+k.slice(2)+'"][value="'+d[k]+'"]');
+      if(el)el.checked=true;
     });
-  });
-  var res = document.getElementById('cl-result');
-  res.style.display = 'block';
-  if(tot === 0){ toast('먼저 항목을 분류해주세요!'); res.style.display='none'; return; }
-  if(ok === tot){
-    res.style.cssText='display:block;background:var(--gbg);border:1px solid #BFDFAA;color:#1A5000;padding:11px 14px;border-radius:8px;font-size:13px;margin-top:10px';
-    res.innerHTML = '🎉 완벽! ' + ok + '/' + tot + '개 모두 정답입니다!';
-  } else {
-    res.style.cssText='display:block;background:var(--abg);border:1px solid #EDD070;color:#6A5000;padding:11px 14px;border-radius:8px;font-size:13px;margin-top:10px';
-    res.innerHTML = '📝 ' + ok + '/' + tot + '개 정답. 빨간 항목을 다시 확인해보세요!';
-  }
-}
-function resetCls() {
-  var pool = document.getElementById('pool');
-  ['data','info'].forEach(function(k){
-    document.querySelectorAll('#zone-'+k+'-area .chip').forEach(function(c){
-      c.classList.remove('ok-chip','ng-chip');
-      pool.appendChild(c);
-    });
-  });
-  var res = document.getElementById('cl-result');
-  res.style.display='none';
-  document.querySelectorAll('.opt').forEach(function(o){ o.className='opt'; o.style.pointerEvents=''; });
-  document.querySelectorAll('.qfb').forEach(function(f){ f.className='qfb'; f.innerHTML=''; });
+  }catch(e){}
 }
 
-document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l201sc');});
+
+var valueData = {
+  '저장': '💾 <b>저장 특징의 가치</b><br>① 스마트폰 한 대에 수만 장의 사진 저장 가능<br>② 음악 수천 곡을 작은 기기에 보관<br>③ 도서관의 모든 책을 디지털로 저장하면 서버 하나면 충분<br>→ 다양한 형태의 방대한 데이터를 효율적으로 보존·관리',
+  '가공': '⚙️ <b>가공 특징의 가치</b><br>① 수십만 건의 데이터에서 원하는 정보를 검색어 하나로 찾음<br>② 사진 편집 앱으로 수백 장 사진을 한 번에 보정<br>③ 의료 데이터를 분석하여 질병 조기 진단<br>→ 다양한 분야의 데이터를 분석하여 유용한 정보 창출',
+  '전송': '📡 <b>전송 특징의 가치</b><br>① 지구 반대편에 있는 사람과 화상 통화 (지연 거의 없음)<br>② 대용량 파일도 몇 초 만에 공유<br>③ 다양한 기기(폰·태블릿·PC) 간 자유로운 데이터 공유<br>→ 시간과 장소의 제한 없이 데이터를 실시간으로 공유',
+};
+function showValue(type) {
+  var d = document.getElementById('value-desc');
+  if(d) d.innerHTML = valueData[type] || '';
+}
+
+document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l201sc');loadActivity('l201sc_act');});
 </script>
 </body></html>
