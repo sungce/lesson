@@ -940,8 +940,8 @@
 
 
 /* ── 로그인 모달 ── */
-.login-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.login-overlay.show{display:flex}
+.login-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center}
+.login-overlay.show{display:flex!important}
 .login-modal{background:#fff;border-radius:18px;padding:36px 32px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.18);text-align:center;animation:modal-in .25s ease}
 @keyframes modal-in{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
 .login-modal .lm-icon{font-size:48px;margin-bottom:12px}
@@ -1017,7 +1017,7 @@
       <div class="profile-name" id="profile-name">로그인 필요</div>
       <div class="profile-sub" id="profile-sub">클릭하여 이름 설정</div>
     </div>
-    <button class="profile-edit" onclick="openLogin(true)" title="이름 변경">✏️</button>
+    <button class="profile-edit" onclick="openLogin(true)" title="이름 변경" style="font-size:13px">✏️</button>
   </div>
 
   <!-- 학습 기록 버튼 -->
@@ -1886,14 +1886,33 @@
   // ── 프로필 초기화 ──────────────────────────
   function initProfile() {
     var name = localStorage.getItem('user_name');
-    if (!name) {
-      setTimeout(function() {
-        document.getElementById('login-overlay').classList.add('show');
-      }, 500);
+    if (!name || name === '') {
+      // 저장된 이름 없음 → 모달 표시
+      showLoginModal();
     } else {
       applyProfile(name);
     }
     updateRecordCount();
+  }
+
+  function showLoginModal() {
+    var overlay = document.getElementById('login-overlay');
+    if (!overlay) return;
+    overlay.style.display = 'flex';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.right = '0';
+    overlay.style.bottom = '0';
+    overlay.style.background = 'rgba(0,0,0,.6)';
+    overlay.style.zIndex = '9999';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.classList.add('show');
+    setTimeout(function() {
+      var inp = document.getElementById('login-input');
+      if (inp) inp.focus();
+    }, 100);
   }
 
   function applyProfile(name) {
@@ -1913,8 +1932,7 @@
     var cur = localStorage.getItem('user_name') || '';
     var inp = document.getElementById('login-input');
     if (inp) inp.value = isEdit ? cur : '';
-    document.getElementById('login-overlay').classList.add('show');
-    setTimeout(function() { if (inp) inp.focus(); }, 120);
+    showLoginModal();
   }
 
   function doLogin() {
@@ -1923,12 +1941,12 @@
     if (!name) { if (inp) inp.focus(); return; }
     localStorage.setItem('user_name', name);
     applyProfile(name);
-    document.getElementById('login-overlay').classList.remove('show');
+    var ov=document.getElementById('login-overlay');ov.classList.remove('show');ov.style.display='none';
     updateRecordCount();
   }
 
   function skipLogin() {
-    document.getElementById('login-overlay').classList.remove('show');
+    var ov=document.getElementById('login-overlay');ov.classList.remove('show');ov.style.display='none';
     localStorage.setItem('user_name', '학습자');
     applyProfile('학습자');
   }
