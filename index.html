@@ -938,6 +938,66 @@
   }
   .nav-sub-toggle { cursor: pointer; }
 
+
+/* ── 로그인 모달 ── */
+.login-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.login-overlay.show{display:flex}
+.login-modal{background:#fff;border-radius:18px;padding:36px 32px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.18);text-align:center;animation:modal-in .25s ease}
+@keyframes modal-in{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+.login-modal .lm-icon{font-size:48px;margin-bottom:12px}
+.login-modal h2{font-size:20px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
+.login-modal p{font-size:13px;color:#6b7280;margin-bottom:24px;line-height:1.6}
+.login-modal input{width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:10px;font-size:15px;font-family:inherit;outline:none;transition:border-color .15s;margin-bottom:16px}
+.login-modal input:focus{border-color:var(--unit-2)}
+.login-modal .lm-btn{width:100%;padding:13px;background:var(--unit-2);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
+.login-modal .lm-btn:hover{background:#1a8a62}
+.login-modal .lm-skip{font-size:12px;color:#9ca3af;margin-top:12px;cursor:pointer;text-decoration:underline}
+
+/* ── 프로필 영역 (사이드바) ── */
+.profile-area{padding:14px 16px;background:#f0fdf4;border-radius:12px;margin:12px 14px 0;display:flex;align-items:center;gap:10px}
+.profile-avatar{width:36px;height:36px;border-radius:50%;background:var(--unit-2);color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.profile-info{flex:1;min-width:0}
+.profile-name{font-size:13px;font-weight:700;color:#1a2e1f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.profile-sub{font-size:10px;color:#4caf88}
+.profile-edit{width:24px;height:24px;border-radius:6px;border:1px solid #a8dfc8;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;transition:background .15s}
+.profile-edit:hover{background:#e2f5ee}
+
+/* ── 학습 기록 버튼 (사이드바) ── */
+.record-nav-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;margin:6px 14px 0;background:#fff;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;font-size:12px;font-weight:600;color:#374151;transition:all .15s}
+.record-nav-btn:hover{border-color:var(--unit-2);color:var(--unit-2);background:#f0fdf4}
+.record-nav-btn .rn-count{margin-left:auto;background:#e8f5e9;color:var(--unit-2);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
+
+/* ── 학습 기록 뷰 ── */
+#view-records{padding:28px 32px}
+.records-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.records-header h2{font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px}
+.rec-goto-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:#f0fdf4;border:1px solid #a8dfc8;border-radius:10px;font-size:12px;font-weight:600;color:var(--unit-2);text-decoration:none;cursor:pointer;transition:all .15s}
+.rec-goto-btn:hover{background:var(--unit-2);color:#fff}
+.records-sub{font-size:13px;color:#6b7280;margin-bottom:24px}
+
+.rec-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.rec-stat-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;text-align:center}
+.rec-stat-n{font-size:26px;font-weight:700;margin-bottom:4px}
+.rec-stat-l{font-size:11px;color:#9ca3af}
+
+.rec-empty{background:#fff;border:1.5px dashed #d1d5db;border-radius:14px;padding:52px 20px;text-align:center}
+.rec-empty-icon{font-size:40px;margin-bottom:12px;opacity:.4}
+.rec-empty h3{font-size:15px;font-weight:600;color:#6b7280;margin-bottom:6px}
+.rec-empty p{font-size:12px;color:#9ca3af;margin-bottom:20px}
+.rec-goto-course{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--unit-2);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none}
+
+.rec-list{display:flex;flex-direction:column;gap:10px}
+.rec-item{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:14px}
+.rec-item-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.rec-item-info{flex:1;min-width:0}
+.rec-item-title{font-size:13px;font-weight:600;color:#1f2937;margin-bottom:3px}
+.rec-item-meta{font-size:11px;color:#9ca3af}
+.rec-item-right{text-align:right;flex-shrink:0}
+.rec-item-date{font-size:10px;color:#d1d5db;margin-bottom:4px}
+.rec-item-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
+.rec-badge-done{background:#e8f5e9;color:#2e7d32}
+.rec-badge-sc{background:#e3f2fd;color:#1565c0}
+
 </style>
 </head>
 <body>
@@ -949,6 +1009,25 @@
     <h1>정보 교과<br>웹 학습 플랫폼</h1>
     <div class="sub">중학교 1학년 · 총 68차시</div>
   </div>
+
+  <!-- 프로필 영역 -->
+  <div class="profile-area" id="profile-area">
+    <div class="profile-avatar" id="profile-avatar">?</div>
+    <div class="profile-info">
+      <div class="profile-name" id="profile-name">로그인 필요</div>
+      <div class="profile-sub" id="profile-sub">클릭하여 이름 설정</div>
+    </div>
+    <button class="profile-edit" onclick="openLogin(true)" title="이름 변경">✏️</button>
+  </div>
+
+  <!-- 학습 기록 버튼 -->
+  <button class="record-nav-btn" onclick="showView('records');setActive(null);updateRecordView()">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+    </svg>
+    나의 학습 기록
+    <span class="rn-count" id="record-count">0</span>
+  </button>
 
   <nav class="sidebar-nav">
     <div class="nav-section-label">홈</div>
@@ -1070,7 +1149,7 @@
   <section class="view active" id="view-dashboard">
     <div class="dash-hero">
       <div class="dash-hero-text">
-        <h2>안녕하세요, 학습자님!<br>오늘도 함께 배워볼까요?</h2>
+        <h2>안녕하세요, <span id="hero-name">학습자</span>님!<br>오늘도 함께 배워볼까요?</h2>
         <p>2022 개정 교육과정 기반 · 5개 대단원 · 34개 소단원 · 68차시</p>
       </div>
       <div class="dash-stats">
@@ -1558,6 +1637,43 @@
     </div>
   </section>
 
+
+  <!-- ─── RECORDS VIEW ─── -->
+  <section class="view" id="view-records">
+    <div class="records-header">
+      <h2>
+        <svg width="22" height="22" fill="none" stroke="var(--unit-2)" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+        </svg>
+        나의 학습 기록
+      </h2>
+      <a class="rec-goto-btn" onclick="showView('dashboard');setActive(document.querySelector('.nav-item'))">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        과제함 가기
+      </a>
+    </div>
+    <p class="records-sub" id="records-sub-text">제출한 수행평가 및 과제 내역이 브라우저에 안전하게 보관됩니다.</p>
+
+    <!-- 통계 -->
+    <div class="rec-stats">
+      <div class="rec-stat-card">
+        <div class="rec-stat-n" id="rec-stat-act" style="color:var(--unit-2)">0</div>
+        <div class="rec-stat-l">저장한 활동</div>
+      </div>
+      <div class="rec-stat-card">
+        <div class="rec-stat-n" id="rec-stat-sc" style="color:var(--unit-4)">0</div>
+        <div class="rec-stat-l">완료한 자기평가</div>
+      </div>
+      <div class="rec-stat-card">
+        <div class="rec-stat-n" id="rec-stat-lesson" style="color:var(--unit-3)">0</div>
+        <div class="rec-stat-l">완료 표시 소단원</div>
+      </div>
+    </div>
+
+    <!-- 기록 목록 -->
+    <div id="rec-list-wrap"></div>
+  </section>
+
 </main>
 
 <script>
@@ -1727,6 +1843,224 @@
     updateTimerDisplay();
     document.getElementById('timer-start-btn').textContent = '▶ 시작';
   }
+
+  // ══════════════════════════════════════════
+  //  로그인 + 학습 기록 시스템
+  // ══════════════════════════════════════════
+
+  var LESSONS = [
+    {key:'l101',unit:'I',  icon:'💻', title:'I-1. 컴퓨팅 시스템의 구성과 동작 원리'},
+    {key:'l102',unit:'I',  icon:'🤖', title:'I-2. 피지컬 컴퓨팅 시스템의 이해'},
+    {key:'l103',unit:'I',  icon:'🏃', title:'I-3. 운동 횟수 표시 장치 만들기'},
+    {key:'l104',unit:'I',  icon:'🌡️', title:'I-4. 수면 온도 알림이 장치 만들기'},
+    {key:'l105',unit:'I',  icon:'🎵', title:'I-5. 소리에 반응하는 애니메이션 장치'},
+    {key:'l106',unit:'I',  icon:'📡', title:'I-6. 이심전심 게임 장치 만들기'},
+    {key:'l201',unit:'II', icon:'💾', title:'II-1. 디지털 형태의 데이터'},
+    {key:'l202',unit:'II', icon:'🔢', title:'II-2. 다양한 데이터의 디지털 표현'},
+    {key:'l203',unit:'II', icon:'📥', title:'II-3. 데이터의 수집과 관리'},
+    {key:'l204',unit:'II', icon:'🌳', title:'II-4. 데이터의 구조화와 분석'},
+    {key:'l205',unit:'II', icon:'🎬', title:'II-5. 인기 공유 동영상 데이터 분석'},
+    {key:'l206',unit:'II', icon:'🍽️', title:'II-6. 급식 잔반 데이터 분석'},
+    {key:'l301',unit:'III',icon:'🗺️', title:'III-1. 문제의 상태와 구조화'},
+    {key:'l302',unit:'III',icon:'🔍', title:'III-2. 문제의 추상화'},
+    {key:'l303',unit:'III',icon:'📐', title:'III-3. 알고리즘의 이해와 표현'},
+    {key:'l304',unit:'III',icon:'⚖️', title:'III-4. 알고리즘의 분석과 설계'},
+    {key:'l305',unit:'III',icon:'🟢', title:'III-5. 프로그래밍 시작하기'},
+    {key:'l306',unit:'III',icon:'🔀', title:'III-6. 논리 연산 프로그래밍'},
+    {key:'l307',unit:'III',icon:'🔁', title:'III-7. 중첩 제어 구조 프로그래밍'},
+    {key:'l308',unit:'III',icon:'📋', title:'III-8. 리스트와 프로그래밍'},
+    {key:'l309',unit:'III',icon:'🔧', title:'III-9. 함수와 디버깅'},
+    {key:'l310',unit:'III',icon:'🌐', title:'III-10. 실생활과 학문 분야 문제 해결'},
+    {key:'l401',unit:'IV', icon:'🤖', title:'IV-1. 인공지능의 개념과 특성'},
+    {key:'l402',unit:'IV', icon:'📊', title:'IV-2. 데이터와 학습'},
+    {key:'l403',unit:'IV', icon:'💪', title:'IV-3. 팔 이미지를 이용한 운동 도우미'},
+    {key:'l404',unit:'IV', icon:'😄', title:'IV-4. 소리 데이터를 이용한 웃음 계수 시스템'},
+    {key:'l405',unit:'IV', icon:'📝', title:'IV-5. 텍스트 데이터를 이용한 영화 평가 시스템'},
+    {key:'l406',unit:'IV', icon:'⚖️', title:'IV-6. 인공지능의 윤리적 문제 해결'}
+  ];
+
+  var UNIT_BG  = {I:'var(--unit-1-light)',II:'#e8f5e9',III:'var(--unit-3-light)',IV:'var(--unit-4-light)'};
+  var UNIT_COL = {I:'var(--unit-1)',II:'var(--unit-2)',III:'var(--unit-3)',IV:'var(--unit-4)'};
+  var UNIT_NAME = {I:'컴퓨팅 시스템',II:'데이터',III:'알고리즘·프로그래밍',IV:'인공지능'};
+
+  // ── 프로필 초기화 ──────────────────────────
+  function initProfile() {
+    var name = localStorage.getItem('user_name');
+    if (!name) {
+      setTimeout(function() {
+        document.getElementById('login-overlay').classList.add('show');
+      }, 500);
+    } else {
+      applyProfile(name);
+    }
+    updateRecordCount();
+  }
+
+  function applyProfile(name) {
+    var safeChar = (name || '학').charAt(0);
+    var el;
+    el = document.getElementById('profile-avatar');
+    if (el) el.textContent = safeChar;
+    el = document.getElementById('profile-name');
+    if (el) el.textContent = name + '님';
+    el = document.getElementById('profile-sub');
+    if (el) el.textContent = '학습 기록 저장 중';
+    el = document.getElementById('hero-name');
+    if (el) el.textContent = name;
+  }
+
+  function openLogin(isEdit) {
+    var cur = localStorage.getItem('user_name') || '';
+    var inp = document.getElementById('login-input');
+    if (inp) inp.value = isEdit ? cur : '';
+    document.getElementById('login-overlay').classList.add('show');
+    setTimeout(function() { if (inp) inp.focus(); }, 120);
+  }
+
+  function doLogin() {
+    var inp  = document.getElementById('login-input');
+    var name = inp ? inp.value.trim() : '';
+    if (!name) { if (inp) inp.focus(); return; }
+    localStorage.setItem('user_name', name);
+    applyProfile(name);
+    document.getElementById('login-overlay').classList.remove('show');
+    updateRecordCount();
+  }
+
+  function skipLogin() {
+    document.getElementById('login-overlay').classList.remove('show');
+    localStorage.setItem('user_name', '학습자');
+    applyProfile('학습자');
+  }
+
+  // ── 기록 집계 ──────────────────────────────
+  function collectRecords() {
+    var list = [];
+    LESSONS.forEach(function(L) {
+      // 수행활동
+      try {
+        var raw = localStorage.getItem(L.key + '_act');
+        if (raw) {
+          var d = JSON.parse(raw);
+          var filled = Object.values(d).some(function(v){ return v && String(v).trim().length > 0; });
+          if (filled) list.push({ type:'act', L:L });
+        }
+      } catch(e) {}
+      // 자기평가
+      try {
+        var raw2 = localStorage.getItem(L.key + 'sc');
+        if (raw2) {
+          var d2 = JSON.parse(raw2);
+          var filled2 = Object.values(d2).some(function(v){ return v && String(v).trim().length > 0; });
+          if (filled2) list.push({ type:'sc', L:L });
+        }
+      } catch(e) {}
+    });
+    // 완료 표시
+    var done = [];
+    ['01','02','03','04'].forEach(function(n) {
+      try {
+        var arr = JSON.parse(localStorage.getItem('u' + n + 'done') || '[]');
+        arr.forEach(function(num) { done.push({ u:n, num:num }); });
+      } catch(e) {}
+    });
+    return { list:list, done:done };
+  }
+
+  function updateRecordCount() {
+    var data  = collectRecords();
+    var total = data.list.length + data.done.length;
+    var el    = document.getElementById('record-count');
+    if (el) el.textContent = total;
+  }
+
+  function updateRecordView() {
+    var data = collectRecords();
+    var list = data.list, done = data.done;
+
+    // 통계
+    var actN  = list.filter(function(r){ return r.type==='act'; }).length;
+    var scN   = list.filter(function(r){ return r.type==='sc'; }).length;
+    var el;
+    el = document.getElementById('rec-stat-act');    if (el) el.textContent = actN;
+    el = document.getElementById('rec-stat-sc');     if (el) el.textContent = scN;
+    el = document.getElementById('rec-stat-lesson'); if (el) el.textContent = done.length;
+
+    var wrap = document.getElementById('rec-list-wrap');
+    if (!wrap) return;
+
+    var total = list.length + done.length;
+
+    if (total === 0) {
+      wrap.innerHTML =
+        '<div class="rec-empty">' +
+          '<div class="rec-empty-icon">📭</div>' +
+          '<h3>아직 제출한 과제가 없습니다.</h3>' +
+          '<p>각 소단원에서 수행 활동을 저장하거나<br>자기평가를 완료하면 여기에 기록됩니다.</p>' +
+          '<button class="rec-goto-course" onclick="showView('dashboard');setActive(document.querySelector('.nav-item'))">학습 코스로 가기</button>' +
+        '</div>';
+      updateRecordCount();
+      return;
+    }
+
+    var rows = '';
+
+    // 완료 표시 행
+    var uLabel = {'01':'I','02':'II','03':'III','04':'IV'};
+    var uIcon  = {'01':'💻','02':'💾','03':'🟢','04':'🤖'};
+    done.forEach(function(d) {
+      var ul  = uLabel[d.u] || '';
+      var bg  = UNIT_BG[ul]  || '#f5f5f5';
+      var col = UNIT_COL[ul] || '#333';
+      rows +=
+        '<div class="rec-item">' +
+          '<div class="rec-item-icon" style="background:' + bg + '">' + (uIcon[d.u]||'📌') + '</div>' +
+          '<div class="rec-item-info">' +
+            '<div class="rec-item-title">' + ul + '단원 소단원 ' + d.num + ' 완료 표시</div>' +
+            '<div class="rec-item-meta" style="color:' + col + '">' + (UNIT_NAME[ul]||'') + '</div>' +
+          '</div>' +
+          '<div class="rec-item-right"><span class="rec-item-badge rec-badge-done">완료</span></div>' +
+        '</div>';
+    });
+
+    // 수행활동·자기평가 행
+    list.forEach(function(r) {
+      var bg  = UNIT_BG[r.L.unit]  || '#f5f5f5';
+      var col = UNIT_COL[r.L.unit] || '#333';
+      var badge = r.type === 'act'
+        ? '<span class="rec-item-badge rec-badge-done">활동 저장</span>'
+        : '<span class="rec-item-badge rec-badge-sc">자기평가</span>';
+      rows +=
+        '<div class="rec-item">' +
+          '<div class="rec-item-icon" style="background:' + bg + '">' + r.L.icon + '</div>' +
+          '<div class="rec-item-info">' +
+            '<div class="rec-item-title">' + r.L.title + '</div>' +
+            '<div class="rec-item-meta" style="color:' + col + '">' + (r.type==='act'?'수행 활동 저장':'자기평가 완료') + '</div>' +
+          '</div>' +
+          '<div class="rec-item-right">' + badge + '</div>' +
+        '</div>';
+    });
+
+    wrap.innerHTML = '<div class="rec-list">' + rows + '</div>';
+    updateRecordCount();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() { initProfile(); });
+
 </script>
+
+<!-- 로그인 모달 -->
+<div class="login-overlay" id="login-overlay">
+  <div class="login-modal">
+    <div class="lm-icon">👋</div>
+    <h2>반갑습니다!</h2>
+    <p>학습 기록을 저장하기 위해<br>이름(닉네임)을 입력해주세요.</p>
+    <input type="text" id="login-input" placeholder="예) 홍길동" maxlength="20"
+           onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="lm-btn" onclick="doLogin()">학습 시작하기 🚀</button>
+    <div class="lm-skip" onclick="skipLogin()">나중에 할게요</div>
+  </div>
+</div>
+
 </body>
 </html>
