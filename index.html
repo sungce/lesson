@@ -942,16 +942,20 @@
 /* ── 로그인 모달 ── */
 .login-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center}
 .login-overlay.show{display:flex!important}
-.login-modal{background:#fff;border-radius:18px;padding:36px 32px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.18);text-align:center;animation:modal-in .25s ease}
-@keyframes modal-in{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
-.login-modal .lm-icon{font-size:48px;margin-bottom:12px}
-.login-modal h2{font-size:20px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
-.login-modal p{font-size:13px;color:#6b7280;margin-bottom:24px;line-height:1.6}
-.login-modal input{width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:10px;font-size:15px;font-family:inherit;outline:none;transition:border-color .15s;margin-bottom:16px}
-.login-modal input:focus{border-color:var(--unit-2)}
-.login-modal .lm-btn{width:100%;padding:13px;background:var(--unit-2);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
-.login-modal .lm-btn:hover{background:#1a8a62}
-.login-modal .lm-skip{font-size:12px;color:#9ca3af;margin-top:12px;cursor:pointer;text-decoration:underline}
+.login-modal{background:#fff;border-radius:20px;padding:40px 36px 32px;width:100%;max-width:360px;box-shadow:0 24px 64px rgba(0,0,0,.2);text-align:center;animation:modal-in .28s cubic-bezier(.25,.46,.45,.94)}
+@keyframes modal-in{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:none}}
+.lm-logo{margin-bottom:16px;display:flex;justify-content:center}
+.login-modal h2{font-size:18px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+.login-modal p{font-size:12px;color:#9ca3af;margin-bottom:24px}
+#google-btn-wrap{display:flex;justify-content:center;margin-bottom:4px;min-height:44px}
+.lm-divider{display:flex;align-items:center;gap:10px;margin:16px 0;color:#d1d5db;font-size:12px}
+.lm-divider::before,.lm-divider::after{content:'';flex:1;height:1px;background:#e5e7eb}
+.login-modal input{width:100%;padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:14px;font-family:inherit;outline:none;transition:border-color .15s;margin-bottom:10px;box-sizing:border-box}
+.login-modal input:focus{border-color:#4285F4}
+.login-modal .lm-btn{width:100%;padding:12px;background:#4285F4;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
+.login-modal .lm-btn:hover{background:#1a73e8}
+.lm-skip{font-size:11px;color:#9ca3af;margin-top:14px;cursor:pointer;transition:color .15s}
+.lm-skip:hover{color:#6b7280}
 
 /* ── 프로필 영역 (사이드바) ── */
 .profile-area{padding:14px 16px;background:#f0fdf4;border-radius:12px;margin:12px 14px 0;display:flex;align-items:center;gap:10px}
@@ -999,6 +1003,7 @@
 .rec-badge-sc{background:#e3f2fd;color:#1565c0}
 
 </style>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -1031,7 +1036,7 @@
 
   <nav class="sidebar-nav">
     <div class="nav-section-label">홈</div>
-    <a class="nav-item active" onclick="showView('dashboard'); setActive(this)">
+    <a class="nav-item active" href="./" onclick="showView('dashboard'); setActive(this); return false;">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       대시보드
     </a>
@@ -1039,8 +1044,8 @@
     <div class="nav-section-label" style="margin-top:8px">단원</div>
 
     <!-- Unit I — 클릭 시 서브메뉴 토글 + 뷰 전환 -->
-    <a class="nav-item nav-unit1 active-unit" id="nav-unit1-head"
-       onclick="toggleUnitNav(); showView('unit1'); setActive(this)">
+    <a class="nav-item nav-unit1 active-unit" id="nav-unit1-head" href="unit-01/index.html"
+       onclick="toggleUnitNav(); showView('unit1'); setActive(this); return false;">
       <div class="nav-dot" style="background:var(--unit-1)"></div>
       I. 컴퓨팅 시스템
       <span class="nav-badge">13</span>
@@ -1056,8 +1061,8 @@
       <a class="nav-sub" href="unit-01/lesson-06/index.html"><span class="sub-num" style="background:var(--unit-1-light);color:var(--unit-1)">6</span>이심전심 게임 장치 만들기</a>
     </div>
 
-    <a class="nav-item" id="nav-unit2-head"
-       onclick="toggleUnitNav2(); showView('unit2'); setActive(this)">
+    <a class="nav-item" id="nav-unit2-head" href="unit-02/index.html"
+       onclick="toggleUnitNav2(); showView('unit2'); setActive(this); return false;">
       <div class="nav-dot" style="background:var(--unit-2)"></div>
       II. 데이터
       <span class="nav-badge">13</span>
@@ -1071,8 +1076,8 @@
       <a class="nav-sub" href="unit-02/lesson-05/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">5</span>인기 공유 동영상 데이터 분석</a>
       <a class="nav-sub" href="unit-02/lesson-06/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">6</span>급식 잔반 데이터 분석</a>
     </div>
-    <a class="nav-item" id="nav-unit3-head"
-       onclick="toggleUnitNav3(); showView('unit3'); setActive(this)">
+    <a class="nav-item" id="nav-unit3-head" href="unit-03/index.html"
+       onclick="toggleUnitNav3(); showView('unit3'); setActive(this); return false;">
       <div class="nav-dot" style="background:var(--unit-3)"></div>
       III. 알고리즘·프로그래밍
       <span class="nav-badge">22</span>
@@ -1090,8 +1095,8 @@
       <a class="nav-sub" href="unit-03/lesson-09/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">9</span>함수와 디버깅</a>
       <a class="nav-sub" href="unit-03/lesson-10/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">10</span>실생활과 학문 분야 문제 해결</a>
     </div>
-    <a class="nav-item" id="nav-unit4-head"
-       onclick="toggleUnitNav4(); showView('unit4'); setActive(this)">
+    <a class="nav-item" id="nav-unit4-head" href="unit-04/index.html"
+       onclick="toggleUnitNav4(); showView('unit4'); setActive(this); return false;">
       <div class="nav-dot" style="background:var(--unit-4)"></div>
       IV. 인공지능
       <span class="nav-badge">13</span>
@@ -1674,6 +1679,174 @@
     <div id="rec-list-wrap"></div>
   </section>
 
+
+  <!-- ─── UNIT III VIEW ─── -->
+  <section class="view" id="view-unit3">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-family:'DM Serif Display',serif;font-size:36px;color:var(--unit-3);line-height:1">III</span>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:3px">Unit III</div>
+            <h2 style="font-size:20px;font-weight:700;color:var(--text)">알고리즘과 프로그래밍</h2>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.6">문제 추상화·알고리즘 설계·순서도 표현,<br>엔트리로 순차·선택·반복·리스트·함수 프로그래밍</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-shrink:0">
+        <div style="text-align:center;padding:12px 16px;background:var(--unit-3-light);border-radius:var(--radius-sm)">
+          <div style="font-size:20px;font-weight:700;color:var(--unit-3)">10</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">소단원</div>
+        </div>
+        <div style="text-align:center;padding:12px 16px;background:var(--bg);border-radius:var(--radius-sm)">
+          <div style="font-size:20px;font-weight:700;color:var(--text)">22</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">차시</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <a href="unit-03/lesson-01/index.html" class="u1-card" style="--unit-c:var(--unit-3)">
+        <div class="u1-num" style="color:var(--unit-3)">01</div><div class="u1-icon">🗺️</div>
+        <div class="u1-title">문제의 상태와 구조화</div>
+        <div class="u1-desc">초기·현재·목표 상태 정의, 강 건너기 시뮬레이터</div>
+        <div class="u1-meta"><span class="u1-tag">1차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-02/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">02</div><div class="u1-icon">🔍</div>
+        <div class="u1-title">문제의 추상화</div>
+        <div class="u1-desc">문제 분해·핵심 요소 추출, 자판기 추상화 게임</div>
+        <div class="u1-meta"><span class="u1-tag">1차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-03/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">03</div><div class="u1-icon">📐</div>
+        <div class="u1-title">알고리즘의 이해와 표현</div>
+        <div class="u1-desc">자연어·순서도 표현, 순서도 블록 조립</div>
+        <div class="u1-meta"><span class="u1-tag">1차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-04/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">04</div><div class="u1-icon">⚖️</div>
+        <div class="u1-title">알고리즘의 분석과 설계</div>
+        <div class="u1-desc">분할·시행착오·되추적·최선 전략 4가지</div>
+        <div class="u1-meta"><span class="u1-tag">1차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-05/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">05</div><div class="u1-icon">🟢</div>
+        <div class="u1-title">프로그래밍 시작하기</div>
+        <div class="u1-desc">엔트리 사칙 연산 계산기, 6단계 프로그래밍 과정</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-06/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">06</div><div class="u1-icon">🔀</div>
+        <div class="u1-title">논리 연산 프로그래밍</div>
+        <div class="u1-desc">AND·OR·NOT, 놀이공원 입장료 계산기</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-07/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">07</div><div class="u1-icon">🔁</div>
+        <div class="u1-title">중첩 제어 구조 프로그래밍</div>
+        <div class="u1-desc">반복 속 반복, Canvas 패턴 생성기</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-08/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">08</div><div class="u1-icon">📋</div>
+        <div class="u1-title">리스트와 프로그래밍</div>
+        <div class="u1-desc">리스트 추가·삭제·인덱스, OX 퀴즈 체험</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-09/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">09</div><div class="u1-icon">🔧</div>
+        <div class="u1-title">함수와 디버깅</div>
+        <div class="u1-desc">함수 정의·호출·재사용, 버그 찾기 게임</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+      <a href="unit-03/lesson-10/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-3)">10</div><div class="u1-icon">🌐</div>
+        <div class="u1-title">실생활과 학문 분야 문제 해결</div>
+        <div class="u1-desc">번역기·전자 투표 시뮬레이터, 통합 프로젝트</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-3)">학습하기 →</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── UNIT IV VIEW ─── -->
+  <section class="view" id="view-unit4">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-family:'DM Serif Display',serif;font-size:36px;color:var(--unit-4);line-height:1">IV</span>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:3px">Unit IV</div>
+            <h2 style="font-size:20px;font-weight:700;color:var(--text)">인공지능</h2>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.6">AI 개념·머신러닝 학습 원리,<br>이미지·소리·텍스트 분류 실습, 인공지능 윤리</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-shrink:0">
+        <div style="text-align:center;padding:12px 16px;background:var(--unit-4-light);border-radius:var(--radius-sm)">
+          <div style="font-size:20px;font-weight:700;color:var(--unit-4)">6</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">소단원</div>
+        </div>
+        <div style="text-align:center;padding:12px 16px;background:var(--bg);border-radius:var(--radius-sm)">
+          <div style="font-size:20px;font-weight:700;color:var(--text)">13</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">차시</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <a href="unit-04/lesson-01/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-4)">01</div><div class="u1-icon">🤖</div>
+        <div class="u1-title">인공지능의 개념과 특성</div>
+        <div class="u1-desc">4가지 특성·AI vs 일반SW 분류</div>
+        <div class="u1-meta"><span class="u1-tag">1차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-4)">학습하기 →</div>
+      </a>
+      <a href="unit-04/lesson-02/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-4)">02</div><div class="u1-icon">📊</div>
+        <div class="u1-title">데이터와 학습</div>
+        <div class="u1-desc">데이터 역할·레이블링·훈련/테스트 분류</div>
+        <div class="u1-meta"><span class="u1-tag">2차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-4)">학습하기 →</div>
+      </a>
+      <a href="unit-04/lesson-03/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-4)">03</div><div class="u1-icon">💪</div>
+        <div class="u1-title">팔 이미지를 이용한 운동 도우미</div>
+        <div class="u1-desc">이미지 분류·티처블머신·엔트리 연동</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-4)">학습하기 →</div>
+      </a>
+      <a href="unit-04/lesson-04/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-4)">04</div><div class="u1-icon">😄</div>
+        <div class="u1-title">소리 데이터를 이용한 웃음 계수 시스템</div>
+        <div class="u1-desc">소리 분류·웃음 카운터 프로그램</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-4)">학습하기 →</div>
+      </a>
+      <a href="unit-04/lesson-05/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-4)">05</div><div class="u1-icon">📝</div>
+        <div class="u1-title">텍스트 데이터를 이용한 영화 평가 시스템</div>
+        <div class="u1-desc">텍스트 분류·감성 분석</div>
+        <div class="u1-meta"><span class="u1-tag">3차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-4)">학습하기 →</div>
+      </a>
+      <a href="unit-04/lesson-06/index.html" class="u1-card">
+        <div class="u1-num" style="color:var(--unit-4)">06</div><div class="u1-icon">⚖️</div>
+        <div class="u1-title">인공지능의 윤리적 문제 해결</div>
+        <div class="u1-desc">개인정보·편향·비식별화·윤리 토론</div>
+        <div class="u1-meta"><span class="u1-tag">1차시</span><span class="u1-tag u1-done">완료</span></div>
+        <div class="u1-arrow" style="color:var(--unit-4)">학습하기 →</div>
+      </a>
+    </div>
+  </section>
 </main>
 
 <script>
@@ -1842,6 +2015,32 @@
     remaining = 45 * 60;
     updateTimerDisplay();
     document.getElementById('timer-start-btn').textContent = '▶ 시작';
+  }
+
+  // Google 로그인 콜백
+  function handleGoogleLogin(response) {
+    try {
+      // JWT decode (payload 부분)
+      var parts = response.credential.split('.');
+      var payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+      var name = payload.name || payload.given_name || '학습자';
+      var picture = payload.picture || '';
+      localStorage.setItem('user_name', name);
+      localStorage.setItem('user_picture', picture);
+      if (picture) {
+        var av = document.getElementById('profile-avatar');
+        if (av) {
+          av.style.backgroundImage = 'url(' + picture + ')';
+          av.style.backgroundSize = 'cover';
+          av.style.backgroundPosition = 'center';
+          av.textContent = '';
+        }
+      }
+      applyProfile(name);
+      var ov = document.getElementById('login-overlay');
+      ov.classList.remove('show'); ov.style.display = 'none';
+      updateRecordCount();
+    } catch(e) { console.error(e); }
   }
 
   // ══════════════════════════════════════════
@@ -2068,14 +2267,40 @@
 </script>
 
 <!-- 로그인 모달 -->
-<div class="login-overlay" id="login-overlay">
+<div class="login-overlay" id="login-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center">
   <div class="login-modal">
-    <div class="lm-icon">👋</div>
-    <h2>반갑습니다!</h2>
-    <p>학습 기록을 저장하기 위해<br>이름(닉네임)을 입력해주세요.</p>
-    <input type="text" id="login-input" placeholder="예) 홍길동" maxlength="20"
+    <div class="lm-logo">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect width="48" height="48" rx="12" fill="#4285F4"/>
+        <text x="50%" y="54%" font-size="22" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="middle" font-family="serif">情</text>
+      </svg>
+    </div>
+    <h2>정보 교과 학습 플랫폼</h2>
+    <p>2022 개정 교육과정 · 중학교 1학년</p>
+
+    <!-- Google One Tap / Sign-In Button -->
+    <div id="google-btn-wrap">
+      <div id="g_id_onload"
+           data-client_id="YOUR_GOOGLE_CLIENT_ID"
+           data-callback="handleGoogleLogin"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+           data-type="standard"
+           data-size="large"
+           data-theme="outline"
+           data-text="signin_with"
+           data-shape="rectangular"
+           data-locale="ko"
+           data-width="280">
+      </div>
+    </div>
+
+    <div class="lm-divider"><span>또는</span></div>
+
+    <input type="text" id="login-input" placeholder="이름(닉네임) 직접 입력" maxlength="20"
            onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="lm-btn" onclick="doLogin()">학습 시작하기 🚀</button>
+    <button class="lm-btn" onclick="doLogin()">시작하기 →</button>
     <div class="lm-skip" onclick="skipLogin()">나중에 할게요</div>
   </div>
 </div>
