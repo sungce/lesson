@@ -332,6 +332,24 @@ table{width:100%;border-collapse:collapse}
 </main>
 <div id="toast"></div>
 <script>
+
+  // ── Google Sheets 저장 ──────────────────────────────────
+  var GS_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+
+  function getUserName() {
+    return localStorage.getItem('user_name') || '익명';
+  }
+
+  function postToSheets(payload) {
+    if (!GS_URL || GS_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL') return;
+    fetch(GS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function(){});
+  }
+
 tR = 45; window._tInit = 45;
 
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
@@ -343,9 +361,32 @@ function renderT(){var e=document.getElementById('tnum');if(!e)return;e.textCont
 function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
 function resetTimer(){clearInterval(tIv);tRun=false;if(window._tInit)tR=window._tInit;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
 function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');o.style.pointerEvents='none';});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
-function saveSC(key){var d={};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){toast('저장 실패');}}
+function saveSC(key){
+  var d={};
+  document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});
+  try{
+    localStorage.setItem(key,JSON.stringify(d));
+    postToSheets({type:'sc',userName:getUserName(),lessonKey:'l31',lessonName:'l31',answers:d});
+    toast('자기평가가 저장되었습니다 ✓');
+  }catch(e){}
+};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){toast('저장 실패');}}
 function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
-function markDone(n){try{var d=JSON.parse(localStorage.getItem('u03done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u03done',JSON.stringify(d));}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
+function markDone(n){
+  try{
+    var d=JSON.parse(localStorage.getItem('u03done')||'[]');
+    if(!d.includes(n))d.push(n);
+    localStorage.setItem('u03done',JSON.stringify(d));
+    // Google Sheets 저장
+    postToSheets({
+      type:'done',
+      userName: getUserName(),
+      unit: 'III',
+      lessonNum: n,
+      lessonName: '알고리즘과 프로그래밍'
+    });
+  }catch(e){}
+  toast('✅ 소단원 '+n+' 완료 표시!');
+}
 
 
 var leftItems = ['👨‍🌾농부','🐺늑대','🐐염소','🥬양배추'];
