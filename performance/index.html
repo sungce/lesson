@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>과정 중심의 수행활동 — 정보 교과 학습 플랫폼</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F4F0;--sf:#fff;--br:#E2DFD6;--tx:#1C1C1C;--mt:#696760;--lt:#A8A59E;--r:14px;--rs:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.65;min-height:100vh}
+.topbar{background:var(--sf);border-bottom:1px solid var(--br);height:52px;padding:0 24px;display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:90}
+.bc{font-size:12px;color:var(--mt);flex:1;display:flex;align-items:center;gap:6px}.bc a{color:var(--mt);text-decoration:none}.bc a:hover{color:var(--tx)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--rs);font-size:12px;font-family:inherit;font-weight:500;cursor:pointer;border:1px solid var(--br);background:var(--sf);color:var(--tx);text-decoration:none;transition:background .12s}.btn:hover{background:var(--bg)}
+.page{max-width:920px;margin:0 auto;padding:36px 24px}
+
+.hero{text-align:center;padding:40px 20px 32px;margin-bottom:36px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8A55A8;padding:5px 14px;border-radius:20px;background:#F3E5F5;border:1px solid #CE93D8;margin-bottom:16px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(24px,4vw,38px);font-weight:400;letter-spacing:-.01em;color:var(--tx);margin-bottom:12px}
+.hero h1 em{font-style:italic;color:#8A55A8}
+.hero p{font-size:14px;color:var(--mt);max-width:480px;margin:0 auto;line-height:1.8}
+
+.units-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:36px}
+.unit-card{background:var(--sf);border:1.5px solid var(--br);border-radius:var(--r);padding:20px 16px;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:all .2s;position:relative;overflow:hidden}
+.unit-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ug,#ccc)}
+.unit-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.10);border-color:var(--uc,#ccc)}
+.unit-roman{font-family:'DM Serif Display',serif;font-size:32px;line-height:1;color:var(--uc,#888);margin-bottom:10px;opacity:.85}
+.unit-name{font-size:13px;font-weight:700;margin-bottom:4px;line-height:1.3}
+.unit-meta{font-size:10px;color:var(--lt);margin-bottom:12px}
+.unit-acts{display:flex;flex-direction:column;gap:6px;flex:1}
+.act-item{background:var(--bg);border-radius:var(--rs);padding:8px 10px;font-size:11px;color:var(--mt);line-height:1.5}
+.act-item b{display:block;font-weight:700;color:var(--tx);margin-bottom:2px;font-size:11px}
+.act-tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;margin-top:3px}
+.tag-ind{background:#E3F2FD;color:#1565C0}
+.tag-grp{background:#FCE4EC;color:#880E4F}
+.go-btn{margin-top:14px;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;border-radius:var(--rs);background:var(--uc);color:#fff;font-size:12px;font-weight:700;text-align:center;transition:opacity .15s}
+.unit-card:hover .go-btn{opacity:.9}
+
+/* 상세 목록 테이블 */
+.list-section{background:var(--sf);border:1px solid var(--br);border-radius:var(--r);overflow:hidden}
+.list-header{padding:18px 24px;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:10px}
+.list-header h2{font-size:15px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:#FAFAF8;font-size:11px;font-weight:700;color:var(--mt);padding:10px 16px;text-align:left;border-bottom:1px solid var(--br)}
+tbody tr{border-bottom:1px solid var(--br);transition:background .12s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#FAFAF8}
+td{padding:14px 16px;vertical-align:top}
+.td-num{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:var(--uc)}
+.td-title{font-weight:700;margin-bottom:3px}
+.td-desc{font-size:12px;color:var(--mt);line-height:1.6}
+.td-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+.td-skill{font-size:11px;color:var(--lt)}
+.go-link{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--rs);background:var(--uc);color:#fff;font-size:11px;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .15s}
+.go-link:hover{opacity:.85}
+
+/* 저장 현황 */
+.saved-dot{width:8px;height:8px;border-radius:50%;background:#ccc;display:inline-block}
+.saved-dot.done{background:#1B9E72}
+
+@media(max-width:1000px){.units-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.units-grid{grid-template-columns:1fr 1fr}.page{padding:20px 14px}table{font-size:12px}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="bc">
+    <a href="https://sungce.github.io/lesson/">정보 교과 학습 플랫폼</a>
+    <span>›</span><span style="color:var(--tx);font-weight:500">과정 중심의 수행활동</span>
+  </div>
+  <a class="btn" href="../index.html">← 메인으로</a>
+</header>
+
+<div class="page">
+
+  <!-- 히어로 -->
+  <div class="hero">
+    <div class="hero-eyebrow">2022 개정 교육과정 · 중학교 1학년</div>
+    <h1>과정 중심의<br><em>수행활동</em></h1>
+    <p>5개 대단원 · 7개 활동 · 교과서 수록 수행과제를 인터랙티브 웹 활동지로 제공합니다.<br>모든 입력 내용은 브라우저에 자동 저장됩니다.</p>
+  </div>
+
+  <!-- 단원 카드 5종 -->
+  <div class="units-grid">
+
+    <a class="unit-card" href="unit1.html"
+       style="--uc:#6C65CC;--ug:linear-gradient(90deg,#6C65CC,#9B96E0)">
+      <div class="unit-roman">I</div>
+      <div class="unit-name">컴퓨팅 시스템</div>
+      <div class="unit-meta">1개 활동 · 개별</div>
+      <div class="unit-acts">
+        <div class="act-item">
+          <b>🔊 소음 측정 알림이 만들기</b>
+          소리 센서로 교실 소음 측정·LED 알림 시스템
+          <div><span class="act-tag tag-ind">개별</span></div>
+        </div>
+      </div>
+      <div class="go-btn">활동 시작 →</div>
+    </a>
+
+    <a class="unit-card" href="unit2.html"
+       style="--uc:#1B9E72;--ug:linear-gradient(90deg,#1B9E72,#4CAF88)">
+      <div class="unit-roman">II</div>
+      <div class="unit-name">데이터</div>
+      <div class="unit-meta">2개 활동 · 모둠+개별</div>
+      <div class="unit-acts">
+        <div class="act-item">
+          <b>🎮 디지털 문자 변환 게임</b>
+          이진수↔한글 변환표 게임
+          <div><span class="act-tag tag-grp">모둠</span></div>
+        </div>
+        <div class="act-item">
+          <b>📊 데이터 분석과 의미 해석</b>
+          SNS 영향력자 데이터 분석
+          <div><span class="act-tag tag-ind">개별</span></div>
+        </div>
+      </div>
+      <div class="go-btn">활동 시작 →</div>
+    </a>
+
+    <a class="unit-card" href="unit3.html"
+       style="--uc:#D0692A;--ug:linear-gradient(90deg,#D0692A,#F0935A)">
+      <div class="unit-roman">III</div>
+      <div class="unit-name">알고리즘과<br>프로그래밍</div>
+      <div class="unit-meta">1개 활동 · 개별</div>
+      <div class="unit-acts">
+        <div class="act-item">
+          <b>🪓 이야기 프로그래밍</b>
+          동화 각색 인터랙티브 애니메이션 구현
+          <div><span class="act-tag tag-ind">개별</span></div>
+        </div>
+      </div>
+      <div class="go-btn">활동 시작 →</div>
+    </a>
+
+    <a class="unit-card" href="unit4.html"
+       style="--uc:#3A8EC0;--ug:linear-gradient(90deg,#3A8EC0,#5BAEE0)">
+      <div class="unit-roman">IV</div>
+      <div class="unit-name">인공지능</div>
+      <div class="unit-meta">1개 활동 · 모둠</div>
+      <div class="unit-acts">
+        <div class="act-item">
+          <b>🌱 긍정적인 말 프로그램</b>
+          텍스트 AI 모델로 나무 성장 프로그램
+          <div><span class="act-tag tag-grp">모둠</span></div>
+        </div>
+      </div>
+      <div class="go-btn">활동 시작 →</div>
+    </a>
+
+    <a class="unit-card" href="unit5.html"
+       style="--uc:#8A55A8;--ug:linear-gradient(90deg,#8A55A8,#B07BCC)">
+      <div class="unit-roman">V</div>
+      <div class="unit-name">디지털 문화</div>
+      <div class="unit-meta">2개 활동 · 개별+모둠</div>
+      <div class="unit-acts">
+        <div class="act-item">
+          <b>🔒 개인 정보 보호 실천</b>
+          침해 사례 분석·예방 방안
+          <div><span class="act-tag tag-ind">개별</span></div>
+        </div>
+        <div class="act-item">
+          <b>🎨 AI 그림 토론</b>
+          AI 예술 찬반 토론 (콜로라도 사례)
+          <div><span class="act-tag tag-grp">모둠</span></div>
+        </div>
+      </div>
+      <div class="go-btn">활동 시작 →</div>
+    </a>
+
+  </div>
+
+  <!-- 상세 목록 테이블 -->
+  <div class="list-section">
+    <div class="list-header">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      <h2>수행활동 전체 목록</h2>
+      <span style="margin-left:auto;font-size:11px;color:var(--lt)">5개 단원 · 7개 활동</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:50px">단원</th>
+          <th>활동명</th>
+          <th style="width:80px">유형</th>
+          <th>핵심 소양</th>
+          <th>저장</th>
+          <th style="width:90px">바로가기</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="td-num" style="color:#6C65CC">I</div></td>
+          <td>
+            <div class="td-title">소음 측정 알림이 만들기</div>
+            <div class="td-desc">피지컬 컴퓨팅 · 소리 센서 + LED 스크린 · 문제 이해→알고리즘→프로그래밍→공유·개선</div>
+          </td>
+          <td><span class="td-tag tag-ind">개별</span></td>
+          <td class="td-skill">💡 컴퓨팅 사고력<br>🌐 디지털 문화 소양</td>
+          <td><span class="saved-dot" id="dot_u1"></span></td>
+          <td><a class="go-link" href="unit1.html" style="background:#6C65CC">시작 →</a></td>
+        </tr>
+        <tr>
+          <td><div class="td-num" style="color:#1B9E72">II</div></td>
+          <td>
+            <div class="td-title">디지털 문자 변환 게임</div>
+            <div class="td-desc">모스 부호 변형 이진수 변환표 게임 · 4인 1팀 역할 분담 · 인터랙티브 변환기 체험</div>
+          </td>
+          <td><span class="td-tag tag-grp">모둠</span></td>
+          <td class="td-skill">💡 컴퓨팅 사고력<br>🌐 디지털 문화 소양</td>
+          <td><span class="saved-dot" id="dot_u2a"></span></td>
+          <td><a class="go-link" href="unit2.html" style="background:#1B9E72">시작 →</a></td>
+        </tr>
+        <tr>
+          <td><div class="td-num" style="color:#1B9E72">II</div></td>
+          <td>
+            <div class="td-title">데이터 분석과 의미 해석하기</div>
+            <div class="td-desc">캐글(Kaggle) SNS 영향력자 데이터셋 · 코답(CODAP) 분석 · 상관관계·그래프 해석</div>
+          </td>
+          <td><span class="td-tag tag-ind">개별</span></td>
+          <td class="td-skill">💡 컴퓨팅 사고력<br>🤖 인공지능 소양</td>
+          <td><span class="saved-dot" id="dot_u2b"></span></td>
+          <td><a class="go-link" href="unit2.html#panel2" style="background:#1B9E72">시작 →</a></td>
+        </tr>
+        <tr>
+          <td><div class="td-num" style="color:#D0692A">III</div></td>
+          <td>
+            <div class="td-title">내가 만드는 이야기 프로그래밍</div>
+            <div class="td-desc">동화 각색 · 엔트리 인터랙티브 애니메이션 · 선택 분기 알고리즘 · 피지컬 컴퓨팅 연계</div>
+          </td>
+          <td><span class="td-tag tag-ind">개별</span></td>
+          <td class="td-skill">💡 컴퓨팅 사고력<br>🌐 디지털 문화 소양</td>
+          <td><span class="saved-dot" id="dot_u3"></span></td>
+          <td><a class="go-link" href="unit3.html" style="background:#D0692A">시작 →</a></td>
+        </tr>
+        <tr>
+          <td><div class="td-num" style="color:#3A8EC0">IV</div></td>
+          <td>
+            <div class="td-title">긍정적인 말 사용 프로그램 만들기</div>
+            <div class="td-desc">텍스트 분류 AI 모델 · 엔트리 나무 성장 프로그램 · 정확도 계산 · 데이터 수집·레이블링</div>
+          </td>
+          <td><span class="td-tag tag-grp">모둠</span></td>
+          <td class="td-skill">🤖 인공지능 소양<br>💡 컴퓨팅 사고력</td>
+          <td><span class="saved-dot" id="dot_u4"></span></td>
+          <td><a class="go-link" href="unit4.html" style="background:#3A8EC0">시작 →</a></td>
+        </tr>
+        <tr>
+          <td><div class="td-num" style="color:#8A55A8">V</div></td>
+          <td>
+            <div class="td-title">개인 정보 보호 실천하기</div>
+            <div class="td-desc">침해 사례 3종 (촬영 공유·해킹·도용) 분석 · 보호 실천 방안 체크리스트 · 발표문 작성</div>
+          </td>
+          <td><span class="td-tag tag-ind">개별</span></td>
+          <td class="td-skill">🌐 디지털 문화 소양<br>💡 컴퓨팅 사고력</td>
+          <td><span class="saved-dot" id="dot_u5a"></span></td>
+          <td><a class="go-link" href="unit5.html" style="background:#8A55A8">시작 →</a></td>
+        </tr>
+        <tr>
+          <td><div class="td-num" style="color:#8A55A8">V</div></td>
+          <td>
+            <div class="td-title">인공지능이 생성한 그림 문제에 대해 토론하기</div>
+            <div class="td-desc">콜로라도 AI 미술전 사례 · 찬반 주장·근거 작성 · 토론 진행 · 종합 결론 도출</div>
+          </td>
+          <td><span class="td-tag tag-grp">모둠</span></td>
+          <td class="td-skill">🌐 디지털 문화 소양<br>🤖 인공지능 소양</td>
+          <td><span class="saved-dot" id="dot_u5b"></span></td>
+          <td><a class="go-link" href="unit5.html" style="background:#8A55A8">시작 →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="text-align:center;margin-top:28px;font-size:12px;color:var(--lt)">
+    모든 입력 내용은 브라우저 localStorage에 자동 저장됩니다. 💾
+  </div>
+
+</div>
+
+<script>
+// 저장 현황 표시
+var KEYS = {
+  dot_u1: 'perf_u1', dot_u2a: 'perf_u2', dot_u2b: 'perf_u2',
+  dot_u3: 'perf_u3', dot_u4: 'perf_u4', dot_u5a: 'perf_u5', dot_u5b: 'perf_u5'
+};
+Object.keys(KEYS).forEach(function(dotId) {
+  try {
+    var data = JSON.parse(localStorage.getItem(KEYS[dotId]) || '{}');
+    var hasContent = Object.values(data).some(function(v) {
+      return v && String(v).trim().length > 0;
+    });
+    if (hasContent) {
+      document.getElementById(dotId).classList.add('done');
+    }
+  } catch(e) {}
+});
+</script>
+</body>
+</html>
