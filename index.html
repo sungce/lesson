@@ -1022,13 +1022,11 @@
   .nav-subnav {
     overflow: hidden;
     max-height: 0;
-    transition: max-height .28s cubic-bezier(.25,.46,.45,.94),
-                opacity .22s ease;
     opacity: 0;
+    transition: max-height .3s ease, opacity .25s ease;
   }
   .nav-subnav.open {
-    max-height: 400px;
-    opacity: 1;
+    /* max-height는 JS에서 scrollHeight 기준으로 설정 */
   }
 
 </style>
@@ -1081,7 +1079,7 @@
       <span id="unit1-arrow" class="nav-arrow  nav-arrow-open" onclick="event.preventDefault();event.stopPropagation();toggleUnitNav()">&#9660;</span>
     </a>
     <!-- Unit I 서브메뉴 -->
-        <div id="unit1-subnav" class="nav-subnav  open">
+        <div id="unit1-subnav" class="nav-subnav open" style="overflow:hidden;transition:max-height .3s ease,opacity .25s ease;opacity:1">
       <a class="nav-sub" href="unit-01/lesson-01/index.html"><span class="sub-num" style="background:var(--unit-1-light);color:var(--unit-1)">1</span>컴퓨팅 시스템의 구성과 동작 원리</a>
       <a class="nav-sub" href="unit-01/lesson-02/index.html"><span class="sub-num" style="background:var(--unit-1-light);color:var(--unit-1)">2</span>피지컬 컴퓨팅 시스템의 이해</a>
       <a class="nav-sub" href="unit-01/lesson-03/index.html"><span class="sub-num" style="background:var(--unit-1-light);color:var(--unit-1)">3</span>운동 횟수 표시 장치 만들기</a>
@@ -1097,7 +1095,7 @@
       <span class="nav-badge">13</span>
       <span id="unit2-arrow" class="nav-arrow" onclick="event.preventDefault();event.stopPropagation();toggleUnitNav2()">&#9660;</span>
     </a>
-        <div id="unit2-subnav" class="nav-subnav">
+        <div id="unit2-subnav" class="nav-subnav" style="overflow:hidden;transition:max-height .3s ease,opacity .25s ease;max-height:0px;opacity:0">
       <a class="nav-sub" href="unit-02/lesson-01/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">1</span>디지털 형태의 데이터</a>
       <a class="nav-sub" href="unit-02/lesson-02/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">2</span>다양한 데이터의 디지털 표현</a>
       <a class="nav-sub" href="unit-02/lesson-03/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">3</span>데이터의 수집과 관리</a>
@@ -1112,7 +1110,7 @@
       <span class="nav-badge">22</span>
       <span id="unit3-arrow" class="nav-arrow" onclick="event.preventDefault();event.stopPropagation();toggleUnitNav3()">&#9660;</span>
     </a>
-    <div id="unit3-subnav" class="nav-subnav">
+    <div id="unit3-subnav" class="nav-subnav" style="overflow:hidden;transition:max-height .3s ease,opacity .25s ease;max-height:0px;opacity:0">
       <a class="nav-sub" href="unit-03/lesson-01/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">1</span>문제의 상태와 구조화</a>
       <a class="nav-sub" href="unit-03/lesson-02/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">2</span>문제의 추상화</a>
       <a class="nav-sub" href="unit-03/lesson-03/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">3</span>알고리즘의 이해와 표현</a>
@@ -1131,7 +1129,7 @@
       <span class="nav-badge">13</span>
       <span id="unit4-arrow" class="nav-arrow" onclick="event.preventDefault();event.stopPropagation();toggleUnitNav4()">&#9660;</span>
     </a>
-    <div id="unit4-subnav" class="nav-subnav">
+    <div id="unit4-subnav" class="nav-subnav" style="overflow:hidden;transition:max-height .3s ease,opacity .25s ease;max-height:0px;opacity:0">
       <a class="nav-sub" href="unit-04/lesson-01/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">1</span>인공지능의 개념과 특성</a>
       <a class="nav-sub" href="unit-04/lesson-02/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">2</span>데이터와 학습</a>
       <a class="nav-sub" href="unit-04/lesson-03/index.html"><span class="sub-num" style="background:var(--unit-4-light);color:var(--unit-4)">3</span>팔 이미지 운동 도우미</a>
@@ -1879,6 +1877,38 @@
 </main>
 
 <script>
+
+  // ── 단원 소단원 토글 ──
+  function toggleUnit(n) {
+    var sub   = document.getElementById('unit' + n + '-subnav');
+    var arrow = document.getElementById('unit' + n + '-arrow');
+    if (!sub) return;
+
+    if (sub.style.maxHeight && sub.style.maxHeight !== '0px') {
+      // 닫기
+      sub.style.maxHeight = '0px';
+      sub.style.opacity   = '0';
+      if (arrow) {
+        arrow.style.transform = 'rotate(-90deg)';
+        arrow.classList.remove('nav-arrow-open');
+      }
+    } else {
+      // 열기
+      sub.style.maxHeight = sub.scrollHeight + 20 + 'px';
+      sub.style.opacity   = '1';
+      if (arrow) {
+        arrow.style.transform = 'rotate(0deg)';
+        arrow.classList.add('nav-arrow-open');
+      }
+    }
+  }
+
+  // 하위 호환용 래퍼
+  function toggleUnitNav()  { toggleUnit(1); }
+  function toggleUnitNav2() { toggleUnit(2); }
+  function toggleUnitNav3() { toggleUnit(3); }
+  function toggleUnitNav4() { toggleUnit(4); }
+
   // View navigation
   function showView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -1888,44 +1918,17 @@
 
 
   // lesson-06 서브서브메뉴 토글
-
-  function toggleUnitNav2() {
-    var sub   = document.getElementById('unit2-subnav');
-    var arrow = document.getElementById('unit2-arrow');
-    if (!sub) return;
-    var isOpen = sub.classList.contains('open');
-    if (isOpen) {
-      sub.classList.remove('open');
-      if (arrow) arrow.classList.remove('nav-arrow-open');
-    } else {
+  else {
       sub.classList.add('open');
       if (arrow) arrow.classList.add('nav-arrow-open');
     }
   }
-
-  function toggleUnitNav4() {
-    var sub   = document.getElementById('unit4-subnav');
-    var arrow = document.getElementById('unit4-arrow');
-    if (!sub) return;
-    var isOpen = sub.classList.contains('open');
-    if (isOpen) {
-      sub.classList.remove('open');
-      if (arrow) arrow.classList.remove('nav-arrow-open');
-    } else {
+  else {
       sub.classList.add('open');
       if (arrow) arrow.classList.add('nav-arrow-open');
     }
   }
-
-  function toggleUnitNav3() {
-    var sub   = document.getElementById('unit3-subnav');
-    var arrow = document.getElementById('unit3-arrow');
-    if (!sub) return;
-    var isOpen = sub.classList.contains('open');
-    if (isOpen) {
-      sub.classList.remove('open');
-      if (arrow) arrow.classList.remove('nav-arrow-open');
-    } else {
+  else {
       sub.classList.add('open');
       if (arrow) arrow.classList.add('nav-arrow-open');
     }
@@ -1942,15 +1945,7 @@
   }
 
   // Unit I 서브메뉴 토글
-  function toggleUnitNav() {
-    var sub   = document.getElementById('unit1-subnav');
-    var arrow = document.getElementById('unit1-arrow');
-    if (!sub) return;
-    var isOpen = sub.classList.contains('open');
-    if (isOpen) {
-      sub.classList.remove('open');
-      if (arrow) arrow.classList.remove('nav-arrow-open');
-    } else {
+  else {
       sub.classList.add('open');
       if (arrow) arrow.classList.add('nav-arrow-open');
     }
@@ -2311,7 +2306,19 @@
     updateRecordCount();
   }
 
-  document.addEventListener('DOMContentLoaded', function() { initProfile(); });
+  document.addEventListener('DOMContentLoaded', function() { initProfile();
+    // 열린 subnav의 maxHeight 초기화
+    (function initNav(){
+      [1,2,3,4].forEach(function(n){
+        var sub = document.getElementById('unit'+n+'-subnav');
+        if (!sub) return;
+        if (sub.classList.contains('open')) {
+          sub.style.maxHeight = sub.scrollHeight + 20 + 'px';
+          sub.style.opacity = '1';
+        }
+      });
+    })();
+    });
 
 </script>
 
