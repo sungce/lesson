@@ -1072,7 +1072,7 @@
 
     <!-- Unit I — 클릭 시 서브메뉴 토글 + 뷰 전환 -->
     <a class="nav-item nav-unit1 active-unit" id="nav-unit1-head" href="unit-01/index.html"
-       onclick="showView('unit1'); setActive(this); return false;">
+       onclick="filterLessons(null,'I'); setActive(this); return false;">
       <div class="nav-dot" style="background:var(--unit-1)"></div>
       I. 컴퓨팅 시스템
       <span class="nav-badge">13</span>
@@ -1089,7 +1089,7 @@
     </div>
 
     <a class="nav-item" id="nav-unit2-head" href="unit-02/index.html"
-       onclick="showView('unit2'); setActive(this); return false;">
+       onclick="filterLessons(null,'II'); setActive(this); return false;">
       <div class="nav-dot" style="background:var(--unit-2)"></div>
       II. 데이터
       <span class="nav-badge">13</span>
@@ -1104,7 +1104,7 @@
       <a class="nav-sub" href="unit-02/lesson-06/index.html"><span class="sub-num" style="background:var(--unit-2-light);color:var(--unit-2)">6</span>급식 잔반 데이터 분석</a>
     </div>
     <a class="nav-item" id="nav-unit3-head" href="unit-03/index.html"
-       onclick="showView('unit3'); setActive(this); return false;">
+       onclick="filterLessons(null,'III'); setActive(this); return false;">
       <div class="nav-dot" style="background:var(--unit-3)"></div>
       III. 알고리즘·프로그래밍
       <span class="nav-badge">22</span>
@@ -1123,7 +1123,7 @@
       <a class="nav-sub" href="unit-03/lesson-10/index.html"><span class="sub-num" style="background:var(--unit-3-light);color:var(--unit-3)">10</span>실생활과 학문 분야 문제 해결</a>
     </div>
     <a class="nav-item" id="nav-unit4-head" href="unit-04/index.html"
-       onclick="showView('unit4'); setActive(this); return false;">
+       onclick="filterLessons(null,'IV'); setActive(this); return false;">
       <div class="nav-dot" style="background:var(--unit-4)"></div>
       IV. 인공지능
       <span class="nav-badge">13</span>
@@ -1969,11 +1969,29 @@
 
   // Lesson filter
   function filterLessons(btn, unit) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.lesson-row').forEach(row => {
+    // 1) 대시보드 뷰로 전환 (소단원 목록이 view-dashboard 안에 있음)
+    showView('dashboard');
+    // 2) 네비 active 상태 업데이트
+    var dashNav = document.querySelector('.nav-item.active-unit');
+    // 대시보드 nav-item 활성화
+    document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
+    var dashBtn = document.querySelector('.nav-item[onclick*="dashboard"]');
+    if (dashBtn) dashBtn.classList.add('active');
+
+    // 3) 필터 버튼 active
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+
+    // 4) lesson-row 표시/숨김
+    document.querySelectorAll('.lesson-row').forEach(function(row) {
       row.style.display = (unit === 'all' || row.dataset.unit === unit) ? 'flex' : 'none';
     });
+
+    // 5) 소단원 목록 섹션으로 스크롤
+    setTimeout(function(){
+      var el = document.querySelector('.unit-filter');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
   }
 
   // Quiz
