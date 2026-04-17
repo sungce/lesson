@@ -364,8 +364,7 @@ table{width:100%;border-collapse:collapse}
       body: JSON.stringify(payload)
     }).catch(function(){});
   }
-
-tR = 135; window._tInit = 135;
+var tR = 135; window._tInit = 135;
 
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
 function toggleSec(id){var e=document.getElementById(id);if(e)e.classList.toggle('collapsed');}
@@ -384,7 +383,7 @@ function saveSC(key){
     postToSheets({type:'sc',userName:getUserName(),lessonKey:'l35',lessonName:'l35',answers:d});
     toast('자기평가가 저장되었습니다 ✓');
   }catch(e){}
-};document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});try{localStorage.setItem(key,JSON.stringify(d));toast('자기평가가 저장되었습니다 ✓');}catch(e){toast('저장 실패');}}
+}
 function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
 function markDone(n){
   try{
