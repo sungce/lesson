@@ -311,11 +311,7 @@ table{width:100%;border-collapse:collapse}
       <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
       <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
     </div></div>
-    <div class="ap">
-      <h5>수업 타이머</h5>
-      <span class="td-num" id="tnum">00:45</span>
-      <div class="td-lbl">1차시 (45분)</div>
-      <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div>
+<div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺ 초기화</button></div>
     </div>
     <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">알고리즘 분석</span><span class="tdef">효율성 비교</span></div><div class="tterm"><span class="tw">문제 나누기</span><span class="tdef">분할 정복</span></div><div class="tterm"><span class="tw">시행착오</span><span class="tdef">모든 경우 시도</span></div><div class="tterm"><span class="tw">되추적</span><span class="tdef">역방향 탐색</span></div><div class="tterm"><span class="tw">최선 선택</span><span class="tdef">탐욕 알고리즘</span></div><div class="tterm"><span class="tw">효율성</span><span class="tdef">시간·자원 최소화</span></div></div></div>
     <div class="ap" style="background:var(--ult);border-color:var(--umd)">
@@ -349,26 +345,11 @@ table{width:100%;border-collapse:collapse}
       body: JSON.stringify(payload)
     }).catch(function(){});
   }
-var tR = 45; window._tInit = 45;
 
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
 function toggleSec(id){var e=document.getElementById(id);if(e)e.classList.toggle('collapsed');}
 function goTo(id){var e=document.getElementById(id);if(!e)return;window.scrollTo({top:e.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});}
 var tR,tRun=false,tIv=null;
-function pad(n){return n<10?'0'+n:''+n;}
-function renderT(){var e=document.getElementById('tnum');if(!e)return;e.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);e.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
-function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
-function resetTimer(){clearInterval(tIv);tRun=false;if(window._tInit)tR=window._tInit;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
-function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');o.style.pointerEvents='none';});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
-function saveSC(key){
-  var d={};
-  document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});
-  try{
-    localStorage.setItem(key,JSON.stringify(d));
-    postToSheets({type:'sc',userName:getUserName(),lessonKey:'l34',lessonName:'l34',answers:d});
-    toast('자기평가가 저장되었습니다 ✓');
-  }catch(e){}
-}
 function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
 function markDone(n){
   try{
@@ -402,6 +383,6 @@ function checkStrategy(){
 }
 function resetStrategy(){for(var k in stAnswers){document.getElementById(k).value='';}document.getElementById('strategy-result').style.display='none';}
 
-document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l304sc');});
+document.addEventListener('DOMContentLoaded',function(){loadSC('l304sc');});
 </script>
 </body></html>
