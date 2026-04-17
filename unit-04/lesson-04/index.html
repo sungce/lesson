@@ -283,10 +283,6 @@ table{width:100%;border-collapse:collapse}
       <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
       <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
     </div></div>
-    <div class="ap"><h5>수업 타이머</h5>
-      <span class="td-num" id="tnum">02:15</span>
-      <div class="td-lbl">3차시 (135분)</div>
-      <div class="trow"><button class="btn bsm" id="tbtn" onclick="toggleTimer()">▶ 시작</button><button class="btn bsm" onclick="resetTimer()">↺</button></div>
     </div>
     <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">소리 분류</span><span class="tdef">소리→클래스 예측</span></div><div class="tterm"><span class="tw">음성 인식</span><span class="tdef">소리 데이터 학습</span></div><div class="tterm"><span class="tw">4가지 클래스</span><span class="tdef">웃음·화남·울음·소음</span></div><div class="tterm"><span class="tw">웃음 카운터</span><span class="tdef">감지→변수 증가</span></div><div class="tterm"><span class="tw">티처블 머신</span><span class="tdef">소리 학습 도구</span></div></div></div>
     <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
@@ -319,26 +315,11 @@ table{width:100%;border-collapse:collapse}
       body: JSON.stringify(payload)
     }).catch(function(){});
   }
-var tR = 135;window._tInit=135;
 
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},2400);}
 function toggleSec(id){var e=document.getElementById(id);if(e)e.classList.toggle('collapsed');}
 function goTo(id){var e=document.getElementById(id);if(!e)return;window.scrollTo({top:e.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});}
 var tR,tRun=false,tIv=null;
-function pad(n){return n<10?'0'+n:''+n;}
-function renderT(){var e=document.getElementById('tnum');if(!e)return;e.textContent=pad(Math.floor(tR/60))+':'+pad(tR%60);e.style.color=tR<300?'#8C1E0E':tR<600?'#7A4E0A':'';}
-function toggleTimer(){var b=document.getElementById('tbtn');if(tRun){clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';}else{tRun=true;if(b)b.textContent='⏸ 일시정지';tIv=setInterval(function(){if(tR>0){tR--;renderT();}else{clearInterval(tIv);tRun=false;if(b)b.textContent='▶ 시작';toast('⏰ 수업 시간이 종료되었습니다!');}},1000);}}
-function resetTimer(){clearInterval(tIv);tRun=false;if(window._tInit)tR=window._tInit;var b=document.getElementById('tbtn');if(b)b.textContent='▶ 시작';renderT();}
-function checkQ(el,ok,msg){el.closest('.qopts').querySelectorAll('.opt').forEach(function(o){o.classList.add('locked');});el.classList.add(ok?'correct':'wrong');var fb=el.closest('.qwrap').querySelector('.qfb');if(fb){fb.className='qfb '+(ok?'ok':'err');fb.innerHTML=(ok?'✓ 정답: ':'✗ 힌트: ')+msg;}}
-function saveSC(key){
-  var d={};
-  document.querySelectorAll('.scitem select').forEach(function(s,i){d['q'+i]=s.value;});
-  try{
-    localStorage.setItem(key,JSON.stringify(d));
-    postToSheets({type:'sc',userName:getUserName(),lessonKey:'l44',lessonName:'l44',answers:d});
-    toast('자기평가가 저장되었습니다 ✓');
-  }catch(e){}
-}
 function loadSC(key){try{var d=JSON.parse(localStorage.getItem(key)||'{}');document.querySelectorAll('.scitem select').forEach(function(s,i){if(d['q'+i])s.value=d['q'+i];});}catch(e){}}
 function markDone(n){
   try{
@@ -375,6 +356,6 @@ var laughCount=0;
 function addLaugh(){laughCount++;document.getElementById('laugh-num').textContent=laughCount;toast('😄 웃음 '+laughCount+'회 감지!');}
 function resetLaugh(){laughCount=0;document.getElementById('laugh-num').textContent=0;document.getElementById('laugh-num').style.color='var(--u)';}
 
-document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l404sc');});
+document.addEventListener('DOMContentLoaded',function(){loadSC('l404sc');});
 </script>
 </body></html>
