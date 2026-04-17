@@ -2091,18 +2091,31 @@
     {key:'l403',unit:'IV', icon:'💪', title:'IV-3. 팔 이미지를 이용한 운동 도우미'},
     {key:'l404',unit:'IV', icon:'😄', title:'IV-4. 소리 데이터를 이용한 웃음 계수 시스템'},
     {key:'l405',unit:'IV', icon:'📝', title:'IV-5. 텍스트 데이터를 이용한 영화 평가 시스템'},
-    {key:'l406',unit:'IV', icon:'⚖️', title:'IV-6. 인공지능의 윤리적 문제 해결'}
+    {key:'l406',unit:'IV', icon:'⚖️', title:'IV-6. 인공지능의 윤리적 문제 해결'},
+    {key:'l501',unit:'V',  icon:'🌐', title:'V-1. 디지털 사회와 정보 윤리'},
+    {key:'l502',unit:'V',  icon:'🔐', title:'V-2. 개인 정보 보호와 사이버 보안'},
+    {key:'l503',unit:'V',  icon:'©️', title:'V-3. 저작권과 디지털 창작물'},
+    {key:'l504',unit:'V',  icon:'🛡️', title:'V-4. 사이버 폭력 예방과 대처'},
+    {key:'l505',unit:'V',  icon:'📰', title:'V-5. 미디어 리터러시와 정보 신뢰성'},
+    {key:'l506',unit:'V',  icon:'🤖', title:'V-6. AI와 디지털 문화의 미래'},
   ];
 
-  var UNIT_BG  = {I:'var(--unit-1-light)',II:'#e8f5e9',III:'var(--unit-3-light)',IV:'var(--unit-4-light)'};
-  var UNIT_COL = {I:'var(--unit-1)',II:'var(--unit-2)',III:'var(--unit-3)',IV:'var(--unit-4)'};
-  var UNIT_NAME = {I:'컴퓨팅 시스템',II:'데이터',III:'알고리즘·프로그래밍',IV:'인공지능'};
+  var UNIT_BG  = {I:'var(--unit-1-light)',II:'#e8f5e9',III:'var(--unit-3-light)',IV:'var(--unit-4-light)',V:'var(--unit-5-light)'};
+  var UNIT_COL = {I:'var(--unit-1)',II:'var(--unit-2)',III:'var(--unit-3)',IV:'var(--unit-4)',V:'var(--unit-5)'};
+  var UNIT_NAME = {I:'컴퓨팅 시스템',II:'데이터',III:'알고리즘·프로그래밍',IV:'인공지능',V:'디지털 문화'};
 
   // ── 프로필 초기화 ──────────────────────────
   function initProfile() {
     var name = localStorage.getItem('user_name');
+    // Google Client ID 미설정 안내
+    var notice = document.getElementById('google-setup-notice');
+    var clientId = (document.getElementById('g_id_onload') || {}).getAttribute
+                 ? document.getElementById('g_id_onload').getAttribute('data-client_id')
+                 : '';
+    if (notice && (!clientId || clientId === 'YOUR_GOOGLE_CLIENT_ID')) {
+      notice.style.display = 'block';
+    }
     if (!name || name === '') {
-      // 저장된 이름 없음 → 모달 표시
       showLoginModal();
     } else {
       applyProfile(name);
@@ -2191,7 +2204,7 @@
     });
     // 완료 표시
     var done = [];
-    ['01','02','03','04'].forEach(function(n) {
+    ['01','02','03','04','05'].forEach(function(n) {
       try {
         var arr = JSON.parse(localStorage.getItem('u' + n + 'done') || '[]');
         arr.forEach(function(num) { done.push({ u:n, num:num }); });
@@ -2295,24 +2308,24 @@
 </script>
 
 <!-- 로그인 모달 -->
-<div class="login-overlay" id="login-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center">
+<div class="login-overlay" id="login-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center">
   <div class="login-modal">
-    <div class="lm-logo">
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect width="48" height="48" rx="12" fill="#4285F4"/>
-        <text x="50%" y="54%" font-size="22" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="middle" font-family="serif">情</text>
+    <div class="lm-logo" style="display:flex;justify-content:center;margin-bottom:16px">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+        <rect width="52" height="52" rx="13" fill="#4285F4"/>
+        <text x="50%" y="54%" font-size="24" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="middle" font-family="serif">情</text>
       </svg>
     </div>
-    <h2>정보 교과 학습 플랫폼</h2>
-    <p>2022 개정 교육과정 · 중학교 1학년</p>
+    <h2 style="font-size:18px;font-weight:700;color:#1a1a2e;margin-bottom:4px;text-align:center">정보 교과 학습 플랫폼</h2>
+    <p style="font-size:12px;color:#9ca3af;margin-bottom:22px;text-align:center">2022 개정 교육과정 · 중학교 1학년</p>
 
-    <!-- Google One Tap / Sign-In Button -->
-    <div id="google-btn-wrap">
-      <div id="g_id_onload"
-           data-client_id="YOUR_GOOGLE_CLIENT_ID"
-           data-callback="handleGoogleLogin"
-           data-auto_prompt="false">
-      </div>
+    <!-- Google 로그인 버튼 -->
+    <div id="g_id_onload"
+         data-client_id="YOUR_GOOGLE_CLIENT_ID"
+         data-callback="handleGoogleLogin"
+         data-auto_prompt="false">
+    </div>
+    <div style="display:flex;justify-content:center;margin-bottom:6px;min-height:44px">
       <div class="g_id_signin"
            data-type="standard"
            data-size="large"
@@ -2324,12 +2337,26 @@
       </div>
     </div>
 
-    <div class="lm-divider"><span>또는</span></div>
+    <!-- Google Client ID 미설정 시 안내 -->
+    <div id="google-setup-notice" style="display:none;background:#FFF3CD;border:1px solid #F0AD00;border-radius:8px;padding:10px 12px;font-size:11px;color:#7A4E0A;margin-bottom:10px;line-height:1.6">
+      ⚙️ Google Client ID가 설정되지 않았습니다.<br>
+      Google Cloud Console에서 OAuth 2.0 ID를 발급 후<br>
+      <code style="background:#fff;padding:1px 5px;border-radius:3px">data-client_id</code> 값을 교체하면 구글 로그인이 활성화됩니다.
+    </div>
 
-    <input type="text" id="login-input" placeholder="이름(닉네임) 직접 입력" maxlength="20"
+    <div class="lm-divider" style="display:flex;align-items:center;gap:10px;margin:14px 0;color:#d1d5db;font-size:12px">
+      <span style="flex:1;height:1px;background:#e5e7eb;display:block"></span>
+      <span>또는 이름 직접 입력</span>
+      <span style="flex:1;height:1px;background:#e5e7eb;display:block"></span>
+    </div>
+
+    <input type="text" id="login-input" placeholder="이름 또는 닉네임 입력 (예: 홍길동)" maxlength="20"
+           style="width:100%;padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:14px;font-family:inherit;outline:none;margin-bottom:10px;box-sizing:border-box"
            onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="lm-btn" onclick="doLogin()">시작하기 →</button>
-    <div class="lm-skip" onclick="skipLogin()">나중에 할게요</div>
+    <button class="lm-btn" onclick="doLogin()" style="width:100%;padding:12px;background:#4285F4;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
+      학습 시작하기 →
+    </button>
+    <div class="lm-skip" onclick="skipLogin()" style="font-size:11px;color:#9ca3af;margin-top:12px;text-align:center;cursor:pointer">나중에 할게요</div>
   </div>
 </div>
 
