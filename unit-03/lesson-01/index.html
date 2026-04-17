@@ -233,22 +233,29 @@ table{width:100%;border-collapse:collapse}
       <b>📋 조건:</b> 배에는 농부 외에 한 가지만 탈 수 있다. 양배추와 염소만 남으면 염소가 먹고, 늑대와 염소만 남으면 늑대가 잡아먹는다.
     </div>
     <div id="river-game" style="margin-bottom:14px">
-      <div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:10px;margin-bottom:12px">
-        <div style="background:#E4F0FA;border:1px solid #0A4E8C;border-radius:var(--rSM);padding:12px;min-height:100px">
+      <div style="display:grid;grid-template-columns:1fr 72px 1fr;gap:10px;margin-bottom:12px">
+
+        <!-- 왼쪽 강둑 -->
+        <div style="background:#E4F0FA;border:1.5px solid #0A4E8C;border-radius:var(--rSM);padding:12px;min-height:110px">
           <div style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">🌊 출발 (왼쪽)</div>
           <div id="left-bank" style="display:flex;flex-wrap:wrap;gap:5px"></div>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">
-          <div style="font-size:18px">🚣</div>
-          <div id="boat-area" style="font-size:11px;color:var(--mt);text-align:center;min-height:20px"></div>
-          <button class="btn bsm bp" onclick="crossRiver()" style="font-size:10px;padding:4px 8px">건너기</button>
+
+        <!-- 가운데 강/배 -->
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+          <div style="font-size:20px">🚣</div>
+          <div id="boat-area" style="font-size:12px;color:var(--mt);text-align:center;min-height:22px;line-height:1.4"></div>
+          <button class="btn bsm bp" id="cross-btn" onclick="crossRiver()" style="font-size:10px;padding:4px 8px;white-space:nowrap">건너기 →</button>
         </div>
-        <div style="background:#E8F3DC;border:1px solid #2A720E;border-radius:var(--rSM);padding:12px;min-height:100px">
+
+        <!-- 오른쪽 강둑 -->
+        <div style="background:#E8F3DC;border:1.5px solid #2A720E;border-radius:var(--rSM);padding:12px;min-height:110px">
           <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">✅ 도착 (오른쪽)</div>
           <div id="right-bank" style="display:flex;flex-wrap:wrap;gap:5px"></div>
         </div>
       </div>
-      <div id="river-msg" style="font-size:12px;padding:9px 12px;background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);color:var(--mt);margin-bottom:10px">농부와 함께 태울 것을 클릭하세요. (혼자 건너도 됩니다)</div>
+    </div>
+    <div id="river-msg" style="font-size:12px;padding:9px 12px;background:var(--bg);border:1px solid var(--br);border-radius:var(--rSM);color:var(--mt);margin-bottom:10px">왼쪽에서 함께 데려갈 것을 클릭하세요. (혼자 건너도 됩니다)</div>
       <div style="display:flex;gap:7px">
         <button class="btn bsm bp" onclick="resetRiver()">↺ 다시 시작</button>
       </div>
@@ -388,80 +395,145 @@ function markDone(n){
 }
 
 
-var leftItems = ['👨‍🌾농부','🐺늑대','🐐염소','🥬양배추'];
-var rightItems = [];
-var boatItem = null;
-var farmerSide = 'left';
+// ── 강 건너기 시뮬레이터 ──────────────────────────
+var ITEMS = ['🐺늑대','🐐염소','🥬양배추'];
+var rv = {
+  left: ['👨\u200d🌾농부','🐺늑대','🐐염소','🥬양배추'],
+  right: [],
+  farmer: 'left',   // 'left' | 'right'
+  carry: null       // 배에 실은 아이템 (null = 혼자)
+};
 
-function renderRiver(){
-  var lDiv=document.getElementById('left-bank');
-  var rDiv=document.getElementById('right-bank');
-  var bDiv=document.getElementById('boat-area');
-  if(!lDiv)return;
-  lDiv.innerHTML='';
-  leftItems.forEach(function(it){
-    if(it!=='👨‍🌾농부'||farmerSide==='left'){
-      var d=document.createElement('div');
-      d.style.cssText='padding:5px 9px;background:var(--sf);border:1.5px solid var(--br);border-radius:20px;font-size:11px;cursor:pointer;transition:all .12s';
-      d.textContent=it;
-      d.onmouseover=function(){d.style.borderColor='var(--u)';};
-      d.onmouseout=function(){d.style.borderColor=boatItem===it?'#4A9020':'var(--br)';};
-      d.onclick=function(){selectBoat(it);};
-      if(boatItem===it)d.style.cssText='padding:5px 9px;background:var(--gbg);border:1.5px solid #4A9020;border-radius:20px;font-size:11px;cursor:pointer';
-      lDiv.appendChild(d);
-    }
+function rvHas(bank, item){ return rv[bank].indexOf(item) !== -1; }
+
+function rvRender(){
+  var lDiv = document.getElementById('left-bank');
+  var rDiv = document.getElementById('right-bank');
+  var bDiv = document.getElementById('boat-area');
+  var btn  = document.getElementById('cross-btn');
+  if(!lDiv) return;
+
+  // 왼쪽 강둑
+  lDiv.innerHTML = '';
+  rv.left.forEach(function(it){
+    var d = document.createElement('div');
+    var isFarmer = (it === '👨\u200d🌾농부');
+    var isSelected = (rv.carry === it);
+    var canClick = !isFarmer && (rv.farmer === 'left');
+    d.style.cssText = 'padding:5px 10px;border-radius:20px;font-size:12px;transition:all .12s;user-select:none;' +
+      (isFarmer ? 'background:#FFF3CD;border:1.5px solid #F0AD00;cursor:default;' :
+       isSelected ? 'background:var(--gbg);border:1.5px solid #4A9020;cursor:pointer;' :
+       canClick ? 'background:var(--sf);border:1.5px solid var(--br);cursor:pointer;' :
+                  'background:var(--sf);border:1.5px solid var(--br);opacity:.5;cursor:default;');
+    d.textContent = it + (isSelected ? ' ✓' : '');
+    if(canClick){ d.onclick = function(){ rvSelect(it); }; }
+    lDiv.appendChild(d);
   });
-  rDiv.innerHTML='';
-  rightItems.forEach(function(it){
-    var d=document.createElement('div');
-    d.style.cssText='padding:5px 9px;background:#E8F3DC;border:1.5px solid #4A9020;border-radius:20px;font-size:11px';
-    d.textContent=it;rDiv.appendChild(d);
+
+  // 오른쪽 강둑
+  rDiv.innerHTML = '';
+  rv.right.forEach(function(it){
+    var d = document.createElement('div');
+    var isFarmer = (it === '👨\u200d🌾농부');
+    var isSelected = (rv.carry === it);
+    var canClick = !isFarmer && (rv.farmer === 'right');
+    d.style.cssText = 'padding:5px 10px;border-radius:20px;font-size:12px;transition:all .12s;user-select:none;' +
+      (isFarmer ? 'background:#FFF3CD;border:1.5px solid #F0AD00;cursor:default;' :
+       isSelected ? 'background:var(--gbg);border:1.5px solid #4A9020;cursor:pointer;' :
+       canClick ? 'background:#E8F3DC;border:1.5px solid #4A9020;cursor:pointer;' :
+                  'background:#E8F3DC;border:1.5px solid #4A9020;opacity:.5;cursor:default;');
+    d.textContent = it + (isSelected ? ' ✓' : '');
+    if(canClick){ d.onclick = function(){ rvSelect(it); }; }
+    rDiv.appendChild(d);
   });
-  bDiv.innerHTML=boatItem?('<div style="font-size:11px;text-align:center">'+boatItem+'</div>'):'';
+
+  // 배
+  bDiv.innerHTML = rv.carry
+    ? '<div style="background:var(--sf);border:1px solid var(--br);border-radius:12px;padding:3px 8px;font-size:11px;">'+rv.carry+'</div>'
+    : '';
+
+  // 버튼 텍스트
+  if(btn) btn.textContent = (rv.farmer === 'left') ? '건너기 →' : '← 돌아오기';
 }
-function selectBoat(it){
-  if(farmerSide==='right')return;
-  if(it==='👨‍🌾농부')return;
-  boatItem=boatItem===it?null:it;
-  renderRiver();
+
+function rvSelect(it){
+  // 현재 농부 쪽에서만 선택 가능
+  var bank = rv.farmer;
+  if(!rvHas(bank, it)) return;
+  rv.carry = (rv.carry === it) ? null : it;
+  rvRender();
 }
+
 function crossRiver(){
-  var msg=document.getElementById('river-msg');
-  if(farmerSide==='right'){msg.textContent='농부가 이미 건너편에 있습니다.';return;}
-  // 이동
-  if(boatItem){
-    leftItems=leftItems.filter(function(x){return x!==boatItem;});
-    rightItems.push(boatItem);
+  var msg = document.getElementById('river-msg');
+  var from = rv.farmer;
+  var to   = (from === 'left') ? 'right' : 'left';
+
+  // 농부 이동
+  rv[from] = rv[from].filter(function(x){ return x !== '👨\u200d🌾농부'; });
+  rv[to].push('👨\u200d🌾농부');
+  rv.farmer = to;
+
+  // 아이템 이동
+  if(rv.carry){
+    rv[from] = rv[from].filter(function(x){ return x !== rv.carry; });
+    rv[to].push(rv.carry);
+    rv.carry = null;
   }
-  leftItems=leftItems.filter(function(x){return x!=='👨‍🌾농부';});
-  rightItems.push('👨‍🌾농부');
-  farmerSide='right';
-  boatItem=null;
-  // 유효성 검사
-  var leftHas=function(a){return leftItems.indexOf(a)!==-1;};
-  if(leftHas('🐺늑대')&&leftHas('🐐염소')){msg.style.cssText='font-size:12px;padding:9px 12px;background:var(--rbg);border:1px solid #F0B8A0;border-radius:8px;color:var(--red)';msg.textContent='❌ 실패! 농부가 없는 사이 늑대가 염소를 잡아먹었습니다! 다시 시작하세요.';setTimeout(resetRiver,2000);renderRiver();return;}
-  if(leftHas('🐐염소')&&leftHas('🥬양배추')){msg.style.cssText='font-size:12px;padding:9px 12px;background:var(--rbg);border:1px solid #F0B8A0;border-radius:8px;color:var(--red)';msg.textContent='❌ 실패! 염소가 양배추를 먹었습니다! 다시 시작하세요.';setTimeout(resetRiver,2000);renderRiver();return;}
-  if(rightItems.length===4){msg.style.cssText='font-size:12px;padding:9px 12px;background:var(--gbg);border:1px solid #BFDFAA;border-radius:8px;color:var(--green)';msg.textContent='🎉 성공! 모두 안전하게 건너편에 도착했습니다!';renderRiver();return;}
-  msg.style.cssText='font-size:12px;padding:9px 12px;background:var(--bg);border:1px solid var(--br);border-radius:8px;color:var(--mt)';
-  msg.textContent='건너편에서 다시 데려올 항목을 선택하거나, 혼자 돌아오려면 건너기를 누르세요. (현재: 오른쪽에 '+rightItems.join('·')+')';
-  // 농부 왼쪽으로 자동 돌아가기 옵션 제공
-  renderRiver();
-  // 돌아오기 버튼 활성화
-  var crossBtn=document.querySelector('[onclick="crossRiver()"]');
-  if(crossBtn)crossBtn.textContent='← 돌아오기';
-  window._goingBack=true;
+
+  // 위험 체크 — 농부가 떠난 쪽(from)
+  var wolf   = rvHas(from,'🐺늑대');
+  var goat   = rvHas(from,'🐐염소');
+  var cab    = rvHas(from,'🥬양배추');
+
+  if(wolf && goat){
+    setMsg(msg, 'fail', '❌ 실패! 늑대와 염소가 남겨져 염소가 잡아먹혔습니다. 2초 후 리셋...');
+    rvRender(); setTimeout(resetRiver, 2000); return;
+  }
+  if(goat && cab){
+    setMsg(msg, 'fail', '❌ 실패! 염소와 양배추가 남겨져 양배추가 먹혔습니다. 2초 후 리셋...');
+    rvRender(); setTimeout(resetRiver, 2000); return;
+  }
+
+  // 클리어 체크 — 오른쪽에 4개 모두
+  if(rv.right.length === 4){
+    setMsg(msg, 'win', '🎉 성공! 모두 안전하게 건너편에 도착했습니다! 총 이동 횟수: '+rv.steps+'회');
+    rvRender(); return;
+  }
+
+  rv.steps = (rv.steps||0) + 1;
+  setMsg(msg, 'info',
+    (rv.farmer === 'right'
+      ? '오른쪽에서 데려올 것을 고르거나 혼자 돌아오세요. (현재 오른쪽: '+rv.right.filter(function(x){return x!=='👨\u200d🌾농부';}).join(' ')+' )'
+      : '왼쪽에서 함께 데려갈 것을 클릭하세요. (현재 왼쪽: '+rv.left.filter(function(x){return x!=='👨\u200d🌾농부';}).join(' ')+' )')
+  );
+  rvRender();
 }
+
+function setMsg(el, type, text){
+  var styles = {
+    fail: 'background:var(--rbg);border:1px solid #F0B8A0;color:var(--red)',
+    win:  'background:var(--gbg);border:1px solid #BFDFAA;color:var(--green)',
+    info: 'background:var(--bg);border:1px solid var(--br);color:var(--mt)'
+  };
+  if(el){
+    el.style.cssText = 'font-size:12px;padding:9px 12px;border-radius:8px;' + (styles[type]||styles.info);
+    el.textContent = text;
+  }
+}
+
 function resetRiver(){
-  leftItems=['👨‍🌾농부','🐺늑대','🐐염소','🥬양배추'];
-  rightItems=[];boatItem=null;farmerSide='left';
-  window._goingBack=false;
-  var crossBtn=document.querySelector('[onclick="crossRiver()"]');
-  if(crossBtn)crossBtn.textContent='건너기';
-  var msg=document.getElementById('river-msg');
-  if(msg){msg.style.cssText='font-size:12px;padding:9px 12px;background:var(--bg);border:1px solid var(--br);border-radius:8px;color:var(--mt)';msg.textContent='농부와 함께 태울 것을 클릭하세요. (혼자 건너도 됩니다)';}
-  renderRiver();
+  rv.left   = ['👨\u200d🌾농부','🐺늑대','🐐염소','🥬양배추'];
+  rv.right  = [];
+  rv.farmer = 'left';
+  rv.carry  = null;
+  rv.steps  = 0;
+  var msg = document.getElementById('river-msg');
+  setMsg(msg, 'info', '왼쪽에서 함께 데려갈 것을 클릭하세요. (혼자 건너도 됩니다)');
+  rvRender();
 }
-document.addEventListener('DOMContentLoaded',function(){renderRiver();});
+
+document.addEventListener('DOMContentLoaded',function(){rvRender();renderT();loadSC('l301sc');});
 
 document.addEventListener('DOMContentLoaded',function(){renderT();loadSC('l301sc');});
 </script>
