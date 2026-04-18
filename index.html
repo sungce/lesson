@@ -1169,7 +1169,7 @@
     <div class="units-grid">
 
       <!-- I. 컴퓨팅 시스템 -->
-      <a class="unit-overview-card" href="unit-01/index.html" style="text-decoration:none;display:block;cursor:pointer;position:relative;overflow:hidden;">
+      <a class="unit-overview-card" href="unit-01/index.html" onclick="filterLessons(null,'I'); return false;" style="text-decoration:none;display:block;cursor:pointer;position:relative;overflow:hidden;">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-1)"></div>
         <div class="unit-roman" style="color:var(--unit-1)">I</div>
         <h4>컴퓨팅 시스템</h4>
@@ -1187,7 +1187,7 @@
       </a>
 
       <!-- II. 데이터 -->
-      <a class="unit-overview-card" href="unit-02/index.html" style="text-decoration:none;display:block;cursor:pointer;position:relative;overflow:hidden;">
+      <a class="unit-overview-card" href="unit-02/index.html" onclick="filterLessons(null,'II'); return false;" style="text-decoration:none;display:block;cursor:pointer;position:relative;overflow:hidden;">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-2)"></div>
         <div class="unit-roman" style="color:var(--unit-2)">II</div>
         <h4>데이터</h4>
@@ -1205,7 +1205,7 @@
       </a>
 
       <!-- III. 알고리즘과 프로그래밍 -->
-      <a class="unit-overview-card" href="unit-03/index.html" style="border-color:#F0997B;text-decoration:none;display:block;cursor:pointer;position:relative;overflow:hidden;">
+      <a class="unit-overview-card" href="unit-03/index.html" onclick="filterLessons(null,'III'); return false;" style="border-color:#F0997B;text-decoration:none;display:block;cursor:pointer;position:relative;overflow:hidden;">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-3)"></div>
         <div class="unit-roman" style="color:var(--unit-3)">III</div>
         <h4>알고리즘과 프로그래밍</h4>
@@ -1223,7 +1223,7 @@
       </a>
 
       <!-- IV. 인공지능 -->
-      <a class="unit-overview-card" href="unit-04/index.html" style="text-decoration:none;display:block;cursor:pointer;position:relative;overflow:hidden;">
+      <a class="unit-overview-card" href="unit-04/index.html" onclick="filterLessons(null,'IV'); return false;" style="text-decoration:none;display:block;cursor:pointer;position:relative;overflow:hidden;">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-4)"></div>
         <div class="unit-roman" style="color:var(--unit-4)">IV</div>
         <h4>인공지능</h4>
@@ -1241,7 +1241,7 @@
       </a>
 
       <!-- V. 디지털 문화 -->
-      <a href="unit-05/index.html" class="unit-overview-card" style="text-decoration:none;color:inherit;position:relative;overflow:hidden;">
+      <a href="unit-05/index.html" onclick="filterLessons(null,'V'); return false;" class="unit-overview-card" style="text-decoration:none;color:inherit;position:relative;overflow:hidden;">
         <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--unit-5)"></div>
         <div class="unit-roman" style="color:var(--unit-5)">V</div>
         <h4>디지털 문화</h4>
@@ -1930,7 +1930,6 @@
     if (btn && btn.classList && btn.classList.contains('filter-btn')) {
       btn.classList.add('active');
     } else {
-      // unit 값으로 해당 filter-btn 찾아 active
       document.querySelectorAll('.filter-btn').forEach(function(b) {
         var label = b.textContent.trim();
         if ((unit === 'all' && label === '전체') || label === unit) {
@@ -1940,15 +1939,24 @@
     }
 
     // 3) lesson-row 표시/숨김
+    var visibleCount = 0;
     document.querySelectorAll('.lesson-row').forEach(function(row) {
-      row.style.display = (unit === 'all' || row.dataset.unit === unit) ? 'flex' : 'none';
+      var show = (unit === 'all' || row.dataset.unit === unit);
+      row.style.display = show ? 'flex' : 'none';
+      if (show) visibleCount++;
     });
 
-    // 4) 소단원 목록 섹션으로 스크롤
-    setTimeout(function() {
-      var el = document.querySelector('.unit-filter');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    // 4) lessons-list 헤더 업데이트
+    var header = document.querySelector('.lessons-list-header');
+    if (header) {
+      header.innerHTML = '<span>📚</span> ' + (unit === 'all' ? '학습 목록 전체' : unit + '단원 소단원') + ' (' + visibleCount + '개)';
+    }
+
+    // 5) 소단원 목록으로 스크롤
+    var el = document.querySelector('.lessons-list');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   // Quiz
