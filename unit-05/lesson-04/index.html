@@ -57,6 +57,28 @@ table{width:100%}.act-table,.peer-check,.rub{table-layout:fixed;word-break:break
 @media(max-width:900px){.ca{display:none}.page{padding:16px 14px}}
 @media(max-width:640px){.page{padding:11px 10px}.act-step{flex-direction:column;gap:5px}.act-num{margin-bottom:0}}
 @media(max-width:480px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.topbar{padding:0 10px}.page{padding:8px 9px}}
+
+/* ── 사이드바 (ca) ── */
+.g2{display:grid;grid-template-columns:1fr minmax(0,248px);gap:16px;align-items:start}
+.cm{min-width:0}
+.ca{position:sticky;top:calc(var(--TH)+12px);display:flex;flex-direction:column;gap:10px}
+.ap{background:var(--sf);border:1px solid var(--br);border-radius:var(--rLG);padding:12px 14px}
+.ap h5{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--lt);margin-bottom:8px}
+.slist{display:flex;flex-direction:column;gap:2px}
+.si{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--rSM);font-size:11px;color:var(--mt);cursor:pointer;transition:background .12s}
+.si:hover{background:var(--bg)}
+.dot{width:19px;height:19px;border-radius:50%;background:var(--br);color:var(--lt);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dot.sd{background:var(--gbg);color:var(--green)}
+.dot.sa{background:var(--u);color:#fff}
+.termlist{display:flex;flex-direction:column}
+.tterm{display:flex;align-items:baseline;gap:6px;padding:4px 0;border-bottom:1px solid var(--br);font-size:11px}
+.tterm:last-child{border-bottom:none}
+.tw{font-weight:700;color:var(--u);white-space:nowrap}
+.tdef{color:var(--mt);font-size:10px}
+.pbtrack{height:5px;background:var(--br);border-radius:4px;overflow:hidden}
+.pbfill{height:100%;background:var(--u);border-radius:4px}
+@media(max-width:900px){.g2{grid-template-columns:1fr}.ca{display:none}}
+@media(max-width:640px){.page{padding:11px 10px}}
 </style>
 </head>
 <body>
@@ -74,7 +96,7 @@ table{width:100%}.act-table,.peer-check,.rub{table-layout:fixed;word-break:break
   </div>
 </header>
 <div id="toast"></div>
-<div class="page">
+<div class="page"><div class="g2"><div class="cm">
 
 <div class="cb">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
@@ -128,7 +150,27 @@ table{width:100%}.act-table,.peer-check,.rub{table-layout:fixed;word-break:break
   </div>
   <div class="act-row" style="margin-top:10px"><button class="btn bsm bp" onclick="saveSC('l504sc')">자기평가 저장</button></div>
 </div>
-</div>
+</div>  <!-- cm -->
+<div class="ca">
+    <div class="ap"><h5>학습 진행</h5><div class="slist">
+      <div class="si" onclick="goTo('sec-goal')"><div class="dot sd">1</div>학습목표</div>
+      <div class="si" onclick="goTo('sec-concept')"><div class="dot">2</div>개념설명</div>
+      <div class="si" onclick="goTo('sec-activity')"><div class="dot sa">★</div>수행 활동</div>
+      <div class="si" onclick="goTo('sec-assess')"><div class="dot">4</div>수행평가</div>
+      <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
+    </div></div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">사이버 불링</span><span class="tdef">온라인 집단 괴롭힘</span></div><div class="tterm"><span class="tw">악성 댓글</span><span class="tdef">비방·혐오 표현</span></div><div class="tterm"><span class="tw">방관자</span><span class="tdef">침묵하는 목격자</span></div><div class="tterm"><span class="tw">디지털 에티켓</span><span class="tdef">온라인 예절 규범</span></div><div class="tterm"><span class="tw">신고</span><span class="tdef">피해 알리기</span></div></div></div>
+    <div class="ap" style="background:var(--ult);border-color:var(--umd)"><h5 style="color:var(--u)">단원 진도</h5>
+      <div style="display:flex;align-items:center;gap:7px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:67%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">4/6</span></div>
+    </div>
+    <div class="ap" style="background:#F3E8FA;border-color:#D0A8E8">
+      <h5 style="color:#7B3FA0">🌐 디지털 문화 자료</h5>
+      <a href="https://www.cyber112.or.kr" target="_blank" class="btn bsm" style="width:100%;justify-content:center;margin-bottom:5px;font-size:10px">사이버범죄 신고 ↗</a>
+      <a href="https://www.koreacopyright.or.kr" target="_blank" class="btn bsm" style="width:100%;justify-content:center;font-size:10px;color:var(--mt)">저작권위원회 ↗</a>
+    </div>
+  </div>
+</div>  <!-- g2 -->
+</div>  <!-- page -->
 <script>
   var GS_URL='YOUR_APPS_SCRIPT_WEB_APP_URL';
   function getUserName(){return localStorage.getItem('user_name')||'익명';}
