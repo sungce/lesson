@@ -100,7 +100,7 @@ table{width:100%;border-collapse:collapse}
 
 /* 1100px 이하 */
 @media(max-width:1100px){
-  .g2{grid-template-columns:1fr}
+  .g2{grid-template-columns:1fr 220px}
   .ca{position:static}
   .crow{grid-template-columns:1fr}
   .sgrid{grid-template-columns:1fr 1fr}
@@ -108,7 +108,8 @@ table{width:100%;border-collapse:collapse}
 
 /* 900px 이하 */
 @media(max-width:900px){
-  .ca{display:none}
+  .g2{grid-template-columns:1fr 200px}
+  .ca{position:static}
   .page{padding:16px 14px}
   .cb,.act-body{padding:13px}
   .sgrid{grid-template-columns:1fr 1fr}
@@ -269,11 +270,11 @@ table{width:100%;border-collapse:collapse}
       <div class="si" onclick="goTo('sec-review')"><div class="dot">5</div>확인하기</div>
     </div></div>
     </div>
+    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">번역기</span><span class="tdef">리스트+반복+비교</span></div><div class="tterm"><span class="tw">전자투표</span><span class="tdef">리스트+변수+집계</span></div><div class="tterm"><span class="tw">통합 프로젝트</span><span class="tdef">모든 개념 활용</span></div><div class="tterm"><span class="tw">발표</span><span class="tdef">결과 소통·평가</span></div><div class="tterm"><span class="tw">학문 융합</span><span class="tdef">다양한 분야 적용</span></div></div></div>
     <div class="ap" style="background:var(--ult);border-color:var(--umd)">
       <h5 style="color:var(--u)">단원 진도</h5>
       <div style="display:flex;align-items:center;gap:7px;margin-bottom:3px"><div class="pbtrack" style="flex:1"><div class="pbfill" style="width:100%"></div></div><span style="font-size:11px;font-weight:600;color:var(--u)">10/10</span></div>
     </div>
-    <div class="ap"><h5>핵심 용어</h5><div class="termlist"><div class="tterm"><span class="tw">번역기</span><span class="tdef">리스트+반복+비교</span></div><div class="tterm"><span class="tw">전자투표</span><span class="tdef">리스트+변수+집계</span></div><div class="tterm"><span class="tw">통합 프로젝트</span><span class="tdef">모든 개념 활용</span></div><div class="tterm"><span class="tw">발표</span><span class="tdef">결과 소통·평가</span></div><div class="tterm"><span class="tw">학문 융합</span><span class="tdef">다양한 분야 적용</span></div></div></div>
     <div class="ap" style="background:#F0FDF4;border-color:#BBF7D0">
       <h5 style="color:#166534">🟢 엔트리 실습</h5>
       <a href="https://playentry.org" target="_blank" class="entry-link" style="width:100%;justify-content:center;margin-bottom:5px">엔트리 열기 ↗</a>
