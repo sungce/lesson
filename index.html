@@ -2104,11 +2104,14 @@
 
   // ── 프로필 초기화 ──────────────────────────
   function initProfile() {
-    var name = localStorage.getItem('user_name');
-    if (!name || name === '') {
-      showLoginModal();
+    var isGoogle = localStorage.getItem('user_google') === '1';
+    var hasName  = localStorage.getItem('user_name');
+    if (hasName && hasName.trim()) {
+      var picture = isGoogle ? (localStorage.getItem('user_picture') || '') : '';
+      applyProfile(hasName, picture);
+      closeLoginModal();
     } else {
-      applyProfile(name);
+      showLoginModal();
     }
     updateRecordCount();
   }
@@ -2163,6 +2166,17 @@
     if (el) el.textContent = name;
   }
 
+
+  function doLogin() {
+    var inp  = document.getElementById('login-input');
+    var name = inp ? inp.value.trim() : '';
+    if (!name) { if (inp) { inp.focus(); inp.style.borderColor='#EF4444'; } return; }
+    localStorage.setItem('user_name',   name);
+    localStorage.setItem('user_google', '0');
+    applyProfile(name, '');
+    closeLoginModal();
+    updateRecordCount();
+  }
   function closeLoginModal() {
     var ov = document.getElementById('login-overlay');
     if (!ov) return;
@@ -2295,27 +2309,25 @@
 
 </script>
 
-<!-- 로그인 모달 (Google 전용) -->
+<!-- 로그인 모달 -->
 <div class="login-overlay show" id="login-overlay">
   <div class="login-modal">
     <div class="lm-logo">
-      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-        <rect width="56" height="56" rx="14" fill="#4285F4"/>
-        <text x="50%" y="54%" font-size="28" font-weight="900" fill="white"
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+        <rect width="52" height="52" rx="13" fill="#4285F4"/>
+        <text x="50%" y="54%" font-size="25" font-weight="900" fill="white"
               text-anchor="middle" dominant-baseline="middle" font-family="serif">情</text>
       </svg>
     </div>
     <h2 class="lm-title">정보 교과 학습 플랫폼</h2>
     <p class="lm-sub">2022 개정 교육과정 · 중학교 1학년</p>
 
-    <!-- Google 로그인 버튼 영역 -->
-    <div id="gsi-btn-wrap">
-      <!-- GSI 렌더링 버튼 -->
+    <!-- Google 로그인 (Client ID 설정 시 활성화) -->
+    <div id="gsi-btn-wrap" style="display:flex;justify-content:center;margin-bottom:4px;min-height:44px;align-items:center">
       <div id="g_id_onload"
            data-client_id="YOUR_GOOGLE_CLIENT_ID"
            data-callback="handleGoogleLogin"
-           data-auto_prompt="false"
-           data-itp_support="true">
+           data-auto_prompt="false">
       </div>
       <div class="g_id_signin"
            data-type="standard"
@@ -2328,18 +2340,36 @@
       </div>
     </div>
 
-    <!-- Client ID 미설정 시 안내 -->
-    <div id="client-id-notice" style="display:none">
-      <div class="notice-box">
-        ⚙️ <strong>Google Client ID 설정이 필요합니다</strong><br>
-        Google Cloud Console에서 OAuth 2.0 클라이언트 ID를 발급 후<br>
-        <code>index.html</code>의 <code>data-client_id</code> 값을 교체하세요.<br><br>
-        승인된 JavaScript 출처에<br>
-        <code>https://sungce.github.io</code> 를 추가해야 합니다.
-      </div>
+    <!-- Client ID 미설정 안내 -->
+    <div id="client-id-notice" style="display:none;background:#FEF3C7;border:1px solid #F59E0B;border-radius:10px;padding:12px 14px;font-size:11px;color:#78350F;line-height:1.75;text-align:left;margin-bottom:12px">
+      ⚙️ <strong>Google Client ID 미설정</strong><br>
+      Google Cloud Console에서 OAuth 클라이언트 ID 발급 후<br>
+      <code style="background:#fff;padding:1px 5px;border-radius:3px;font-size:10px">data-client_id</code> 값을 교체하면 구글 로그인이 활성화됩니다.<br>
+      승인 출처: <code style="background:#fff;padding:1px 5px;border-radius:3px;font-size:10px">https://sungce.github.io</code>
     </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:10px 0 14px;color:#d1d5db;font-size:12px">
+      <span style="flex:1;height:1px;background:#e5e7eb;display:block"></span>
+      <span style="white-space:nowrap;font-size:11px">이름으로 시작하기</span>
+      <span style="flex:1;height:1px;background:#e5e7eb;display:block"></span>
+    </div>
+
+    <input type="text" id="login-input"
+           placeholder="이름 또는 닉네임 입력 (예: 홍길동)" maxlength="20"
+           style="width:100%;padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:14px;font-family:inherit;outline:none;margin-bottom:10px;box-sizing:border-box;transition:border-color .15s"
+           onfocus="this.style.borderColor='#4285F4'"
+           onblur="this.style.borderColor='#e5e7eb'"
+           onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()"
+            style="width:100%;padding:12px;background:#4285F4;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s"
+            onmouseover="this.style.background='#3367D6'"
+            onmouseout="this.style.background='#4285F4'">
+      학습 시작하기 →
+    </button>
   </div>
 </div>
+
+
 
 
 
