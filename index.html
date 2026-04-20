@@ -1024,19 +1024,7 @@
   .nav-subnav{overflow:hidden;max-height:0;opacity:0;transition:max-height .3s ease,opacity .25s ease}
   
 
-  .hidden{display:none!important}
-
-  /* ── 로그인 모달 (Google 전용) ── */
-  .login-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center}
-  .login-overlay.show{display:flex!important}
-  .login-modal{background:#fff;border-radius:20px;padding:44px 36px 36px;width:100%;max-width:360px;box-shadow:0 24px 64px rgba(0,0,0,.22);text-align:center;animation:modal-in .28s cubic-bezier(.25,.46,.45,.94)}
-  .lm-logo{margin-bottom:20px;display:flex;justify-content:center}
-  .lm-title{font-size:18px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
-  .lm-sub{font-size:12px;color:#9ca3af;margin-bottom:28px}
-  #gsi-btn-wrap{display:flex;justify-content:center;min-height:50px;align-items:center}
-  .notice-box{background:#FEF3C7;border:1px solid #F59E0B;border-radius:10px;padding:14px 16px;font-size:12px;color:#78350F;line-height:1.8;text-align:left;margin-top:16px}
-  .notice-box code{background:#fff;padding:1px 6px;border-radius:4px;font-family:monospace;font-size:11px}
-  @keyframes modal-in{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:none}}
+  .hidden{display:none!important}to{opacity:1;transform:none}}
 </style>
   
   <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -2169,8 +2157,11 @@
 
   function doLogin() {
     var inp  = document.getElementById('login-input');
-    var name = inp ? inp.value.trim() : '';
-    if (!name) { if (inp) { inp.focus(); inp.style.borderColor='#EF4444'; } return; }
+    var name = (inp ? inp.value : '').trim();
+    if (!name) {
+      if (inp) { inp.focus(); inp.style.borderColor = '#EF4444'; }
+      return;
+    }
     localStorage.setItem('user_name',   name);
     localStorage.setItem('user_google', '0');
     applyProfile(name, '');
@@ -2181,13 +2172,17 @@
     var ov = document.getElementById('login-overlay');
     if (!ov) return;
     ov.classList.remove('show');
-    ov.style.display = 'none';
+    ov.style.display   = 'none';
+    ov.style.zIndex    = '-1';
+    ov.style.pointerEvents = 'none';
   }
 
   function showLoginModal() {
     var ov = document.getElementById('login-overlay');
     if (!ov) return;
-    ov.style.display = 'flex';
+    ov.style.display       = 'flex';
+    ov.style.zIndex        = '9999';
+    ov.style.pointerEvents = 'auto';
     ov.classList.add('show');
     // Client ID 미설정 확인
     var el = document.getElementById('g_id_onload');
@@ -2310,7 +2305,7 @@
 </script>
 
 <!-- 로그인 모달 -->
-<div class="login-overlay show" id="login-overlay">
+<div class="login-overlay" id="login-overlay">
   <div class="login-modal">
     <div class="lm-logo">
       <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
