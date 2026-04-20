@@ -71,7 +71,8 @@ table{width:100%;border-collapse:collapse}
 /* 1100px 이하 */
 @media(max-width:1100px){
   .g2{grid-template-columns:1fr 220px}
-  .ca{position:static}
+  .ca{position:static;display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;margin-top:12px}
+  .ca .ap{flex:1 1 220px;min-width:180px}
   .crow{grid-template-columns:1fr}
   .sgrid{grid-template-columns:1fr 1fr}
 }
@@ -79,7 +80,8 @@ table{width:100%;border-collapse:collapse}
 /* 900px 이하 */
 @media(max-width:900px){
   .g2{grid-template-columns:1fr 200px}
-  .ca{position:static}
+  .ca{position:static;display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;margin-top:12px}
+  .ca .ap{flex:1 1 180px;min-width:160px}
   .page{padding:16px 14px}
   .cb,.act-body{padding:13px}
   .sgrid{grid-template-columns:1fr 1fr}

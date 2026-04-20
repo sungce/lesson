@@ -53,8 +53,9 @@ canvas,img{max-width:100%;height:auto}
 table{width:100%}.act-table,.peer-check,.rub{table-layout:fixed;word-break:break-word}
 .act-step>div:not(.act-num){min-width:0;flex:1;overflow-wrap:break-word;word-break:break-word}
 .act-input{width:100%;box-sizing:border-box}
-@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static}.crow{grid-template-columns:1fr}}
-@media(max-width:900px){.ca{display:none}.page{padding:16px 14px}}
+@media(max-width:1100px){.g2{grid-template-columns:1fr}.ca{position:static;display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;margin-top:12px}.crow{grid-template-columns:1fr}}
+@media(max-width:900px){.ca{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .ca .ap{flex:1 1 180px;min-width:160px}.page{padding:16px 14px}}
 @media(max-width:640px){.page{padding:11px 10px}.act-step{flex-direction:column;gap:5px}.act-num{margin-bottom:0}}
 @media(max-width:480px){:root{--SW:0px}.sb{display:none}.main{margin-left:0}.topbar{padding:0 10px}.page{padding:8px 9px}}
 
@@ -77,7 +78,8 @@ table{width:100%}.act-table,.peer-check,.rub{table-layout:fixed;word-break:break
 .tdef{color:var(--mt);font-size:10px}
 .pbtrack{height:5px;background:var(--br);border-radius:4px;overflow:hidden}
 .pbfill{height:100%;background:var(--u);border-radius:4px}
-@media(max-width:900px){.g2{grid-template-columns:1fr}.ca{display:none}}
+@media(max-width:900px){.g2{grid-template-columns:1fr}.ca{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .ca .ap{flex:1 1 180px;min-width:160px}}
 @media(max-width:640px){.page{padding:11px 10px}}
 </style>
 </head>
