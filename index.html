@@ -1041,10 +1041,10 @@
 
   <!-- 프로필 영역 -->
   <div class="profile-area" id="profile-area">
-    <div class="profile-avatar" id="profile-avatar">?</div>
+    <div class="profile-avatar" id="profile-avatar" style="cursor:pointer" onclick="openLogin(true)">?</div>
     <div class="profile-info">
       <div class="profile-name" id="profile-name">로그인 필요</div>
-      <div class="profile-sub" id="profile-sub">클릭하여 이름 설정</div>
+      <div class="profile-sub"  id="profile-sub">클릭하여 이름 설정</div>
     </div>
     <button class="profile-edit" onclick="openLogin(true)" title="이름 변경" style="font-size:13px">✏️</button>
   </div>
@@ -1855,6 +1855,27 @@
 
 <script>
 
+  // ── Google Sheets 연동 ─────────────────────────────────────────
+  var GS_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+
+  function postToSheets(payload) {
+    if (!GS_URL || GS_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL') return;
+    fetch(GS_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    }).catch(function(){});
+  }
+
+  function fetchRecordsFromSheets(userName, callback) {
+    if (!GS_URL || GS_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL') { callback(null); return; }
+    fetch(GS_URL + '?userName=' + encodeURIComponent(userName))
+      .then(function(r){ return r.json(); })
+      .then(function(d){ callback(d); })
+      .catch(function(){ callback(null); });
+  }
+
+
   // ── 단원 소단원 토글 ──
   function toggleUnit(n) {
     var sub   = document.getElementById('unit' + n + '-subnav');
@@ -2149,7 +2170,7 @@
     el = document.getElementById('profile-name');
     if (el) el.textContent = name + '님';
     el = document.getElementById('profile-sub');
-    if (el) el.textContent = '학습 기록 저장 중';
+    if (el) el.textContent = (GS_URL && GS_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL') ? '☁️ Sheets 연동 중...' : '로컬 저장 중';
     el = document.getElementById('hero-name');
     if (el) el.textContent = name;
   }
@@ -2215,6 +2236,30 @@
     var total = data.list.length + data.done.length;
     var el    = document.getElementById('record-count');
     if (el) el.textContent = total;
+
+    // Google Sheets 동기화 표시
+    var sub = document.getElementById('profile-sub');
+    var name = localStorage.getItem('user_name');
+    if (sub && name) {
+      if (GS_URL && GS_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
+        sub.textContent = '☁️ Sheets 연동 중...';
+        fetchRecordsFromSheets(name, function(sheetData) {
+          if (sheetData) {
+            var sheetTotal = (sheetData.acts ? sheetData.acts.length : 0)
+                           + (sheetData.scs  ? sheetData.scs.length  : 0)
+                           + (sheetData.done ? sheetData.done.length : 0);
+            // Sheets 기록 수로 카운트 업데이트
+            var cnt = document.getElementById('record-count');
+            if (cnt) cnt.textContent = Math.max(total, sheetTotal);
+            if (sub) sub.textContent = '☁️ Sheets 연동됨 · ' + name;
+          } else {
+            if (sub) sub.textContent = '로컬 저장 · ' + name;
+          }
+        });
+      } else {
+        sub.textContent = '로컬 저장 · ' + name;
+      }
+    }
   }
 
   function updateRecordView() {
