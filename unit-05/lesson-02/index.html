@@ -173,9 +173,9 @@ table{width:100%}.act-table,.peer-check,.rub{table-layout:fixed;word-break:break
 </div>  <!-- g2 -->
 </div>  <!-- page -->
 <script>
-  var GS_URL='https://script.google.com/macros/s/AKfycbx4DNSY4ebMEUX8d9ViHlUXCpXUJBa4S9T1oafUJnzsWupU4_3WgfZp7BAdye61eGy4/exec';
+  var GS_URL='https://script.google.com/macros/s/13rudHavb6-7M3A_VyXx8oLlhshPLyku2Nyvt-xFLcuY/exec';
   function getUserName(){return localStorage.getItem('user_name')||'익명';}
-  function postToSheets(p){if(!GS_URL||GS_URL==='https://script.google.com/macros/s/AKfycbx4DNSY4ebMEUX8d9ViHlUXCpXUJBa4S9T1oafUJnzsWupU4_3WgfZp7BAdye61eGy4/exec')return;fetch(GS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).catch(function(){});}
+  function postToSheets(p){if(!GS_URL||GS_URL==='https://script.google.com/macros/s/13rudHavb6-7M3A_VyXx8oLlhshPLyku2Nyvt-xFLcuY/exec')return;fetch(GS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).catch(function(){});}
   function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2400);}
   function markDone(n){try{var d=JSON.parse(localStorage.getItem('u05done')||'[]');if(!d.includes(n))d.push(n);localStorage.setItem('u05done',JSON.stringify(d));postToSheets({type:'done',userName:getUserName(),unit:'V',lessonNum:n,lessonName:'디지털 문화'});}catch(e){}toast('✅ 소단원 '+n+' 완료 표시!');}
   function saveActivity(key){var d={};document.querySelectorAll('.act-input').forEach(function(el,i){d['a'+i]=el.value;});try{localStorage.setItem(key,JSON.stringify(d));postToSheets({type:'act',userName:getUserName(),lessonKey:key,lessonName:document.title,answers:d});toast('✅ 수행 활동이 저장되었습니다!');}catch(e){}}
