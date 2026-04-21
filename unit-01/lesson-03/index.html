@@ -392,7 +392,7 @@ table{width:100%;border-collapse:collapse}
   }
 
   function postToSheets(payload) {
-    if (!GS_URL || GS_URL === 'https://script.google.com/macros/s/AKfycbxykezqsOyjLHV8quEIXutFt_Ff0XvIf0dxYHnZYJ4ub6ELrYm5R7LpDBNvvhAdwZLd/exec') return;
+    if (!GS_URL || GS_URL.indexOf('script.google.com') === -1) return;
     fetch(GS_URL, {
       method: 'POST',
       mode: 'no-cors',
